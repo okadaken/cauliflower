@@ -42,16 +42,16 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the fi
 Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
                'Otherwise, if the second value is true, do the second block of statements.\n' +
                'If none of the values are true, do the last block of statements.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'ならば';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'ならば';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'ならば';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'を実行する';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'もし';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'もし';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'そうでないなら';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = '';
 
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'ならば';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'もし';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
                     'to reconfigure this if block.';
 
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'でなく、～ならば';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'でなく、もし～';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
 
 Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'ならば';
