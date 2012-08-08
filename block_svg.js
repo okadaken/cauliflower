@@ -248,7 +248,7 @@ Blockly.BlockSvg.prototype.render = function() {
     parentBlock.render();
   } else {
     // Top-most block.  Fire an event to allow scrollbars to resize.
-    Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+    Blockly.fireUiEvent(window, 'resize');
   }
 };
 
@@ -261,6 +261,13 @@ Blockly.BlockSvg.prototype.render = function() {
 Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
   var titleX = -Blockly.BlockSvg.SEP_SPACE_X;
   var iconWidth;
+  // Move the mutator icon into position.
+  if (this.block_.mutator) {
+    iconWidth = this.block_.mutator.renderIcon(titleX);
+    if (iconWidth) {
+      titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
+  }
   // Move the comment icon into position.
   if (this.block_.comment) {
     iconWidth = this.block_.comment.renderIcon(titleX);
@@ -268,9 +275,9 @@ Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
       titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
   }
-  // Move the mutator icon into position.
-  if (this.block_.mutator) {
-    iconWidth = this.block_.mutator.renderIcon(titleX);
+  // Move the warning icon into position.
+  if (this.block_.warning) {
+    iconWidth = this.block_.warning.renderIcon(titleX);
     if (iconWidth) {
       titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
@@ -303,6 +310,13 @@ Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
 Blockly.BlockSvg.prototype.renderTitleLTR_ = function(titleY) {
   var titleX = Blockly.BlockSvg.SEP_SPACE_X;
   var iconWidth;
+  // Move the mutator icon into position.
+  if (this.block_.mutator) {
+    iconWidth = this.block_.mutator.renderIcon(titleX);
+    if (iconWidth) {
+      titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
+  }
   // Move the comment icon into position.
   if (this.block_.comment) {
     iconWidth = this.block_.comment.renderIcon(titleX);
@@ -310,9 +324,9 @@ Blockly.BlockSvg.prototype.renderTitleLTR_ = function(titleY) {
       titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
   }
-  // Move the mutator icon into position.
-  if (this.block_.mutator) {
-    iconWidth = this.block_.mutator.renderIcon(titleX);
+  // Move the warning icon into position.
+  if (this.block_.warning) {
+    iconWidth = this.block_.warning.renderIcon(titleX);
     if (iconWidth) {
       titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
@@ -410,10 +424,10 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
         /* HACK:
          The current versions of Chrome (16.0) and Safari (5.1) with a common
          root of WebKit 535 has a size reporting bug where the height of a
-         block is 5 pixels too large.  If WebKit browsers start under-sizing
+         block is 3 pixels too large.  If WebKit browsers start under-sizing
          connections to other blocks, then delete this entire hack.
         */
-        bBox.height -= 5;
+        bBox.height -= 3;
       }
       // Subtract one from the height due to the shadow.
       input.renderHeight = Math.max(input.renderHeight, bBox.height - 1);

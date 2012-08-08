@@ -174,13 +174,8 @@ Blockly.createDom_ = function(container) {
 
   Blockly.mainWorkspace = new Blockly.Workspace(Blockly.editable);
   svg.appendChild(Blockly.mainWorkspace.createDom());
-  svg.appendChild(Blockly.FieldTextInput.createDom());
-  Blockly.commentCanvas = Blockly.createSvgElement('g', {}, svg);
   if (Blockly.Toolbox && Blockly.editable) {
     svg.appendChild(Blockly.Toolbox.createDom());
-  }
-  if (Blockly.Mutator && Blockly.editable) {
-    svg.appendChild(Blockly.Mutator.createDom());
   }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
   if (Blockly.editable) {
@@ -219,12 +214,11 @@ Blockly.init_ = function() {
 
   if (Blockly.editable) {
     Blockly.Toolbox && Blockly.Toolbox.init();
-    Blockly.Mutator && Blockly.Mutator.init();
   }
 
   Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);
   Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
-      Blockly.mainWorkspace.getCanvas(),
+      Blockly.mainWorkspace.getBubbleCanvas(),
       Blockly.getMainWorkspaceMetrics, this.setMainWorkspaceMetrics);
 
   // Load the sounds.

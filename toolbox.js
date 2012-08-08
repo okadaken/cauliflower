@@ -117,7 +117,7 @@ Blockly.Toolbox.setMetrics = function(yRatio) {
  */
 Blockly.Toolbox.init = function() {
   Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
-                               Blockly.getMainWorkspaceMetrics);
+                               Blockly.getMainWorkspaceMetrics, true);
   Blockly.Toolbox.languageTree = Blockly.Toolbox.buildTree_();
   Blockly.Toolbox.redraw();
 
@@ -254,14 +254,14 @@ Blockly.Toolbox.redraw = function() {
   // Right-click on empty areas of the toolbox does not generate a context menu.
   Blockly.bindEvent_(Blockly.Toolbox.svgGroup_, 'mousedown', null,
       function(e) {
-        if (e.button == 2) {
+        if (Blockly.isRightButton(e)) {
           Blockly.hideChaff(true);
           e.stopPropagation();
         }
       });
 
   // Fire a resize event since the toolbox may have changed width and height.
-  Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+  Blockly.fireUiEvent(window, 'resize');
 };
 
 /**
