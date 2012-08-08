@@ -6,12 +6,13 @@
   <script type="text/javascript" src="FileSaver.min.js"></script>
   <script type="text/javascript" src="htmlparser.js"></script>
   <script type="text/javascript" src="xmltext.js"></script>
+  <script id="userScript"></script>
   <script>
 /**
  * List of tab names.
  * @private
  */
-var TABS_ = ['blocks', 'javascript', 'xml', 'html'];
+var TABS_ = ['blocks', 'javascript', 'html', 'output'];
 
 var selected = 'blocks';
 
@@ -21,6 +22,7 @@ var selected = 'blocks';
  */
 function tabClick(id) {
   // If the XML tab was open, save and render the content.
+  /*
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('textarea_xml');
     var xmlText = xmlTextarea.value;
@@ -40,6 +42,7 @@ function tabClick(id) {
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
     }
   }
+  */
 
   // Deselect all tabs and hide all panes.
   for (var x in TABS_) {
@@ -81,6 +84,15 @@ function renderContent() {
   } else if (content.id == 'content_html' ){
     var htmlTextarea = document.getElementById('textarea_html');
     htmlTextarea.focus();
+  } else if (content.id == 'content_output' ){
+	
+	var javascriptContent = document.getElementById('userScript');
+	javascriptContent.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+	
+	content.innerHTML = document.getElementById('textarea_html').value;
+    var htmlTextarea = document.getElementById('textarea_html');
+    
+    runJS();
   }
 }
 
@@ -111,6 +123,7 @@ function init(blockly) {
   restore_blocks();
   restore_htmls();
   Blockly.bindEvent_(window, 'unload', null, backup_blocks);
+  Blockly.bindEvent_(window, 'unload', null, backup_htmls);
   tabClick('tab_' + selected);
 
   // Init load event.
@@ -210,10 +223,13 @@ function output(){
 		var outputText = dom.innerHTML;
 	}
 	*/
-	{ // <!--
-		var outputText = htmlText.replace("###blockScript###","<script>\n"+javascriptText+"</script>");
-	} // -->
-
+	{ 
+		// ＜/script＞と書いちゃうとコンパイルできなくなってしまうので、意味も無く　＜ と / と script と ＞ を分割。
+		var tmp = "<" + "script" + ">\n" + javascriptText + "<" + "/" + "script" + ">";
+		var outputText = htmlText.replace("###blockScript###",tmp);
+		
+		outputText += tmp; //テスト用
+	}
 	console.log( outputText );
 
 	var builder = new BlobBuilder();
@@ -467,19 +483,20 @@ function discard() {
       <td>
         <table>
           <tr id="tabRow" height="1em">
-          	<td id="tab_html" class="taboff" onclick="tabClick(this.id)">HTML</td>
+          	<td id="tab_html" class="taboff" onclick="tabClick(this.id)">HTML編集</td>
           	<td class="tabmin">&nbsp;</td>
             <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">JavascriptBlocks</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
+            <td id="tab_output" class="taboff" onclick="tabClick(this.id)">HTML出力</td>
             <!--
             <td id="tab_dart" class="taboff" onclick="tabClick(this.id)">Dart</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_python" class="taboff" onclick="tabClick(this.id)">Python</td>
             <td class="tabmin">&nbsp;</td>
-            -->
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
+            -->
             <td class="tabmax">
               <button onclick="output()">OutputHTML</button>
               <button onclick="discard()">Discard</button>
@@ -498,12 +515,15 @@ function discard() {
         <pre id="content_javascript"></pre>
         <pre id="content_dart"></pre>
         <pre id="content_python"></pre>
+        <!--
         <div id="content_xml">
           <textarea id="textarea_xml"></textarea>
         </div>
+        -->
         <div id="content_html">
         	<textarea id="textarea_html"></textarea>
         </div>
+        <div id="content_output"></div>
       </td>
     </tr>
   </table>

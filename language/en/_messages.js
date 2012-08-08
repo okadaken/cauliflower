@@ -1,5 +1,10 @@
 // Text strings (factored out to make multi-language easier).
 
+/**
+ * Due to the frequency of long strings, the 80-column wrap rule need not apply
+ * to message files.
+ */
+
 // Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = 'Duplicate';
 Blockly.MSG_REMOVE_COMMENT = 'Remove Comment';
@@ -25,12 +30,6 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 Blockly.MSG_VARIABLE_CATEGORY = 'Variables';
 Blockly.MSG_PROCEDURE_CATEGORY = 'Procedures';
 
-// Mutator dialog.
-Blockly.MSG_MUTATOR_TOOLTIP = 'Edit this block';
-Blockly.MSG_MUTATOR_HEADER = 'Block Editor';
-Blockly.MSG_MUTATOR_CHANGE = 'Change';
-Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
-
 // Control Blocks
 Blockly.LANG_CATEGORY_CONTROLS = 'Control';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
@@ -42,19 +41,19 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the fi
 Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
                'Otherwise, if the second value is true, do the second block of statements.\n' +
                'If none of the values are true, do the last block of statements.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'もし';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '…でなく、もし';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'ならば';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'その時は';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'then';
 
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'もし…';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
                     'to reconfigure this if block.';
 
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'でなく、もし…';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
 
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'ならば…';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
 Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
@@ -73,9 +72,8 @@ Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'from';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'to';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'do';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
-          'For each count, set the current count number to\n' +
-          'variable "';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP_2 = '", and then do some statements.';        
+    'For each count, set the current count number to\n' +
+    'variable "%1", and then do some statements.';        
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = 'for each';
@@ -83,15 +81,19 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'item';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'in list';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'do';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\nvariable "';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_2 = '", and then do some statements.';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\n' +
+  'variable "%1", and then do some statements.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'of loop';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\n' +
+    'continue with the next iteration.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
+    'This block may only\n' +
+    'be used within a loop.';
 
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = 'Logic';
@@ -133,13 +135,14 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Return the sum of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Return the difference of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\nthe power of the second number.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\n' +
+    'the power of the second number.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
 Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
 Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
-Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "';
+Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "%1".';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = 'square root';
@@ -199,11 +202,13 @@ Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_numb
 Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n specified limits, inclusive.';
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n' +
+    'specified limits, inclusive.';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
+    '0.0 (inclusive) and 1.0 (exclusive).';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = 'Text';
@@ -353,10 +358,14 @@ Blockly.LANG_PROCEDURES_DEFNORETURN_DO = 'do';
 Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1 = 'A procedure with no return value.';
 
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = 'procedure';
-Blockly.LANG_PROCEDURES_DEFRETURN_DO = 'do';
+Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
+Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'return';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = 'A procedure with a return value.';
+
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning:\n' +
+    'This procedure has\n' +
+    'duplicate parameters.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'call';
@@ -364,6 +373,11 @@ Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'procedure';
 Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1 = 'Call a procedure with no return value.';
 
 Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-Blockly.LANG_PROCEDURES_CALLRETURN_CALL = 'call';
-Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = 'procedure';
+Blockly.LANG_PROCEDURES_CALLRETURN_CALL = Blockly.LANG_PROCEDURES_CALLNORETURN_CALL;
+Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return value.';
+
+Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'parameters';
+Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'variable:';
+
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight Procedure';
