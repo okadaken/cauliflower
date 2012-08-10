@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cauliflower v0.1</title>
+<link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css" />
+<script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
+<script type="text/javascript">
+<!--
+	$(function() {
+		$('#tabs').tabs({
+			selected : 0,//select first tab
+		});
+	});
+// -->
+</script>
+</head>
+<body>
+	<h1>Cauliflower v0.1</h1>
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab-javascript">JavaScript</a></li>
+			<li><a href="#tab-html">HTML</a></li>
+		</ul>
+		<div id="tab-javascript">
+			<p>ここにはBlockyを表示させます。</p>
+		</div>
+		<div id="tab-html">
+			<p>ここにはHTMLの編集用テキストエリアを表示させます。</p>
+		</div>
+	</div>
+</body>
+</html>
