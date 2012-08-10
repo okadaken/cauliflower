@@ -2,17 +2,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Cauliflower v0.1</title>
+
+<!-- for jquery -->
 <link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css" />
 <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
+<script type="text/javascript" src="jquery/jquery.cookie.js"></script>
 <script type="text/javascript">
 <!--
 	$(function() {
 		$('#tabs').tabs({
-			selected : 0,//select first tab
+			cookie : {
+				expires : 3　//選択タブをcookieで3日間保存
+			}
 		});
 	});
 // -->
+</script>
+
+<!-- for codepress -->
+<script type="text/javascript" src="codepress/codepress.js"></script>
+<script type="text/javascript" src="codepress/languages/html.js"></script>
+<script type="text/javascript">
+<!--
+$(function(){
+	$("#textarea_html").load("html_template.txt");
+});
+
+function getHTMLCode() {
+  alert(textarea_html.getCode() );
+}
+//-->
 </script>
 </head>
 <body>
@@ -26,7 +46,18 @@
 			<p>ここにはBlockyを表示させます。</p>
 		</div>
 		<div id="tab-html">
+			<p>
+				<a href="javascript:getHTMLCode();">テスト用：値を取得</a>
+			</p>
 			<p>ここにはHTMLの編集用テキストエリアを表示させます。</p>
+			<p>TODO:タブ表示の横幅をどうにかしたい。</P>
+			<p>TODO:codepressの別開発のコードを入れたので、ファイルを整理する。</p>
+			<p>TODO:書いたものを保存する。（ターキーさん方式でローカルストレージかな）</p>
+			<p>TODO:Firefoxでしかテストしてない。</p>
+			<textarea id="textarea_html" wrap="off"
+				class="codepress html linenumbers-on autocomplete-on"
+				style="width: 100%; height: 100%; border: none; resize: none;">
+			</textarea>
 		</div>
 	</div>
 </body>
