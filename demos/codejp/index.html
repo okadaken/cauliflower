@@ -12,37 +12,24 @@
  * List of tab names.
  * @private
  */
-var TABS_ = ['blocks', 'javascript', 'html', 'output'];
+var TABS_ = ['javascript', 'html', 'output'];
 
-var selected = 'blocks';
+var selected = 'javascript';
+
+function initEvent(){
+  var d = frames['blocks'].document;
+  /*@cc_on @if(1)
+  d.attachEvent('onclick', clickhandler);
+  @else@*/
+  d.addEventListener('mousemove', touchBlock, false);
+  /*@end@*/
+}
 
 /**
  * Switch the visible pane when a tab is clicked.
  * @param {string} id ID of tab clicked.
  */
 function tabClick(id) {
-  // If the XML tab was open, save and render the content.
-  /*
-  if (document.getElementById('tab_xml').className == 'tabon') {
-    var xmlTextarea = document.getElementById('textarea_xml');
-    var xmlText = xmlTextarea.value;
-    var xmlDom = null;
-    try {
-      xmlDom = Blockly.Xml.textToDom(xmlText);
-    } catch (e) {
-      var q =
-          window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
-      if (!q) {
-        // Leave the user on the XML tab.
-        return;
-      }
-    }
-    if (xmlDom) {
-      Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-    }
-  }
-  */
 
   // Deselect all tabs and hide all panes.
   for (var x in TABS_) {
@@ -58,6 +45,12 @@ function tabClick(id) {
   content.style.display = 'block';
   renderContent();
 }
+
+function touchBlock() {
+	var content = document.getElementById("content_javascript_text");	
+    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+}    
+
 
 /**
  * Populate the currently selected pane with content generated from the blocks.
@@ -76,7 +69,8 @@ function renderContent() {
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
   } else if (content.id == 'content_javascript') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+//    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+	touchBlock();
   } else if (content.id == 'content_dart') {
     content.innerHTML = Blockly.Generator.workspaceToCode('Dart');
   } else if (content.id == 'content_python') {
@@ -427,7 +421,7 @@ function discard() {
     td {
       padding: 0;
     }
-    pre,
+
     #content_xml, #content_html {
       width: 100%;
       height: 100%;
@@ -444,6 +438,31 @@ function discard() {
       border: none;
       resize: none;
     }
+
+	#content_javascript {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#javascript_left {
+      width: 70%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#javascript_right{
+      width: 30%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#content_javascript_text{
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
 
     iframe {
       width: 100%;
@@ -472,7 +491,7 @@ function discard() {
     }
   </style>
 </head>
-<body>
+<body onload="initEvent()">
   <table height="100%" width="100%">
     <tr>
       <td>
@@ -485,10 +504,12 @@ function discard() {
           <tr id="tabRow" height="1em">
           	<td id="tab_html" class="taboff" onclick="tabClick(this.id)">HTML編集</td>
           	<td class="tabmin">&nbsp;</td>
-            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">JavascriptBlocks</td>
+            <td id="tab_javascript" class="tabon" onclick="tabClick(this.id)">JavascriptBlocks</td>
             <td class="tabmin">&nbsp;</td>
+            <!--
             <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
+            -->
             <td id="tab_output" class="taboff" onclick="tabClick(this.id)">HTML出力</td>
             <!--
             <td id="tab_dart" class="taboff" onclick="tabClick(this.id)">Dart</td>
@@ -511,8 +532,20 @@ function discard() {
     </tr>
     <tr>
       <td height="99%">
-        <iframe id="content_blocks" src="frame.html"></iframe>
-        <pre id="content_javascript"></pre>
+        
+        <div id="content_javascript" >
+	        <table id="block" style="width: 100%;height: 100%;">
+	        	<tr>
+	        		<td id="javascript_left" onclick="touchBlock()">
+	        			<iframe id="content_blocks" name="blocks" src="frame.html"></iframe>
+	        		</td>
+	        		<td id="javascript_right">
+				        <pre id="content_javascript_text"></pre>
+	        		</td>
+	        	</tr>
+	        </table>
+        </div>
+        
         <pre id="content_dart"></pre>
         <pre id="content_python"></pre>
         <!--
