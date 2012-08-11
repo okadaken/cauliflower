@@ -1,7 +1,0 @@
-corepress関連
-
-Firefoxでタブ入力ができなかったので、以下からgecko.jsの修正版に入れ替えた
-http://daisukeh.d.dooo.jp/doku.php?id=programming:dokuwiki:codepress%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%82%92%E4%BD%9C%E3%82%8B
-
-タブ表示したかったので、以下のコードをマージした（要コード整理）
-http://serennz.sakura.ne.jp/sb/log/eid66.html
