@@ -4,14 +4,14 @@
 <title>Cauliflower v0.1</title>
 
 <!-- for jquery -->
-<link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css" />
+<link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css">
 <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
 <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
 <script type="text/javascript">
 <!--
 	$(function() {
-		$('#tabs').tabs({
+		$("#tabs").tabs({
 			cookie : {
 				expires : 3　//選択タブをcookieで3日間保存
 			}
@@ -19,6 +19,15 @@
 	});
 // -->
 </script>
+
+<!-- for codemirror -->
+<link rel=stylesheet href="codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="codemirror/theme/default.css">
+<script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="codemirror/mode/css/css.js></script"></script>
+<script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <style type=text/css>
 .CodeMirror {
 	position: relative;
@@ -34,24 +43,18 @@ iframe {
 	border: 1px solid black;
 }
 </style>
-
-<!-- for codemirror -->
-<script type="text/javascript" src=codemirror/lib/codemirror.js></script>
-<script type="text/javascript" src=codemirror/mode/xml/xml.js></script>
-<script type="text/javascript" src=codemirror/mode/javascript/javascript.js></script>
-<script type="text/javascript" src=codemirror/mode/css/css.js></script>
-<script type="text/javascript" src=codemirror/mode/htmlmixed/htmlmixed.js></script>
-<link rel=stylesheet href=codemirror/lib/codemirror.css>
-<link rel="stylesheet" href="codemirror/theme/default.css">
 <script type="text/javascript">
 <!--
 var editor;
 $(function(){
 	var delay;
-    editor = CodeMirror.fromTextArea(document.getElementById("textarea_html"), {
-      mode: 'text/html',
-      tabMode: 'indent',
-      lineNumbers: 'true',
+    editor = CodeMirror.fromTextArea(document.getElementById("html_textarea"), {
+      mode: "text/html",
+      theme: "default",
+      tabMode: "indent",
+      lineNumbers: "true",
+      fixedGutter: "true",
+      electricChars: "true",
       onChange: function() {
         clearTimeout(delay);
         delay = setTimeout(updatePreview, 300);
@@ -62,8 +65,23 @@ $(function(){
     	 editor.setValue(httpObj.responseText);
     });
     
+    $("#new_button").button().click(function(){
+    	alert("新規作成");
+ 	});
+    $("#open_button").button().click(function(){
+    	alert("読み込み");
+ 	});
+    $("#save_button").button().click(function(){
+    	alert("保存する");
+ 	});
+    $("#exec_button").button().css({"background": "#ffcc00"}).click(function(){//とりあえず色を変える要グラデーション
+    	alert("実行する");
+ 	});
+    $("#html_new_botton").button();
+    
+    
     function updatePreview() {
-      var previewFrame = document.getElementById('preview_html');
+      var previewFrame = document.getElementById("html_preview");
       var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
       preview.open();
       preview.write(editor.getValue());
@@ -80,6 +98,13 @@ function getHTMLCode() {
 </head>
 <body>
 	<h1>Cauliflower v0.1</h1>
+	<p>
+		<button id="new_button">新規</button>
+		<button id="open_button">開く</button>
+		<button id="save_button">保存</button>
+		&nbsp;&nbsp;
+		<button id="exec_button">実行</button>
+	</p>
 	<div id="tabs">
 		<ul>
 			<li><a href="#tab-javascript">JavaScript</a></li>
@@ -92,9 +117,11 @@ function getHTMLCode() {
 			<p>
 				<a href="javascript:getHTMLCode();">テスト用：HTMLを取得</a>
 			</p>
-			<p>TODO:Chromeは外部ファイルアクセス禁止なので、最終的にテンプレートはURL読み込みにする。</p>
-			<textarea id="textarea_html"></textarea>
-			<iframe id=preview_html></iframe>
+			<p>
+				<button id="html_new_botton">新規作成</button>
+			</p>
+			<textarea id="html_textarea"></textarea>
+			<iframe id="html_preview"></iframe>
 		</div>
 	</div>
 </body>
