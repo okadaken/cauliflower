@@ -12,11 +12,19 @@
 <!--
 	$(function() {
 		$("#tabs").tabs({
+			select: function(event, ui){
+				if(ui.index == 0){
+					Blockly.mainWorkspace.render();
+				}else if(ui.index ==1){
+					
+				}
+			},
 			cookie : {
 				expires : 3　//選択タブをcookieで3日間保存
 			}
 		});
 	});
+	
 // -->
 </script>
 
@@ -34,13 +42,19 @@
 	width: 50%;
 }
 
-iframe {
+#html_preview {
 	width: 40%;
 	position: absolute;
 	top: 50px;
 	right: 20px;
 	height: 300px;
 	border: 1px solid black;
+}
+
+#blockly_frame {
+	width: 100%;
+	height: 100%;
+	border: none;
 }
 </style>
 <script type="text/javascript">
@@ -97,32 +111,32 @@ function getHTMLCode() {
 </script>
 </head>
 <body>
-	<h1>Cauliflower v0.1</h1>
-	<p>
-		<button id="new_button">新規</button>
-		<button id="open_button">開く</button>
-		<button id="save_button">保存</button>
-		&nbsp;&nbsp;
-		<button id="exec_button">実行</button>
-	</p>
-	<div id="tabs">
-		<ul>
-			<li><a href="#tab-javascript">JavaScript</a></li>
-			<li><a href="#tab-html">HTML</a></li>
-		</ul>
-		<div id="tab-javascript">
-			<p>ここにはBlockyを表示させます。</p>
-		</div>
-		<div id="tab-html">
-			<p>
-				<a href="javascript:getHTMLCode();">テスト用：HTMLを取得</a>
-			</p>
-			<p>
-				<button id="html_new_botton">新規作成</button>
-			</p>
-			<textarea id="html_textarea"></textarea>
-			<iframe id="html_preview"></iframe>
-		</div>
-	</div>
+    <h1>Cauliflower v0.1</h1>
+    <p>
+        <button id="new_button">新規</button>
+        <button id="open_button">開く</button>
+        <button id="save_button">保存</button>
+        &nbsp;&nbsp;
+        <button id="exec_button">プレビュー</button>
+    </p>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab-javascript">JavaScript</a></li>
+            <li><a href="#tab-html">HTML</a></li>
+        </ul>
+        <div id="tab-javascript">
+            <iframe id="blockly_frame" src="../demos/codejp/frame.html"></iframe>
+        </div>
+        <div id="tab-html">
+            <p>
+                <a href="javascript:getHTMLCode();">テスト用：HTMLを取得</a>
+            </p>
+            <p>
+                <button id="html_new_botton">新規作成</button>
+            </p>
+            <textarea id="html_textarea"></textarea>
+            <iframe id="html_preview"></iframe>
+        </div>
+    </div>
 </body>
 </html>
