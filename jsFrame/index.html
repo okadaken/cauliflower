@@ -1,0 +1,564 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Code</title>
+  <script type="text/javascript" src="extlib/BlobBuilder.min.js"></script>
+  <script type="text/javascript" src="extlib/FileSaver.min.js"></script>
+  <script type="text/javascript" src="extlib/htmlparser.js"></script>
+  <script type="text/javascript" src="extlib/xmltext.js"></script>
+  <script id="userScript"></script>
+  <script>
+/**
+ * List of tab names.
+ * @private
+ */
+var TABS_ = ['javascript', 'html', 'output'];
+
+var selected = 'javascript';
+
+function initEvent(){
+  var d = frames['blocks'].document;
+  /*@cc_on @if(1)
+  d.attachEvent('onclick', clickhandler);
+  @else@*/
+  d.addEventListener('mousemove', touchBlock, false);
+  /*@end@*/
+}
+
+/**
+ * Switch the visible pane when a tab is clicked.
+ * @param {string} id ID of tab clicked.
+ */
+function tabClick(id) {
+
+  // Deselect all tabs and hide all panes.
+  for (var x in TABS_) {
+    document.getElementById('tab_' + TABS_[x]).className = 'taboff';
+    document.getElementById('content_' + TABS_[x]).style.display = 'none';
+  }
+
+  // Select the active tab.
+  selected = id.replace('tab_', '');
+  document.getElementById(id).className = 'tabon';
+  // Show the selected pane.
+  var content = document.getElementById('content_' + selected);
+  content.style.display = 'block';
+  renderContent();
+}
+
+function touchBlock() {
+	var content = document.getElementById("content_javascript_text");	
+    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+}    
+
+
+/**
+ * Populate the currently selected pane with content generated from the blocks.
+ */
+function renderContent() {
+  var content = document.getElementById('content_' + selected);
+  // Initialize the pane.
+  if (content.id == 'content_blocks') {
+    // If the workspace was changed by the XML tab, Firefox will have performed
+    // an incomplete rendering due to Blockly being invisible.  Rerender.
+    Blockly.mainWorkspace.render();
+  } else if (content.id == 'content_xml') {
+    var xmlTextarea = document.getElementById('textarea_xml');
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+    xmlTextarea.value = xmlText;
+    xmlTextarea.focus();
+  } else if (content.id == 'content_javascript') {
+//    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+	touchBlock();
+  } else if (content.id == 'content_dart') {
+    content.innerHTML = Blockly.Generator.workspaceToCode('Dart');
+  } else if (content.id == 'content_python') {
+    content.innerHTML = Blockly.Generator.workspaceToCode('Python');
+  } else if (content.id == 'content_html' ){
+    var htmlTextarea = document.getElementById('textarea_html');
+    htmlTextarea.focus();
+  } else if (content.id == 'content_output' ){
+	
+	var javascriptContent = document.getElementById('userScript');
+	javascriptContent.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+	
+	content.innerHTML = document.getElementById('textarea_html').value;
+    var htmlTextarea = document.getElementById('textarea_html');
+    
+    runJS();
+  }
+}
+
+/**
+ * Initialize Blockly.  Called on page load.
+ * @param {!Blockly} blockly Instance of Blockly from iframe.
+ */
+function init(blockly) {
+  //window.onbeforeunload = function() {
+  //  return 'Leaving this page will result in the loss of your work.';
+  //};
+
+  window.Blockly = blockly;
+
+  // Make the 'Blocks' tab line up with the toolbox.
+  if (Blockly.Toolbox) {
+    Blockly.bindEvent_(window, 'resize', null, function() {
+      document.getElementById('tab_blocks').style.minWidth =
+          (Blockly.Toolbox.width - 38) + 'px';
+          // Account for the 19 pixel margin and on each side.
+      });
+    window.setTimeout(function() {
+        Blockly.fireUiEvent(document, window, 'resize');
+      }, 1);
+  }
+
+  // Restore/backup current works.
+  restore_blocks();
+  restore_htmls();
+  Blockly.bindEvent_(window, 'unload', null, backup_blocks);
+  Blockly.bindEvent_(window, 'unload', null, backup_htmls);
+  tabClick('tab_' + selected);
+
+  // Init load event.
+  var loadInput = document.getElementById('load');
+  loadInput.addEventListener('change', load, false);
+  document.getElementById('fakeload').onclick = function() {
+    loadInput.click();
+  };
+}
+
+/**
+ * Execute the user's code.
+ * Just a quick and dirty eval.  No checks for infinite loops, etc.
+ */
+function runJS() {
+  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  try {
+    eval(code);
+  } catch (e) {
+    alert('Program error:\n' + e);
+  }
+}
+
+/**
+ * Backup code blocks to localStorage.
+ */
+function backup_blocks() {
+  if ('localStorage' in window) {
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    window.localStorage.setItem('blocks', Blockly.Xml.domToText(xml));
+  }
+}
+
+function backup_htmls() {
+  if ('localStorage' in window) {
+  	var htmlText = document.getElementById('textarea_html').value;
+    window.localStorage.setItem('htmls', htmlText);
+  }
+}
+
+/**
+ * Restore code blocks from localStorage.
+ */
+function restore_blocks() {
+  if ('localStorage' in window && window.localStorage.blocks) {
+    var xml = Blockly.Xml.textToDom(window.localStorage.blocks);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  }
+}
+
+function restore_htmls() {
+  if ('localStorage' in window && window.localStorage.htmls) {
+    var htmlText = window.localStorage.htmls;
+  	document.getElementById('textarea_html').value = htmlText;
+  }
+}
+
+/**
+ * Save blocks to local file.
+ */
+function save() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var data = Blockly.Xml.domToText(xml);
+
+  // Store data in blob.
+  var builder = new BlobBuilder();
+  builder.append(data);
+  saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+};
+
+function output(){
+	
+	backup_htmls();
+	
+	var htmlText = document.getElementById('textarea_html').value;
+    var javascriptText = Blockly.Generator.workspaceToCode('JavaScript');
+
+	/*
+	{
+		console.log(htmlText);
+		var dom = HTMLtoDOM(htmlText);
+		console.log(dom.getElementById("blockScript"));
+		console.log(dom.getElementById("blockScript").innerHtml);
+		dom.getElementById("blockScript").innerHtml = "aa";//javascriptText;
+		console.log(dom.getElementById("blockScript"));
+		console.log(dom.getElementById("blockScript").innerHtml);
+		console.log(dom);
+		
+		var outputText = xmlText(dom);
+	}
+	*/
+	/*
+	{
+		var dom = document.implementation.createDocument("", "", null);
+		dom.innerHTML = htmlText;
+		dom.getElementById("blockScript").innerHTML = javascriptText;
+		var outputText = dom.innerHTML;
+	}
+	*/
+	{ 
+		// ＜/script＞と書いちゃうとコンパイルできなくなってしまうので、意味も無く　＜ と / と script と ＞ を分割。
+		var tmp = "<" + "script" + ">\n" + javascriptText + "<" + "/" + "script" + ">";
+		var outputText = htmlText.replace("###blockScript###",tmp);
+		
+		outputText += tmp; //テスト用
+	}
+	console.log( outputText );
+
+	var builder = new BlobBuilder();
+	builder.append( outputText );
+	saveAs( builder.getBlob('text/plain;charset=utf-8'), 'output.html' );
+
+	/*
+	(function () {
+
+		var ronproVer = "ronpro.test";
+
+	    // IndexedDB
+	    var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
+	        IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
+	        dbVersion = 1.0;
+	
+	    // Create/open database
+	    var request = indexedDB.open("ronproFiles", dbVersion),
+	        db,
+	        createObjectStore = function (dataBase) {
+	            // Create an objectStore
+	            console.log("Creating objectStore")
+	            dataBase.createObjectStore(ronproVer);
+	        },
+	
+	        getText = function () {
+	           putRonproInDb("hoge");
+	        },
+	
+	        putRonproInDb = function (blob) {
+	            console.log("Putting RonproData in IndexedDB");
+	            console.log(db);
+	
+	            // Open a transaction to the database
+	            var transaction = db.transaction([ronproVer], IDBTransaction.READ_WRITE);
+	
+	            // Put the blob into the dabase
+	            var put = transaction.objectStore(ronproVer).put(blob, "text");
+	
+	            // Retrieve the file that was just stored
+	            transaction.objectStore(ronproVer).get("text").onsuccess = function (event) {
+	                var textFile = event.target.result;
+	                console.log("Got ronpro!" );
+	                console.log(textFile);
+	
+	                // Get window.URL object
+	                var URL = window.URL || window.webkitURL;
+	
+	                // Create and revoke ObjectURL
+	                var textURL = URL.createObjectURL(textFile);
+	
+	                // Set img src to ObjectURL
+	                var imgElephant = document.getElementById("elephant");
+	                imgElephant.setAttribute("src", textURL);
+	
+	                // Revoking ObjectURL
+	                URL.revokeObjectURL(textURL);
+	            };
+	        };
+	
+	    request.onerror = function (event) {
+	        console.log("Error creating/accessing IndexedDB database");
+	    };
+	
+	    request.onsuccess = function (event) {
+	        console.log("Success creating/accessing IndexedDB database");
+	        db = request.result;
+	
+	        db.onerror = function (event) {
+	            console.log("Error creating/accessing IndexedDB database");
+	        };
+	        
+	        // Interim solution for Google Chrome to create an objectStore. Will be deprecated
+	        if (db.setVersion) {
+	            if (db.version != dbVersion) {
+	                var setVersion = db.setVersion(dbVersion);
+	                setVersion.onsuccess = function () {
+	                    createObjectStore(db);
+	                    getText();
+	                };
+	            }
+	            else {
+	                getText();
+	            }
+	        }
+	        else {
+	            getText();
+	        }
+	        
+	        console.log("Success end...?");
+	    }
+	    
+	    // For future use. Currently only in latest Firefox versions
+	    request.onupgradeneeded = function (event) {
+	        createObjectStore(event.target.result);
+	    };
+	})();
+	*/
+}
+
+/**
+ * Load blocks from local file.
+ */
+function load() {
+  var files = event.target.files;
+  // Only allow uploading one file.
+  if (files.length != 1) {
+    return;
+  }
+
+  // FileReader
+  var reader = new FileReader();
+  reader.onloadend = function(event) {
+    var target = event.target;
+    // 2 == FileReader.DONE
+    if (target.readyState == 2) {
+      try {
+        var xml = Blockly.Xml.textToDom(target.result);
+      } catch (e) {
+        alert('Error parsing XML:\n' + e);
+        return;
+      }
+      var count = Blockly.mainWorkspace.getAllBlocks().length;
+      if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
+        Blockly.mainWorkspace.clear();
+      }
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+    }
+    // Reset value of input after loading because Chrome will not fire
+    // a 'change' event if the same file is loaded again.
+    document.getElementById('load').value = '';
+  };
+  reader.readAsText(files[0]);
+};
+
+/**
+ * Discard all blocks from the workspace.
+ */
+function discard() {
+  var count = Blockly.mainWorkspace.getAllBlocks().length;
+  if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
+    Blockly.mainWorkspace.clear();
+    renderContent();
+  }
+}
+  </script>
+  <style>
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    td {
+      vertical-align: top;
+    }
+
+    /* Tabs */
+    #tabRow>td {
+      border: 1px solid #ccc;
+    }
+    td.tabon {
+      border-bottom-color: #ddd !important;
+      background-color: #ddd;
+      padding: 5px 19px;
+    }
+    td.taboff {
+      cursor: pointer;
+      padding: 5px 19px;
+    }
+    td.taboff:hover {
+      background-color: #eee;
+    }
+    td.tabmin {
+      border-top-style: none !important;
+      border-left-style: none !important;
+      border-right-style: none !important;
+    }
+    td.tabmax {
+      border-top-style: none !important;
+      border-left-style: none !important;
+      border-right-style: none !important;
+      width: 99%;
+      text-align: right;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    td {
+      padding: 0;
+    }
+
+    #content_xml, #content_html {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-top-style: none;
+      overflow: hidden;
+      display: none;
+    }
+    #textarea_xml, #textarea_html {
+      width: 100%;
+      height: 100%;
+      border: none;
+      resize: none;
+    }
+
+	#content_javascript {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#javascript_left {
+      width: 70%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#javascript_right{
+      width: 30%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+	#content_javascript_text{
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+	}
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-top-style: none;
+    }
+    button {
+      padding: 1px 1em;
+      font-size: 90%;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background-color: #eee;
+      color: black;
+    }
+    button.launch {
+      border: 1px solid #d43;
+      background-color: #d43;
+      color: white;
+    }
+    button:active {
+      border: 1px solid blue !important;
+    }
+    button:hover {
+      box-shadow: 2px 2px 5px #888;
+    }
+  </style>
+</head>
+<body onload="initEvent()">
+  <table height="100%" width="100%">
+    <tr>
+      <td>
+        <h1><a href="http://code.google.com/p/blockly/">Blockly</a> &gt; <a href="../index.html">Demos</a> &gt; Code</h1>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table>
+          <tr id="tabRow" height="1em">
+          	<td id="tab_html" class="taboff" onclick="tabClick(this.id)">HTML編集</td>
+          	<td class="tabmin">&nbsp;</td>
+            <td id="tab_javascript" class="tabon" onclick="tabClick(this.id)">JavascriptBlocks</td>
+            <td class="tabmin">&nbsp;</td>
+            <!--
+            <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
+            <td class="tabmin">&nbsp;</td>
+            -->
+            <td id="tab_output" class="taboff" onclick="tabClick(this.id)">HTML出力</td>
+            <!--
+            <td id="tab_dart" class="taboff" onclick="tabClick(this.id)">Dart</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_python" class="taboff" onclick="tabClick(this.id)">Python</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
+            -->
+            <td class="tabmax">
+              <button onclick="output()">OutputHTML</button>
+              <button onclick="discard()">Discard</button>
+              <button onclick="save()">Save XML</button>
+              <button id="fakeload">Load XML</button>
+              <input type="file" id="load" style="display: none;"/>
+              <button class="launch" onclick="runJS()">実行</button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="99%">
+        
+        <div id="content_javascript" >
+	        <table id="block" style="width: 100%;height: 100%;">
+	        	<tr>
+	        		<td id="javascript_left" onclick="touchBlock()">
+	        			<iframe id="content_blocks" name="blocks" src="frame.html"></iframe>
+	        		</td>
+	        		<td id="javascript_right">
+				        <pre id="content_javascript_text"></pre>
+	        		</td>
+	        	</tr>
+	        </table>
+        </div>
+        
+        <pre id="content_dart"></pre>
+        <pre id="content_python"></pre>
+        <!--
+        <div id="content_xml">
+          <textarea id="textarea_xml"></textarea>
+        </div>
+        -->
+        <div id="content_html">
+        	<textarea id="textarea_html"></textarea>
+        </div>
+        <div id="content_output"></div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
