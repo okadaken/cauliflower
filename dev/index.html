@@ -10,21 +10,22 @@
 <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
 <script type="text/javascript">
 <!--
-	$(function() {
+$(function() {
 		$("#tabs").tabs({
+			cookie : {
+				expires : 3　//選択タブをcookieで3日間保存
+			},
+			/*
 			select: function(event, ui){
 				if(ui.index == 0){
 					Blockly.mainWorkspace.render();
 				}else if(ui.index ==1){
 					
 				}
-			},
-			cookie : {
-				expires : 3　//選択タブをcookieで3日間保存
-			}
+			},*/
+			
 		});
 	});
-	
 // -->
 </script>
 
@@ -75,8 +76,9 @@ $(function(){
       }
     });
     
-    var httpObj = $.get("html_template.txt", null, function(){
+    var httpObj = $.get("html_template.txt", function(){
     	 editor.setValue(httpObj.responseText);
+		 editor.save();
     });
     
     $("#new_button").button().click(function(){
@@ -105,7 +107,45 @@ $(function(){
 });
 
 function getHTMLCode() {
-	  alert(editor.getValue());
+	alert(editor.getValue());
+}
+
+/**
+ * Initialize Blockly.  Called on page load.
+ * @param {!Blockly} blockly Instance of Blockly from iframe.
+ */
+function init(blockly) {
+  //window.onbeforeunload = function() {
+  //  return 'Leaving this page will result in the loss of your work.';
+  //};
+
+  window.Blockly = blockly;
+
+  // Make the 'Blocks' tab line up with the toolbox.
+  if (Blockly.Toolbox) {
+    Blockly.bindEvent_(window, 'resize', null, function() {
+      document.getElementById('tab_blocks').style.minWidth =
+          (Blockly.Toolbox.width - 38) + 'px';
+          // Account for the 19 pixel margin and on each side.
+      });
+    window.setTimeout(function() {
+        Blockly.fireUiEvent(document, window, 'resize');
+      }, 1);
+  }
+
+  // Restore/backup current works.
+  restore_blocks();
+  restore_htmls();
+  Blockly.bindEvent_(window, 'unload', null, backup_blocks);
+  Blockly.bindEvent_(window, 'unload', null, backup_htmls);
+  tabClick('tab_' + selected);
+
+  // Init load event.
+  var loadInput = document.getElementById('load');
+  loadInput.addEventListener('change', load, false);
+  document.getElementById('fakeload').onclick = function() {
+    loadInput.click();
+  };
 }
 //-->
 </script>
@@ -125,7 +165,7 @@ function getHTMLCode() {
             <li><a href="#tab-html">HTML</a></li>
         </ul>
         <div id="tab-javascript">
-            <iframe id="blockly_frame" src="../demos/codejp/frame.html"></iframe>
+            <!-- <iframe id="blockly_frame" src="../demos/codejp/frame.html"></iframe>-->
         </div>
         <div id="tab-html">
             <p>
