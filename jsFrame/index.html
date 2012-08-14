@@ -80,6 +80,8 @@ function init(blockly) {
   //  return 'Leaving this page will result in the loss of your work.';
   //};
 
+  restore_htmls();
+
   window.Blockly = blockly;
 
   // Make the 'Blocks' tab line up with the toolbox.
@@ -119,6 +121,10 @@ function restore_blocks() {
   if ('localStorage' in window && window.localStorage.blocks) {
     var xml = Blockly.Xml.textToDom(window.localStorage.blocks);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  }
+}
+function restore_htmls() {
+  if ('localStorage' in window && window.localStorage.blocks) {
     var htmlText = window.localStorage.htmls;
   	document.getElementById('textarea_html').value = htmlText;
   }
@@ -259,7 +265,7 @@ function discard() {
 		    	</tr>
 		    </table>
         </div>
-        <div id="content_html">
+        <div id="content_html" style="width: 100%;height: 100%;">
         	<textarea id="textarea_html"></textarea>
         </div>
         <div id="content_output"></div>

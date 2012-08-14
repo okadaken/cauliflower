@@ -39,10 +39,33 @@ Blockly.Language.event_onload = {
 Blockly.Language.event_onclick = {
   category: Blockly.MSG_EVENT_CATEGORY,
   init: function() {
+  	
+	var funcNameList = new Array();
+	
+	var htmltext = parent.document.getElementById('textarea_html').value;
+	console.log(htmltext);
+	if (htmltext != '') {
+		var dom = new DOMParser().parseFromString(htmltext, "text/xml");
+		var list = dom.getElementsByTagName("button");
+		console.log(list);
+		for( var i=0 ; i < list.length ; i++ ){
+			var tmp = new Array();
+			tmp.push( list[i].getAttribute("id") );
+			tmp.push( list[i].getAttribute("id") );
+			funcNameList.push( tmp );
+		}
+	}
+	console.log( funcNameList );
+	
     this.setColour(45);
-    this.appendTitle( new Blockly.FieldTextInput('target'), 'TARGET' );
+	
+    var dropdown = new Blockly.FieldDropdown(funcNameList);
+    //var dropdown = new Blockly.FieldDropdown([['world', 'WORLD'], ['computer', 'CPU']]);
+    this.appendTitle(dropdown, 'TARGET' );
+
+    //this.appendTitle( new Blockly.FieldTextInput('target'), 'TARGET' );
     this.appendTitle('をクリックされた時');
-    this.setInputsInline(true);
+    //this.setInputsInline(true);
 
     this.appendInput('', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(false);
