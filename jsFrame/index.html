@@ -132,6 +132,8 @@ function discard() {
   if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
     Blockly.mainWorkspace.clear();
     renderContent();
+    window.localStorage.setItem('htmls', '');
+    window.localStorage.setItem('blocks', '');
   }
 }
   </script>
