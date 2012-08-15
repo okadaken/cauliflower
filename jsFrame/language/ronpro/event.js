@@ -26,7 +26,7 @@ if (!Blockly.Language) Blockly.Language = {};
 
 
 Blockly.Language.event_onload = {
-  category: Blockly.MSG_EVENT_CATEGORY,
+  category: null,
   init: function() {
     this.setColour(45);
 	this.appendTitle('ページが読み込まれたとき');
@@ -37,37 +37,41 @@ Blockly.Language.event_onload = {
 };
 
 Blockly.Language.event_onclick = {
-  category: Blockly.MSG_EVENT_CATEGORY,
+  category: null,
   init: function() {
   	
+	/*
 	var funcNameList = new Array();
 	
 	var htmltext = parent.document.getElementById('textarea_html').value;
-	console.log(htmltext);
 	if (htmltext != '') {
 		var dom = new DOMParser().parseFromString(htmltext, "text/xml");
 		var list = dom.getElementsByTagName("button");
-		console.log(list);
 		for( var i=0 ; i < list.length ; i++ ){
 			var tmp = new Array();
-			tmp.push( list[i].getAttribute("id") );
-			tmp.push( list[i].getAttribute("id") );
+			tmp.push( list[i].getAttribute("onclick") );
+			tmp.push( list[i].getAttribute("onclick") );
 			funcNameList.push( tmp );
 		}
 	}
-	console.log( funcNameList );
+	*/
 	
     this.setColour(45);
 	
-    var dropdown = new Blockly.FieldDropdown(funcNameList);
-    //var dropdown = new Blockly.FieldDropdown([['world', 'WORLD'], ['computer', 'CPU']]);
-    this.appendTitle(dropdown, 'TARGET' );
+	//console.log( 'onclick>>' + this.getTitleText('FUNC'));
+	if (this.getTitleText('FUNC') == null) {
+		this.appendTitle('hoge','FUNC');
+	} else {
+		this.appendTitle(this.getTitleText('FUNC'),'FUNC');
+	}
+	this.appendTitle('{');
 
     //this.appendTitle( new Blockly.FieldTextInput('target'), 'TARGET' );
-    this.appendTitle('をクリックされた時');
+    //this.appendTitle('をクリックされた時');
     //this.setInputsInline(true);
 
     this.appendInput('', Blockly.NEXT_STATEMENT, 'DO');
+	this.appendInput('}', Blockly.DUMMY_INPUT, null );
     this.setPreviousStatement(false);
   },
 };

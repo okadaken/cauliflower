@@ -37,7 +37,9 @@
   <script>
     function init() {
       Blockly.inject(document.body, {path: ''});
+      window.Blockly = Blockly;
 
+/*
       if (window.parent.init) {
         // Let the top-level application know that Blockly is ready.
         window.parent.init(Blockly);
@@ -53,6 +55,7 @@
         }
         alert(msg);
       }
+*/
     }
   </script>
 </head>

@@ -258,6 +258,8 @@ Blockly.Flyout.prototype.show = function(names) {
   } else if (names == Blockly.MSG_PROCEDURE_CATEGORY) {
     // Special category for procedures.
     Blockly.Procedures.flyoutCategory(blocks, gaps, margin, this.workspace_);
+  } else if (names == Blockly.MSG_EVENT_CATEGORY ) {
+    Blockly.Events.flyoutCategory(blocks, gaps, margin, this.workspace_);
   } else {
     for (var i = 0, name; name = names[i]; i++) {
       var block = new Blockly.Block(this.workspace_, name);
