@@ -12,6 +12,7 @@ $(document).ready(function() {
     initializeHTMLEditor();
     initializeDialogs();
     
+    restoreHTML();
     setTimeout(updatePreview, 300);
 });
 
@@ -20,13 +21,16 @@ function initializeTabs() {
         cookie: {
             expires: 3 //選択タブをcookieで3日間保存
         },
+        load: function(event, ui) {
+            if (ui.panel.id == "tab-html") {
+                restoreHTML();
+            }
+        },
         select: function(event, ui) {
-            if (ui.index == 0) {
-                Blockly.mainWorkspace.render();
-            } else 
-                if (ui.index == 1) {
-                
-                }
+            if (ui.panel.id == "tab-javascript") {
+                backupHTML();
+                //Blockly.mainWorkspace.render();
+            }
         }
     });
 }
@@ -46,7 +50,9 @@ function initializeButtons() {
     }).click(function() {//TODO:とりあえず色を変えただけ 要グラデーション
         alert("実行する");
     });
-    $("#html_new_botton").button();
+    $("#html_new_botton").button().click(function() {
+        loadHTMLTemplate();
+    });
 }
 
 function initializeHTMLEditor() {
@@ -62,10 +68,6 @@ function initializeHTMLEditor() {
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
         }
-    });
-    var httpObj = $.get("html_template.txt", function() {
-        HTMLEditor.setValue(httpObj.responseText);
-        HTMLEditor.save();
     });
 }
 
@@ -136,6 +138,29 @@ function updatePreview() {
     preview.open();
     preview.write(HTMLEditor.getValue());
     preview.close();
+}
+
+function restoreHTML() {
+    if ("localStorage" in window && window.localStorage.cauliflower_html) {
+        HTMLEditor.setValue(window.localStorage.cauliflower_html);
+    } else {
+        loadHTMLTemplate();
+    }
+}
+
+function backupHTML() {
+    if ("localStorage" in window) {
+        window.localStorage.setItem("cauliflower_html", getHTMLCode());
+    }
+}
+
+function loadHTMLTemplate() {
+    if ("localStorage" in window) {
+        window.localStorage.setItem("cauliflower_html", "");
+    }
+    var httpObj = $.get("html_template.txt", function() {
+        HTMLEditor.setValue(httpObj.responseText);
+    });
 }
 
 function htmlEscape(s) {
