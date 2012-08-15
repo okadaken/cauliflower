@@ -186,7 +186,6 @@ CodeMirror.modeExtensions["htmlmixed"] = {
   commentStart: "<!--",
   commentEnd: "-->",
   wordWrapChars: [">", ";", "\\{", "\\}"],
-
   getModeInfos: function (text, absPos) {
     var modeInfos = new Array();
     modeInfos[0] =

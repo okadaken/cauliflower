@@ -8,10 +8,10 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
- * body内のみを抽出してプレビュー
+ * bodyのみを抽出してプレビューすること
  * 保存形式の検討
  * シングルクオート
- * HTMLフォーマットボタン
+ * HTMLフォーマット改善
  */
 var HTMLEditor;
 

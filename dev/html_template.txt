@@ -5,6 +5,6 @@
   <title>ページタイトル</title>
 </head>
 <body>
-  <!- ここにHTMLを追加しましょう -->
+  <!- ここにHTMLを追加します -->
 </body>
 </html>
