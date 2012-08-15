@@ -15,6 +15,12 @@
  */
 var HTMLEditor;
 
+if($==null){
+    alert("null");
+}
+$('#html_frame').load(function() {
+});
+
 $(document).ready(function() {
     initializeTabs();
     initializeButtons();
