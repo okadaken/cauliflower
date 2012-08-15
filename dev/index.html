@@ -15,10 +15,17 @@
         <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
         <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
         <script type="text/javascript" src="codemirror/lib/util/closetag.js"></script>
+        <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
+        <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
+        <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
         <style type=text/css>
             .CodeMirror {
                 position: relative;
                 width: 50%;
+            }
+            
+            span.CodeMirror-matchhighlight {
+                background: #ffaaaa
             }
             
             #html_preview {
@@ -53,7 +60,7 @@
             <button id="new_button">新規</button>
             <button id="open_button">開く</button>
             <button id="save_button">保存</button>
-            &nbsp;&nbsp;<button id="exec_button">プレビュー</button>
+            &nbsp;&nbsp;<button id="exec_button">実行プレビュー</button>
         </p>
         <div id="tabs">
             <ul>
@@ -72,13 +79,16 @@
                     <a href="javascript:getAllCode();">テスト用：HTMLを取得</a>
                 </p>
                 <p>
+                    <a href="javascript:discardHTML();">テスト用：localstrage初期化</a>
+                </p>
+                <p>
+                    <a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
+                </p>
+                <p>
                     <button id="html_new_botton">新規作成</button>
                 </p>
                 <textarea id="html_textarea">
                 </textarea>
-                <p>
-                    <a href="javascript:getAllCode();">テスト用：HTMLを取得</a>
-                </p>
                 <iframe id="html_preview">
                 </iframe>
             </div>
@@ -87,7 +97,7 @@
             <p>
         </div>
         <div id="HTML_syntaxerror_dialog">
-            <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:0px 15px 50px 0px;">
+            <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 70px 0px;">
             <div id="HTML_syntaxerror_dialog_message">
             </div>
         </div>

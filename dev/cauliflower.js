@@ -1,8 +1,17 @@
 /**
  * Cauliflower v0.1
+ * Copyright (c) 2012 Ken Okada<>, Manabu Sugiura<>
  *
- * Copyright 2012 okadaken & gakuchan
  * http://github.com/okadaken/cauliflower
+ *
+ * TODO:License書く
+ * http://sourceforge.jp/projects/opensource/wiki/licenses
+ *
+ * 例題ボタン
+ * body内のみを抽出してプレビュー
+ * 保存形式の検討
+ * シングルクオート
+ * HTMLフォーマットボタン
  */
 var HTMLEditor;
 
@@ -22,18 +31,19 @@ function initializeTabs() {
         cookie: {
             expires: 3 //選択タブをcookieで3日間保存
         },
-        load: function(event, ui) {
-            if (ui.panel.id == "tab-html") {
-                restoreHTML();
-                HTMLEditor.refresh();
+        show: function(event, ui) {
+            if (HTMLEditor != null) {
+                switch (ui.panel.id) {
+                    case "tab-html":
+                        restoreHTML();
+                        break;
+                    case "tab-javascript":
+                        backupHTML();
+                        //Blockly.mainWorkspace.render();
+                        break;
+                }
             }
         },
-        select: function(event, ui) {
-            if (ui.panel.id == "tab-javascript") {
-                backupHTML();
-                //Blockly.mainWorkspace.render();
-            }
-        }
     });
 }
 
@@ -67,6 +77,7 @@ function initializeHTMLEditor() {
         fixedGutter: "true",
         electricChars: "true",
         closeTagIndent: false,
+        autofocus: true,
         extraKeys: {
             "'>'": function(cm) {
                 cm.closeTag(cm, '>');
@@ -76,6 +87,7 @@ function initializeHTMLEditor() {
             }
         },
         onChange: function() {
+            HTMLEditor.clearMarks();
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
         },
@@ -109,7 +121,8 @@ function getHTMLCode() {
 
 //Blocklyのエディタができるまでの仮実装
 function getJavaScriptCode() {
-    return "\nalert(\"Hello World!\");\n";
+    var code = "\nalert(\"Hello World!\");\n";
+    return code;
 }
 
 function getAllCode() {
@@ -118,7 +131,8 @@ function getAllCode() {
         var xml = HTMLtoXML(getHTMLCode());
     } catch (e) {//変換できなければエラー表示して終了
         var errorLine = e.split("\n")[0];
-        var message = "<p>HTMLの構文エラーです。</p><span style=\"background: #ffaaaa;\">" + htmlEscape(errorLine) + "</span><p>上記のHTMLを正しく修正してください。</p>";
+        mark(errorLine);
+        var message = "<p>HTMLの構文エラーです。</p>エラーの原因となった文字列:<br><span style=\"background: #ffaaaa;\">" + htmlEscape(errorLine) + "</span><p>HTMLエディタでハイライトされている箇所を修正してください。</p>";
         $("#HTML_syntaxerror_dialog_message").html(message);
         $("#HTML_syntaxerror_dialog").dialog("open");
         return;
@@ -141,6 +155,7 @@ function getAllCode() {
         var serializer = new XMLSerializer();
         var code = serializer.serializeToString(doc);
         console.log(code); //TODO:最後に行頭のDOCTYPEを追加すること
+        //console.log( serializer.serializeToString(body)); 
     } else {
         alert("bodyタグが見つかりません");//TODO:dialogにすること
     }
@@ -152,6 +167,23 @@ function updatePreview() {
     preview.open();
     preview.write(HTMLEditor.getValue());
     preview.close();
+}
+
+function mark(s) {
+    HTMLEditor.matchHighlight("CodeMirror-matchhighlight", s);
+}
+
+function clearMarks() {
+    HTMLEditor.clearMarks();
+}
+
+function autoFormat() {
+    CodeMirror.commands["selectAll"](HTMLEditor);
+    var range = {
+        from: HTMLEditor.getCursor(true),
+        to: HTMLEditor.getCursor(false)
+    };
+    HTMLEditor.autoFormatRange(range.from, range.to);
 }
 
 function restoreHTML() {
@@ -169,13 +201,17 @@ function backupHTML() {
 }
 
 function loadHTMLTemplate() {
-    if ("localStorage" in window) {
-        window.localStorage.setItem("cauliflower_html", "");
-    }
+    discardHTML();
     var httpObj = $.get("html_template.txt", function() {
         HTMLEditor.setValue(httpObj.responseText);
     });
     backupHTML();
+}
+
+function discardHTML() {
+    if ("localStorage" in window) {
+        window.localStorage.removeItem("cauliflower_html");
+    }
 }
 
 function htmlEscape(s) {
