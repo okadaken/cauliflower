@@ -1,105 +1,118 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Cauliflower v0.1</title>
-        <!-- for jquery -->
-        <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css">
-        <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
-        <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
-        <!-- for codemirror -->
-        <link rel=stylesheet href="codemirror/lib/codemirror.css">
-        <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
-        <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
-        <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
-        <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
-        <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-        <script type="text/javascript" src="codemirror/lib/util/closetag.js"></script>
-        <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
-        <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
-        <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
-        <style type=text/css>
-            .CodeMirror {
-                position: relative;
-                width: 50%;
-            }
-            
-            span.CodeMirror-matchhighlight {
-                background: #ffaaaa
-            }
-            
-            #html_preview {
-                width: 40%;
-                position: absolute;
-                top: 50px;
-                right: 20px;
-                height: 300px;
-                border: 1px solid black;
-            }
-            
-            #blockly_frame {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-            
-            .ui-tabs {
-                font-size: 14px;
-            }
-            
-            .ui-dialog {
-                font-size: 12px;
-            }
-        </style>
-        <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
-        <script type="text/javascript" src="cauliflower.js"></script>
-    </head>
-    <body>
-        <h1>Cauliflower v0.1</h1>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cauliflower v0.1</title>
+    <!-- for jquery -->
+    <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css">
+    <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
+    <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
+    <!-- for codemirror -->
+    <link rel=stylesheet href="codemirror/lib/codemirror.css">
+    <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
+    <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="codemirror/lib/util/closetag.js"></script>
+    <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
+    <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
+    <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
+    <style type=text/css>
+      .CodeMirror {
+          position: relative;
+          width: 50%;
+          border-top: 2px solid #d4d4d4;
+          border-bottom: 2px solid #d4d4d4;
+      }
+      
+      span.CodeMirror-matchhighlight {
+          background: #ffaaaa
+      }
+      
+      #html_preview {
+          width: 40%;
+          position: absolute;
+          top: 50px;
+          right: 20px;
+          height: 300px;
+          border: 1px solid black;
+      }
+      
+      #blockly_frame {
+          width: 100%;
+          height: 500px;
+          /*height: 100%;*/
+          border: none;
+      }
+      
+      .title {
+          font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+          text-align: right;
+          vertical-align: middle;
+          font-size: 25px;
+          color: #1B75BB;
+      }
+      
+      .ui-tabs {
+          font-size: 14px;
+      }
+      
+      .ui-dialog {
+          font-size: 12px;
+      }
+      
+      .ui-button {
+          font-size: 13px;
+      }
+    </style>
+    <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
+    <script type="text/javascript" src="cauliflower.js"></script>
+  </head>
+  <body>
+    <p>
+      <span class="title">Cauliflower v0.1</span>
+      <button id="new_button">新規</button>
+      <button id="open_button">開く</button>
+      <button id="save_button">保存</button>
+      &nbsp;&nbsp;<button id="exec_button">実行プレビュー</button>
+    </p>
+    <div id="tabs">
+      <ul>
+        <li>
+          <a href="#tab-html">HTML</a>
+        </li>
+        <li>
+          <a href="#tab-javascript">JavaScript</a>
+        </li>
+      </ul>
+      <div id="tab-javascript">
+        <iframe id="blockly_frame" src="jsFrame/frame.html">
+        </iframe>
+      </div>
+      <div id="tab-html">
         <p>
-            <button id="new_button">新規</button>
-            <button id="open_button">開く</button>
-            <button id="save_button">保存</button>
-            &nbsp;&nbsp;<button id="exec_button">実行プレビュー</button>
+          <a href="javascript:getAllCode();">テスト用：HTMLを取得</a>
         </p>
-        <div id="tabs">
-            <ul>
-                <li>
-                    <a href="#tab-html">HTML</a>
-                </li>
-                <li>
-                    <a href="#tab-javascript">JavaScript</a>
-                </li>
-            </ul>
-            <div id="tab-javascript">
-                <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
-            </div>
-            <div id="tab-html">
-                <p>
-                    <a href="javascript:getAllCode();">テスト用：HTMLを取得</a>
-                </p>
-                <p>
-                    <a href="javascript:discardHTML();">テスト用：localstrage初期化</a>
-                </p>
-                <p>
-                    <a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
-                </p>
-                <p>
-                    <button id="html_new_botton">新規作成</button>
-                </p>
-                <textarea id="html_textarea">
-                </textarea>
-                <iframe id="html_preview">
-                </iframe>
-            </div>
-        </div>
-        <div id="dialog-message" title="Download complete">
-            <p>
-        </div>
-        <div id="HTML_syntaxerror_dialog">
-            <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 70px 0px;">
-            <div id="HTML_syntaxerror_dialog_message">
-            </div>
-        </div>
-    </body>
+        <p>
+          <a href="javascript:discardHTML();">テスト用：localstrage初期化</a>
+        </p>
+        <p>
+          <a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
+        </p>
+        <p>
+          <button id="html_new_botton">新規作成</button>
+        </p>
+        <textarea id="html_textarea"></textarea>
+        <iframe id="html_preview">
+        </iframe>
+      </div>
+    </div>
+    <div id="HTML_syntaxerror_dialog">
+      <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 70px 0px;">
+      <div id="HTML_syntaxerror_dialog_message">
+      </div>
+    </div>
+  </body>
 </html>
