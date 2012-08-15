@@ -13,6 +13,7 @@ $(document).ready(function() {
     initializeDialogs();
     
     restoreHTML();
+    HTMLEditor.refresh();
     setTimeout(updatePreview, 300);
 });
 
@@ -24,6 +25,7 @@ function initializeTabs() {
         load: function(event, ui) {
             if (ui.panel.id == "tab-html") {
                 restoreHTML();
+                HTMLEditor.refresh();
             }
         },
         select: function(event, ui) {
@@ -64,9 +66,21 @@ function initializeHTMLEditor() {
         lineNumbers: "true",
         fixedGutter: "true",
         electricChars: "true",
+        closeTagIndent: false,
+        extraKeys: {
+            "'>'": function(cm) {
+                cm.closeTag(cm, '>');
+            },
+            "'/'": function(cm) {
+                cm.closeTag(cm, '/');
+            }
+        },
         onChange: function() {
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
+        },
+        onBlur: function() {
+            backupHTML();
         }
     });
 }
@@ -161,6 +175,7 @@ function loadHTMLTemplate() {
     var httpObj = $.get("html_template.txt", function() {
         HTMLEditor.setValue(httpObj.responseText);
     });
+    backupHTML();
 }
 
 function htmlEscape(s) {
