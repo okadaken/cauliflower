@@ -1,182 +1,91 @@
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Cauliflower v0.1</title>
-
-<!-- for jquery -->
-<link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css">
-<script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
-<script type="text/javascript" src="jquery/jquery.cookie.js"></script>
-<script type="text/javascript">
-<!--
-$(function() {
-		$("#tabs").tabs({
-			cookie : {
-				expires : 3　//選択タブをcookieで3日間保存
-			},
-			/*
-			select: function(event, ui){
-				if(ui.index == 0){
-					Blockly.mainWorkspace.render();
-				}else if(ui.index ==1){
-					
-				}
-			},*/
-			
-		});
-	});
-// -->
-</script>
-
-<!-- for codemirror -->
-<link rel=stylesheet href="codemirror/lib/codemirror.css">
-<link rel="stylesheet" href="codemirror/theme/default.css">
-<script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
-<script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
-<script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
-<script type="text/javascript" src="codemirror/mode/css/css.js></script"></script>
-<script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-<style type=text/css>
-.CodeMirror {
-	position: relative;
-	width: 50%;
-}
-
-#html_preview {
-	width: 40%;
-	position: absolute;
-	top: 50px;
-	right: 20px;
-	height: 300px;
-	border: 1px solid black;
-}
-
-#blockly_frame {
-	width: 100%;
-	height: 100%;
-	border: none;
-}
-</style>
-<script type="text/javascript">
-<!--
-var editor;
-$(function(){
-	var delay;
-    editor = CodeMirror.fromTextArea(document.getElementById("html_textarea"), {
-      mode: "text/html",
-      theme: "default",
-      tabMode: "indent",
-      lineNumbers: "true",
-      fixedGutter: "true",
-      electricChars: "true",
-      onChange: function() {
-        clearTimeout(delay);
-        delay = setTimeout(updatePreview, 300);
-      }
-    });
-    
-    var httpObj = $.get("html_template.txt", function(){
-    	 editor.setValue(httpObj.responseText);
-		 editor.save();
-    });
-    
-    $("#new_button").button().click(function(){
-    	alert("新規作成");
- 	});
-    $("#open_button").button().click(function(){
-    	alert("読み込み");
- 	});
-    $("#save_button").button().click(function(){
-    	alert("保存する");
- 	});
-    $("#exec_button").button().css({"background": "#ffcc00"}).click(function(){//とりあえず色を変える要グラデーション
-    	alert("実行する");
- 	});
-    $("#html_new_botton").button();
-    
-    
-    function updatePreview() {
-      var previewFrame = document.getElementById("html_preview");
-      var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
-      preview.open();
-      preview.write(editor.getValue());
-      preview.close();
-    }
-    setTimeout(updatePreview, 300);
-});
-
-function getHTMLCode() {
-	alert(editor.getValue());
-}
-
-/**
- * Initialize Blockly.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
- */
-function init(blockly) {
-  //window.onbeforeunload = function() {
-  //  return 'Leaving this page will result in the loss of your work.';
-  //};
-
-  window.Blockly = blockly;
-
-  // Make the 'Blocks' tab line up with the toolbox.
-  if (Blockly.Toolbox) {
-    Blockly.bindEvent_(window, 'resize', null, function() {
-      document.getElementById('tab_blocks').style.minWidth =
-          (Blockly.Toolbox.width - 38) + 'px';
-          // Account for the 19 pixel margin and on each side.
-      });
-    window.setTimeout(function() {
-        Blockly.fireUiEvent(document, window, 'resize');
-      }, 1);
-  }
-
-  // Restore/backup current works.
-  restore_blocks();
-  restore_htmls();
-  Blockly.bindEvent_(window, 'unload', null, backup_blocks);
-  Blockly.bindEvent_(window, 'unload', null, backup_htmls);
-  tabClick('tab_' + selected);
-
-  // Init load event.
-  var loadInput = document.getElementById('load');
-  loadInput.addEventListener('change', load, false);
-  document.getElementById('fakeload').onclick = function() {
-    loadInput.click();
-  };
-}
-//-->
-</script>
-</head>
-<body>
-    <h1>Cauliflower v0.1</h1>
-    <p>
-        <button id="new_button">新規</button>
-        <button id="open_button">開く</button>
-        <button id="save_button">保存</button>
-        &nbsp;&nbsp;
-        <button id="exec_button">プレビュー</button>
-    </p>
-    <div id="tabs">
-        <ul>
-            <li><a href="#tab-javascript">JavaScript</a></li>
-            <li><a href="#tab-html">HTML</a></li>
-        </ul>
-        <div id="tab-javascript">
-            <!-- <iframe id="blockly_frame" src="../demos/codejp/frame.html"></iframe>-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Cauliflower v0.1</title>
+        <!-- for jquery -->
+        <link rel="stylesheet" href="jquery/css//jquery-ui-1.8.22.custom.css">
+        <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
+        <!-- for codemirror -->
+        <link rel=stylesheet href="codemirror/lib/codemirror.css">
+        <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+        <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
+        <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
+        <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
+        <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+        <style type=text/css>
+            .CodeMirror {
+                position: relative;
+                width: 50%;
+            }
+            
+            #html_preview {
+                width: 40%;
+                position: absolute;
+                top: 50px;
+                right: 20px;
+                height: 300px;
+                border: 1px solid black;
+            }
+            
+            #blockly_frame {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            
+            .ui-tabs {
+                font-size: 14px;
+            }
+            
+            .ui-dialog {
+                font-size: 12px;
+            }
+        </style>
+        <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
+        <script type="text/javascript" src="cauliflower.js"></script>
+    </head>
+    <body>
+        <h1>Cauliflower v0.1</h1>
+        <p>
+            <button id="new_button">新規</button>
+            <button id="open_button">開く</button>
+            <button id="save_button">保存</button>
+            &nbsp;&nbsp;<button id="exec_button">プレビュー</button>
+        </p>
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tab-javascript">JavaScript</a>
+                </li>
+                <li>
+                    <a href="#tab-html">HTML</a>
+                </li>
+            </ul>
+            <div id="tab-javascript">
+                <!--<iframe id="blockly_frame" src="../jsFrame/frame.html"></iframe>-->
+            </div>
+            <div id="tab-html">
+                <p>
+                    <a href="javascript:getAllCode();">テスト用：HTMLを取得</a>
+                </p>
+                <p>
+                    <button id="html_new_botton">新規作成</button>
+                </p>
+                <textarea id="html_textarea">
+                </textarea>
+                <iframe id="html_preview">
+                </iframe>
+            </div>
         </div>
-        <div id="tab-html">
+        <div id="dialog-message" title="Download complete">
             <p>
-                <a href="javascript:getHTMLCode();">テスト用：HTMLを取得</a>
-            </p>
-            <p>
-                <button id="html_new_botton">新規作成</button>
-            </p>
-            <textarea id="html_textarea"></textarea>
-            <iframe id="html_preview"></iframe>
         </div>
-    </div>
-</body>
+        <div id="HTML_syntaxerror_dialog">
+            <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:0px 15px 50px 0px;">
+            <div id="HTML_syntaxerror_dialog_message">
+            </div>
+        </div>
+    </body>
 </html>
