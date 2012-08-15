@@ -15,7 +15,7 @@
  */
 var HTMLEditor;
 
-if($==null){
+if ($ == null) {
     alert("null");
 }
 $('#html_frame').load(function() {
@@ -131,7 +131,7 @@ function getJavaScriptCode() {
     return code;
 }
 
-function getAllCode() {
+function parseHTML2DOM() {
     //前処理としてHTMLをXMLに変換
     try {
         var xml = HTMLtoXML(getHTMLCode());
@@ -141,12 +141,19 @@ function getAllCode() {
         var message = "<p>HTMLの構文エラーです。</p>エラーの原因となった文字列:<br><span style=\"background: #ffaaaa;\">" + htmlEscape(errorLine) + "</span><p>HTMLエディタでハイライトされている箇所を修正してください。</p>";
         $("#HTML_syntaxerror_dialog_message").html(message);
         $("#HTML_syntaxerror_dialog").dialog("open");
-        return;
+        return null;
     }
     
     //DOMにパース
     var parser = new DOMParser();
-    var doc = parser.parseFromString(xml, "text/xml");
+    return parser.parseFromString(xml, "text/xml");
+}
+
+function getAllCode() {
+    var doc = parseHTML2DOM();
+    if (doc == null) {
+        return;
+    }
     
     //JavaScriptタグとコードのノードを生成
     var js = doc.createElement("script");
