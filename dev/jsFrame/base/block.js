@@ -438,6 +438,9 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     Blockly.highlightedConnection_.unhighlight();
     Blockly.highlightedConnection_ = null;
   }
+  
+  var target = window.parent.document.getElementById("blockly_text");
+  target.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
 };
 
 /**
