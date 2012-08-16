@@ -43,16 +43,18 @@ Blockly.MyDocument.allId = function(opt_block) {
 	var idList = new Array();
 	
 	var dom = window.parent.parseHTML2DOM();
-	var body = dom.getElementsByTagName("body");
-	search( idList, body[0] );
+    if (dom != null) {
+        var body = dom.getElementsByTagName("body");
+        search(idList, body[0]);
+    }
 
 	return idList;
 };
 function search( idList, element ){
-	if( element instanceof Text ){
+	if( element.nodeType == 3 || element.nodeType == 8){ // skip Text & Comment node
 		return;
 	}
-	if( element.getAttribute('id') != null ){
+	if( element.getAttribute('id') != null && element.getAttribute('id').length != 0){
 		idList.push( element.getAttribute('id') );
 	}
 	for( var i=0 ; i < element.childNodes.length ; i++ ){

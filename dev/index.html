@@ -29,7 +29,9 @@
       }
       
       span.CodeMirror-matchhighlight {
-          background: #ffaaaa
+          font-weight: bolder;
+          /*padding: 0px 0px 0px 40px;*/
+          background: #ffaaaa; /* url(img/dialog/notice.png) no-repeat center left;*/
       }
       
       #html_preview {
@@ -67,8 +69,7 @@
           font-size: 13px;
       }
     </style>
-    <!--  for Blocky TODO:userScriptの役割をチェック -->
-    <script type="text/javascript" src="jsFrame/extlib/BlobBuilder.min.js"></script>
+    <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="jsFrame/extlib/BlobBuilder.min.js"></script>
     <script type="text/javascript" src="jsFrame/extlib/FileSaver.min.js"></script>
     <script type="text/javascript" id="userScript"></script>
     <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
@@ -118,7 +119,7 @@
       </div>
     </div>
     <div id="HTML_syntaxerror_dialog">
-      <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 70px 0px;">
+      <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 80px 0px;">
       <div id="HTML_syntaxerror_dialog_message">
       </div>
     </div>

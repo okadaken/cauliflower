@@ -18,6 +18,8 @@
 var HTMLEditor;
 var JavaScriptPreview;
 
+var errorLine;
+
 $(document).ready(function() {
     initializeTabs();
     initializeButtons();
@@ -35,6 +37,15 @@ function initializeTabs() {
     $("#tabs").tabs({
         cookie: {
             expires: 3 //選択タブをcookieで3日間保存
+        },
+        select: function(event, ui) {
+            if (HTMLEditor != null) {
+                switch (ui.panel.id) {
+                    case "tab-javascript":
+                        parseHTML2DOM()
+                        break;
+                }
+            }
         },
         show: function(event, ui) {
             if (HTMLEditor != null) {
@@ -117,6 +128,8 @@ function initializeDialogs() {
         buttons: {
             OK: function() {
                 $(this).dialog("close");
+                $("#tabs").tabs("select", 0);
+                mark(errorLine);
             }
         }
     });
@@ -137,9 +150,8 @@ function parseHTML2DOM() {
     try {
         var xml = HTMLtoXML(getHTMLCode());
     } catch (e) {//変換できなければエラー表示して終了
-        var errorLine = e.split("\n")[0];
-        mark(errorLine);
-        var message = "<p>HTMLの構文エラーです。</p>エラーの原因となった文字列:<br><span style=\"background: #ffaaaa;\">" + htmlEscape(errorLine) + "</span><p>HTMLエディタでハイライトされている箇所を修正してください。</p>";
+        errorLine = e.split("\n")[0];
+        var message = "<p>HTMLの構文エラーです。</p>エラーの原因となった文字列:<br><b><span style=\"background: #ffaaaa;\">" + htmlEscape(errorLine) + "</span></b><p>HTMLエディタのハイライト部分を先に修正して、JavaScriptを編集してください。</p>";
         $("#HTML_syntaxerror_dialog_message").html(message);
         $("#HTML_syntaxerror_dialog").dialog("open");
         return null;
@@ -263,7 +275,6 @@ function restoreBlocks() {
         var xml = Blockly.Xml.textToDom(window.localStorage.cauliflower_blocks);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
         updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-        console.log("restoreB");
     }
 }
 
