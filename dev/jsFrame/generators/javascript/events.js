@@ -37,6 +37,6 @@ Blockly.JavaScript.event_onclick = function() {
   var target = this.getTitleText('FUNC');
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   
-  var code = 'function '+target+'{\n' + branch + '}';
+  var code = target+'\n' + branch + '}';
   return code + '\n';
 };
