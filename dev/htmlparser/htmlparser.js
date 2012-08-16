@@ -55,7 +55,8 @@
         while (html) {
             chars = true;
             
-            if (html.indexOf("<!DOCTYPE html>\n" == 0)) {
+            // Skip doctype
+            if (html.indexOf("<!DOCTYPE html>" == 0)) {
                 html = html.replace("<!DOCTYPE html>", "");
             }
             
@@ -74,27 +75,25 @@
                     }
                     
                     // end tag
-                } else 
-                    if (html.indexOf("</") == 0) {
-                        match = html.match(endTag);
-                        
-                        if (match) {
-                            html = html.substring(match[0].length);
-                            match[0].replace(endTag, parseEndTag);
-                            chars = false;
-                        }
-                        
+                } else if (html.indexOf("</") == 0) {
+                    match = html.match(endTag);
+                    
+                    if (match) {
+                        html = html.substring(match[0].length);
+                        match[0].replace(endTag, parseEndTag);
+                        chars = false;
+                    }
+                    
                     // start tag
-                    } else 
-                        if (html.indexOf("<") == 0) {
-                            match = html.match(startTag);
-                            
-                            if (match) {
-                                html = html.substring(match[0].length);
-                                match[0].replace(startTag, parseStartTag);
-                                chars = false;
-                            }
-                        }
+                } else if (html.indexOf("<") == 0) {
+                    match = html.match(startTag);
+                    
+                    if (match) {
+                        html = html.substring(match[0].length);
+                        match[0].replace(startTag, parseStartTag);
+                        chars = false;
+                    }
+                }
                 
                 if (chars) {
                     index = html.indexOf("<");
@@ -169,10 +168,9 @@
             if (!tagName) 
                 var pos = 0;
             // Find the closest opened tag of the same type
-            else 
-                for (var pos = stack.length - 1; pos >= 0; pos--) 
-                    if (stack[pos] == tagName) 
-                        break;
+            else for (var pos = stack.length - 1; pos >= 0; pos--) 
+                if (stack[pos] == tagName) 
+                    break;
             
             if (pos >= 0) {
                 // Close all the open elements, up the stack
@@ -225,17 +223,14 @@
         if (!doc) {
             if (typeof DOMDocument != "undefined") 
                 doc = new DOMDocument();
-            else 
-                if (typeof document != "undefined" && document.implementation && document.implementation.createDocument) 
-                    doc = document.implementation.createDocument("", "", null);
-                else 
-                    if (typeof ActiveX != "undefined") 
-                        doc = new ActiveXObject("Msxml.DOMDocument");
+            else if (typeof document != "undefined" && document.implementation && document.implementation.createDocument) 
+                doc = document.implementation.createDocument("", "", null);
+            else if (typeof ActiveX != "undefined") 
+                doc = new ActiveXObject("Msxml.DOMDocument");
             
-        } else 
-            doc = doc.ownerDocument ||
-            doc.getOwnerDocument && doc.getOwnerDocument() ||
-            doc;
+        } else doc = doc.ownerDocument ||
+        doc.getOwnerDocument && doc.getOwnerDocument() ||
+        doc;
         
         var elems = [], documentElement = doc.documentElement ||
         doc.getDocumentElement && doc.getDocumentElement();
@@ -277,9 +272,8 @@
                 
                 if (structure[tagName] && typeof one[structure[tagName]] != "boolean") 
                     one[structure[tagName]].appendChild(elem);
-                else 
-                    if (curParentNode && curParentNode.appendChild) 
-                        curParentNode.appendChild(elem);
+                else if (curParentNode && curParentNode.appendChild) 
+                    curParentNode.appendChild(elem);
                 
                 if (!unary) {
                     elems.push(elem);

@@ -10,6 +10,7 @@
     <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
     <!-- for codemirror -->
     <link rel=stylesheet href="codemirror/lib/codemirror.css">
+    <link rel=stylesheet href="codemirror/theme/eclipse.css">
     <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
     <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
@@ -43,7 +44,6 @@
       #blockly_frame {
           width: 100%;
           height: 500px;
-          /*height: 100%;*/
           border: none;
       }
       
@@ -67,6 +67,10 @@
           font-size: 13px;
       }
     </style>
+    <!--  for Blocky TODO:userScriptの役割をチェック -->
+    <script type="text/javascript" src="jsFrame/extlib/BlobBuilder.min.js"></script>
+    <script type="text/javascript" src="jsFrame/extlib/FileSaver.min.js"></script>
+    <script type="text/javascript" id="userScript"></script>
     <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
     <script type="text/javascript" src="cauliflower.js"></script>
   </head>
@@ -84,19 +88,17 @@
         <li><a href="#tab-javascript">JavaScript</a></li>
       </ul>
       <div id="tab-javascript">
-		    <table id="block" style="width: 100%;height: 100%;">
-		    	<tr>
-		    		<td style="width: 70%;height: 100%;">
-				        <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
-		    		</td>
-		    		<td style="width: 30%;height: 100%; vertical-align: top">
-				        <pre id="blockly_text"></pre>
-		    		</td>
-		    	</tr>
-		    </table>
-		<!--
-        <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
-		-->
+        <a href="javascript:discardBlocks();">開発用：ブロックのロカールストレージ削除</a>
+        <table id="block" style="width: 100%;height: 100%;">
+          <tr>
+            <td style="width: 70%;height: 100%;">
+              <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
+            </td>
+            <td style="width: 30%;height: 100%; vertical-align: top">
+              <textarea id="blockly_text"></textarea>
+            </td>
+          </tr>
+        </table>
       </div>
       <div id="tab-html">
         <p>

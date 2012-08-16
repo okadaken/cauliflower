@@ -12,14 +12,11 @@
  * 保存形式の検討
  * シングルクオート
  * HTMLフォーマット改善
+ * HTMLの構文解析タイミング（Blocklyのカテゴリクリックでエラーを出すのをやめたい、タブクリックかなー）
+ * $(window).unload(function(){でHTML保存する
  */
 var HTMLEditor;
-
-if ($ == null) {
-    alert("null");
-}
-$('#html_frame').load(function() {
-});
+var JavaScriptPreview;
 
 $(document).ready(function() {
     initializeTabs();
@@ -30,6 +27,8 @@ $(document).ready(function() {
     restoreHTML();
     HTMLEditor.refresh();
     setTimeout(updatePreview, 300);
+    
+    initializeJavaScriptPreview();
 });
 
 function initializeTabs() {
@@ -45,7 +44,9 @@ function initializeTabs() {
                         break;
                     case "tab-javascript":
                         backupHTML();
-                        //Blockly.mainWorkspace.render();
+                        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+                        Blockly.mainWorkspace.render();
+                        Blockly.Toolbox.redraw();//Firefoxのタブ切り替え対策
                         break;
                 }
             }
@@ -158,8 +159,7 @@ function getAllCode() {
     //JavaScriptタグとコードのノードを生成
     var js = doc.createElement("script");
     js.setAttribute("type", "text/javascript");
-    js.appendChild(doc.createTextNode(getJavaScriptCode()));
-    
+    js.appendChild(doc.createTextNode(getJavaScriptCode()));//commentかも
     //生成したノードを追加
     var body = doc.getElementsByTagName("body")[0];
     if (body != null) {
@@ -232,4 +232,45 @@ function htmlEscape(s) {
     s = s.replace(/>/g, '&gt;');
     s = s.replace(/</g, '&lt;');
     return s;
+}
+
+function initializeJavaScriptPreview() {
+    JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById("blockly_text"), {
+        mode: "javascript",
+        theme: "eclipse",
+        tabMode: "indent",
+        lineNumbers: "true",
+        fixedGutter: "true",
+        electricChars: "true",
+        readOnly: "true",
+    });
+    JavaScriptPreview.setSize(350, 495);//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
+}
+
+function updateJavaScriptPreview(code) {
+    JavaScriptPreview.setValue(code);
+}
+
+function backupBlocks() {
+    if ("localStorage" in window) {
+        var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        window.localStorage.setItem("cauliflower_blocks", Blockly.Xml.domToText(xml));
+    }
+}
+
+function restoreBlocks() {
+    if ("localStorage" in window && window.localStorage.cauliflower_blocks) {
+        var xml = Blockly.Xml.textToDom(window.localStorage.cauliflower_blocks);
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        console.log("restoreB");
+    }
+}
+
+function discardBlocks() {
+    var count = Blockly.mainWorkspace.getAllBlocks().length;
+    if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
+        Blockly.mainWorkspace.clear();
+        renderContent();
+    }
 }
