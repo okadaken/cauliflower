@@ -30,6 +30,7 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 Blockly.MSG_VARIABLE_CATEGORY = 'var(NEW!)';
 Blockly.MSG_PROCEDURE_CATEGORY = 'function(NEW!)';
 Blockly.MSG_EVENT_CATEGORY = 'イベント関数(NEW!)';
+Blockly.MSG_MYDOCUMENT_CATEGORY = 'document関連(NEW!)'
 
 // Control Blocks
 Blockly.LANG_CATEGORY_CONTROLS = 'Control';

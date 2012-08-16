@@ -204,7 +204,11 @@ Blockly.Toolbox.redraw = function() {
     options.push({text: Blockly.MSG_EVENT_CATEGORY,
                   cat: Blockly.MSG_EVENT_CATEGORY});
   }
-
+  if (Blockly.Language.myDocument_innerHTML ) {
+    // Procedures have a special category that is dynamic.
+    options.push({text: Blockly.MSG_MYDOCUMENT_CATEGORY,
+                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY});
+  }
 
 
   function callbackFactory(element) {

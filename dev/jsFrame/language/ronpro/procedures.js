@@ -62,6 +62,7 @@ Blockly.Language.procedures_defnoreturn = {
     }
     // Merge the arguments into a human-readable list.
     var paramString = this.arguments_.join(', ');
+	paramString = paramString;
     this.setTitleText(paramString, 'PARAMS');
   },
   mutationToDom: function() {
