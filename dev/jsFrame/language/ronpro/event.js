@@ -39,32 +39,19 @@ Blockly.Language.event_onload = {
 Blockly.Language.event_onclick = {
   category: null,
   init: function() {
-  	
-	/*
-	var funcNameList = new Array();
-	
-	var htmltext = parent.document.getElementById('textarea_html').value;
-	if (htmltext != '') {
-		var dom = new DOMParser().parseFromString(htmltext, "text/xml");
-		var list = dom.getElementsByTagName("button");
-		for( var i=0 ; i < list.length ; i++ ){
-			var tmp = new Array();
-			tmp.push( list[i].getAttribute("onclick") );
-			tmp.push( list[i].getAttribute("onclick") );
-			funcNameList.push( tmp );
-		}
-	}
-	*/
-	
+  		
     this.setColour(45);
 	
-	//console.log( 'onclick>>' + this.getTitleText('FUNC'));
+	
 	if (this.getTitleText('FUNC') == null) {
-		this.appendTitle('hoge','FUNC');
+		this.appendTitle('','FUNC');
 	} else {
 		this.appendTitle(this.getTitleText('FUNC'),'FUNC');
 	}
-	this.appendTitle('{');
+	
+	
+	//this.appendTitle('', 'FUNC');
+	//this.appendInput('{', Blockly.DUMMY_INPUT, null );
 
     //this.appendTitle( new Blockly.FieldTextInput('target'), 'TARGET' );
     //this.appendTitle('をクリックされた時');
@@ -74,5 +61,18 @@ Blockly.Language.event_onclick = {
 	this.appendInput('}', Blockly.DUMMY_INPUT, null );
     this.setPreviousStatement(false);
   },
+  
+  mutationToDom: function() {
+    // Save the name and arguments (none of which are editable).
+    var container = document.createElement('mutation');
+    container.setAttribute('name', this.getTitleText('FUNC'));
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    this.arguments_ = [];
+    this.setTitleText( xmlElement.getAttribute('name'), 'FUNC');
+  },
+
+
 };
 

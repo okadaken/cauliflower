@@ -42,13 +42,10 @@ Blockly.Events.NAME_TYPE = 'event';
 Blockly.Events.allEventFunctions = function(opt_block) {
 	var funcNameList = new Array();
 	
-	var htmltext = parent.document.getElementById('textarea_html').value;
-	if (htmltext != '') {
-		var dom = new DOMParser().parseFromString(htmltext, "text/xml");
-		var list = dom.getElementsByTagName("button");
-		for( var i=0 ; i < list.length ; i++ ){
-			funcNameList.push( list[i].getAttribute("onclick") );
-		}
+	var dom = window.parent.parseHTML2DOM();
+	var list = dom.getElementsByTagName("button");
+	for( var i=0 ; list != null && i < list.length ; i++ ){
+		funcNameList.push( list[i].getAttribute("onclick") );
 	}
 
 	return funcNameList;
@@ -74,10 +71,10 @@ Blockly.Events.flyoutCategory = function(blocks, gaps, margin, workspace) {
     var getBlock = Blockly.Language.event_onclick ?
         new Blockly.Block(workspace, 'event_onclick') : null;
 
+    getBlock && getBlock.setTitleText( 'function ' + funcList[i] + '{', 'FUNC');
+
     getBlock && getBlock.initSvg();
 
-    getBlock && getBlock.setTitleText(funcList[i], 'FUNC');
-	//getBlock.appendTitle(funcList[i]);
 	
     getBlock && blocks.push(getBlock);
     if (getBlock) {
