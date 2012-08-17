@@ -300,6 +300,7 @@ function discardBlocks() {
 function diff(text1, text2) {
     var dmp = new diff_match_patch();
     var diffs = dmp.diff_main(text1, text2);
+    dmp.diff_cleanupSemantic(diffs);
     //$('#diff').html(dmp.diff_prettyHtml(diffs)); for test
     var line = 0;
     var cIndex = 0;
