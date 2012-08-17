@@ -34,6 +34,11 @@
           background: #ffaaaa; /* url(img/dialog/notice.png) no-repeat center left;*/
       }
       
+      span.CodeMirror-update {
+          font-weight: bolder;
+          background: #ffcc33;
+      }
+      
       #html_preview {
           width: 40%;
           position: absolute;
@@ -73,6 +78,7 @@
     <script type="text/javascript" src="jsFrame/extlib/FileSaver.min.js"></script>
     <script type="text/javascript" id="userScript"></script>
     <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
+    <script type="text/javascript" src="diff/diff_match_patch.js"></script>
     <script type="text/javascript" src="cauliflower.js"></script>
   </head>
   <body>
@@ -95,7 +101,7 @@
             <td style="width: 70%;height: 100%;">
               <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
             </td>
-            <td style="width: 30%;height: 100%; vertical-align: top">
+            <td style="visible:hidden;width: 30%;height: 100%; vertical-align: top">
               <textarea id="blockly_text"></textarea>
             </td>
           </tr>

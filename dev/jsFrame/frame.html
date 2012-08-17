@@ -45,6 +45,7 @@
           
           window.parent.setTimeout(window.parent.restoreBlocks, 0);
           Blockly.bindEvent_(window, 'unload', null, window.parent.backupBlocks);
+          Blockly.mainWorkspace.render();
       }
     </script>
   </head>

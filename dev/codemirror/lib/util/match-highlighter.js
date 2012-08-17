@@ -4,7 +4,7 @@
 // And including a special span.CodeMirror-matchhighlight css class (also optionally a separate one for .CodeMirror-focused -- see demo matchhighlighter.html)
 
 (function() {
-    var DEFAULT_MIN_CHARS = 2;
+    var DEFAULT_MIN_CHARS = 1;//2
     
     function MatchHighlightState() {
         this.marked = [];
