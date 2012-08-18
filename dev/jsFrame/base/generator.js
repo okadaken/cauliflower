@@ -133,6 +133,11 @@ Blockly.Generator.workspaceToCode = function(name) {
   generator.init();
   var blocks = Blockly.mainWorkspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
+  	
+	if( block.isRoot == undefined ){
+		continue;
+	}
+	
     var line = generator.blockToCode(block, true);
     if (line instanceof Array) {
       // Value blocks return tuples of code and operator order.

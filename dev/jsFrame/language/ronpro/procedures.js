@@ -28,6 +28,7 @@ Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
   category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL,
+  isRoot: true,
   init: function() {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(
@@ -164,6 +165,7 @@ Blockly.Language.procedures_defreturn = {
   // Define a procedure with a return value.
   category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL,
+  isRoot: true,
   init: function() {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(

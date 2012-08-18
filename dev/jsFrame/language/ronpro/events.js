@@ -27,6 +27,7 @@ if (!Blockly.Language) Blockly.Language = {};
 
 Blockly.Language.event_onload = {
   category: null,
+  isRoot: true,
   init: function() {
     this.setColour(45);
 	this.appendTitle('ページが読み込まれたとき');
@@ -38,6 +39,7 @@ Blockly.Language.event_onload = {
 
 Blockly.Language.event_onclick = {
   category: null,
+  isRoot: true,
   init: function() {
   		
     this.setColour(45);
