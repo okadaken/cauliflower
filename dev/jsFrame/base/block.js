@@ -438,8 +438,8 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     Blockly.highlightedConnection_.unhighlight();
     Blockly.highlightedConnection_ = null;
   }
-  
-  window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+
+  Blockly.updateJavascript();
 };
 
 /**

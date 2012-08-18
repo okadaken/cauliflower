@@ -539,3 +539,10 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
 Blockly.cssLoaded = function() {
   Blockly.Toolbox && Blockly.Toolbox.redraw();
 };
+
+
+Blockly.updateJavascript = function(){
+
+	window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+
+}

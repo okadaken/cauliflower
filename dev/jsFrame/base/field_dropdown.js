@@ -104,6 +104,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
       }
       // This mouse click has been handled, don't bubble up to document.
       e.stopPropagation();
+	  Blockly.updateJavascript();
     };
   }
 
@@ -224,6 +225,7 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
     // Options are tuples of human-readable text and language-neutral values.
     if (options[x][1] == newValue) {
       this.setText(options[x][0]);
+  
       return;
     }
   }
