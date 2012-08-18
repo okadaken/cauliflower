@@ -8,18 +8,21 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
- * bodyのみを抽出してプレビューすること
  * 保存形式の検討
  * HTMLフォーマット改善
  * $(window).unload(function(){でHTML保存する
  * HTML構文エラー時のアイコン追加
  * restore後のJavaScriptエディタの位置がおかしい気がする
+ * parseHTML2DOMのException変更
+ * 実行プレビューにソース閲覧機能を追加すること
  */
 var HTMLEditor;
 var JavaScriptPreview;
 
 var errorLine;
 var previousCode;
+
+var previewWindow;
 
 $(document).ready(function() {
     initializeTabs();
@@ -79,7 +82,12 @@ function initializeButtons() {
     $('#exec_button').button().css({
         'background': '#ffcc00'
     }).click(function() {//TODO:とりあえず色を変えただけ 要グラデーション
-        alert('実行する');
+        //事前にチェック（やり方考えること）
+        //TODO:bodyタグが見つからなったときのエラー処理をしていないので追加すること
+        if (parseHTML2DOM(true) != null) {
+            previewWindow = window.open('preview.html', 'previewWindow', 'width=600,height=600,previewWindow.focus();');
+            previewWindow.focus();
+        }
     });
     $('#html_new_botton').button().click(function() {
         loadHTMLTemplate();
@@ -140,15 +148,16 @@ function getHTMLCode() {
     return HTMLEditor.getValue();
 }
 
-//Blocklyのエディタができるまでの仮実装
+//Blocklyがreference errorになる場合があるのをチェック
 function getJavaScriptCode() {
-    if (Blockly == null) {
+    if (typeof Blockly === 'undefined') {
         return '\n\n';
     }
     var code = '\n' + Blockly.Generator.workspaceToCode('JavaScript');
     return code;
 }
 
+//ここで再度throwするように変更せよ
 function parseHTML2DOM(dialog) {
     //前処理としてHTMLをXMLに変換
     try {
@@ -156,7 +165,7 @@ function parseHTML2DOM(dialog) {
     } catch (e) {//変換できなければエラー表示して終了
         if (dialog) {
             errorLine = e.split('\n')[0];
-            var message = '<p>HTMLの構文エラーです。</p><p>エラーの原因となった文字列:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>先にHTMLエディタのハイライト部分を修正してから、JavaScriptを編集してください。</p>';
+            var message = '<p>HTMLの構文エラーです。</p><p>エラーの原因となった文字列:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>HTMLエディタのハイライト部分を修正してください。</p>';
             $('#HTML_syntaxerror_dialog_message').html(message);
             $('#HTML_syntaxerror_dialog').dialog('open');
         }
@@ -200,7 +209,7 @@ function updatePreview() {
     var previewFrame = document.getElementById('html_preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
-    preview.write(getAllCode(false));
+    preview.write('<p>↓これはJavaScript統合前のHTMLなので動作しない（後で削除します）</p>' + HTMLEditor.getValue());
     preview.close();
 }
 
@@ -266,7 +275,7 @@ function initializeJavaScriptPreview() {
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize(350, 495);//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
+    JavaScriptPreview.setSize('100%', 495);//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
 }
 
 function updateJavaScriptPreview(code) {
