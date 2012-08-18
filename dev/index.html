@@ -39,6 +39,10 @@
           background: #fc3;
       }
       
+      #new_button {
+          margin-left: 20px;
+      }
+      
       #exec_button {
           margin-left: 40px;
       }
@@ -88,15 +92,15 @@
   <body>
     <p>
       <span class="title">Cauliflower v0.1</span>
-      &nbsp;&nbsp;<button id="new_button">新規</button>
+      <button id="new_button">新規</button>
       <button id="open_button">開く</button>
       <button id="save_button">保存</button>
-      <button id="exec_button">実行プレビュー</button>
+      <button id="exec_button">プレビュー</button>
     </p>
     <div id="tabs">
       <ul>
-        <li><a href="#tab-html">HTML</a></li>
-        <li><a href="#tab-javascript">JavaScript</a></li>
+        <li><a href="#tab-html">HTML編集</a></li>
+        <li><a href="#tab-javascript">JavaScript編集</a></li>
       </ul>
       <div id="tab-javascript">
         <a href="javascript:discardBlocks();">開発用：ブロックのローカルストレージ削除</a>
@@ -125,8 +129,7 @@
           <button id="html_new_botton">新規作成</button>
         </p>
         <textarea id="html_textarea"></textarea>
-        <iframe id="html_preview">
-        </iframe>
+        <iframe id="html_preview"></iframe>
       </div>
     </div>
     <div id="HTML_syntaxerror_dialog">

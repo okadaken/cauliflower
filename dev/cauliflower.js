@@ -57,6 +57,10 @@ function initializeTabs() {
         show: function(event, ui) {
             if (HTMLEditor != null) {
                 switch (ui.panel.id) {
+                    case 'tab-html':
+                        HTMLEditor.refresh();
+                        HTMLEditor.focus();
+                        break;
                     case 'tab-javascript':
                         updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
                         Blockly.Toolbox.redraw();//Firefoxのタブ切り替え対策
