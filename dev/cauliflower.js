@@ -10,7 +10,6 @@
  * 例題ボタン
  * 保存形式の検討
  * HTMLフォーマット改善
- * $(window).unload(function(){でHTML保存する
  * HTML構文エラー時のアイコン追加
  * restore後のJavaScriptエディタの位置がおかしい気がする
  * parseHTML2DOMのException変更
@@ -37,6 +36,10 @@ $(document).ready(function() {
     initializeJavaScriptPreview();
 });
 
+$(window).unload(function() {
+    backupHTML();
+});
+
 function initializeTabs() {
     $('#tabs').tabs({
         cookie: {
@@ -54,11 +57,7 @@ function initializeTabs() {
         show: function(event, ui) {
             if (HTMLEditor != null) {
                 switch (ui.panel.id) {
-                    case 'tab-html':
-                        restoreHTML();
-                        break;
                     case 'tab-javascript':
-                        backupHTML();
                         updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
                         Blockly.Toolbox.redraw();//Firefoxのタブ切り替え対策
                         Blockly.mainWorkspace.render();
@@ -117,9 +116,6 @@ function initializeHTMLEditor() {
             HTMLEditor.clearMarks();
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
-        },
-        onBlur: function() {
-            backupHTML();
         }
     });
 }
@@ -249,7 +245,6 @@ function loadHTMLTemplate() {
     var httpObj = $.get('html_template.txt', function() {
         HTMLEditor.setValue(httpObj.responseText);
     });
-    backupHTML();
 }
 
 function discardHTML() {
