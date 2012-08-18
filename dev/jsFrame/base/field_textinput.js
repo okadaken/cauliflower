@@ -181,8 +181,7 @@ Blockly.FieldTextInput.prototype.onHtmlInputKeyUp_ = function(e) {
     this.validate_();
   }
   
-  window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-
+ 
 };
 
 /**
@@ -259,4 +258,6 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   this.setText(text);
   Blockly.FieldTextInput.destroyDom_();
   this.sourceBlock_.render();
+  window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+  
 };
