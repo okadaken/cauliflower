@@ -42,7 +42,7 @@ Blockly.MyDocument.NAME_TYPE = 'Document';
 Blockly.MyDocument.allId = function(opt_block) {
 	var idList = new Array();
 	
-	var dom = window.parent.parseHTML2DOM();
+	var dom = window.parent.parseHTML2DOM(false);
     if (dom != null) {
         var body = dom.getElementsByTagName("body");
         search(idList, body[0]);

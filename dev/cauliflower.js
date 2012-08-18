@@ -43,7 +43,7 @@ function initializeTabs() {
             if (HTMLEditor != null) {
                 switch (ui.panel.id) {
                     case 'tab-javascript':
-                        parseHTML2DOM()
+                        parseHTML2DOM(true)
                         break;
                 }
             }
@@ -142,19 +142,24 @@ function getHTMLCode() {
 
 //Blocklyのエディタができるまでの仮実装
 function getJavaScriptCode() {
+    if (Blockly == null) {
+        return '\n\n';
+    }
     var code = '\n' + Blockly.Generator.workspaceToCode('JavaScript');
     return code;
 }
 
-function parseHTML2DOM() {
+function parseHTML2DOM(dialog) {
     //前処理としてHTMLをXMLに変換
     try {
         var xml = HTMLtoXML(getHTMLCode());
     } catch (e) {//変換できなければエラー表示して終了
-        errorLine = e.split('\n')[0];
-        var message = '<p>HTMLの構文エラーです。</p><p>エラーの原因となった文字列:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>先にHTMLエディタのハイライト部分を修正してから、JavaScriptを編集してください。</p>';
-        $('#HTML_syntaxerror_dialog_message').html(message);
-        $('#HTML_syntaxerror_dialog').dialog('open');
+        if (dialog) {
+            errorLine = e.split('\n')[0];
+            var message = '<p>HTMLの構文エラーです。</p><p>エラーの原因となった文字列:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>先にHTMLエディタのハイライト部分を修正してから、JavaScriptを編集してください。</p>';
+            $('#HTML_syntaxerror_dialog_message').html(message);
+            $('#HTML_syntaxerror_dialog').dialog('open');
+        }
         return null;
     }
     
@@ -163,10 +168,10 @@ function parseHTML2DOM() {
     return parser.parseFromString(xml, 'text/xml');
 }
 
-function getAllCode() {
-    var doc = parseHTML2DOM();
+function getAllCode(dialog) {
+    var doc = parseHTML2DOM(dialog);
     if (doc == null) {
-        return;
+        return '解析不能';//一時的にnullは返さないようにしておく
     }
     
     //JavaScriptタグとコードのノードを生成
@@ -183,6 +188,7 @@ function getAllCode() {
         body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
         var serializer = new XMLSerializer();
         var code = serializer.serializeToString(doc);
+        return code;
         console.log(code); //TODO:最後に行頭のDOCTYPEを追加すること
         //console.log( serializer.serializeToString(body)); 
     } else {
@@ -194,7 +200,7 @@ function updatePreview() {
     var previewFrame = document.getElementById('html_preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
-    preview.write(HTMLEditor.getValue());
+    preview.write(getAllCode(false));
     preview.close();
 }
 
