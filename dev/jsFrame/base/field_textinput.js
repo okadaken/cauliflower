@@ -180,8 +180,6 @@ Blockly.FieldTextInput.prototype.onHtmlInputKeyUp_ = function(e) {
     this.resizeEditor_();
     this.validate_();
   }
-  
-  Blockly.updateJavascript();
 };
 
 /**
@@ -258,4 +256,6 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   this.setText(text);
   Blockly.FieldTextInput.destroyDom_();
   this.sourceBlock_.render();
+
+  Blockly.updateJavascript();  
 };

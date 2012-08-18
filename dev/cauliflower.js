@@ -10,12 +10,10 @@
  * 例題ボタン
  * bodyのみを抽出してプレビューすること
  * 保存形式の検討
- * シングルクオート
  * HTMLフォーマット改善
- * HTMLの構文解析タイミング（Blocklyのカテゴリクリックでエラーを出すのをやめたい、タブクリックかなー）
  * $(window).unload(function(){でHTML保存する
  * HTML構文エラー時のアイコン追加
- * restore後のJavaScriptエディタの位置
+ * restore後のJavaScriptエディタの位置がおかしい気がする
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -290,7 +288,7 @@ function restoreBlocks() {
 
 function discardBlocks() {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
-    if (count < 2 || window.confirm(count + '個のブロックを全て削除してもよろしいですか？')) {
+    if (count < 2 || window.confirm(count + '個のブロックを全て削除しますか？')) {
         Blockly.mainWorkspace.clear();
         Blockly.mainWorkspace.render();
         updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
