@@ -42,7 +42,7 @@ Blockly.Events.NAME_TYPE = 'event';
 Blockly.Events.allEventFunctions = function(opt_block) {
 	var funcNameList = new Array();
 	
-	var dom = window.parent.parseHTML2DOM();
+	var dom = window.parent.parseHTML2DOM(false);
 	var list = dom.getElementsByTagName("button");
 	for( var i=0 ; list != null && i < list.length ; i++ ){
 		funcNameList.push( list[i].getAttribute("onclick") );
