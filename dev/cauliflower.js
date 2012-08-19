@@ -8,12 +8,11 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
- * 保存形式の検討
  * HTMLフォーマット改善
- * HTML構文エラー時のアイコン追加
  * restore後のJavaScriptエディタの位置がおかしい気がする
  * parseHTML2DOMのException変更
  * 実行プレビューにソース閲覧機能を追加すること
+ * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -63,8 +62,8 @@ function initializeTabs() {
                         break;
                     case 'tab-javascript':
                         updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-                        Blockly.Toolbox.redraw();//Firefoxのタブ切り替え対策
                         Blockly.mainWorkspace.render();
+                        Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
                         break;
                 }
             }
@@ -73,28 +72,88 @@ function initializeTabs() {
 }
 
 function initializeButtons() {
-    $('#new_button').button().click(function() {
-        alert('新規作成');
+
+    $('#load').bind('change', function() {
+        loadFile();
     });
-    $('#open_button').button().click(function() {
-        alert('読み込み');
-    });
-    $('#save_button').button().click(function() {
-        alert('保存する');
-    });
-    $('#exec_button').button().css({
-        'background': '#ffcc00'
-    }).click(function() {//TODO:とりあえず色を変えただけ 要グラデーション
-        //事前にチェック（やり方考えること）
-        //TODO:bodyタグが見つからなったときのエラー処理をしていないので追加すること
-        if (parseHTML2DOM(true) != null) {
-            previewWindow = window.open('preview.html', 'previewWindow', 'width=600,height=600,previewWindow.focus();');
-            previewWindow.focus();
+    
+    $('#new_button').button({
+        icons: {
+            primary: 'ui-icon-document'
         }
+    }).click(function() {
+        alert('新規作成は未実装');
+    })
+    $('#load_button').button({
+        icons: {
+            primary: 'ui-icon-folder-open'
+        }
+    }).click(function() {
+        //document.getElementById('load').click();
+        $('#load').click();
     });
+    $('#save_button').button({
+        icons: {
+            primary: 'ui-icon-disk'
+        }
+    }).click(function() {
+        save();
+    }).parent().buttonset();
+    
+    Downloadify.create('downloadify', {
+        filename: function() {
+            return guessSaveFileName();
+        },
+        data: function() {
+            return createXML();
+        },
+        onComplete: function() {
+            alert('保存が完了しました');
+        },
+        onCancel: function() {
+            //alert('You have cancelled the saving of this file.');
+        },
+        onError: function() {
+            alert('You must put something in the File Contents or there will be nothing to save!');
+        },
+        swf: 'downloadify/media/downloadify.swf',
+        downloadImage: 'downloadify/images/download.png',
+        width: 70,
+        height: 32,
+        transparent: true,
+        append: false
+    });
+    
+    $('#exec_button').button({
+        icons: {
+            primary: 'ui-icon-flag'
+            //primary: 'ui-icon-circle-triangle-e'
+            //primary: 'ui-icon-play'
+        }
+    }).click(function() {//TODO:とりあえず色を変えただけ 要グラデーション
+        openPreviewWindow();
+    });
+    
+    /** ボタンにする予定実装していない **/
     $('#html_new_botton').button().click(function() {
         loadHTMLTemplate();
     });
+}
+
+function guessSaveFileName() {
+    var ext = '.calf';
+    var defaultFileName = '新規JavaScriptプログラム' + ext;
+    var dom = parseHTML2DOM(false);
+    if (dom != null) {
+        var titles = dom.getElementsByTagName('title');
+        if (titles.length != 0) {
+            return titles[0].firstChild.nodeValue + ext;
+        } else {
+            return defaultFileName;
+        }
+    } else {
+        return defaultFileName;
+    }
 }
 
 function initializeHTMLEditor() {
@@ -122,6 +181,8 @@ function initializeHTMLEditor() {
             delay = setTimeout(updatePreview, 300);
         }
     });
+    HTMLEditor.setSize('55%', '480');
+    
 }
 
 function initializeDialogs() {
@@ -197,8 +258,7 @@ function getAllCode(dialog) {
         body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
         var serializer = new XMLSerializer();
         var code = serializer.serializeToString(doc);
-        return code;
-        console.log(code); //TODO:最後に行頭のDOCTYPEを追加すること
+        return code;//TODO:最後に行頭のDOCTYPEを追加すること
         //console.log( serializer.serializeToString(body)); 
     } else {
         alert('bodyタグが見つかりません');//TODO:dialogにすること
@@ -209,7 +269,7 @@ function updatePreview() {
     var previewFrame = document.getElementById('html_preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
-    preview.write('<p>↓これはJavaScript統合前のHTMLなので動作しない（後で削除します）</p>' + HTMLEditor.getValue());
+    preview.write('<p>↓これはJavaScript統合前のHTMLなので動作しない（後で削除します）<br>ここにタグ辞典を入れるのがいいかも。</p>' + HTMLEditor.getValue());
     preview.close();
 }
 
@@ -264,6 +324,15 @@ function htmlEscape(s) {
     return s;
 }
 
+function openPreviewWindow() {
+    //事前にチェック（やり方考えること）
+    //TODO:bodyタグが見つからなったときのエラー処理をしていないので追加すること
+    if (parseHTML2DOM(true) != null) {
+        previewWindow = window.open('preview.html', 'previewWindow', 'width=600,height=600,previewWindow.focus();');
+        previewWindow.focus();
+    }
+}
+
 function initializeJavaScriptPreview() {
     JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById('blockly_text'), {
         mode: 'javascript',
@@ -274,7 +343,7 @@ function initializeJavaScriptPreview() {
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize('100%', 495);//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
+    JavaScriptPreview.setSize('100%', '495');//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
 }
 
 function updateJavaScriptPreview(code) {
@@ -309,11 +378,82 @@ function discardBlocks() {
     }
 }
 
+function createDOMDocument() {
+    if (typeof DOMDocument != "undefined") {
+        return new DOMDocument();
+    } else if (typeof document != "undefined" && document.implementation && document.implementation.createDocument) {
+        return document.implementation.createDocument("", "", null);
+    } else if (typeof ActiveX != "undefined") {
+        return new ActiveXObject("Msxml.DOMDocument");
+    }
+}
+
+function createXML() {
+    //HTML
+    var doc = createDOMDocument();
+    var cauliflower = doc.createElement("cauliflower");
+    cauliflower.setAttribute('v', '1'); //後方互換のため
+    var html = doc.createElement('html');
+    html.appendChild(doc.createTextNode(getHTMLCode()));
+    doc.appendChild(cauliflower);
+    cauliflower.appendChild(html);
+    
+    //Blocks
+    var blocks = doc.createElement('blocks');
+    var bloksDoc = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var blockElements = bloksDoc.getElementsByTagName('block');
+    while (blockElements.length != 0) {
+        blocks.appendChild(blockElements[0]);
+    }
+    cauliflower.appendChild(blocks);
+    
+    var serializer = new XMLSerializer();
+    var xml = serializer.serializeToString(doc);
+    return xml;
+}
+
+function loadFile() {
+    var file = document.getElementById('load').files[0];
+    var reader = new FileReader();
+    var fileData = document.getElementById("load").files[0];
+    
+    //Safariのエラー処理を追加すること
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+        try {
+            var parser = new DOMParser();
+            var xml = parser.parseFromString(evt.target.result, 'text/xml');
+        } catch (e) {
+            alert('Error parsing XML:\n' + e);
+            return;
+        }
+        var htmls = xml.getElementsByTagName('html');
+        if (htmls.length != 0) {
+            HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
+        }
+        var count = Blockly.mainWorkspace.getAllBlocks().length;
+        if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
+            Blockly.mainWorkspace.clear();
+        }
+        
+        var blockxml = document.createElement('xml');
+        var blocks = xml.getElementsByTagName('block');
+        while (blocks.length != 0) {
+            blockxml.appendChild(blocks[0]);
+        }
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blockxml);
+        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        Blockly.mainWorkspace.render();
+        Blockly.Toolbox.redraw();
+        $('#load').val('');
+    }
+    reader.readAsText(fileData, "utf-8");
+}
+
 function diff(text1, text2) {
     var dmp = new diff_match_patch();
     var diffs = dmp.diff_main(text1, text2);
     dmp.diff_cleanupSemantic(diffs);
-    //$('#diff').html(dmp.diff_prettyHtml(diffs)); for test
     var line = 0;
     var cIndex = 0;
     for (var diff in diffs) {

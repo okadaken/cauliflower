@@ -1,4 +1,13 @@
-
+    $("#rerun").button().click(function() {
+        alert("Running the last action");
+    }).next().button({
+        text: false,
+        icons: {
+            primary: "ui-icon-triangle-1-s"
+        }
+    }).click(function() {
+        alert("Could display a menu to select an action");
+    });
     
                                    var editor;
                                     $(function(){

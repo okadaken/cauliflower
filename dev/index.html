@@ -20,18 +20,27 @@
     <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
+    <script type="text/javascript" src="downloadify/js/swfobject.js"></script>
+    <script type="text/javascript" src="downloadify/js/downloadify.min.js"></script>
     <style type=text/css>
+      
+      #top {
+          padding: 10px 4px;
+      }
+      
       .CodeMirror {
-          position: relative;
-          width: 50%;
-          border-top: 2px solid #d4d4d4;
-          border-bottom: 2px solid #d4d4d4;
+          border: 2px solid #d4d4d4;
+          /*position: relative;*/
+          /*height: 100%;
+           width: 80%;*/
       }
       
       span.CodeMirror-matchhighlight {
           font-weight: bolder;
-          /*padding: 0px 0px 0px 40px;*/
-          background: #ffaaaa; /* url(img/dialog/notice.png) no-repeat center left;*/
+          padding: 0px 0px 0px 18px;
+          background: #ffaaaa;
+          background-image: url(img/codemirror/error.png);
+          background-repeat: no-repeat;
       }
       
       span.CodeMirror-update {
@@ -44,7 +53,10 @@
       }
       
       #exec_button {
-          margin-left: 40px;
+          background: url("images/ui-bg_flat_55_fbec88_40x100.png") repeat-x scroll 50% 50% #FBEC88;
+          border: 1px solid #FAD42E;
+          /* margin-left: 40px;*/
+          /* 'background': '#ffcc00'*/
       }
       
       #html_preview {
@@ -81,54 +93,96 @@
       .ui-button {
           font-size: 13px;
       }
+      
+      #downloadify {
+          cursor: pointer;
+          position: relative;
+          top: 11px;
+          left: 0px;
+      }
+      
+      /* Target Firefox 2 */
+      #downloadify, x:-moz-any-link {
+          cursor: pointer;
+          position: relative;
+          top: 10px;
+          left: 0px;
+      }
+      
+      #new_button, x:-moz-any-link {
+          height: 30px;
+      }
+      
+      #load_button, x:-moz-any-link {
+          height: 30px;
+      }
+      
+      #exec_button, x:-moz-any-link {
+          height: 30px;
+      }
+      
+      /* Then overwrite for Firefox 3 specifically */
+      #downloadify, x:-moz-any-link, x:default {
+          cursor: pointer;
+          position: relative;
+          top: 10px;
+          left: 0px;
+      }
+      
+      #new_button, x:-moz-any-link, x:default {
+          height: 30px;
+      }
+      
+      #load_button, x:-moz-any-link, x:default {
+          height: 30px;
+      }
+      
+      #exec_button, x:-moz-any-link, x:default {
+          height: 30px;
+      }
     </style>
     <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
-    <script type="text/javascript" src="jsFrame/extlib/BlobBuilder.min.js"></script>
-    <script type="text/javascript" src="jsFrame/extlib/FileSaver.min.js"></script>
     <script type="text/javascript" id="userScript"></script>
     <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
     <script type="text/javascript" src="diff/diff_match_patch.js"></script>
   </head>
   <body>
-    <p>
-      <span class="title">Cauliflower v0.1</span>
-      <button id="new_button">新規</button>
-      <button id="open_button">開く</button>
-      <button id="save_button">保存</button>
-      <button id="exec_button">プレビュー</button>
-    </p>
+    <div id="top">
+      <span class="title">
+        Cauliflower v0.1
+      </span>
+      <span>
+        <button id="new_button">新規</button>
+        <button id="load_button">開く</button>
+        <span id="downloadify">
+        </span>
+        <!-- buttonset用のダミー --><button id="save_button" style="visibility:hidden; margin-right:-60px">保存</button>
+      </span>
+      <input id="load" type="file" multiple="" style="width:0px;visibility:hidden;"><button id="exec_button">実行</button>
+    </div>
     <div id="tabs">
       <ul>
         <li><a href="#tab-html">HTML編集</a></li>
         <li><a href="#tab-javascript">JavaScript編集</a></li>
       </ul>
       <div id="tab-javascript">
-        <a href="javascript:discardBlocks();">開発用：ブロックのローカルストレージ削除</a>
         <table id="block" style="width: 100%;height: 100%;">
           <tr>
-            <td style="width: 60%;height: 100%;">
+            <td style="width: 60%;height: 100%;vertical-align: top; ">
               <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
+              <a href="javascript:discardBlocks();">開発用：ブロックのローカルストレージ削除</a>
             </td>
-            <td style="visible:hidden;width: 40%;height: 100%; vertical-align: top">
+            <td style="width: 40%;height: 100%; vertical-align: top; padding-left:20px;">
               <textarea id="blockly_text"></textarea>
             </td>
           </tr>
         </table>
       </div>
       <div id="tab-html">
-        <p>
-          <a href="javascript:getAllCode(true);">テスト用：HTMLを取得</a>
-        </p>
-        <p>
-          <a href="javascript:discardHTML();">テスト用：localstrage初期化</a>
-        </p>
-        <p>
-          <a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
-        </p>
-        <p>
-          <button id="html_new_botton">新規作成</button>
-        </p>
         <textarea id="html_textarea"></textarea>
+        <div style="margin-bottom:10px;">
+          <a href="javascript:loadHTMLTemplate();">ボタンにする予定：テンプレート読込</a>｜<a href="javascript:discardHTML();">テスト用：localstrage初期化</a>｜<a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
+        </div>
         <iframe id="html_preview"></iframe>
       </div>
     </div>
