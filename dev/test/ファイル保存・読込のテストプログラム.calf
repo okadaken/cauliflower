@@ -1,0 +1,27 @@
+<cauliflower v="1"><html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;ファイル保存・読込のテストプログラム&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- これはファイル保存・読込のテストプログラムです  --&gt;
+  &lt;h2&gt;ボタンを押すと3回ダイアログを出します&lt;/h2&gt;
+  &lt;button id="hoge" onclick="hoge()"&gt;押してね&lt;/button&gt;
+  &lt;h2&gt;以下はブラウザごとの対応状況メモですよ。&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Windows&lt;/li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Firefox:OK&lt;/li&gt;
+      &lt;li&gt;Chrome:OK&lt;/li&gt;
+      &lt;li&gt;Safari:NG&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;li&gt;Mac&lt;/li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Firefox:&lt;/li&gt;
+      &lt;li&gt;Chrome:&lt;/li&gt;
+      &lt;li&gt;Safari:&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</html><blocks><block xmlns="http://www.w3.org/1999/xhtml" type="event_onclick" x="-330" y="-270"><mutation name="function hoge(){"></mutation><statement name="DO"><block type="controls_for" inline="true"><variable data="i" name="VAR"></variable><value name="FROM"><block type="math_number"><title name="NUM">1</title></block></value><value name="TO"><block type="math_number"><title name="NUM">3</title></block></value><statement name="DO"><block type="text_print" inline="false"><value name="TEXT"><block type="text_join" inline="false"><mutation items="2"></mutation><value name="ADD0"><block type="variables_get"><title name="VAR">i</title></block></value><value name="ADD1"><block type="text"><title name="TEXT">回目のHello World!!</title></block></value></block></value></block></statement></block></statement></block></blocks></cauliflower>
