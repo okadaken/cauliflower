@@ -13,6 +13,8 @@
  * parseHTML2DOMのException変更
  * 実行プレビューにソース閲覧機能を追加すること
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
+ * body><<で試してみて
+ * ブラウザチェックを入れる
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -33,6 +35,8 @@ $(document).ready(function() {
     setTimeout(updatePreview, 300);
     
     initializeJavaScriptPreview();
+    
+    adjustCSS();
 });
 
 $(window).unload(function() {
@@ -94,7 +98,7 @@ function initializeButtons() {
     });
     $('#save_button').button({
         icons: {
-            primary: 'ui-icon-disk'
+            //primary: 'ui-icon-disk'
         }
     }).click(function() {
         save();
@@ -508,4 +512,36 @@ function highLightJavaScriptPreview(startLine, startCh, endLine, endCh, classNam
         line: endLine,
         ch: endCh
     }, className);
+}
+
+function adjustCSS() {
+    if (getWindowsOSVersion() >= 7) {//7以上のchrome対策
+        $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '0px');
+    } else if (getWindowsOSVersion() == -1) {//mac
+        $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '0px');
+        if (window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1) {
+            $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '-1px');
+        }
+    }
+    //safariの場合は保存と読込を隠す
+}
+
+
+function getWindowsOSVersion() {
+    if ((window.navigator.userAgent).indexOf("NT 6.0") != -1) {
+        return 6;
+    } else if ((window.navigator.userAgent).indexOf("NT 6.1") != -1) {
+        return 7;
+    } else {
+        return -1;
+    }
+    /*
+     var ua = window.navigator.userAgent.toLowerCase();
+     if (ua.indexOf("NT 6.0") != -1) {
+     return 6;
+     } else if (ua.indexOf("NT 6.1") != -1) {
+     return 7;
+     } else {
+     return -1;
+     }*/
 }
