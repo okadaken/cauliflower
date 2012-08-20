@@ -354,6 +354,9 @@ var CodeMirror = (function() {
         if (width != null) wrapper.style.width = interpret(width);
         if (height != null) scroller.style.height = interpret(height);
       },
+      addClass: function(addClass) {
+       wrapper.className =  wrapper.className  + ' ' + addClass
+      },
 
       operation: function(f){return operation(f)();},
       compoundChange: function(f){return compoundChange(f);},
