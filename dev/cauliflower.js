@@ -15,6 +15,13 @@
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
  * body><<で試してみて
  * ブラウザチェックを入れる
+ * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
+ * HTMLのタブはプレビューとHTMLタグリファレンスにする
+ * JavaScriptのコードが長くなると、左に大きくなるのを直す。たぶん%指定が原因。
+ * CodeMirrorの全部のデモチェックをすること
+ * Tempブランチを削除すること
+ * ブラウザの対応状況のまとめをREADMEに書くこと
+ * JavaScriptのWordラップをためしてみること（横にスクロールバーは出さないようにしてみる）
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -96,10 +103,9 @@ function initializeButtons() {
         //document.getElementById('load').click();
         $('#load').click();
     });
-    $('#save_button').button({
-        icons: {
-            //primary: 'ui-icon-disk'
-        }
+    $('#save_button_dummy').button({
+        icons: { //primary: 'ui-icon-disk'
+}
     }).click(function() {
         save();
     }).parent().buttonset();
@@ -121,7 +127,7 @@ function initializeButtons() {
             alert('You must put something in the File Contents or there will be nothing to save!');
         },
         swf: 'downloadify/media/downloadify.swf',
-        downloadImage: 'downloadify/images/download.png',
+        downloadImage: getDownloadifyImagePath(),
         width: 70,
         height: 32,
         transparent: true,
@@ -144,6 +150,20 @@ function initializeButtons() {
     });
 }
 
+function getDownloadifyImagePath() {
+    var env = getUserEnv();
+    if (env.os == 'Windows' && env.winv == 'Vista') {
+        return 'downloadify/images/win-vista-download.png';
+    } else if (env.os == 'Windows' && env.winv == '7') {
+        //画像作成する
+        return 'downloadify/images/win-vista-download.png';
+    } else if (env.os == 'Mac') {
+        return 'downloadify/images/mac-download.png';
+    } else {
+        return 'downloadify/images/win-vista-download.png';//とりあえず
+    }
+}
+
 function guessSaveFileName() {
     var ext = '.calf';
     var defaultFileName = '新規JavaScriptプログラム' + ext;
@@ -151,7 +171,7 @@ function guessSaveFileName() {
     if (dom != null) {
         var titles = dom.getElementsByTagName('title');
         if (titles.length != 0) {
-            return titles[0].firstChild.nodeValue + ext;
+            return titles[0].firstChild.nodeValue.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '') + ext;
         } else {
             return defaultFileName;
         }
@@ -163,7 +183,7 @@ function guessSaveFileName() {
 function initializeHTMLEditor() {
     var delay;
     HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html_textarea'), {
-        mode: 'text/html',
+        mode: 'htmlmixed',//text/html
         theme: 'default',
         tabMode: 'indent',
         lineNumbers: true,
@@ -183,10 +203,14 @@ function initializeHTMLEditor() {
             HTMLEditor.clearMarks();
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
+        },
+        onCursorActivity: function() {
+            HTMLEditor.setLineClass(hlLine, null, null);
+            hlLine = HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, 'CodeMirror-activeline');
         }
     });
-    HTMLEditor.setSize('55%', '480');
-    
+    HTMLEditor.setSize('47%', '480');
+    var hlLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
 }
 
 function initializeDialogs() {
@@ -196,8 +220,8 @@ function initializeDialogs() {
         modal: true,
         draggable: false,
         resizable: false,
-        show: 'clip',//'explode',
-        hide: 'clip',//'explode',
+        show: 'explode',
+        hide: 'explode',
         title: 'HTML構文エラー',
         buttons: {
             OK: function() {
@@ -229,8 +253,13 @@ function parseHTML2DOM(dialog) {
         var xml = HTMLtoXML(getHTMLCode());
     } catch (e) {//変換できなければエラー表示して終了
         if (dialog) {
-            errorLine = e.split('\n')[0];
-            var message = '<p>HTMLの構文エラーです。</p><p>エラーの原因となった文字列:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>HTMLエディタのハイライト部分を修正してください。</p>';
+            errorLine = e.split('\n');
+            if (errorLine.length > 1) {
+                errorLine = errorLine[0] + '\n' + errorLine[1];
+            } else {
+                errorLine = errorLine[0];
+            }
+            var message = '<p>HTMLの構文エラーです。</p><p>エラー箇所:<br><b><code style="background: #ffaaaa;">' + htmlEscape(errorLine) + '</code></b></p><p>HTMLエディタのハイライト部分やその周辺を修正してください。</p>';
             $('#HTML_syntaxerror_dialog_message').html(message);
             $('#HTML_syntaxerror_dialog').dialog('open');
         }
@@ -278,6 +307,7 @@ function updatePreview() {
 }
 
 function mark(s) {
+    HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, '');
     HTMLEditor.matchHighlight('CodeMirror-matchhighlight', s);
 }
 
@@ -340,14 +370,17 @@ function openPreviewWindow() {
 function initializeJavaScriptPreview() {
     JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById('blockly_text'), {
         mode: 'javascript',
-        theme: 'eclipse',
+        theme: 'eclipse-jspreview',
         tabMode: 'indent',
         lineNumbers: true,
         fixedGutter: true,
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize('100%', '495');//TODO:CSSでやりたいけど、複数エディタの指定方法が分からない
+    JavaScriptPreview.setSize('400px', '500px');
+    
+    //独自拡張で個別にclass指定
+    JavaScriptPreview.addClass('eclipse-jspreview');
 }
 
 function updateJavaScriptPreview(code) {
@@ -413,6 +446,7 @@ function createXML() {
     
     var serializer = new XMLSerializer();
     var xml = serializer.serializeToString(doc);
+    
     return xml;
 }
 
@@ -515,33 +549,62 @@ function highLightJavaScriptPreview(startLine, startCh, endLine, endCh, classNam
 }
 
 function adjustCSS() {
-    if (getWindowsOSVersion() >= 7) {//7以上のchrome対策
+    var env = getUserEnv();
+    if (env.os == 'Windows' && env.winv == 7) {//Windows7以上のchrome対策
         $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '0px');
-    } else if (getWindowsOSVersion() == -1) {//mac
-        $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '0px');
-        if (window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1) {
+    } else if (env.os == 'Mac') {//Mac
+        if (env.browser == 'Firefox') {//MacのFirefox対策
+            $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '-2px');
+        } else {//SafariとChromeは共通コードで大丈夫
             $('#downloadify').css('cursor', 'pointer').css('position', 'relative').css('top', '10px').css('left', '-1px');
         }
     }
-    //safariの場合は保存と読込を隠す
 }
 
 
-function getWindowsOSVersion() {
-    if ((window.navigator.userAgent).indexOf("NT 6.0") != -1) {
-        return 6;
-    } else if ((window.navigator.userAgent).indexOf("NT 6.1") != -1) {
-        return 7;
+function getUserEnv() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    var env = {};
+    
+    //OS
+    if (ua.indexOf('win') > -1) {
+        env['os'] = 'Windows';
+        if (ua.indexOf('nt 5.1') != -1) {
+            env['winv'] = 'XP';
+        } else if (ua.indexOf('nt 6.0') != -1) {
+            env['winv'] = 'Vista';
+        } else if (ua.indexOf('nt 6.1') != -1) {
+            env['winv'] = '7';
+        } else {
+            env['winv'] = null;
+        }
+    } else if (ua.indexOf('mac') > -1) {
+        env['os'] = "Mac";
     } else {
-        return -1;
+        env['os'] = null;
     }
-    /*
-     var ua = window.navigator.userAgent.toLowerCase();
-     if (ua.indexOf("NT 6.0") != -1) {
-     return 6;
-     } else if (ua.indexOf("NT 6.1") != -1) {
-     return 7;
-     } else {
-     return -1;
-     }*/
+    
+    //Browser
+    if (ua.indexOf('firefox') != -1) {
+        env['browser'] = 'Firefox';
+    } else if (ua.indexOf('chrome') != -1) {
+        env['browser'] = 'Chrome';
+    } else if (ua.indexOf('safari') != -1) {
+        env['browser'] = 'Safari';
+        if (ua.match("Safari/(\\d+(\\.\\d+)*)")) {
+            env['browserv'] = match[1];
+            //Safariは6からFileAPI対応なので、調べられるようにしておく
+            //テストしましょう
+        }
+    } else if (ua.indexOf('opera') != -1) {
+        env['browser'] = 'Opera';
+    } else if (ua.indexOf('msie') != -1) {
+        env['browser'] = 'IE';
+    } else if (ua.indexOf('gecko') != -1) {
+        env['browser'] = 'Gecko';
+    } else {
+        env['browser'] = null;
+    }
+    console.log(env);
+    return env;
 }
