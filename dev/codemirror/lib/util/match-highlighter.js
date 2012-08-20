@@ -2,10 +2,9 @@
 // Use by attaching the following function call to the onCursorActivity event:
 //myCodeMirror.matchHighlight(minChars);
 // And including a special span.CodeMirror-matchhighlight css class (also optionally a separate one for .CodeMirror-focused -- see demo matchhighlighter.html)
-
 (function() {
-    var DEFAULT_MIN_CHARS = 1;//2
-    
+
+    var DEFAULT_MIN_CHARS = 2;//2
     function MatchHighlightState() {
         this.marked = [];
     }
@@ -38,25 +37,27 @@
         }
     }
     
-    function markDocument2(cm, className, query, minChars) {
+    function markDocument2(cm,className, query, minChars) {
         clearMarks(cm);
         minChars = (typeof minChars !== 'undefined' ? minChars : DEFAULT_MIN_CHARS);
         if (query.replace(/^\s+|\s+$/g, "").length >= minChars) {
             var state = getMatchHighlightState(cm);
+            
             cm.operation(function() {
                 if (cm.lineCount() < 2000) { // This is too expensive on big documents.
                     for (var cursor = cm.getSearchCursor(query); cursor.findNext();) {
                         //Only apply matchhighlight to the matches other than the one actually selected
-                        if (!(cursor.from().line === cm.getCursor(true).line && cursor.from().ch === cm.getCursor(true).ch)) 
+                        if (!(cursor.from().line === cm.getCursor(true).line && cursor.from().ch === cm.getCursor(true).ch)) {
                             state.marked.push(cm.markText(cursor.from(), cursor.to(), className));
+                        }
                     }
                 }
             });
         }
     }
     
-    CodeMirror.defineExtension("matchHighlight", function(className, query, minChars) {
-        markDocument2(this, className, query, minChars);
+    CodeMirror.defineExtension("matchHighlight", function( className, query, minChars) {
+        markDocument2(this,  className, query, minChars);
     });
     
     CodeMirror.defineExtension("clearMarks", function() {
