@@ -1,0 +1,15 @@
+Windows 7
+Chrome
+以下のエラーログあり
+cauliflower.js:582
+GET http://web.sfc.keio.ac.jp/~manabu/cauliflower/dev/images/ui-bg_flat_55_fbec88_40x100.png 404 (Not found)
+
+ /~manabu/cauliflower/dev/:168
+Resource interpreted as Image but transferred with MIME type application/octet-stream: "http://web.sfc.keio.ac.jp/~manabu/cauliflower/dev/jsFrame/ext/media/handopen.cur". field_label.js:85
+
+Firefox
+とくに問題なし
+
+Safari
+テストしていない
+
