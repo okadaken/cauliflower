@@ -22,6 +22,7 @@
  * Tempブランチを削除すること
  * ブラウザの対応状況のまとめをREADMEに書くこと
  * 横長画面のテストをしてみること
+ * 重要：エラーハンドリング全部書き直す！！！
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -59,8 +60,14 @@ function initializeTabs() {
             if (HTMLEditor != null) {
                 switch (ui.panel.id) {
                     case 'tab-javascript':
-                        parseHTML2DOM(true)
-                        break;
+                        try {
+                            validateHTML();
+                        } catch (e) {
+                             $('#tabs').tabs('select', 0);
+                            alert(e);
+                            event.preventDefault();
+                            return;
+                        }
                 }
             }
         },
@@ -81,6 +88,24 @@ function initializeTabs() {
         }
     });
 }
+
+function validateHTML() {
+    var doc = parseHTML2DOM(true);
+    
+    if (doc.getElementsByTagName('parsererror').length != 0) {
+        //        throw doc.getElementsByTagName('parsererror')[0].childNodes[0].nodeValue;
+        throw 'HTMLが見つかりません';
+    }
+    
+    if (doc.getElementsByTagName('html').length == 0) {
+        throw 'htmlタグが見つかりません';
+    }
+    
+    if (doc.getElementsByTagName('body').length == 0) {
+        throw 'bodyタグが見つかりません';
+    }
+}
+
 
 function initializeButtons() {
 
