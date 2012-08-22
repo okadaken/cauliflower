@@ -21,7 +21,7 @@
  * CodeMirrorの全部のデモチェックをすること
  * Tempブランチを削除すること
  * ブラウザの対応状況のまとめをREADMEに書くこと
- * JavaScriptのWordラップをためしてみること（横にスクロールバーは出さないようにしてみる）
+ * 横長画面のテストをしてみること
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -136,9 +136,9 @@ function initializeButtons() {
     
     $('#exec_button').button({
         icons: {
-            primary: 'ui-icon-flag'
+            //primary: 'ui-icon-flag'
             //primary: 'ui-icon-circle-triangle-e'
-            //primary: 'ui-icon-play'
+            primary: 'ui-icon-play'
         }
     }).click(function() {//TODO:とりあえず色を変えただけ 要グラデーション
         openPreviewWindow();
@@ -167,17 +167,21 @@ function getDownloadifyImagePath() {
 function guessSaveFileName() {
     var ext = '.calf';
     var defaultFileName = '新規JavaScriptプログラム' + ext;
-    var dom = parseHTML2DOM(false);
-    if (dom != null) {
-        var titles = dom.getElementsByTagName('title');
+    var doc = parseHTML2DOM(false);
+    if (doc != null) {
+        var titles = doc.getElementsByTagName('title');
         if (titles.length != 0) {
-            return titles[0].firstChild.nodeValue.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '') + ext;
+            return trimStringForFileName(titles[0].firstChild.nodeValue) + ext;
         } else {
             return defaultFileName;
         }
     } else {
         return defaultFileName;
     }
+}
+
+function trimStringForFileName(s) {
+    return s.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '');
 }
 
 function initializeHTMLEditor() {
@@ -294,7 +298,7 @@ function getAllCode(dialog) {
         return code;//TODO:最後に行頭のDOCTYPEを追加すること
         //console.log( serializer.serializeToString(body)); 
     } else {
-        alert('bodyタグが見つかりません');//TODO:dialogにすること
+        throw 'bodyタグが見つかりません';//TODO:dialogにすること,previewからの呼び出し時に対応すること
     }
 }
 

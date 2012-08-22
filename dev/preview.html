@@ -10,8 +10,23 @@
   <body>
     <script>
       $(document).ready(function() {
-          console.log('load');
-          $('#preview_contents').html(window.opener.getAllCode(true));
+          try {
+              console.log('load');
+              var html = window.opener.getAllCode(true);
+              $('#preview_contents').html(html);
+          } catch (e) {
+              window.close();
+              window.opener.alert(e);//dialogにすること
+          }
+          
+          /*
+           もし関数外のコードを許すなら、一度実行しないと、document.writeなどが実行されない
+           復活させるべきコードだと思われる。HTMLの書きだしの順番は考慮すべき。
+           try {
+           eval(window.opener.getJavaScriptCode());
+           } catch (e) {
+           alert('Program error:\n' + e);
+           }*/
       });
     </script>
     <div id="preview_contents">
