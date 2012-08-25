@@ -24,21 +24,32 @@
 
 if (!Blockly.Language) Blockly.Language = {};
 
+function allOption(){
+	return [
+		['HTML', 'innerHtml'],
+		['値', 'value'],
+	];
+}
 
-Blockly.Language.myDocument_innerHTML = {
+Blockly.Language.myDocument_set = {
   category: null,
   init: function() {
     this.setColour(45);
 	
-	this.appendTitle( 'document.getElementById(\'' );
-	this.appendTitle( '_', 'TARGET' );
-	this.appendTitle( '\').innerHTML = ' );
-    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
+	this.appendTitle( 'ID' );
+	this.appendTitle(new Blockly.FieldDropdown(Blockly.MyDocument.dropdownCreate ),'TARGET');
+	this.appendTitle( 'の' );
+	this.appendTitle(new Blockly.FieldDropdown(allOption),'ACTION');
+	this.appendTitle( 'を' );
+	this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null );
+	this.appendInput('に変える', Blockly.DUMMY_INPUT, null );
+    this.setInputsInline(true);
+	
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-	this.setOutput( false, Object );
+	//this.setOutput( false, Object );
   },
-  
+  /*
   mutationToDom: function() {
     // Save the name and arguments (none of which are editable).
     var container = document.createElement('mutation');
@@ -49,7 +60,7 @@ Blockly.Language.myDocument_innerHTML = {
     this.arguments_ = [];
     this.setTitleText( xmlElement.getAttribute('name'), 'TARGET');
   },
-
+*/
 
 };
 

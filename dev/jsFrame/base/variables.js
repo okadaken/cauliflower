@@ -153,6 +153,7 @@ Blockly.Variables.renameVariable = function(oldName, newName) {
  * @param {!Blockly.Workspace} workspace The flyout's workspace.
  */
 Blockly.Variables.flyoutCategory = function(blocks, gaps, margin, workspace) {
+	
   var variableList = Blockly.Variables.allVariables();
   variableList.sort(Blockly.caseInsensitiveComparator);
   // In addition to the user's variables, we also want to display the default

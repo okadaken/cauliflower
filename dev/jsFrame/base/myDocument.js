@@ -62,6 +62,15 @@ function search( idList, element ){
 	}
 }
 
+Blockly.MyDocument.dropdownCreate = function(){
+	var idList = Blockly.MyDocument.allId();
+	var dropdown = [];
+	for( var i=0 ; i < idList.length ; i++ ){
+		dropdown[i] = [ idList[i], idList[i] ];
+	}
+	return dropdown;
+}
+
 /**
  * Construct the blocks required by the flyout for the variable category.
  * @param {!Array.<!Blockly.Block>} blocks List of blocks to show.
@@ -70,19 +79,21 @@ function search( idList, element ){
  * @param {!Blockly.Workspace} workspace The flyout's workspace.
  */
 Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
+	
   var idList = Blockly.MyDocument.allId();
   idList.sort(Blockly.caseInsensitiveComparator);
+
   // In addition to the user's variables, we also want to display the default
   // variable name at the top.  We also don't want this duplicated if the
   // user has created a variable of the same name.
   //funcList.unshift(null);
   
-  for (var i = 0; i < idList.length; i++) {
-	
-    var getBlock = Blockly.Language.myDocument_innerHTML ?
-        new Blockly.Block(workspace, 'myDocument_innerHTML') : null;
+  //for (var i = 0; i < idList.length; i++) {
+  if( idList.length > 0 ){	
+    var getBlock = Blockly.Language.myDocument_set ?
+        new Blockly.Block(workspace, 'myDocument_set') : null;
 
-    getBlock && getBlock.setTitleText( idList[i], 'TARGET');
+    getBlock && getBlock.setTitleText( idList[0], 'TARGET');
 
     getBlock && getBlock.initSvg();
 	

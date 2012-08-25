@@ -24,13 +24,13 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.myDocument_innerHTML = function() {
+Blockly.JavaScript.myDocument_set = function() {
 	
   var target = this.getTitleText( 'TARGET' );
-  //var target = Blockly.JavaScript.statementToCode(this, 'TARGET');
-  var value = Blockly.JavaScript.valueToCode(this, 'TEXT');
+  var action = this.getTitleValue( 'ACTION');
+  var value = Blockly.JavaScript.valueToCode(this, 'VALUE');
   
-  var code = 'document.getElementById(\'' + target + '\').innerHTML = ' + value + ';';
+  var code = 'document.getElementById(\'' + target + '\').' + action + ' = ' + value + ';';
   return code + '\n';
 };
 
