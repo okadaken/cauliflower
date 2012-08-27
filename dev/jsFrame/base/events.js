@@ -108,19 +108,14 @@ Blockly.Events.dropdownCreate = function(){
  */
 Blockly.Events.flyoutCategory = function(blocks, gaps, margin, workspace) {
   var funcList = Blockly.Events.allEventFunctions();
-  //funcList.sort(Blockly.caseInsensitiveComparator);
-  
-  //for (var i = 0; i < funcList.length; i++) {
+
   if( funcList.length > 0 ){
   	
-	console.log( funcList );
-	
     var getBlock = Blockly.Language.eventFunction ?
         new Blockly.Block(workspace, 'eventFunction') : null;
 
     getBlock && getBlock.setTitleText( funcList[0], 'FUNC');
     getBlock && getBlock.initSvg();
-	
     getBlock && blocks.push(getBlock);
     if (getBlock) {
       gaps.push(margin, margin * 3);
