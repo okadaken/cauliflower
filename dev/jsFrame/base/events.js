@@ -40,16 +40,56 @@ Blockly.Events.NAME_TYPE = 'event';
  * @return {!Array.<string>} Array of variable names.
  */
 Blockly.Events.allEventFunctions = function(opt_block) {
-	var funcNameList = new Array();
-	
+	var funcNameList = [];
 	var dom = window.parent.parseHTML2DOM(false);
-	var list = dom.getElementsByTagName("button");
-	for( var i=0 ; list != null && i < list.length ; i++ ){
-		funcNameList.push( list[i].getAttribute("onclick") );
-	}
+	var body = dom.getElementsByTagName("body");
+
+	searchEventFunctions( body[0], funcNameList );
+
+console.log( funcNameList );
 
 	return funcNameList;
 };
+
+var eventTarget = [
+	'onload',
+	'onunload',
+	'onresize',
+	'onscroll',
+	
+	'onclick',
+	'ondblclick',
+	'onmousedown',
+	'onmouseup',
+	'onmouseover',
+	'onmouseout',
+	
+	'onkeydown',
+	'onkeypress',
+	'onkeyup',
+	
+	'onchange',
+	'onsubmit',
+	'onreset',
+	
+	'onfocus',
+	'onblur',
+];
+
+function searchEventFunctions( element, funcNameList ){
+	if( element.nodeType == 3 || element.nodeType == 8){ // skip Text & Comment node
+		return;
+	}
+		
+	for ( var i=0 ; i < eventTarget.length ; i++ ) {
+		if (element.getAttribute(eventTarget[i]) != null) {
+			funcNameList.push(element.getAttribute(eventTarget[i]));
+		}
+	}
+	for( var i=0 ; i < element.childNodes.length ; i++ ){
+		searchEventFunctions( element.childNodes[i], funcNameList );
+	}
+}
 
 /**
  * Construct the blocks required by the flyout for the variable category.
