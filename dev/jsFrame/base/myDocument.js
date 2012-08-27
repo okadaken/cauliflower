@@ -50,12 +50,18 @@ Blockly.MyDocument.allId = function(opt_block) {
 
 	return idList;
 };
+/**
+ * 再帰的にElement内に存在するIDとタグ名一覧を取り出す。
+ * 
+ * @param {Object} idList
+ * @param {Object} element
+ */
 function search( idList, element ){
 	if( element.nodeType == 3 || element.nodeType == 8){ // skip Text & Comment node
 		return;
 	}
 	if( element.getAttribute('id') != null && element.getAttribute('id').length != 0){
-		idList.push( element.getAttribute('id') );
+		idList.push( [element.getAttribute('id'), element.tagName ] );
 	}
 	for( var i=0 ; i < element.childNodes.length ; i++ ){
 		search( idList, element.childNodes[i] );
@@ -66,11 +72,30 @@ Blockly.MyDocument.dropdownCreate = function(){
 	var idList = Blockly.MyDocument.allId();
 	var dropdown = [];
 	for( var i=0 ; i < idList.length ; i++ ){
-		dropdown[i] = [ idList[i], idList[i] ];
+		dropdown[i] = [ idList[i][0], idList[i][0] ];
 	}
 	return dropdown;
 }
 
+Blockly.MyDocument.dropdownChange = function(text) {
+	
+	if( text ){
+		this.setText(text);
+		
+		var ids = Blockly.MyDocument.allId();
+		var tag = "";
+		for( var i=0 ; i < ids.length ; i++ ){
+			if( ids[i][0] == text ){
+				tag = ids[i][1];
+				break;
+			}
+		}
+		
+		this.getLinkedDropdown().setOptions( getOption( tag ) );
+
+	}
+    window.setTimeout(Blockly.MyDocument.refreshFlyoutCategory, 1);
+};
 /**
  * Construct the blocks required by the flyout for the variable category.
  * @param {!Array.<!Blockly.Block>} blocks List of blocks to show.
@@ -81,19 +106,13 @@ Blockly.MyDocument.dropdownCreate = function(){
 Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
 	
   var idList = Blockly.MyDocument.allId();
-  idList.sort(Blockly.caseInsensitiveComparator);
+  //idList.sort(Blockly.caseInsensitiveComparator);
 
-  // In addition to the user's variables, we also want to display the default
-  // variable name at the top.  We also don't want this duplicated if the
-  // user has created a variable of the same name.
-  //funcList.unshift(null);
-  
-  //for (var i = 0; i < idList.length; i++) {
   if( idList.length > 0 ){	
     var getBlock = Blockly.Language.myDocument_set ?
         new Blockly.Block(workspace, 'myDocument_set') : null;
 
-    getBlock && getBlock.setTitleText( idList[0], 'TARGET');
+    getBlock && getBlock.setTitleText( idList[0][0], 'TARGET');
 
     getBlock && getBlock.initSvg();
 	

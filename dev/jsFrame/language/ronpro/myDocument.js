@@ -26,9 +26,33 @@ if (!Blockly.Language) Blockly.Language = {};
 
 function allOption(){
 	return [
-		['HTML', 'innerHTML'],
-		['値', 'value'],
+		[
+			'all', 
+			[
+				['HTML', 'innerHTML'],
+				['値', 'value'],
+			]
+		],
+		[
+			'div', 
+			[
+				['スタイルの背景色', 'style.backgroundColor'],
+			]
+		]
 	];
+}
+
+function getOption( tagName ){
+	
+	var allOptions = allOption();
+	
+	var options = [];
+	for( var i=0 ; i < allOptions.length ; i++ ){
+		if( allOptions[i][0] == 'all' || allOptions[i][0] == tagName ){
+			options = options.concat( allOptions[i][1] );
+		}
+	}
+	return options;	
 }
 
 Blockly.Language.myDocument_set = {
@@ -36,10 +60,17 @@ Blockly.Language.myDocument_set = {
   init: function() {
     this.setColour(45);
 	
+	var ids = Blockly.MyDocument.allId();
+	var first = ids[0];
+	var firstTagName = first[1];
+	
+	var fieldDropDown = new Blockly.FieldDropdown(getOption( firstTagName ));
+	var idDropDown = new Blockly.FieldDropdown(Blockly.MyDocument.dropdownCreate, Blockly.MyDocument.dropdownChange, fieldDropDown );
+	
 	this.appendTitle( 'ID' );
-	this.appendTitle(new Blockly.FieldDropdown(Blockly.MyDocument.dropdownCreate ),'TARGET');
+	this.appendTitle( idDropDown,'TARGET');
 	this.appendTitle( 'の' );
-	this.appendTitle(new Blockly.FieldDropdown(allOption),'ACTION');
+	this.appendTitle( fieldDropDown,'ACTION');
 	this.appendTitle( 'を' );
 	this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null );
 	this.appendInput('に変える', Blockly.DUMMY_INPUT, null );

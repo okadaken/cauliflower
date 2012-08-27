@@ -32,12 +32,14 @@
  *     option is selected.
  * @constructor
  */
-Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
+Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler, opt_linkedDropdown ) {
   this.menuGenerator_ = menuGenerator;
   this.changeHandler_ = opt_changeHandler;
   var firstText = this.getOptions_()[0][0];
   // Call parent's constructor.
   Blockly.Field.call(this, firstText);
+  
+  this.linkedDropdown = opt_linkedDropdown;
 };
 
 // FieldDropdown is a subclass of Field.
@@ -240,3 +242,16 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
 Blockly.FieldDropdown.hideMenu = function() {
   Blockly.FieldDropdown.svgGroup_.style.display = 'none';
 };
+
+/**
+ * for Cauliflower
+ * 外部から強制的にオプションを変更する。
+ * @param {Object} options
+ */
+Blockly.FieldDropdown.prototype.setOptions = function( options ){
+	this.menuGenerator_ = options;
+};
+
+Blockly.FieldDropdown.prototype.getLinkedDropdown = function(){
+	return this.linkedDropdown;
+}
