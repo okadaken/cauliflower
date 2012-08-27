@@ -26,7 +26,7 @@ if (!Blockly.Language) Blockly.Language = {};
 
 function allOption(){
 	return [
-		['HTML', 'innerHtml'],
+		['HTML', 'innerHTML'],
 		['値', 'value'],
 	];
 }
