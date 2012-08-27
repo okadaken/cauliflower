@@ -46,8 +46,6 @@ Blockly.Events.allEventFunctions = function(opt_block) {
 
 	searchEventFunctions( body[0], funcNameList );
 
-console.log( funcNameList );
-
 	return funcNameList;
 };
 
@@ -91,6 +89,16 @@ function searchEventFunctions( element, funcNameList ){
 	}
 }
 
+Blockly.Events.dropdownCreate = function(){
+	var funcList = Blockly.Events.allEventFunctions();
+	var dropdown = [];
+	for( var i=0 ; i < funcList.length ; i++ ){
+		dropdown[i] = [ funcList[i], funcList[i] ];
+	}
+	return dropdown;
+}
+
+
 /**
  * Construct the blocks required by the flyout for the variable category.
  * @param {!Array.<!Blockly.Block>} blocks List of blocks to show.
@@ -100,21 +108,18 @@ function searchEventFunctions( element, funcNameList ){
  */
 Blockly.Events.flyoutCategory = function(blocks, gaps, margin, workspace) {
   var funcList = Blockly.Events.allEventFunctions();
-  funcList.sort(Blockly.caseInsensitiveComparator);
-  // In addition to the user's variables, we also want to display the default
-  // variable name at the top.  We also don't want this duplicated if the
-  // user has created a variable of the same name.
-  //funcList.unshift(null);
+  //funcList.sort(Blockly.caseInsensitiveComparator);
   
-  for (var i = 0; i < funcList.length; i++) {
+  //for (var i = 0; i < funcList.length; i++) {
+  if( funcList.length > 0 ){
+  	
+	console.log( funcList );
 	
-    var getBlock = Blockly.Language.event_onclick ?
-        new Blockly.Block(workspace, 'event_onclick') : null;
+    var getBlock = Blockly.Language.eventFunction ?
+        new Blockly.Block(workspace, 'eventFunction') : null;
 
-    getBlock && getBlock.setTitleText( 'function ' + funcList[i] + '{', 'FUNC');
-
+    getBlock && getBlock.setTitleText( funcList[0], 'FUNC');
     getBlock && getBlock.initSvg();
-
 	
     getBlock && blocks.push(getBlock);
     if (getBlock) {
@@ -122,8 +127,8 @@ Blockly.Events.flyoutCategory = function(blocks, gaps, margin, workspace) {
     } else {
       gaps.push(margin * 2);
     }
-
   }
+  
 };
 
 /**

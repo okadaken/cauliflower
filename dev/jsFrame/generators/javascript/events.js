@@ -24,19 +24,11 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.event_onload = function() {
-  var n = 0;
-  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  
-  var code = 'function event_onload(){\n' + branch + '}';
-  return code + '\n';
-};
-
-Blockly.JavaScript.event_onclick = function() {
+Blockly.JavaScript.eventFunction = function() {
   var n = 0;
   var target = this.getTitleText('FUNC');
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   
-  var code = target+'\n' + branch + '}';
+  var code = 'function ' + target+'{\n' + branch + '}';
   return code + '\n';
 };

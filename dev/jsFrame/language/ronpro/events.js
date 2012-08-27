@@ -25,45 +25,22 @@
 if (!Blockly.Language) Blockly.Language = {};
 
 
-Blockly.Language.event_onload = {
-  category: null,
-  isRoot: true,
-  init: function() {
-    this.setColour(45);
-	this.appendTitle('ページが読み込まれたとき');
-    this.appendInput('', Blockly.NEXT_STATEMENT, 'DO');
-    this.setPreviousStatement(false);
-    //this.setNextStatement(true);
-  },
-};
-
-Blockly.Language.event_onclick = {
+Blockly.Language.eventFunction = {
   category: null,
   isRoot: true,
   init: function() {
   		
     this.setColour(45);
 	
+	this.appendTitle('function');
+    this.appendTitle(new Blockly.FieldDropdown(Blockly.Events.dropdownCreate),'FUNC');
+	this.appendTitle( '{' );
 	
-	if (this.getTitleText('FUNC') == null) {
-		this.appendTitle('','FUNC');
-	} else {
-		this.appendTitle(this.getTitleText('FUNC'),'FUNC');
-	}
-	
-	
-	//this.appendTitle('', 'FUNC');
-	//this.appendInput('{', Blockly.DUMMY_INPUT, null );
-
-    //this.appendTitle( new Blockly.FieldTextInput('target'), 'TARGET' );
-    //this.appendTitle('をクリックされた時');
-    //this.setInputsInline(true);
-
     this.appendInput('', Blockly.NEXT_STATEMENT, 'DO');
 	this.appendInput('}', Blockly.DUMMY_INPUT, null );
     this.setPreviousStatement(false);
   },
-  
+  /*
   mutationToDom: function() {
     // Save the name and arguments (none of which are editable).
     var container = document.createElement('mutation');
@@ -74,7 +51,7 @@ Blockly.Language.event_onclick = {
     this.arguments_ = [];
     this.setTitleText( xmlElement.getAttribute('name'), 'FUNC');
   },
-
+*/
 
 };
 
