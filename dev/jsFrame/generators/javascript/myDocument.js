@@ -34,3 +34,12 @@ Blockly.JavaScript.myDocument_set = function() {
   return code + '\n';
 };
 
+Blockly.JavaScript.myDocument_get = function() {
+	
+  var target = this.getTitleText( 'TARGET' );
+  var attr = this.getTitleValue( 'ATTRIBUTE');
+  
+  var code = 'document.getElementById(\'' + target + '\').' + attr;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+

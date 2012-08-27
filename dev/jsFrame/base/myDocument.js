@@ -106,16 +106,25 @@ Blockly.MyDocument.dropdownChange = function(text) {
 Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
 	
   var idList = Blockly.MyDocument.allId();
-  //idList.sort(Blockly.caseInsensitiveComparator);
 
   if( idList.length > 0 ){	
-    var getBlock = Blockly.Language.myDocument_set ?
+    var setBlock = Blockly.Language.myDocument_set ?
         new Blockly.Block(workspace, 'myDocument_set') : null;
 
-    getBlock && getBlock.setTitleText( idList[0][0], 'TARGET');
+    setBlock && setBlock.setTitleText( idList[0][0], 'TARGET');
+    setBlock && setBlock.initSvg();
+    setBlock && blocks.push(setBlock);
+    if (setBlock) {
+      gaps.push(margin, margin * 3);
+    } else {
+      gaps.push(margin * 2);
+    }
 
+    var getBlock = Blockly.Language.myDocument_get ?
+        new Blockly.Block(workspace, 'myDocument_get') : null;
+
+    getBlock && getBlock.setTitleText( idList[0][0], 'TARGET');
     getBlock && getBlock.initSvg();
-	
     getBlock && blocks.push(getBlock);
     if (getBlock) {
       gaps.push(margin, margin * 3);

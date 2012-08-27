@@ -359,3 +359,8 @@ Blockly.JavaScript.math_random_float = function() {
   // Random fraction between 0 and 1.
   return ['Math.random()', Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
+
+Blockly.JavaScript.math_parseInt = function() {
+  var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '0';
+  return ['parseInt(' + value + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};

@@ -128,7 +128,7 @@ Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
 
 // Math Blocks.
-Blockly.LANG_CATEGORY_MATH = 'Math';
+Blockly.LANG_CATEGORY_MATH = '数値計算';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
 Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = 'A number.';
 

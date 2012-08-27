@@ -80,18 +80,25 @@ Blockly.Language.myDocument_set = {
     this.setNextStatement(true);
 	//this.setOutput( false, Object );
   },
-  /*
-  mutationToDom: function() {
-    // Save the name and arguments (none of which are editable).
-    var container = document.createElement('mutation');
-    container.setAttribute('name', this.getTitleText('TARGET'));
-    return container;
-  },
-  domToMutation: function(xmlElement) {
-    this.arguments_ = [];
-    this.setTitleText( xmlElement.getAttribute('name'), 'TARGET');
-  },
-*/
-
 };
 
+Blockly.Language.myDocument_get = {
+  category: null,
+  init: function() {
+    this.setColour(45);
+	
+	var ids = Blockly.MyDocument.allId();
+	var first = ids[0];
+	var firstTagName = first[1];
+	
+	var fieldDropDown = new Blockly.FieldDropdown(getOption( firstTagName ));
+	var idDropDown = new Blockly.FieldDropdown(Blockly.MyDocument.dropdownCreate, Blockly.MyDocument.dropdownChange, fieldDropDown );
+	
+	this.appendTitle( 'ID' );
+	this.appendTitle( idDropDown,'TARGET');
+	this.appendTitle( 'の' );
+	this.appendTitle( fieldDropDown,'ATTRIBUTE');
+	
+	this.setOutput( true, Object );
+  },
+};
