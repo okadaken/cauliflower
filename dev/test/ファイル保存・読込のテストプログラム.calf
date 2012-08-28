@@ -28,13 +28,15 @@
 &lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
-    <block type="procedures_defnoreturn" x="5" y="-1">
+    <block type="procedures_defnoreturn" x="-56" y="-333">
       <mutation>
+        <arg name="x">
+        </arg>
       </mutation>
       <title name="NAME">hoge</title>
       <statement name="STACK">
         <block type="controls_for" inline="true">
-          <variable data="x" name="VAR">
+          <variable data="i" name="VAR">
           </variable>
           <value name="FROM">
             <block type="math_number">
@@ -54,7 +56,7 @@
                   </mutation>
                   <value name="ADD0">
                     <block type="variables_get">
-                      <title name="VAR">x</title>
+                      <title name="VAR">i</title>
                     </block>
                   </value>
                   <value name="ADD1">
