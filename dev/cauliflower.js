@@ -393,13 +393,6 @@ function discardBlocks() {
     }
 }
 
-function clearBlocklyWorkspace() {
-    Blockly.mainWorkspace.clear();
-    Blockly.mainWorkspace.render();
-    updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-}
-
-
 function load() {
     var reader = new FileReader();//Safari5では実行不能
     var fileData = $('#load').get()[0].files[0];
@@ -487,6 +480,13 @@ function getUserEnv() {
 /**************************************************
  * 以下OK
  **************************************************/
+//OK
+function clearBlocklyWorkspace() {
+    Blockly.mainWorkspace.clear();
+    Blockly.mainWorkspace.render();
+    updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+}
+
 //OK
 function initializeButtons() {
     initalizeNewButton();
