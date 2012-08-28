@@ -20,8 +20,6 @@
     <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
-    <script type="text/javascript" src="downloadify/js/swfobject.js"></script>
-    <script type="text/javascript" src="downloadify/js/downloadify.min.js"></script>
     <style type=text/css>
       
       #top {
@@ -29,7 +27,7 @@
       }
       
       .CodeMirror {
-          border: 2px solid #d4d4d4;
+          border: 1px solid #d4d4d4;
           /*position: relative;*/
           /*height: 100%;
            width: 80%;*/
@@ -54,17 +52,29 @@
           /*text-decoration: underline;*/
           /*font-weight: bolder;*/
           background: #fc3;
+          /*text-shadow: gray 1px 2px 1px;*/
+      }
+      
+      #dialogicon {
+          vertical-align: middle;
+          float: left;
+          margin: 3px 15px 5px 0px;
       }
       
       #new_button {
           margin-left: 20px;
       }
       
+      #load {
+          width: 0px;
+          visibility: hidden;
+      }
+      
       #exec_button {
           background: url("jquery/css/images/ui-bg_flat_55_fbec88_40x100.png") repeat-x scroll 50% 50% #FBEC88;
           border: 1px solid #FAD42E;
-          /* margin-left: 40px;*/
-          /* 'background': '#ffcc00'*/
+          margin-left: 30px;
+          /*とりあえず色を変えただけ 要グラデーション*/
       }
       
       #html_preview {
@@ -101,59 +111,6 @@
       .ui-button {
           font-size: 13px;
       }
-      
-      #downloadify {
-          cursor: pointer;
-          position: relative;
-          top: 11px;
-          left: 0px;
-      }
-      
-      /* Target Firefox 2 */
-      #downloadify, x:-moz-any-link {
-          cursor: pointer;
-          position: relative;
-          top: 10px;
-          left: 0px;
-      }
-      
-      #new_button, x:-moz-any-link {
-          height: 30px;
-      }
-      
-      #load_button, x:-moz-any-link {
-          height: 30px;
-      }
-      
-      #exec_button, x:-moz-any-link {
-          height: 30px;
-      }
-      
-      /* Firefoxの点線対策 */
-      object {
-          outline: none;
-      }
-      
-      /* Then overwrite for Firefox 3 specifically */
-      #downloadify, x:-moz-any-link, x:default {
-          cursor: pointer;
-          position: relative;
-          top: 10px;
-          left: 0px;
-          outline: none;
-      }
-      
-      #new_button, x:-moz-any-link, x:default {
-          height: 30px;
-      }
-      
-      #load_button, x:-moz-any-link, x:default {
-          height: 30px;
-      }
-      
-      #exec_button, x:-moz-any-link, x:default {
-          height: 30px;
-      }
     </style>
     <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
     <script type="text/javascript" id="userScript"></script>
@@ -168,11 +125,10 @@
       <span>
         <button id="new_button">新規</button>
         <button id="load_button">開く</button>
-        <span id="downloadify">
-        </span>
-        <!-- buttonset用のダミー --><button id="save_button_dummy" style="border:0px; width:0px;height:0px;"></button>
+        <button id="save_button">保存</button>
       </span>
-      <input id="load" type="file" multiple="" style="width:0px; visibility:hidden;"><button id="exec_button">実行</button>
+      <button id="exec_button">実行</button>
+      <input id="load" type="file">
     </div>
     <div id="tabs">
       <ul>
@@ -200,9 +156,9 @@
         <iframe id="html_preview"></iframe>
       </div>
     </div>
-    <div id="HTML_syntaxerror_dialog">
-      <img src="img/dialog/error.png" style="vertical-align: middle;float:left; margin:3px 15px 95px 0px;">
-      <div id="HTML_syntaxerror_dialog_message">
+    <div id="dialog">
+      <img id="dialogicon">
+      <div id="dialog_message">
       </div>
     </div>
   </body>

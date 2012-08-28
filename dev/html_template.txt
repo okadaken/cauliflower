@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ページタイトル</title>
+  <title>ページタイトルを書きます</title>
 </head>
 <body>
-  <!- ここにHTMLを追加します -->
+  <!-- ここにHTMLを書きます -->
 </body>
 </html>

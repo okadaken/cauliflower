@@ -13,6 +13,14 @@
           try {
               console.log('load');
               var html = window.opener.getAllCode(true);
+              var doc = window.opener.parseHTML2DOM(false);
+              if (doc != null) {
+                  var titles = doc.getElementsByTagName('title');
+                  if (titles.length != 0) {
+                      $('title').text(titles[0].firstChild.nodeValue);
+                  }
+              }
+              
               $('#preview_contents').html(html);
           } catch (e) {
               window.close();
