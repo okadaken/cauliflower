@@ -26,9 +26,14 @@ Blockly.MSG_NEW_VARIABLE_TITLE = 'New variable name:';
 Blockly.MSG_RENAME_VARIABLE = 'Rename variable...';
 Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 
+Blockly.MSG_NEW_PROCEDURE = 'New procedure...';
+Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';
+Blockly.MSG_RENAME_PROCEDURE = 'Rename procedure...';
+Blockly.MSG_RENAME_PROCEDURE_TITLE = 'Rename all "%1" procedure to:';
+
 // Toolbox.
 Blockly.MSG_VARIABLE_CATEGORY = '変数';
-Blockly.MSG_PROCEDURE_CATEGORY = 'function';
+Blockly.MSG_PROCEDURE_CATEGORY = '関数';
 Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
 Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 

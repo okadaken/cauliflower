@@ -77,19 +77,28 @@ Blockly.Procedures.allProcedures = function() {
  * @return {string} Non-colliding name.
  */
 Blockly.Procedures.findLegalName = function(name, block) {
+
+  function getLegalName( name, workspace, block ){
+	  while (!Blockly.Procedures.isLegalName(name, workspace, block)) {
+	    // Collision with another procedure.
+	    var r = name.match(/^(.*?)(\d+)$/);
+	    if (!r) {
+	      name += '2';
+	    } else {
+	      name = r[1] + (parseInt(r[2], 10) + 1);
+	    }
+	  }
+	  return name;
+  }
+
   if (!block.workspace.editable) {
-    return name;
+    //return name;
+	//主workspaceではなく、メニュー内workspaceであると仮定する。
+	return getLegalName( name, Blockly.mainWorkspace, block );
+	
+  } else {
+  	return getLegalName( name, block.workspace, block );
   }
-  while (!Blockly.Procedures.isLegalName(name, block.workspace, block)) {
-    // Collision with another procedure.
-    var r = name.match(/^(.*?)(\d+)$/);
-    if (!r) {
-      name += '2';
-    } else {
-      name = r[1] + (parseInt(r[2], 10) + 1);
-    }
-  }
-  return name;
 };
 
 /**
@@ -249,5 +258,126 @@ Blockly.Procedures.mutateCallers = function(name, workspace,
   var callers = Blockly.Procedures.getCallers(name, workspace);
   for (var x = 0; x < callers.length; x++) {
     callers[x].setProcedureParameters(paramNames, paramIds);
+  }
+};
+
+//-------------------------------------------------------------------------------
+
+Blockly.Procedures.allEventFunctions = function() {
+	var funcNameList = [];
+	var dom = window.parent.parseHTML2DOM(false);
+	var body = dom.getElementsByTagName("body");
+
+	searchEventFunctions( body[0], funcNameList );
+
+	return funcNameList;
+};
+
+var eventTarget = [
+	'onload',
+	'onunload',
+	'onresize',
+	'onscroll',
+	
+	'onclick',
+	'ondblclick',
+	'onmousedown',
+	'onmouseup',
+	'onmouseover',
+	'onmouseout',
+	
+	'onkeydown',
+	'onkeypress',
+	'onkeyup',
+	
+	'onchange',
+	'onsubmit',
+	'onreset',
+	
+	'onfocus',
+	'onblur',
+];
+
+function searchEventFunctions( element, funcNameList ){
+	if( element.nodeType == 3 || element.nodeType == 8){ // skip Text & Comment node
+		return;
+	}
+	for ( var i=0 ; i < eventTarget.length ; i++ ) {
+		if (element.getAttribute(eventTarget[i]) != null) {
+			funcNameList.push(element.getAttribute(eventTarget[i]));
+		}
+	}
+	for( var i=0 ; i < element.childNodes.length ; i++ ){
+		searchEventFunctions( element.childNodes[i], funcNameList );
+	}
+}
+
+function removeBrackets( funcList ){
+	for( var i=0 ; i<funcList.length ; i++ ){
+		var tmp = funcList[i].replace(' ','');
+		if( tmp.slice(tmp.length-2) == '()' ){
+			funcList[i] = tmp.slice( 0, tmp.length-2 );
+		}
+	}
+}
+
+Blockly.Procedures.dropdownCreate = function( initValue ) {
+  var funcList = Blockly.Procedures.allEventFunctions();
+  removeBrackets( funcList );
+  
+  var name = initValue;
+  
+  if (name && funcList.indexOf(name) == -1) {
+    funcList.push(name);
+  }
+  
+  funcList.sort(Blockly.caseInsensitiveComparator);
+  funcList.push(Blockly.MSG_RENAME_PROCEDURE);
+  funcList.push(Blockly.MSG_NEW_PROCEDURE);
+
+  var options = [];
+  for (var x = 0; x < funcList.length; x++) {
+    options[x] = [funcList[x], funcList[x]];
+  }
+  return options;
+};
+
+Blockly.Procedures.dropdownChange = function(text) {
+  function promptName(promptText, defaultText) {
+    Blockly.hideChaff();
+    var newVar = window.prompt(promptText, defaultText);
+    // Merge runs of whitespace.  Strip leading and trailing whitespace.
+    // Beyond this, all names are legal.
+    return newVar && newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
+  }
+  if (text == Blockly.MSG_RENAME_PROCEDURE) {
+    var oldVar = this.getText();
+    text = promptName(Blockly.MSG_RENAME_PROCEDURE_TITLE.replace('%1', oldVar),
+                      oldVar);
+    if (text) {
+      Blockly.Procedures.renameProcedure(oldVar, text);
+    }
+  } else {
+    if (text == Blockly.MSG_NEW_PROCEDURE) {
+      text = promptName(Blockly.MSG_NEW_PROCEDURE_TITLE, '');
+      // Since variables are case-insensitive, ensure that if the new variable
+      // matches with an existing variable, the new case prevails throughout.
+      Blockly.Procedures.renameProcedure(text, text);
+    }
+    if (text) {
+      this.setText(text);
+    }
+  }
+  window.setTimeout(Blockly.Procedures.refreshFlyoutCategory, 1);
+};
+
+Blockly.Procedures.renameProcedure = function(oldName, newName) {
+  var blocks = Blockly.mainWorkspace.getAllBlocks();
+  // Iterate through every block.
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].renameProcedure;
+    if (func) {
+      func.call(blocks[x], oldName, newName);
+    }
   }
 };

@@ -32,9 +32,10 @@
  *     option is selected.
  * @constructor
  */
-Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler, opt_linkedDropdown ) {
+Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler, opt_linkedDropdown, opt_initValue ) {
   this.menuGenerator_ = menuGenerator;
   this.changeHandler_ = opt_changeHandler;
+  this.initValue = opt_initValue;
   var firstText = this.getOptions_()[0][0];
   // Call parent's constructor.
   Blockly.Field.call(this, firstText);
@@ -196,7 +197,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
  */
 Blockly.FieldDropdown.prototype.getOptions_ = function() {
   if (typeof this.menuGenerator_ == 'function') {
-    return this.menuGenerator_.call(this);
+    return this.menuGenerator_.call(this, this.initValue);
   }
   return this.menuGenerator_;
 };
@@ -222,6 +223,7 @@ Blockly.FieldDropdown.prototype.getValue = function() {
  * @param {string} newValue New value to set.
  */
 Blockly.FieldDropdown.prototype.setValue = function(newValue) {
+
   var options = this.getOptions_();
   for (var x = 0; x < options.length; x++) {
     // Options are tuples of human-readable text and language-neutral values.

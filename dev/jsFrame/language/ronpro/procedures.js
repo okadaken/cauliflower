@@ -34,8 +34,10 @@ Blockly.Language.procedures_defnoreturn = {
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE, this);
 	this.appendTitle('function');
-    this.appendTitle(new Blockly.FieldTextInput(name,
-        Blockly.Procedures.rename), 'NAME');
+	
+	var dropdown = new Blockly.FieldDropdown(Blockly.Procedures.dropdownCreate, Blockly.Procedures.dropdownChange, null , name);
+    this.appendTitle( dropdown,'NAME').setText(name);
+	
 	this.appendTitle('(');
     this.appendTitle('', 'PARAMS');
 	this.appendTitle(') {');
@@ -158,7 +160,15 @@ Blockly.Language.procedures_defnoreturn = {
         }
       }
     }
-  }
+  },
+  getProcedure: function() {
+    return [this.getTitleText('NAME')];
+  },
+  renameProcedure: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText('NAME'))) {
+      this.setTitleText(newName, 'NAME');
+    }
+  },
 };
 
 Blockly.Language.procedures_defreturn = {
@@ -196,7 +206,9 @@ Blockly.Language.procedures_defreturn = {
     return [this.getTitleText('NAME'), this.arguments_, true];
   },
   getVars: Blockly.Language.procedures_defnoreturn.getVars,
-  renameVar: Blockly.Language.procedures_defnoreturn.renameVar
+  renameVar: Blockly.Language.procedures_defnoreturn.renameVar,
+  getProcedure: Blockly.Language.procedures_defnoreturn.getProcedure,
+  renameProcedure: Blockly.Language.procedures_defnoreturn.renameProcedure,
 };
 
 Blockly.Language.procedures_mutatorcontainer = {
