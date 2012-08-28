@@ -7,9 +7,10 @@
  * TODO:License書く
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
+ * jquery minに変更
  * 例題ボタン
  * HTMLフォーマット改善 ->ペンディング
- * restore後のJavaScriptエディタの位置がおかしい気がする
+ * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい
  * parseHTML2DOMのException変更
  * 実行プレビューにソース閲覧機能を追加すること
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
@@ -31,6 +32,25 @@ var errorLine;
 var previousCode;
 
 var previewWindow;
+
+function initializeBlocklyFrame(blockly) {
+
+    window.Blockly = blockly;
+    
+    if (Blockly.Toolbox) {
+        window.setTimeout(function() {
+            document.getElementById('blockly_frame').style.minWidth = (Blockly.Toolbox.width - 38) + 'px';
+            // Account for the 19 pixel margin and on each side.
+        }, 1);
+    }
+    
+    setTimeout(function() {
+        Blockly.fireUiEvent(this, window, 'resize');
+    }, 1);
+    
+    setTimeout(restoreBlocks, 0);
+    Blockly.bindEvent_(window, 'unload', null, backupBlocks);
+}
 
 $(document).ready(function() {
     initializeTabs();
@@ -77,9 +97,9 @@ function initializeTabs() {
                         HTMLEditor.focus();
                         break;
                     case 'tab-javascript':
-                        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-                        Blockly.mainWorkspace.render();
-                        Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
+                        //updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+                        //Blockly.mainWorkspace.render();
+                        //Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
                         break;
                 }
             }
@@ -227,8 +247,8 @@ function initializeDialogs() {
         modal: true,
         draggable: false,
         resizable: false,
-        show: 'clip',
-        hide: 'clip'
+        show: 'drop',
+        hide: 'drop'
     });
 }
 
@@ -385,7 +405,7 @@ function restoreBlocks() {
 
 function discardBlocks() {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
-    if (count > 2) {
+    if (count > 0) {
         showConfirmDialog('削除の確認', count + '個のブロックを全て削除しますか？', function() {
             clearBlocklyWorkspace();
             $(this).dialog('close');
@@ -409,9 +429,7 @@ function load() {
             HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
         }
         var count = Blockly.mainWorkspace.getAllBlocks().length;
-        if (count) {
-            showNoticeDialog('確認', '現在配置されているブロックを消去してよろしいですか？');
-        }
+        
         if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
             Blockly.mainWorkspace.clear();
         }

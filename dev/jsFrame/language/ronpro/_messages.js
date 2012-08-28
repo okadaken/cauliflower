@@ -18,6 +18,7 @@ Blockly.MSG_EXPAND_BLOCK = 'Expand Block';
 Blockly.MSG_DISABLE_BLOCK = 'Disable Block';
 Blockly.MSG_ENABLE_BLOCK = 'Enable Block';
 Blockly.MSG_HELP = 'Help';
+Blockly.MSG_ALL_BLOCKS_DELETE = '全てのブロックを削除';
 
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = 'Change value:';

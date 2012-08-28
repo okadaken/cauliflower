@@ -330,13 +330,25 @@ Blockly.onKeyDown_ = function(e) {
  */
 Blockly.showContextMenu_ = function(x, y) {
   var options = [];
+  
+  //Option to delete all blocks.
+   var deleteAllBlocksOption;
+  if(Blockly.mainWorkspace.getAllBlocks().length>0){
+       deleteAllBlocksOption = {enabled: true};
+  }else{
+      deleteAllBlocksOption = {enabled: false};
+  }
+  deleteAllBlocksOption.text = Blockly.MSG_ALL_BLOCKS_DELETE;
+  deleteAllBlocksOption.callback = function() {
+      window.parent.discardBlocks();
+  };
+  options.push(deleteAllBlocksOption);
 
   // Option to get help.
   var helpOption = {enabled: false};
   helpOption.text = Blockly.MSG_HELP;
   helpOption.callback = function() {};
   options.push(helpOption);
-
   Blockly.ContextMenu.show(x, y, options);
 };
 

@@ -41,11 +41,8 @@
           Blockly.inject(document.body, {
               path: ''
           });
-          window.parent.Blockly = Blockly;
           
-          window.parent.setTimeout(window.parent.restoreBlocks, 0);
-          Blockly.bindEvent_(window, 'unload', null, window.parent.backupBlocks);
-          Blockly.mainWorkspace.render();
+          window.parent.initializeBlocklyFrame(Blockly);
       }
     </script>
   </head>
