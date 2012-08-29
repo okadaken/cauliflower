@@ -180,8 +180,12 @@ Blockly.Language.procedures_defreturn = {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
-    this.appendTitle(
-        new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
+
+	this.appendTitle('function');
+	
+	var dropdown = new Blockly.FieldDropdown(Blockly.Procedures.dropdownCreate, Blockly.Procedures.dropdownChange, null , name);
+    this.appendTitle( dropdown,'NAME').setText(name);
+
 	this.appendTitle('(');
     this.appendInput(['', 'PARAMS'], Blockly.DUMMY_INPUT);
 	this.appendTitle(') {');
