@@ -313,25 +313,26 @@ Blockly.Procedures.searchEventFunctions = function( element, funcNameList ){
 	}
 }
 
-function removeBrackets( funcList ){
-	for( var i=0 ; i<funcList.length ; i++ ){
-		var tmp = funcList[i].replace(' ','');
-		if( tmp.slice(tmp.length-2) == '()' ){
-			funcList[i] = tmp.slice( 0, tmp.length-2 );
+Blockly.Procedures.dropdownCreate = function( initValue ) {
+
+	function removeBrackets( funcList ){
+		for( var i=0 ; i<funcList.length ; i++ ){
+			var tmp = funcList[i].replace(' ','');
+			if( tmp.slice(tmp.length-2) == '()' ){
+				funcList[i] = tmp.slice( 0, tmp.length-2 );
+			}
 		}
 	}
-}
-
-Blockly.Procedures.dropdownCreate = function( initValue ) {
 
   var funcList = Blockly.Procedures.allEventFunctions();
   removeBrackets( funcList );
   funcList.sort(Blockly.caseInsensitiveComparator);
   
-  if (initValue && funcList.indexOf(initValue) == -1) {
-    funcList.unshift(initValue);
+  if( this.getText() && funcList.indexOf( this.getText() ) == -1 ){
+    this.initValue = this.getText();
   }
-  
+  funcList.unshift( this.initValue );
+
   funcList.push(Blockly.MSG_RENAME_PROCEDURE);
 
   var options = [];
@@ -355,6 +356,7 @@ Blockly.Procedures.dropdownChange = function(text) {
                       oldVar);
     if (text) {
       Blockly.Procedures.renameProcedure(oldVar, text);
+	  this.initValue = text;
     }
   } else if( text ){
 	this.setText(text);
