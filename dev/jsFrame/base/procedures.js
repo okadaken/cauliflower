@@ -328,7 +328,7 @@ Blockly.Procedures.dropdownCreate = function( initValue ) {
   removeBrackets( funcList );
   funcList.sort(Blockly.caseInsensitiveComparator);
   
-  if (name && funcList.indexOf(initValue) == -1) {
+  if (initValue && funcList.indexOf(initValue) == -1) {
     funcList.unshift(initValue);
   }
   
