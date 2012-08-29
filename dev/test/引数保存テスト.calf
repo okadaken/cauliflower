@@ -1,0 +1,49 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;引数保存テスト&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ここにHTMLを書きます --&gt;
+  &lt;button onclick="hoge()"&gt;hoge&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-258" y="-367">
+      <mutation>
+      </mutation>
+      <title name="NAME">hoge</title>
+      <statement name="STACK">
+        <block type="procedures_callnoreturn" inline="false">
+          <mutation name="procedure">
+            <arg name="x">
+            </arg>
+          </mutation>
+          <value name="ARG0">
+            <block type="text">
+              <title name="TEXT">Hello</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <block type="procedures_defnoreturn" x="-251" y="-255">
+      <mutation>
+        <arg name="x">
+        </arg>
+      </mutation>
+      <title name="NAME">procedure</title>
+      <statement name="STACK">
+        <block type="text_print" inline="false">
+          <value name="TEXT">
+            <block type="variables_get">
+              <title name="VAR">x</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
