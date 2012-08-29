@@ -56,7 +56,9 @@ $(document).ready(function() {
     initializeDialogs();
     
     restoreHTML();
+    resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
     HTMLEditor.refresh();
+    
     setTimeout(updatePreview, 300);
     
     initializeJavaScriptPreview();
@@ -65,6 +67,11 @@ $(document).ready(function() {
 $(window).unload(function() {
     backupHTML();
 });
+
+function resetHTMLEditUndoState() {
+    HTMLEditor.clearHistory();
+    updateHTMLToolBar();
+}
 
 function initializeTabs() {
     $('#tabs').tabs({
