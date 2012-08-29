@@ -86,10 +86,25 @@
           border: 1px solid black;
       }
       
+      #tab-javascript {
+          height: 530px;
+      }
+      
       #blockly_frame {
           width: 100%;
-          height: 500px;
-          border: none;
+          height: 100%;
+          border: 1px solid #d4d4d4;
+      }
+      
+      #blockly_frame_div {
+          float: left;
+          width: 65%;
+          height: 100%;
+      }
+      
+      #blockly_text_div {
+          margin-left: 65%;
+          padding-left: 20px;
       }
       
       .title {
@@ -136,17 +151,25 @@
         <li><a href="#tab-javascript">JavaScript編集</a></li>
       </ul>
       <div id="tab-javascript">
+        <div id="blockly_frame_div">
+          <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
+        </div>
+        <div id="blockly_text_div">
+          <textarea id="blockly_text"></textarea>
+        </div>
+        <!--
         <table id="block" style="width: 100%;height: 100%;">
-          <tr>
-            <td style="width: 65%;height: 100%;vertical-align: top; ">
-              <iframe id="blockly_frame" src="jsFrame/frame.html" style="min-width: 350px;"></iframe>
-              <a href="javascript:discardBlocks();">開発用：ブロックのローカルストレージ削除</a>
-            </td>
-            <td style="width:35%; height: 100%;vertical-align: top; padding-left:20px;">
-              <textarea id="blockly_text"></textarea>
-            </td>
-          </tr>
+        <tr>
+        <td style="width: 65%;height: 100%;vertical-align: top; ">
+        <iframe id="blockly_frame" src="jsFrame/frame.html" style="min-width: 350px;"></iframe>
+        <a href="javascript:discardBlocks();">開発用：ブロックのローカルストレージ削除</a>
+        </td>
+        <td style="width:35%; height: 100%;vertical-align: top; padding-left:20px;">
+        <textarea id="blockly_text"></textarea>
+        </td>
+        </tr>
         </table>
+        -->
       </div>
       <div id="tab-html">
         <textarea id="html_textarea"></textarea>

@@ -10,7 +10,8 @@
  * jquery minに変更
  * 例題ボタン
  * HTMLフォーマット改善 ->ペンディング
- * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい
+ * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
+ * 重要！！！Firefoxのワークスペースの右クリックメニューの位置がおかしい（Firefoxのみ発生する現象）
  * parseHTML2DOMのException変更
  * 実行プレビューにソース閲覧機能を追加すること
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
@@ -38,7 +39,7 @@ function initializeBlocklyFrame(blockly) {
     window.Blockly = blockly;
     
     if (Blockly.Toolbox) {
-        window.setTimeout(function() {
+        setTimeout(function() {
             document.getElementById('blockly_frame').style.minWidth = (Blockly.Toolbox.width - 38) + 'px';
             // Account for the 19 pixel margin and on each side.
         }, 1);
@@ -97,9 +98,9 @@ function initializeTabs() {
                         HTMLEditor.focus();
                         break;
                     case 'tab-javascript':
-                        //updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-                        //Blockly.mainWorkspace.render();
-                        //Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
+                        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+                        Blockly.mainWorkspace.render();
+                        Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
                         break;
                 }
             }
@@ -372,7 +373,8 @@ function initializeJavaScriptPreview() {
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize('400px', '500px');
+    JavaScriptPreview.setSize('400px', '530px');
+    
     
     //独自拡張で個別にclass指定
     JavaScriptPreview.addClass('eclipse-jspreview');
@@ -384,33 +386,6 @@ function updateJavaScriptPreview(code) {
         diff(previousCode, code);
     }
     previousCode = code;
-}
-
-
-
-function backupBlocks() {
-    if ('localStorage' in window) {
-        var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        window.localStorage.setItem('cauliflower_blocks', Blockly.Xml.domToText(xml));
-    }
-}
-
-function restoreBlocks() {
-    if ('localStorage' in window && window.localStorage.cauliflower_blocks) {
-        var xml = Blockly.Xml.textToDom(window.localStorage.cauliflower_blocks);
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-    }
-}
-
-function discardBlocks() {
-    var count = Blockly.mainWorkspace.getAllBlocks().length;
-    if (count > 0) {
-        showConfirmDialog('削除の確認', count + '個のブロックを全て削除しますか？', function() {
-            clearBlocklyWorkspace();
-            $(this).dialog('close');
-        });
-    }
 }
 
 function load() {
@@ -499,10 +474,43 @@ function getUserEnv() {
  * 以下OK
  **************************************************/
 //OK
+function backupBlocks() {
+    if ('localStorage' in window) {
+        var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        window.localStorage.setItem('cauliflower_blocks', Blockly.Xml.domToText(xml));
+    }
+}
+
+//OK
+function restoreBlocks() {
+    if ('localStorage' in window && window.localStorage.cauliflower_blocks) {
+        var xml = Blockly.Xml.textToDom(window.localStorage.cauliflower_blocks);
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        Blockly.mainWorkspace.render();//Chromeだと再描画されないので入れてある
+    }
+}
+
+//OK
+function discardBlocks() {
+    var count = Blockly.mainWorkspace.getAllBlocks().length;
+    if (count > 0) {
+        showConfirmDialog('削除の確認', '全て（計' + count + '個）のブロックを削除しますか？', function() {
+            clearBlocklyWorkspace();
+            $(this).dialog('close');
+        });
+    }
+}
+
+
+//OK
 function clearBlocklyWorkspace() {
     Blockly.mainWorkspace.clear();
     Blockly.mainWorkspace.render();
     updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+    if ('localStorage' in window) {
+        window.localStorage.removeItem('cauliflower_blocks');
+    }
 }
 
 //OK
