@@ -46,7 +46,6 @@ filenames = [
     'workspace.js',
     'xml.js',
     
-    'events.js', # add by turkey 2012/8/15
     'myDocument.js', # add by turkey 2012/8/16
     ]
 

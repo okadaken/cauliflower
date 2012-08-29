@@ -268,12 +268,12 @@ Blockly.Procedures.allEventFunctions = function() {
 	var dom = window.parent.parseHTML2DOM(false);
 	var body = dom.getElementsByTagName("body");
 
-	searchEventFunctions( body[0], funcNameList );
+	Blockly.Procedures.searchEventFunctions( body[0], funcNameList );
 
 	return funcNameList;
 };
 
-var eventTarget = [
+Blockly.Procedures.eventTarget = [
 	'onload',
 	'onunload',
 	'onresize',
@@ -295,20 +295,21 @@ var eventTarget = [
 	'onreset',
 	
 	'onfocus',
-	'onblur',
+	'onblur'
 ];
 
-function searchEventFunctions( element, funcNameList ){
+Blockly.Procedures.searchEventFunctions = function( element, funcNameList ){
 	if( element.nodeType == 3 || element.nodeType == 8){ // skip Text & Comment node
 		return;
 	}
-	for ( var i=0 ; i < eventTarget.length ; i++ ) {
-		if (element.getAttribute(eventTarget[i]) != null) {
-			funcNameList.push(element.getAttribute(eventTarget[i]));
+	for ( var i=0 ; i < Blockly.Procedures.eventTarget.length ; i++ ) {
+		var func = element.getAttribute( Blockly.Procedures.eventTarget[i] );
+		if ( func && funcNameList.indexOf(func)==-1 ) {
+			funcNameList.push(func);
 		}
 	}
 	for( var i=0 ; i < element.childNodes.length ; i++ ){
-		searchEventFunctions( element.childNodes[i], funcNameList );
+		Blockly.Procedures.searchEventFunctions( element.childNodes[i], funcNameList );
 	}
 }
 
