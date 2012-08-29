@@ -167,7 +167,9 @@ function trimStringForFileName(s) {
 }
 
 function initializeHTMLEditor() {
+
     var delay;
+    
     HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html_textarea'), {
         mode: 'text/html',
         theme: 'default',
@@ -189,13 +191,15 @@ function initializeHTMLEditor() {
             HTMLEditor.clearMarks();
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
+            updateHTMLToolBar();
         },
         onCursorActivity: function() {
             HTMLEditor.setLineClass(hlLine, null, null);
             hlLine = HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, 'CodeMirror-activeline');
         }
     });
-    HTMLEditor.setSize('50%', '480');
+    
+    HTMLEditor.setSize('50%', '502px');
     var hlLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
 }
 
@@ -293,6 +297,28 @@ function parseHTML2DOM(dialog) {
     return parser.parseFromString(xml, 'text/xml');
 }
 
+function redoHTMLEdit() {
+    HTMLEditor.redo();
+}
+
+function undoHTMLEdit() {
+    HTMLEditor.undo();
+}
+
+function updateHTMLToolBar() {
+    var history = HTMLEditor.historySize();
+    if (history['undo'] > 0) {
+        $('#undo_button').removeClass('inactive');
+    } else {
+        $('#undo_button').addClass('inactive');
+    }
+    if (history['redo'] > 0) {
+        $('#redo_button').removeClass('inactive');
+    } else {
+        $('#redo_button').addClass('inactive');
+    }
+}
+
 function getAllCode(dialog) {
     var doc = parseHTML2DOM(dialog);
     if (doc == null) {
@@ -337,7 +363,7 @@ function clearMarks() {
     HTMLEditor.clearMarks();
 }
 
-function autoFormat() {
+function autoFormatHTML() {
     var cursor = HTMLEditor.getCursor(true);
     CodeMirror.commands['selectAll'](HTMLEditor);
     var range = {
@@ -374,15 +400,6 @@ function initializeJavaScriptPreview() {
     
     //独自拡張で個別にclass指定
     JavaScriptPreview.addClass('eclipse-jspreview');
-}
-
-function updateJavaScriptPreview() {
-    var code = Blockly.Generator.workspaceToCode('JavaScript')
-    JavaScriptPreview.setValue(code);
-    if (previousCode != null) {
-        diff(previousCode, code);
-    }
-    previousCode = code;
 }
 
 function load() {
@@ -470,6 +487,16 @@ function getUserEnv() {
 /**************************************************
  * 以下OK
  **************************************************/
+//OK
+function updateJavaScriptPreview() {
+    var code = Blockly.Generator.workspaceToCode('JavaScript')
+    JavaScriptPreview.setValue(code);
+    if (previousCode != null) {
+        diff(previousCode, code);
+    }
+    previousCode = code;
+}
+
 //OK
 function backupBlocks() {
     if ('localStorage' in window) {
@@ -589,6 +616,19 @@ function backupHTML() {
     if ('localStorage' in window) {
         window.localStorage.setItem('cauliflower_html', getHTMLCode());
     }
+}
+
+//OK
+function loadHTMLTemplateConfirm() {
+    var title = '編集中のHTMLが削除されます';
+    var message = '編集中のHTMLを削除し、HTMLテンプレートを読み込んでよろしいですか？';
+    showConfirmDialog(title, message, function() {
+        discardHTML();
+        var o = $.get('html_template.txt', function() {
+            HTMLEditor.setValue(o.responseText);
+        });
+        $(this).dialog('close');
+    });
 }
 
 //OK

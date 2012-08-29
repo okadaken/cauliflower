@@ -127,6 +127,39 @@
       .ui-button {
           font-size: 13px;
       }
+      
+      #html-toolbar {
+          border-top: 1px solid #ccc;
+          border-left: 1px solid #ccc;
+          border-right: 1px solid #ccc;
+          border-bottom: 0px solid #ccc;
+          background: #eee;
+          width: 50%;
+          float: left;
+      }
+      
+      .html-toolbar-button {
+          display: block;
+          float: left;
+          line-height: 0;
+          margin: 1px;
+          border: 1px solid #eee;
+          padding: 3px;
+      }
+      
+      .html-toolbar-button img {
+          line-height: 0;
+      }
+      
+      .html-toolbar-button:hover {
+          border: 1px solid #ccc;
+      }
+      
+      .html-toolbar-button.inactive {
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+          filter: alpha(opacity = 50);
+          opacity: .5;
+      }
     </style>
     <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
     <script type="text/javascript" id="userScript"></script>
@@ -139,11 +172,19 @@
         Cauliflower v0.1
       </span>
       <span>
-        <button id="new_button">新規</button>
-        <button id="load_button">開く</button>
-        <button id="save_button">保存</button>
+        <button id="new_button">
+          新規
+        </button>
+        <button id="load_button">
+          開く
+        </button>
+        <button id="save_button">
+          保存
+        </button>
       </span>
-      <button id="exec_button">実行</button>
+      <button id="exec_button">
+        実行
+      </button>
       <input id="load" type="file">
     </div>
     <div id="tabs">
@@ -160,10 +201,20 @@
         </div>
       </div>
       <div id="tab-html">
-        <textarea id="html_textarea"></textarea>
-        <div style="margin-bottom:10px;">
-          <a href="javascript:loadHTMLTemplate();">ボタンにする予定：テンプレート読込</a>｜<a href="javascript:discardHTML();">テスト用：localstrage初期化</a>｜<a href="javascript:autoFormat();">テスト用：オートフォーマット</a>
-        </div>
+        <div id="html-toolbar">
+          <button id="template_button" class="html-toolbar-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm()">
+            <img src="img/silk/page_white_code.png">
+          </button>
+          <button id="undo_button" class="html-toolbar-button" title="元に戻す" onclick="undoHTMLEdit()">
+            <img src="img/silk/arrow_undo.png">
+          </button>
+          <button id="redo_button" class="html-toolbar-button" title="やり直し" onclick="redoHTMLEdit()">
+            <img src="img/silk/arrow_redo.png">
+          </button>
+          <button id="format_button" class="html-toolbar-button" title="自動フォーマット" onclick="autoFormatHTML()">
+            <img src="img/silk/text_indent.png">
+          </button>
+        </div><textarea id="html_textarea"></textarea>
         <iframe id="html_preview"></iframe>
       </div>
     </div>
