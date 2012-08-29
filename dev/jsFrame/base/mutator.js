@@ -64,13 +64,13 @@ Blockly.Mutator.prototype.iconY_ = null;
  * In RTL mode the initial value is negated.
  * @private
  */
-Blockly.Mutator.prototype.relativeLeft_ = -180;
+Blockly.Mutator.prototype.relativeLeft_ = 30;
 
 /**
  * Relative Y coordinate of bubble with respect to the icon's centre.
  * @private
  */
-Blockly.Mutator.prototype.relativeTop_ = -230;
+Blockly.Mutator.prototype.relativeTop_ = -150;
 
 /**
  * Is the mutator always visible?
