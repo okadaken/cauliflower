@@ -581,7 +581,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       callback: function() {
         Blockly.playAudio('delete');
         block.destroy(true);
-        window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        window.parent.updateJavaScriptPreview();
       }
     };
     options.push(deleteOption);

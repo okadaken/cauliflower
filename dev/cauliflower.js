@@ -7,7 +7,6 @@
  * TODO:License書く
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
- * jquery minに変更
  * 例題ボタン
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
@@ -18,10 +17,7 @@
  * ブラウザチェックを入れる
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
  * HTMLのタブはプレビューとHTMLタグリファレンスにする
- * JavaScriptのコードが長くなると、左に大きくなるのを直す。たぶん%指定が原因。
- * CodeMirrorの全部のデモチェックをすること
  * ブラウザの対応状況のまとめをREADMEに書くこと
- * 横長画面のテストをしてみること
  * 重要：エラーハンドリング全部書き直す！！！
  * 新規Windowを開くをJqueryへ
  * 中心のテスト（chromeで上下ずれる）
@@ -98,9 +94,9 @@ function initializeTabs() {
                         HTMLEditor.focus();
                         break;
                     case 'tab-javascript':
-                        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
-                        Blockly.mainWorkspace.render();
+                        updateJavaScriptPreview();
                         Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
+                        Blockly.mainWorkspace.render();
                         break;
                 }
             }
@@ -373,14 +369,15 @@ function initializeJavaScriptPreview() {
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize('400px', '530px');
+    JavaScriptPreview.setSize('465px', '530px');
     
     
     //独自拡張で個別にclass指定
     JavaScriptPreview.addClass('eclipse-jspreview');
 }
 
-function updateJavaScriptPreview(code) {
+function updateJavaScriptPreview() {
+    var code = Blockly.Generator.workspaceToCode('JavaScript')
     JavaScriptPreview.setValue(code);
     if (previousCode != null) {
         diff(previousCode, code);
@@ -415,7 +412,7 @@ function load() {
             blockxml.appendChild(blocks[0]);
         }
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blockxml);
-        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        updateJavaScriptPreview();
         Blockly.mainWorkspace.render();
         Blockly.Toolbox.redraw();
         $('#load').val('');
@@ -486,7 +483,7 @@ function restoreBlocks() {
     if ('localStorage' in window && window.localStorage.cauliflower_blocks) {
         var xml = Blockly.Xml.textToDom(window.localStorage.cauliflower_blocks);
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-        updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+        updateJavaScriptPreview();
         Blockly.mainWorkspace.render();//Chromeだと再描画されないので入れてある
     }
 }
@@ -495,7 +492,7 @@ function restoreBlocks() {
 function discardBlocks() {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
     if (count > 0) {
-        showConfirmDialog('削除の確認', '全て（計' + count + '個）のブロックを削除しますか？', function() {
+        showConfirmDialog('削除の確認', '計' + count + '個のブロックを削除しますか？', function() {
             clearBlocklyWorkspace();
             $(this).dialog('close');
         });
@@ -507,7 +504,7 @@ function discardBlocks() {
 function clearBlocklyWorkspace() {
     Blockly.mainWorkspace.clear();
     Blockly.mainWorkspace.render();
-    updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+    updateJavaScriptPreview();
     if ('localStorage' in window) {
         window.localStorage.removeItem('cauliflower_blocks');
     }

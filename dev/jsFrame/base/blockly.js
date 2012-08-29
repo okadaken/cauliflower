@@ -315,7 +315,7 @@ Blockly.onKeyDown_ = function(e) {
       Blockly.hideChaff();
       Blockly.playAudio('delete');
       Blockly.selected.destroy(true);
-      window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+      window.parent.updateJavaScriptPreview();
     }
     // Stop the browser from going back to the previous page.
     e.preventDefault();
@@ -555,6 +555,6 @@ Blockly.cssLoaded = function() {
 
 Blockly.updateJavascript = function(){
 
-	window.parent.updateJavaScriptPreview(Blockly.Generator.workspaceToCode('JavaScript'));
+	window.parent.updateJavaScriptPreview();
 
 }
