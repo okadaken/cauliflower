@@ -323,18 +323,16 @@ function removeBrackets( funcList ){
 }
 
 Blockly.Procedures.dropdownCreate = function( initValue ) {
+
   var funcList = Blockly.Procedures.allEventFunctions();
   removeBrackets( funcList );
+  funcList.sort(Blockly.caseInsensitiveComparator);
   
-  var name = initValue;
-  
-  if (name && funcList.indexOf(name) == -1) {
-    funcList.push(name);
+  if (name && funcList.indexOf(initValue) == -1) {
+    funcList.unshift(initValue);
   }
   
-  funcList.sort(Blockly.caseInsensitiveComparator);
   funcList.push(Blockly.MSG_RENAME_PROCEDURE);
-  funcList.push(Blockly.MSG_NEW_PROCEDURE);
 
   var options = [];
   for (var x = 0; x < funcList.length; x++) {
@@ -358,16 +356,8 @@ Blockly.Procedures.dropdownChange = function(text) {
     if (text) {
       Blockly.Procedures.renameProcedure(oldVar, text);
     }
-  } else {
-    if (text == Blockly.MSG_NEW_PROCEDURE) {
-      text = promptName(Blockly.MSG_NEW_PROCEDURE_TITLE, '');
-      // Since variables are case-insensitive, ensure that if the new variable
-      // matches with an existing variable, the new case prevails throughout.
-      Blockly.Procedures.renameProcedure(text, text);
-    }
-    if (text) {
-      this.setText(text);
-    }
+  } else if( text ){
+	this.setText(text);
   }
   window.setTimeout(Blockly.Procedures.refreshFlyoutCategory, 1);
 };

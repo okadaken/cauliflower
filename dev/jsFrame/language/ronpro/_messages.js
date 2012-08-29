@@ -29,8 +29,8 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 
 Blockly.MSG_NEW_PROCEDURE = 'New procedure...';
 Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';
-Blockly.MSG_RENAME_PROCEDURE = 'Rename procedure...';
-Blockly.MSG_RENAME_PROCEDURE_TITLE = 'Rename all "%1" procedure to:';
+Blockly.MSG_RENAME_PROCEDURE = '関数名を入力して変更する';
+Blockly.MSG_RENAME_PROCEDURE_TITLE = '関数名"%1"を変更する:';
 
 // Toolbox.
 Blockly.MSG_VARIABLE_CATEGORY = '変数';
