@@ -355,7 +355,7 @@ Blockly.Procedures.dropdownChange = function(text) {
     text = promptName(Blockly.MSG_RENAME_PROCEDURE_TITLE.replace('%1', oldVar),
                       oldVar);
     if (text) {
-      Blockly.Procedures.renameProcedure(oldVar, text);
+	  this.sourceBlock_.renameProcedure(oldVar, text);
 	  this.initValue = text;
     }
   } else if( text ){
