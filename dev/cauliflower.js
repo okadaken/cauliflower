@@ -637,6 +637,10 @@ function createXML() {
     
     var serializer = new XMLSerializer();
     var xml = serializer.serializeToString(root);
+    
+    //Firefoxでxmlns属性が付与されると引数付き関数が復元できない
+    xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
+    
     return formatXML(xml);
 }
 
