@@ -56,9 +56,9 @@
             chars = true;
             
             // Skip doctype
-            if (html.indexOf("<!DOCTYPE html>" == 0)) {
+            /*if (html.indexOf("<!DOCTYPE html>" == 0)) {
                 html = html.replace("<!DOCTYPE html>", "");
-            }
+            }*/
             
             // Make sure we're not in a script or style element
             if (!stack.last() || !special[stack.last()]) {
