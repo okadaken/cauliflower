@@ -11,6 +11,7 @@
     <!-- for codemirror -->
     <link rel=stylesheet href="codemirror/lib/codemirror.css">
     <link rel=stylesheet href="codemirror/theme/eclipse-jspreview.css">
+    <link rel=stylesheet href="codemirror/theme/html-editor.css">
     <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
     <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
@@ -231,6 +232,12 @@
           </a>
           <a id="redo_button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
             <img border="0" src="img/silk/arrow_redo.png">
+          </a>
+          <a id="large_font_button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
+            <img border="0" src="img/silk/font_add.png">
+          </a>
+          <a id="small_font_button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
+            <img border="0" src="img/silk/font_delete.png">
           </a>
           <a id="format_button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
             <img border="0" src="img/silk/text_indent.png">

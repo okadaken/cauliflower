@@ -23,7 +23,6 @@
  * 新規Windowを開くをJqueryへ
  * 中心のテスト（chromeで上下ずれる）
  * jqueryアップデートしたいかも
- * HTMLエディタのフォントを少し大きくする
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -206,7 +205,10 @@ function initializeHTMLEditor() {
     });
     
     HTMLEditor.setSize('50%', '502px');
+    HTMLEditor.addClass('html-editor'); //独自拡張で個別にclass指定
     var hlLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
+    
+    
 }
 
 function showConfirmDialog(title, message, func) {
@@ -478,6 +480,22 @@ function getUserEnv() {
 /**************************************************
  * 以下OK
  **************************************************/
+//OK
+function setHTMLEditorFontLarger() {
+    changeHTMLEditorFontSize(1);
+}
+
+//OK
+function setHTMLEditorFontSmaller() {
+    changeHTMLEditorFontSize(-1);
+}
+
+//OK
+function changeHTMLEditorFontSize(increment) {
+    var current = parseInt($('.html-editor').css('font-size').replace('px', ''));
+    $('.html-editor').css('font-size', (current + increment) + 'px');
+}
+
 //OK
 function getHTMLCode() {
     return HTMLEditor.getValue();
