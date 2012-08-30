@@ -128,37 +128,50 @@
           font-size: 13px;
       }
       
-      #html-toolbar {
+      .html-button-frame {
           border-top: 1px solid #ccc;
           border-left: 1px solid #ccc;
           border-right: 1px solid #ccc;
-          border-bottom: 0px solid #ccc;
           background: #eee;
+          position: relative;
           width: 50%;
-          float: left;
       }
       
-      .html-toolbar-button {
+      .html-button {
           display: block;
           float: left;
+          padding: 3px;
           line-height: 0;
           margin: 1px;
-          border: 1px solid #eee;
-          padding: 3px;
+          margin-right: 0px;
       }
       
-      .html-toolbar-button img {
-          line-height: 0;
-      }
-      
-      .html-toolbar-button:hover {
+      .html-button:hover {
+          padding: 2px;
           border: 1px solid #ccc;
       }
       
-      .html-toolbar-button.inactive {
+      .html-button img {
+          line-height: 0;
+      }
+      
+      .html-button.inactive {
           -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
           filter: alpha(opacity = 50);
           opacity: .5;
+      }
+      
+      .html-clearfix:after {
+          visibility: hidden;
+          display: block;
+          font-size: 0;
+          content: "\0020";
+          clear: both;
+          height: 0;
+      }
+      
+      .html-clearfix {
+          display: block;
       }
     </style>
     <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
@@ -189,8 +202,16 @@
     </div>
     <div id="tabs">
       <ul>
-        <li><a href="#tab-html">HTML編集</a></li>
-        <li><a href="#tab-javascript">JavaScript編集</a></li>
+        <li>
+          <a href="#tab-html">
+            HTML編集
+          </a>
+        </li>
+        <li>
+          <a href="#tab-javascript">
+            JavaScript編集
+          </a>
+        </li>
       </ul>
       <div id="tab-javascript">
         <div id="blockly_frame_div">
@@ -201,19 +222,19 @@
         </div>
       </div>
       <div id="tab-html">
-        <div id="html-toolbar">
-          <button id="template_button" class="html-toolbar-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm()">
-            <img src="img/silk/page_white_code.png">
-          </button>
-          <button id="undo_button" class="html-toolbar-button" title="元に戻す" onclick="undoHTMLEdit()">
-            <img src="img/silk/arrow_undo.png">
-          </button>
-          <button id="redo_button" class="html-toolbar-button" title="やり直し" onclick="redoHTMLEdit()">
-            <img src="img/silk/arrow_redo.png">
-          </button>
-          <button id="format_button" class="html-toolbar-button" title="自動フォーマット" onclick="autoFormatHTML()">
-            <img src="img/silk/text_indent.png">
-          </button>
+        <div id="html-toolbar" class="html-clearfix html-button-frame">
+          <a id="template_button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
+            <img border="0" src="img/silk/page_white_code.png">
+          </a>
+          <a id="undo_button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
+            <img border="0" src="img/silk/arrow_undo.png">
+          </a>
+          <a id="redo_button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
+            <img border="0" src="img/silk/arrow_redo.png">
+          </a>
+          <a id="format_button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
+            <img border="0" src="img/silk/text_indent.png">
+          </a>
         </div><textarea id="html_textarea"></textarea>
         <iframe id="html_preview"></iframe>
       </div>

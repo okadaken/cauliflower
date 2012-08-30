@@ -8,6 +8,7 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
+ * HTMLパースエラーがあるときにも強引に編集できるようにする
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 重要！！！Firefoxのワークスペースの右クリックメニューの位置がおかしい（Firefoxのみ発生する現象）
@@ -21,13 +22,15 @@
  * 重要：エラーハンドリング全部書き直す！！！
  * 新規Windowを開くをJqueryへ
  * 中心のテスト（chromeで上下ずれる）
+ * jqueryアップデートしたいかも
+ * HTMLエディタのフォントを少し大きくする
  */
 var HTMLEditor;
 var JavaScriptPreview;
 
 var errorLine;
 var previousCode;
-
+var hasDoctype;
 var previewWindow;
 
 function initializeBlocklyFrame(blockly) {
@@ -68,11 +71,6 @@ $(window).unload(function() {
     backupHTML();
 });
 
-function resetHTMLEditUndoState() {
-    HTMLEditor.clearHistory();
-    updateHTMLToolBar();
-}
-
 function initializeTabs() {
     $('#tabs').tabs({
         cookie: {
@@ -102,8 +100,8 @@ function initializeTabs() {
                         break;
                     case 'tab-javascript':
                         updateJavaScriptPreview();
-                        Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
                         Blockly.mainWorkspace.render();
+                        Blockly.Toolbox.redraw();//Firefox、Safariではタブ切り替え時に強制再描画が必要
                         break;
                 }
             }
@@ -184,8 +182,9 @@ function initializeHTMLEditor() {
         lineNumbers: true,
         fixedGutter: true,
         electricChars: true,
-        closeTagIndent: false,
+        closeTagIndent: true,
         autofocus: true,
+        tabSize: 2,
         extraKeys: {
             "'>'": function(cm) {
                 cm.closeTag(cm, '>');
@@ -255,13 +254,10 @@ function initializeDialogs() {
         modal: true,
         draggable: false,
         resizable: false,
-        show: 'drop',
-        hide: 'drop'
+        show: 'clip',
+        hide: 'clip'
     });
-}
-
-function getHTMLCode() {
-    return HTMLEditor.getValue();
+    //show/clip/explode/blind/bounce/drop/fold/slide
 }
 
 //Blocklyがreference errorになる場合があるのをチェック
@@ -278,6 +274,12 @@ function parseHTML2DOM(dialog) {
     //前処理としてHTMLをXMLに変換
     try {
         var xml = HTMLtoXML(getHTMLCode());
+        if (xml.indexOf('<doctype html="">') != -1) {
+            hasDoctype = true;
+            xml = xml.replace('<doctype html="">', '').replace('</doctype>', '');
+        } else {
+            hasDoctype = false;
+        }
     } catch (e) {//変換できなければエラー表示して終了
         if (dialog) {
             errorLine = e.split('\n');
@@ -302,14 +304,6 @@ function parseHTML2DOM(dialog) {
     //DOMにパース
     var parser = new DOMParser();
     return parser.parseFromString(xml, 'text/xml');
-}
-
-function redoHTMLEdit() {
-    HTMLEditor.redo();
-}
-
-function undoHTMLEdit() {
-    HTMLEditor.undo();
 }
 
 function updateHTMLToolBar() {
@@ -370,17 +364,7 @@ function clearMarks() {
     HTMLEditor.clearMarks();
 }
 
-function autoFormatHTML() {
-    var cursor = HTMLEditor.getCursor(true);
-    CodeMirror.commands['selectAll'](HTMLEditor);
-    var range = {
-        from: HTMLEditor.getCursor(true),
-        to: HTMLEditor.getCursor(false)
-    };
-    HTMLEditor.autoFormatRange(range.from, range.to);
-    HTMLEditor.setCursor(cursor);
-    HTMLEditor.focus();
-}
+
 
 function openPreviewWindow() {
     //事前にチェック（やり方考えること）
@@ -495,6 +479,40 @@ function getUserEnv() {
  * 以下OK
  **************************************************/
 //OK
+function getHTMLCode() {
+    return HTMLEditor.getValue();
+}
+
+//OK
+function autoFormatHTML() {
+    var cursor = HTMLEditor.getCursor(true);
+    CodeMirror.commands['selectAll'](HTMLEditor);
+    var range = {
+        from: HTMLEditor.getCursor(true),
+        to: HTMLEditor.getCursor(false)
+    };
+    HTMLEditor.autoFormatRange(range.from, range.to);
+    HTMLEditor.setCursor(cursor);
+    HTMLEditor.focus();
+}
+
+//OK
+function resetHTMLEditUndoState() {
+    HTMLEditor.clearHistory();
+    updateHTMLToolBar();
+}
+
+//OK
+function redoHTMLEdit() {
+    HTMLEditor.redo();
+}
+
+//OK
+function undoHTMLEdit() {
+    HTMLEditor.undo();
+}
+
+//OK
 function updateJavaScriptPreview() {
     var code = Blockly.Generator.workspaceToCode('JavaScript')
     JavaScriptPreview.setValue(code);
@@ -526,7 +544,9 @@ function restoreBlocks() {
 function discardBlocks() {
     var count = Blockly.mainWorkspace.getAllBlocks().length;
     if (count > 0) {
-        showConfirmDialog('削除の確認', '計' + count + '個のブロックを削除しますか？', function() {
+        var title = '削除の確認';
+        var message = '計' + count + '個のブロックを削除しますか？';
+        showConfirmDialog(title, message, function() {
             clearBlocklyWorkspace();
             $(this).dialog('close');
         });
@@ -682,7 +702,7 @@ function createXML() {
     var serializer = new XMLSerializer();
     var xml = serializer.serializeToString(root);
     
-    //Firefoxでxmlns属性が付与されると引数付き関数が復元できない
+    //Firefoxでxmlns属性が付与されると引数付き関数が復元できないため除去
     xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
     
     return formatXML(xml);

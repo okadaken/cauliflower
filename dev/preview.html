@@ -13,6 +13,11 @@
           try {
               console.log('load');
               var html = window.opener.getAllCode(true);
+              if (window.opener.hasDoctype) {
+                  //alert('<!DOCTYPE html>\n' + html);
+              }else{
+                  //alert(html);
+              }
               var doc = window.opener.parseHTML2DOM(false);
               if (doc != null) {
                   var titles = doc.getElementsByTagName('title');
