@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>ページタイトルを書きます</title>
-</head>
-<body>
-  <!-- ここにHTMLを書きます -->
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ページタイトル</title>
+  </head>
+  <body>
+    <!-- ここにHTMLを書きます -->
+  </body>
 </html>
