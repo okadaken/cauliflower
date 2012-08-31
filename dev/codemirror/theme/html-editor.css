@@ -1,3 +1,6 @@
+
+
+
 .cm-s-html-editor span.cm-keyword {color: #708;}
 .cm-s-html-editor span.cm-atom {color: #219;}
 .cm-s-html-editor span.cm-number {color: #164;}
@@ -30,6 +33,12 @@
 .cm-s-html-editor div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
 .cm-s-html-editor div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 
-.html-editor {
+.cm-s-html-editor CodeMirror-scroll {height:600px;}
+
+.html-editor{
   font-size: 15px;
+}
+
+element.style {
+  height: 550px;
 }
