@@ -8,6 +8,9 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
+ * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
+ * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
+ * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）
  * HTMLパースエラーがあるときにも強引に編集できるようにする
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
@@ -23,6 +26,7 @@
  * 新規Windowを開くをJqueryへ
  * 中心のテスト（chromeで上下ずれる）
  * jqueryアップデートしたいかも
+ * ダイアログ表示関数にボタンとfunctionのセットを渡すように変更する
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -109,11 +113,15 @@ function initializeTabs() {
 }
 
 function validateHTML() {
+
     var doc = parseHTML2DOM(true);
     
     if (doc.getElementsByTagName('parsererror').length != 0) {
+        if (doc.getElementsByTagName('sourcetext').length != 0) {
+            var sourcetext = doc.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue;
+        }
         //        throw doc.getElementsByTagName('parsererror')[0].childNodes[0].nodeValue;
-        throw 'HTMLが見つかりません';
+        throw sourcetext + 'HTMLが見つかりません';
     }
     if (doc.getElementsByTagName('html').length == 0) {
         throw 'htmlタグが見つかりません';
@@ -176,7 +184,7 @@ function initializeHTMLEditor() {
     
     HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html_textarea'), {
         mode: 'text/html',
-        theme: 'default',
+        theme: 'html-editor',
         tabMode: 'indent',
         lineNumbers: true,
         fixedGutter: true,
@@ -193,10 +201,13 @@ function initializeHTMLEditor() {
             }
         },
         onChange: function() {
+            // var html = getHTMLCode();
+            // if(html.charAt(html.length-1)!=)
             HTMLEditor.clearMarks();
             clearTimeout(delay);
             delay = setTimeout(updatePreview, 300);
             updateHTMLToolBar();
+            
         },
         onCursorActivity: function() {
             HTMLEditor.setLineClass(hlLine, null, null);
@@ -271,14 +282,22 @@ function getJavaScriptCode() {
     return code;
 }
 
+//fortest
+function debugdom(dom) {
+    var serializer = new XMLSerializer();
+    var code = serializer.serializeToString(dom);
+    console.log(code);
+}
+
 //ここで再度throwするように変更せよ
 function parseHTML2DOM(dialog) {
     //前処理としてHTMLをXMLに変換
     try {
         var xml = HTMLtoXML(getHTMLCode());
-        if (xml.indexOf('<doctype html="">') != -1) {
+        if (xml.indexOf('<doctype') != -1) {
             hasDoctype = true;
-            xml = xml.replace('<doctype html="">', '').replace('</doctype>', '');
+            xml = xml.replace(/<doctype.*?>/, '').replace('</doctype>', '');
+            xml = xml.trim();
         } else {
             hasDoctype = false;
         }
@@ -305,7 +324,13 @@ function parseHTML2DOM(dialog) {
     
     //DOMにパース
     var parser = new DOMParser();
-    return parser.parseFromString(xml, 'text/xml');
+    try {
+        var dom = parser.parseFromString(xml, 'text/xml');
+    } catch (e) {
+        alert(e);
+    }
+    //debugdom(dom);
+    return dom;
 }
 
 function updateHTMLToolBar() {
@@ -331,7 +356,7 @@ function getAllCode(dialog) {
     //JavaScriptタグとコードのノードを生成
     var js = doc.createElement('script');
     js.setAttribute('type', 'text/javascript');
-    js.appendChild(doc.createTextNode('\n'));
+    js.appendChild(doc.createTextNode('\nconsole.log("hoge");'));
     js.appendChild(doc.createComment(getJavaScriptCode()));
     js.appendChild(doc.createTextNode('\n'));
     
@@ -342,7 +367,7 @@ function getAllCode(dialog) {
         body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
         var serializer = new XMLSerializer();
         var code = serializer.serializeToString(doc);
-        return code;//TODO:最後に行頭のDOCTYPEを追加すること
+        return code;//TODO:最後に行頭のDOCTYPEを追加すること hasDoctypeを調べる
         //console.log( serializer.serializeToString(body)); 
     } else {
         throw 'bodyタグが見つかりません';//TODO:dialogにすること,previewからの呼び出し時に対応すること
@@ -366,13 +391,11 @@ function clearMarks() {
     HTMLEditor.clearMarks();
 }
 
-
-
 function openPreviewWindow() {
     //事前にチェック（やり方考えること）
     //TODO:bodyタグが見つからなったときのエラー処理をしていないので追加すること
     if (parseHTML2DOM(true) != null) {
-        previewWindow = window.open('preview.html', 'previewWindow', 'width=600,height=600,top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 600) / 2));
+        previewWindow = window.open('preview.html', 'previewWindow', ', scrollbars=yes,width=600,height=600,top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 600) / 2));
         previewWindow.focus();
         
     }
@@ -483,11 +506,13 @@ function getUserEnv() {
 //OK
 function setHTMLEditorFontLarger() {
     changeHTMLEditorFontSize(1);
+    HTMLEditor.refresh();
 }
 
 //OK
 function setHTMLEditorFontSmaller() {
     changeHTMLEditorFontSize(-1);
+    HTMLEditor.refresh();
 }
 
 //OK
@@ -720,7 +745,7 @@ function createXML() {
     var serializer = new XMLSerializer();
     var xml = serializer.serializeToString(root);
     
-    //Firefoxでxmlns属性が付与されると引数付き関数が復元できないため除去
+    //FirefoxでXMLにxmlns属性が付与されると引数付き関数が復元できないため除去
     xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
     
     return formatXML(xml);
