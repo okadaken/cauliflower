@@ -79,12 +79,14 @@
       }
       
       #html_preview {
-          width: 40%;
-          position: absolute;
-          top: 50px;
-          right: 20px;
-          height: 300px;
-          border: 1px solid black;
+          width: 100%;
+          height: 460px;
+          /*
+           position: absolute;
+           /*top: 50px;
+           right: 20px;
+           height: 300px;*/
+          border: 1px solid #d4d4d4;
       }
       
       #tab-javascript {
@@ -107,6 +109,22 @@
       #blockly_text_div {
           margin-left: 60%;
           padding-left: 15px;
+      }
+      
+      /*sub tab*/
+      #html-editor_div {
+          float: left;
+          position: absolute;
+          width: 99%;
+      }
+      
+      #tab-htmlsub {
+          margin-left: 53%;
+          height: 523px;
+      }
+      
+      .ui-tabs #tab-htmlsub {
+          font-size: 12px;
       }
       
       .title {
@@ -174,6 +192,10 @@
       .html-clearfix {
           display: block;
       }
+      
+      #tab-htmlsub-ref-contents .ui-accordion-content {
+          height: 200px;
+      }
     </style>
     <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
     <script type="text/javascript" id="userScript"></script>
@@ -223,35 +245,149 @@
         </div>
       </div>
       <div id="tab-html">
-        <div id="html-toolbar" class="html-clearfix html-button-frame">
-          <a id="template_button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
-            <img border="0" src="img/silk/html.png">
-          </a>
-          <a id="undo_button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
-            <img border="0" src="img/silk/arrow_undo.png">
-          </a>
-          <a id="redo_button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
-            <img border="0" src="img/silk/arrow_redo.png">
-          </a>
-          <a id="large_font_button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
-            <img border="0" src="img/silk/font_add.png">
-          </a>
-          <a id="small_font_button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
-            <img border="0" src="img/silk/font_delete.png">
-          </a>
-          <a id="format_button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
-            <img border="0" src="img/silk/text_indent.png">
-          </a>
+        <div id="html-editor_div">
+          <div id="html-toolbar" class="html-clearfix html-button-frame">
+            <a id="template_button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
+              <img border="0" src="img/silk/html.png">
+            </a>
+            <a id="undo_button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
+              <img border="0" src="img/silk/arrow_undo.png">
+            </a>
+            <a id="redo_button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
+              <img border="0" src="img/silk/arrow_redo.png">
+            </a>
+            <a id="large_font_button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
+              <img border="0" src="img/silk/font_add.png">
+            </a>
+            <a id="small_font_button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
+              <img border="0" src="img/silk/font_delete.png">
+            </a>
+            <a id="format_button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
+              <img border="0" src="img/silk/text_indent.png">
+            </a>
+          </div><textarea id="html_textarea"></textarea>
         </div>
-        <div style="300px">
-          <textarea id="html_textarea"></textarea>
+        <div id="tab-htmlsub">
+          <ul>
+            <li>
+              <a href="#tab-htmlsub-preview">
+                デザイン・プレビュー
+              </a>
+            </li>
+            <li>
+              <a href="#tab-htmlsub-ref">
+                タグ・レファレンス
+              </a>
+            </li>
+          </ul>
+          <div id="tab-htmlsub-preview">
+            <iframe id="html_preview"></iframe>
+          </div>
+          <div id="tab-htmlsub-ref">
+            <p>
+              とりあえず仮設置 目的別にタグと使用例を書けばよさそう
+            </p>
+            <div id="tab-htmlsub-ref-contents">
+              <h3>
+                <a href="#">
+                  Section 1
+                </a>
+              </h3>
+              <div>
+                <p>
+                  Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                  ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                  amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                </p>
+              </div>
+              <h3>
+                <a href="#">
+                  Section 2
+                </a>
+              </h3>
+              <div>
+                <p>
+                  Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                  purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                  velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                  suscipit faucibus urna.
+                </p>
+              </div>
+              <h3>
+                <a href="#">
+                  Section 3
+                </a>
+              </h3>
+              <div>
+                <p>
+                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                  Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                  ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                </p>
+                <ul>
+                  <li>List item one</li>
+                  <li>List item two</li>
+                  <li>List item three</li>
+                </ul>
+                <p>
+                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                  Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                  ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                </p>
+                <p>
+                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                  Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                  ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                </p>
+              </div>
+              <h3>
+                <a href="#">
+                  Section 4
+                </a>
+              </h3>
+              <div>
+                <p>
+                  Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                  et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                  faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                  mauris vel est.
+                </p>
+                <p>
+                  Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                  inceptos himenaeos.
+                </p>
+              </div>
+              <h3>
+                <a href="#">
+                  Section 5
+                </a>
+              </h3>
+              <div>
+                <p>
+                  Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                  et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                  faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                  mauris vel est.
+                </p>
+                <p>
+                  Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                  inceptos himenaeos.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <iframe id="html_preview"></iframe>
       </div>
-    </div>
-    <div id="dialog">
-      <img id="dialogicon">
-      <div id="dialog_message">
+      <div id="dialog">
+        <img id="dialogicon">
+        <div id="dialog_message">
+        </div>
       </div>
     </div>
   </body>

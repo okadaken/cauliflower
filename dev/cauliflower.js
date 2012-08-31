@@ -61,6 +61,12 @@ $(document).ready(function() {
     initializeHTMLEditor();
     initializeDialogs();
     
+    $('#tab-htmlsub-ref-contents').accordion({
+        collapsible: true,
+        autoHeight: false,
+        active: false
+    });
+    
     restoreHTML();
     resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
     HTMLEditor.refresh();
@@ -108,6 +114,12 @@ function initializeTabs() {
                         break;
                 }
             }
+        }
+    });
+    
+    $('#tab-htmlsub').tabs({
+        cookie: {
+            expires: 3 //選択タブをcookieで3日間保存
         }
     });
 }
@@ -378,7 +390,7 @@ function updatePreview() {
     var previewFrame = document.getElementById('html_preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
-    preview.write('<p>↓これはJavaScript統合前のHTMLなので動作しない（後で削除します）<br>ここにタグ辞典を入れるのがいいかも。</p>' + HTMLEditor.getValue());
+    preview.write(HTMLEditor.getValue());
     preview.close();
 }
 
