@@ -17,7 +17,7 @@
  * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 重要！！！Firefoxのワークスペースの右クリックメニューの位置がおかしい（Firefoxのみ発生する現象）
  * parseHTML2DOMのException変更
- * 実行プレビューにソース閲覧機能を追加すること
+ * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
  * ブラウザチェックを入れる
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
@@ -27,6 +27,7 @@
  * 中心のテスト（上下ずれる）
  * jqueryアップデートしたいかも
  * ダイアログ表示関数にボタンとfunctionのセットを渡すように変更する
+ * HTMLパーサーでがんばれば行番号と文字列数が取得できると思う
  */
 var HTMLEditor;
 var JavaScriptPreview;
@@ -72,7 +73,7 @@ $(document).ready(function() {
     resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
     HTMLEditor.refresh();
     
-    setTimeout(updatePreview, 300);
+    setTimeout(updateHTMLDesignPreview, 300);
     
     initializeJavaScriptPreview();
 });
@@ -144,26 +145,29 @@ function validateHTML() {
     }
 }
 
-function save() {
-    var data = {
-        filename: guessSaveFileName(),
-        contents: createXML()
-    };
+function saveToFile(properties) {
+    //Jquery化できるはず
     var form = document.createElement('form');
     form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
     form.setAttribute('method', 'post');
     form.style.display = 'none';
     document.body.appendChild(form);
-    // パラメタの設定
-    for (var paramName in data) {
+    for (var prop in properties) {
         var input = document.createElement('input');
         input.setAttribute('type', 'hidden');
-        input.setAttribute('name', paramName);
-        input.setAttribute('value', data[paramName]);
+        input.setAttribute('name', prop);
+        input.setAttribute('value', properties[prop]);
         form.appendChild(input);
     }
-    
     form.submit();
+}
+
+function save() {
+    var data = {
+        filename: guessSaveFileName(),
+        contents: createXML()
+    };
+    saveToFile(data);
 }
 
 function guessSaveFileName() {
@@ -187,9 +191,7 @@ function guessSaveFileName() {
     }
 }
 
-function trimStringForFileName(s) {
-    return s.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '');
-}
+
 
 function initializeHTMLEditor() {
 
@@ -218,7 +220,7 @@ function initializeHTMLEditor() {
             // if(html.charAt(html.length-1)!=)
             HTMLEditor.clearMarks();
             clearTimeout(delay);
-            delay = setTimeout(updatePreview, 300);
+            delay = setTimeout(updateHTMLDesignPreview, 300);
             updateHTMLToolBar();
             
         },
@@ -348,20 +350,6 @@ function parseHTML2DOM(dialog) {
     return dom;
 }
 
-function updateHTMLToolBar() {
-    var history = HTMLEditor.historySize();
-    if (history['undo'] > 0) {
-        $('#undo-button').removeClass('inactive');
-    } else {
-        $('#undo-button').addClass('inactive');
-    }
-    if (history['redo'] > 0) {
-        $('#redo-button').removeClass('inactive');
-    } else {
-        $('#redo-button').addClass('inactive');
-    }
-}
-
 function getAllCode(dialog) {
     var doc = parseHTML2DOM(dialog);
     if (doc == null) {
@@ -370,8 +358,8 @@ function getAllCode(dialog) {
     
     //JavaScriptタグとコードのノードを生成
     var js = doc.createElement('script');
+    js.appendChild(doc.createTextNode('\n'));
     js.setAttribute('type', 'text/javascript');
-    js.appendChild(doc.createTextNode('\nconsole.log("hoge");'));
     js.appendChild(doc.createComment(getJavaScriptCode()));
     js.appendChild(doc.createTextNode('\n'));
     
@@ -382,6 +370,10 @@ function getAllCode(dialog) {
         body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
         var serializer = new XMLSerializer();
         var code = serializer.serializeToString(doc);
+        
+        //titleが空で<title/>となるとbodyがレンダリングされない
+        code = code.replace('<title/>', '<title></title>');
+        
         return code;//TODO:最後に行頭のDOCTYPEを追加すること hasDoctypeを調べる
         //console.log( serializer.serializeToString(body)); 
     } else {
@@ -389,9 +381,9 @@ function getAllCode(dialog) {
     }
 }
 
-function updatePreview() {
+function updateHTMLDesignPreview() {
     //jqueryへ変更
-    var previewFrame = document.getElementById('html-preview');
+    var previewFrame = document.getElementById('html-design-preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
     preview.write(HTMLEditor.getValue());
@@ -413,7 +405,6 @@ function openPreviewWindow() {
     if (parseHTML2DOM(true) != null) {
         previewWindow = window.open('preview.html', 'previewWindow', ', scrollbars=yes,width=600,height=600,top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 600) / 2));
         previewWindow.focus();
-        
     }
 }
 
@@ -438,6 +429,10 @@ function initializeJavaScriptPreview() {
 function load() {
     var reader = new FileReader();//Safari5では実行不能
     var fileData = $('#load').get()[0].files[0];
+    
+    //onabort	abort	強制停止(abort()関数)で止めた時点
+    //onerror	error	リクエストがエラーだった（404とか）
+    //onloadend	loadend	リクエスト完了時（エラーでも成功でも関係なく、送信が完了した時点で呼ばれる）
     reader.onload = function(evt) {
         try {
             var parser = new DOMParser();
@@ -520,6 +515,30 @@ function getUserEnv() {
 /**************************************************
  * 以下OK
  **************************************************/
+//OK
+function updateHTMLToolBar() {
+    var history = HTMLEditor.historySize();
+    
+    //undo
+    if (history['undo'] > 0) {
+        $('#undo-button').removeClass('inactive');
+    } else {
+        $('#undo-button').addClass('inactive');
+    }
+    
+    //redo
+    if (history['redo'] > 0) {
+        $('#redo-button').removeClass('inactive');
+    } else {
+        $('#redo-button').addClass('inactive');
+    }
+}
+
+//OK
+function trimStringForFileName(s) {
+    return s.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '');
+}
+
 //OK
 function setHTMLEditorFontLarger() {
     changeHTMLEditorFontSize(1);

@@ -1,0 +1,38 @@
+
+
+
+.cm-s-html-preview span.cm-keyword {color: #708;}
+.cm-s-html-preview span.cm-atom {color: #219;}
+.cm-s-html-preview span.cm-number {color: #164;}
+.cm-s-html-preview span.cm-def {color: #00f;}
+.cm-s-html-preview span.cm-variable {color: black;}
+.cm-s-html-preview span.cm-variable-2 {color: #05a;}
+.cm-s-html-preview span.cm-variable-3 {color: #085;}
+.cm-s-html-preview span.cm-property {color: black;}
+.cm-s-html-preview span.cm-operator {color: black;}
+.cm-s-html-preview span.cm-comment {color: #a50;}
+.cm-s-html-preview span.cm-string {color: #a11;}
+.cm-s-html-preview span.cm-string-2 {color: #f50;}
+.cm-s-html-preview span.cm-meta {color: #555;}
+.cm-s-html-preview span.cm-error {color: #f00;}
+.cm-s-html-preview span.cm-qualifier {color: #555;}
+.cm-s-html-preview span.cm-builtin {color: #30a;}
+.cm-s-html-preview span.cm-bracket {color: #cc7;}
+.cm-s-html-preview span.cm-tag {color: #170;}
+.cm-s-html-preview span.cm-attribute {color: #00c;}
+.cm-s-html-preview span.cm-header {color: blue;}
+.cm-s-html-preview span.cm-quote {color: #090;}
+.cm-s-html-preview span.cm-hr {color: #999;}
+.cm-s-html-preview span.cm-link {color: #00c;}
+
+.cm-s-html-preview span.cm-header, span.cm-strong {font-weight: bold;}
+.cm-s-html-preview span.cm-em {font-style: italic;}
+.cm-s-html-preview span.cm-emstrong {font-style: italic; font-weight: bold;}
+.cm-s-html-preview span.cm-link {text-decoration: underline;}
+
+.cm-s-html-preview div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
+.cm-s-html-previewr div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
+
+.html-preview{
+    font-size: 13px;
+}

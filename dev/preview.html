@@ -1,28 +1,163 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cauliflower v0.1 - Preview</title>
-    <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css">
+    <title>Cauliflower - Preview Window</title>
+    <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
     <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css"/>
+    <link rel="stylesheet" href="codemirror/theme/html-preview.css"/>
+    <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
+    <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
+    <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
   </head>
+  <style type="text/css">
+    .CodeMirror {
+        border: 1px solid #d4d4d4;
+    }
+    
+    .ui-tabs-nav {
+        font-size: 13px;
+    }
+    
+    .ui-button {
+        font-size: 11px;
+    }
+    
+    #preview-menu {
+        margin: 5px;
+        text-align: right;
+    }
+    
+    #export-button {
+        text-align: right;
+    }
+    
+    #contents-preview {
+        width: 100%;
+        height: 465px;
+        border: 1px solid #d4d4d4;
+    }
+  </style>
   <body>
     <script>
-      $(document).ready(function() {
-          try {
-              var html = window.opener.getAllCode(true);
-              var doc = window.opener.parseHTML2DOM(false);
-              if (doc != null) {
-                  var titles = doc.getElementsByTagName('title');
-                  if (titles.length != 0) {
-                      $('title').text(titles[0].firstChild.nodeValue);
+      var SourcePreview;
+      
+      function initalizeExportButton() {
+          $('#export-button').button({
+              icons: {
+                  primary: 'ui-icon-circle-arrow-s'
+              }
+          }).click(function() {
+              saveToFileForPreviewWindow({
+                  filename: getExportFileName(),
+                  contents: window.opener.getAllCode(true)
+              });
+          });
+      }
+      
+      //親ウィンドウのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
+      function saveToFileForPreviewWindow(properties) {
+          //Jquery化できるはず
+          var form = document.createElement('form');
+          form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+          form.setAttribute('method', 'post');
+          form.style.display = 'none';
+          document.body.appendChild(form);
+          for (var prop in properties) {
+              var input = document.createElement('input');
+              input.setAttribute('type', 'hidden');
+              input.setAttribute('name', prop);
+              input.setAttribute('value', properties[prop]);
+              form.appendChild(input);
+          }
+          form.submit();
+      }
+      
+      function getExportFileName() {
+          var ext = '.html';
+          var defaultFileName = '新規HTMLファイル' + ext;
+          var pageTitle = getPageTitle();
+          if (pageTitle != null) {
+              return window.opener.trimStringForFileName(pageTitle + ext);
+          } else {
+              return defaultFileName;
+          }
+      }
+      
+      function getPageTitle() {
+          var doc = window.opener.parseHTML2DOM(false);
+          if (doc != null) {
+              var titles = doc.getElementsByTagName('title');
+              if (titles.length != 0 && titles[0].firstChild != null) {
+                  return titles[0].firstChild.nodeValue;
+              }
+          }
+          return null;
+      }
+      
+      function initalizeSourcePreview() {
+          //Jqueryのgetが使えるか検討
+          SourcePreview = CodeMirror.fromTextArea(document.getElementById('src-preview'), {
+              mode: 'htmlmixed',
+              theme: 'html-preview',
+              tabMode: 'indent',
+              lineNumbers: true,
+              fixedGutter: true,
+              electricChars: true,
+              readOnly: true
+          });
+          SourcePreview.setSize('100%', '465px');
+          
+          //独自拡張で個別にclass指定
+          SourcePreview.addClass('html-preview');
+      }
+      
+      function initalizePreviewWindowTabs() {
+          $('#tabs-preview').tabs({
+              cookie: {
+                  expires: 3 //選択タブをcookieで3日間保存
+              },
+              show: function(event, ui) {
+                  switch (ui.panel.id) {
+                      case 'tab-preview-src':
+                          if (SourcePreview != null) {
+                              SourcePreview.refresh();
+                          }
+                          break;
                   }
               }
+          });
+      }
+      
+      function updateHTMLPreview(code) {
+          var previewFrame = document.getElementById('contents-preview');
+          var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+          preview.open();
+          preview.write(code);
+          preview.close();
+      }
+      
+      $(document).ready(function() {
+          initalizePreviewWindowTabs();
+          initalizeExportButton();
+          initalizeSourcePreview();
+          
+          try {
+              var code = window.opener.getAllCode(true);
               
-              $('#preview_contents').html(html);
+              var pageTitle = getPageTitle();
+              if (pageTitle != null) {
+                  $('title').text(pageTitle);
+              }
+              
+              updateHTMLPreview(code);
+              SourcePreview.setValue(code);
           } catch (e) {
-              window.close();
+              //window.close();
               window.opener.alert(e);//dialogにすること
           }
           
@@ -36,7 +171,24 @@
            }*/
       });
     </script>
-    <div id="preview_contents">
+    <div id="preview-menu">
+      <button id="export-button" title="表示されている実行結果をHTMLファイルとして保存します">HTMLファイルへエクスポート</button>
+    </div>
+    <div id="tabs-preview">
+      <ul>
+        <li>
+          <a href="#tab-preview-preview">実行結果</a>
+        </li>
+        <li>
+          <a href="#tab-preview-src">ソース</a>
+        </li>
+      </ul>
+      <div id="tab-preview-preview">
+        <iframe id="contents-preview"></iframe>
+      </div>
+      <div id="tab-preview-src">
+        <textarea id="src-preview"></textarea>
+      </div>
     </div>
   </body>
 </html>
