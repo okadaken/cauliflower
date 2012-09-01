@@ -8,6 +8,7 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
+ * getElementを全部jquery方式へ
  * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
  * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）
  * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
@@ -23,7 +24,7 @@
  * ブラウザの対応状況のまとめをREADMEに書くこと
  * 重要：エラーハンドリング全部書き直す！！！
  * 新規Windowを開くをJqueryへ
- * 中心のテスト（chromeで上下ずれる）
+ * 中心のテスト（上下ずれる）
  * jqueryアップデートしたいかも
  * ダイアログ表示関数にボタンとfunctionのセットを渡すように変更する
  */
@@ -235,7 +236,7 @@ function initializeHTMLEditor() {
 }
 
 function showConfirmDialog(title, message, func) {
-    $('#dialogicon').attr('src', 'img/dialog/warning.png');
+    $('#dialog-icon').attr('src', 'img/dialog/warning.png');
     $('#dialog').dialog({
         title: title,
         buttons: {
@@ -250,7 +251,7 @@ function showConfirmDialog(title, message, func) {
 }
 
 function showNoticeDialog(title, message, func) {
-    $('#dialogicon').attr('src', 'img/dialog/notice.png');
+    $('#dialog-icon').attr('src', 'img/dialog/notice.png');
     $('#dialog').dialog({
         title: title,
         buttons: {
@@ -262,7 +263,7 @@ function showNoticeDialog(title, message, func) {
 }
 
 function showErrorDialog(title, message, func) {
-    $('#dialogicon').attr('src', 'img/dialog/error.png');
+    $('#dialog-icon').attr('src', 'img/dialog/error.png');
     $('#dialog').dialog({
         title: title,
         buttons: {
@@ -282,7 +283,7 @@ function initializeDialogs() {
         show: 'clip',
         hide: 'clip'
     });
-    //show/clip/explode/blind/bounce/drop/fold/slide
+    // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
 }
 
 //Blocklyがreference errorになる場合があるのをチェック
