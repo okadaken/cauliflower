@@ -8,6 +8,7 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * 例題ボタン
+ * previewからこのファイルを参照すればフォーカス問題はクリアできるかもしれない。
  * getElementを全部jquery方式へ
  * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
  * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）

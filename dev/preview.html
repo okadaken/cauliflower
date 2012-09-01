@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cauliflower - Preview Window</title>
+    <title>実行 - Cauliflower</title>
     <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
@@ -32,14 +32,10 @@
         text-align: right;
     }
     
-    #export-button {
-        text-align: right;
-    }
-    
     #contents-preview {
         width: 100%;
         height: 465px;
-        border: 1px solid #d4d4d4;
+        border: 1px solid #fff;
     }
   </style>
   <body>
@@ -59,7 +55,8 @@
           });
       }
       
-      //親ウィンドウのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
+      //cauliflower.jsのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
+      //ファイル分割して読み込みを検討すること
       function saveToFileForPreviewWindow(properties) {
           //Jquery化できるはず
           var form = document.createElement('form');
@@ -172,7 +169,7 @@
       });
     </script>
     <div id="preview-menu">
-      <button id="export-button" title="表示されている実行結果をHTMLファイルとして保存します">HTMLファイルへエクスポート</button>
+      <button id="export-button" title="HTMLとJavaScriptとHTMLファイルとして保存します">HTMLファイルとしてエクスポート</button>
     </div>
     <div id="tabs-preview">
       <ul>
