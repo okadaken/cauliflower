@@ -9,8 +9,8 @@
  *
  * 例題ボタン
  * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
- * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
  * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）
+ * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
  * HTMLパースエラーがあるときにも強引に編集できるようにする
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
@@ -20,7 +20,6 @@
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
  * ブラウザチェックを入れる
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
- * HTMLのタブはプレビューとHTMLタグリファレンスにする
  * ブラウザの対応状況のまとめをREADMEに書くこと
  * 重要：エラーハンドリング全部書き直す！！！
  * 新規Windowを開くをJqueryへ
@@ -42,7 +41,8 @@ function initializeBlocklyFrame(blockly) {
     
     if (Blockly.Toolbox) {
         setTimeout(function() {
-            document.getElementById('blockly_frame').style.minWidth = (Blockly.Toolbox.width - 38) + 'px';
+            //取れてるかチェックせよ
+            document.getElementById('blockly-frame').style.minWidth = (Blockly.Toolbox.width - 38) + 'px';
             // Account for the 19 pixel margin and on each side.
         }, 1);
     }
@@ -127,7 +127,7 @@ function initializeTabs() {
 function validateHTML() {
 
     var doc = parseHTML2DOM(true);
-    
+    //debugdom(doc);
     if (doc.getElementsByTagName('parsererror').length != 0) {
         if (doc.getElementsByTagName('sourcetext').length != 0) {
             var sourcetext = doc.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue;
@@ -194,7 +194,7 @@ function initializeHTMLEditor() {
 
     var delay;
     
-    HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html_textarea'), {
+    HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html-textarea'), {
         mode: 'text/html',
         theme: 'html-editor',
         tabMode: 'indent',
@@ -245,7 +245,7 @@ function showConfirmDialog(title, message, func) {
             }
         }
     });
-    $('#dialog_message').html('<p>' + message + '</p>');
+    $('#dialog-message').html('<p>' + message + '</p>');
     $('#dialog').dialog('open');
 }
 
@@ -257,7 +257,7 @@ function showNoticeDialog(title, message, func) {
             OK: func
         }
     });
-    $('#dialog_message').html(message);
+    $('#dialog-message').html(message);
     $('#dialog').dialog('open');
 }
 
@@ -269,7 +269,7 @@ function showErrorDialog(title, message, func) {
             OK: func
         }
     });
-    $('#dialog_message').html(message);
+    $('#dialog-message').html(message);
     $('#dialog').dialog('open');
 }
 
@@ -301,8 +301,10 @@ function debugdom(dom) {
     console.log(code);
 }
 
+
 //ここで再度throwするように変更せよ
 function parseHTML2DOM(dialog) {
+
     //前処理としてHTMLをXMLに変換
     try {
         var xml = HTMLtoXML(getHTMLCode());
@@ -328,7 +330,7 @@ function parseHTML2DOM(dialog) {
                 $('#tabs').tabs('select', 0);
                 mark(errorLine);
             });
-            // $('#error_dialog_message').html(message);
+            // $('#error_dialog-message').html(message);
         
         }
         return null;
@@ -348,14 +350,14 @@ function parseHTML2DOM(dialog) {
 function updateHTMLToolBar() {
     var history = HTMLEditor.historySize();
     if (history['undo'] > 0) {
-        $('#undo_button').removeClass('inactive');
+        $('#undo-button').removeClass('inactive');
     } else {
-        $('#undo_button').addClass('inactive');
+        $('#undo-button').addClass('inactive');
     }
     if (history['redo'] > 0) {
-        $('#redo_button').removeClass('inactive');
+        $('#redo-button').removeClass('inactive');
     } else {
-        $('#redo_button').addClass('inactive');
+        $('#redo-button').addClass('inactive');
     }
 }
 
@@ -387,7 +389,8 @@ function getAllCode(dialog) {
 }
 
 function updatePreview() {
-    var previewFrame = document.getElementById('html_preview');
+    //jqueryへ変更
+    var previewFrame = document.getElementById('html-preview');
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
     preview.open();
     preview.write(HTMLEditor.getValue());
@@ -414,7 +417,8 @@ function openPreviewWindow() {
 }
 
 function initializeJavaScriptPreview() {
-    JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById('blockly_text'), {
+    //Jqueryのgetが使えるか検討
+    JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById('blockly-text'), {
         mode: 'javascript',
         theme: 'eclipse-jspreview',
         tabMode: 'indent',
@@ -423,7 +427,7 @@ function initializeJavaScriptPreview() {
         electricChars: true,
         readOnly: true
     });
-    JavaScriptPreview.setSize('465px', '530px');
+    JavaScriptPreview.setSize('100%', '530px');
     
     
     //独自拡張で個別にclass指定
@@ -629,7 +633,7 @@ function initializeButtons() {
 
 //OK
 function initalizeNewButton() {
-    $('#new_button').button({
+    $('#new-button').button({
         icons: {
             primary: 'ui-icon-document'
         }
@@ -647,7 +651,7 @@ function initalizeNewButton() {
 //OK
 function initalizeLoadButton() {
     //開くボタン（inputフォームにイベントを委譲）
-    $('#load_button').button({
+    $('#load-button').button({
         icons: {
             primary: 'ui-icon-folder-open'
         }
@@ -663,7 +667,7 @@ function initalizeLoadButton() {
 
 //OK
 function initalizeSaveButton() {
-    $('#save_button').button({
+    $('#save-button').button({
         icons: {
             primary: 'ui-icon-disk'
         }
@@ -674,7 +678,7 @@ function initalizeSaveButton() {
 
 //OK
 function initalizeExecButton() {
-    $('#exec_button').button({
+    $('#exec-button').button({
         icons: {
             primary: 'ui-icon-play'
             //他のicon候補 'ui-icon-flag' 'ui-icon-gear' 'ui-icon-circle-triangle-e'

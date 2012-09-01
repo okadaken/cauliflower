@@ -3,15 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <title>Cauliflower v0.1</title>
-    <!-- for jquery -->
-    <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css">
+    <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
     <script type="text/javascript" src="jquery/jquery.cookie.js"></script>
-    <!-- for codemirror -->
-    <link rel=stylesheet href="codemirror/lib/codemirror.css">
-    <link rel=stylesheet href="codemirror/theme/eclipse-jspreview.css">
-    <link rel=stylesheet href="codemirror/theme/html-editor.css">
+    <link rel=stylesheet href="codemirror/lib/codemirror.css"/>
+    <link rel=stylesheet href="codemirror/theme/eclipse-jspreview.css"/>
+    <link rel=stylesheet href="codemirror/theme/html-editor.css"/>
     <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="codemirror/mode/xml/xml.js"></script>
     <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
@@ -21,20 +19,16 @@
     <script type="text/javascript" src="codemirror/lib/util/formatting.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/match-highlighter.js"></script>
     <script type="text/javascript" src="codemirror/lib/util/searchcursor.js"></script>
+    <script type="text/javascript" src="cauliflower.js"></script>
+    <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
+    <script type="text/javascript" src="diff/diff_match_patch.js"></script>
     <style type=text/css>
       
-      #top {
-          padding: 10px 4px;
-      }
-      
+      /* for CodeMirror */
       .CodeMirror {
           border: 1px solid #d4d4d4;
-          /*position: relative;*/
-          /*height: 100%;
-           width: 80%;*/
       }
       
-      /* for HTML editor */
       .CodeMirror-activeline {
           background: #e8f2ff !important;
       }
@@ -43,17 +37,14 @@
           font-weight: bolder;
           background: #ffaaaa;
           padding: 0px 0px 0px 0px;
-          /*
-           background-image: url(img/codemirror/error.png);
-           background-repeat: no-repeat;
-           background-position: left bottom*/
       }
       
       .CodeMirror-update {
-          /*text-decoration: underline;*/
-          /*font-weight: bolder;*/
           background: #fc3;
-          /*text-shadow: gray 1px 2px 1px;*/
+      }
+      
+      #top {
+          padding: 10px 4px;
       }
       
       #dialogicon {
@@ -62,23 +53,19 @@
           margin: 3px 15px 5px 0px;
       }
       
-      #new_button {
-          margin-left: 20px;
-      }
-      
       #load {
           width: 0px;
           visibility: hidden;
       }
       
-      #exec_button {
+      /*とりあえず色を変えただけ 要グラデーション*/
+      #exec-button {
           background: url("jquery/css/images/ui-bg_flat_55_fbec88_40x100.png") repeat-x scroll 50% 50% #FBEC88;
           border: 1px solid #FAD42E;
           margin-left: 30px;
-          /*とりあえず色を変えただけ 要グラデーション*/
       }
       
-      #html_preview {
+      #html-preview {
           width: 100%;
           height: 460px;
           /*
@@ -93,26 +80,26 @@
           height: 530px;
       }
       
-      #blockly_frame {
+      #blockly-frame {
           width: 100%;
           height: 100%;
           min-width: 200px;
           border: 1px solid #d4d4d4;
       }
       
-      #blockly_frame_div {
+      #blockly-frame-div {
           float: left;
           width: 60%;
           height: 100%;
       }
       
-      #blockly_text_div {
+      #blockly-text-div {
           margin-left: 60%;
           padding-left: 15px;
       }
       
       /*sub tab*/
-      #html-editor_div {
+      #html-editor-div {
           float: left;
           position: absolute;
           width: 99%;
@@ -133,6 +120,7 @@
           vertical-align: middle;
           font-size: 25px;
           color: #1B75BB;
+          margin-right: 20px;
       }
       
       .ui-tabs {
@@ -197,185 +185,137 @@
           height: 200px;
       }
     </style>
-    <!--  for Blocky TODO:userScriptの役割をチェック --><script type="text/javascript" src="cauliflower.js"></script>
-    <script type="text/javascript" id="userScript"></script>
-    <script type="text/javascript" src="htmlparser/htmlparser.js"></script>
-    <script type="text/javascript" src="diff/diff_match_patch.js"></script>
+    <!--
+    <script type="text/javascript" src="http://ui.jquery.com/applications/themeroller/themeswitchertool/"></script>
+    <script type="text/javascript">
+    $(function() {
+    $('<div style="position: absolute; top: 20px; right: 300px;" />').appendTo('body').themeswitcher();
+    });
+    </script>
+    -->
   </head>
   <body>
     <div id="top">
-      <span class="title">
-        Cauliflower v0.1
-      </span>
+      <span class="title">Cauliflower v0.1</span>
       <span>
-        <button id="new_button">
-          新規
-        </button>
-        <button id="load_button">
-          開く
-        </button>
-        <button id="save_button">
-          保存
-        </button>
+        <button id="new-button" title="新規にHTMLとJavaScriptを作成します">新規</button>
+        <button id="load-button" title="作業内容を読み込みます">開く</button>
+        <button id="save-button" title="作業内容を保存します">保存</button>
       </span>
-      <button id="exec_button">
-        実行
-      </button>
-      <input id="load" type="file">
-    </div>
+      <button id="exec-button" title="ブラウザによる実行結果を確認します">実行</button>
+      <input id="load" type="file"></div>
     <div id="tabs">
       <ul>
         <li>
-          <a href="#tab-html">
-            HTML編集
-          </a>
+          <a href="#tab-html">HTML編集</a>
         </li>
         <li>
-          <a href="#tab-javascript">
-            JavaScript編集
-          </a>
+          <a href="#tab-javascript">JavaScript編集</a>
         </li>
       </ul>
       <div id="tab-javascript">
-        <div id="blockly_frame_div">
-          <iframe id="blockly_frame" src="jsFrame/frame.html"></iframe>
+        <div id="blockly-frame-div">
+          <iframe id="blockly-frame" src="jsFrame/frame.html"></iframe>
         </div>
-        <div id="blockly_text_div">
-          <textarea id="blockly_text"></textarea>
+        <div id="blockly-text-div">
+          <textarea id="blockly-text"></textarea>
         </div>
       </div>
       <div id="tab-html">
-        <div id="html-editor_div">
+        <div id="html-editor-div">
           <div id="html-toolbar" class="html-clearfix html-button-frame">
-            <a id="template_button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
-              <img border="0" src="img/silk/html.png">
-            </a>
-            <a id="undo_button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
-              <img border="0" src="img/silk/arrow_undo.png">
-            </a>
-            <a id="redo_button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
-              <img border="0" src="img/silk/arrow_redo.png">
-            </a>
-            <a id="large_font_button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
-              <img border="0" src="img/silk/font_add.png">
-            </a>
-            <a id="small_font_button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
-              <img border="0" src="img/silk/font_delete.png">
-            </a>
-            <a id="format_button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
-              <img border="0" src="img/silk/text_indent.png">
-            </a>
-          </div><textarea id="html_textarea"></textarea>
+            <a id="template-button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
+              <img border="0" src="img/silk/html.png"></a>
+            <a id="undo-button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
+              <img border="0" src="img/silk/arrow_undo.png"></a>
+            <a id="redo-button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
+              <img border="0" src="img/silk/arrow_redo.png"></a>
+            <a id="large-font-button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
+              <img border="0" src="img/silk/font_add.png"></a>
+            <a id="small-font-button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
+              <img border="0" src="img/silk/font_delete.png"></a>
+            <a id="format-button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
+              <img border="0" src="img/silk/text_indent.png"></a>
+          </div>
+          <textarea id="html-textarea"></textarea>
         </div>
         <div id="tab-htmlsub">
           <ul>
             <li>
-              <a href="#tab-htmlsub-preview">
-                デザイン・プレビュー
-              </a>
+              <a href="#tab-htmlsub-preview">HTMLデザイン・プレビュー</a>
             </li>
             <li>
-              <a href="#tab-htmlsub-ref">
-                タグ・レファレンス
-              </a>
+              <a href="#tab-htmlsub-ref">HTMLタグ・レファレンス</a>
             </li>
           </ul>
           <div id="tab-htmlsub-preview">
-            <iframe id="html_preview"></iframe>
+            <iframe id="html-preview"></iframe>
           </div>
           <div id="tab-htmlsub-ref">
-            <p>
-              とりあえず仮設置 目的別にタグと使用例を書けばよさそう
-            </p>
+            <p>とりあえず仮設置 目的別にタグと使用例を書けばよさそう</p>
             <div id="tab-htmlsub-ref-contents">
               <h3>
-                <a href="#">
-                  Section 1
-                </a>
+                <a href="#">Section 1</a>
               </h3>
               <div>
-                <p>
-                  Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
                   ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
                   amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                </p>
+                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
               </div>
               <h3>
-                <a href="#">
-                  Section 2
-                </a>
+                <a href="#">Section 2</a>
               </h3>
               <div>
-                <p>
-                  Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
                   purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
                   velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                  suscipit faucibus urna.
-                </p>
+                  suscipit faucibus urna.</p>
               </div>
               <h3>
-                <a href="#">
-                  Section 3
-                </a>
+                <a href="#">Section 3</a>
               </h3>
               <div>
-                <p>
-                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
                   ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                </p>
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
                 <ul>
                   <li>List item one</li>
                   <li>List item two</li>
                   <li>List item three</li>
                 </ul>
-                <p>
-                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
                   ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                </p>
-                <p>
-                  Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
                   Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
                   ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                </p>
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
               </div>
               <h3>
-                <a href="#">
-                  Section 4
-                </a>
+                <a href="#">Section 4</a>
               </h3>
               <div>
-                <p>
-                  Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus
                   et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
                   faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-                  mauris vel est.
-                </p>
-                <p>
-                  Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                  mauris vel est.</p>
+                <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
                   Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                  inceptos himenaeos.
-                </p>
+                  inceptos himenaeos.</p>
               </div>
               <h3>
-                <a href="#">
-                  Section 5
-                </a>
+                <a href="#">Section 5</a>
               </h3>
               <div>
-                <p>
-                  Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus
                   et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
                   faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
                   mauris vel est.
                 </p>
-                <p>
-                  Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
                   Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
                   inceptos himenaeos.
                 </p>
@@ -386,8 +326,7 @@
       </div>
       <div id="dialog">
         <img id="dialogicon">
-        <div id="dialog_message">
-        </div>
+        <div id="dialog-message"></div>
       </div>
     </div>
   </body>
