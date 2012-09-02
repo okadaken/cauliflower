@@ -24,6 +24,8 @@
  */
 (function() {
 
+    var source;
+    
     // Regular Expressions for parsing tags and attributes
     var startTag = /^<!?([-A-Za-z0-9_]+)((?:\s+\w+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/, endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/, attr = /([-A-Za-z0-9_]+)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
     
@@ -54,11 +56,6 @@
         
         while (html) {
             chars = true;
-            
-            // Skip doctype
-            /*if (html.indexOf("<!DOCTYPE html>" == 0)) {
-                html = html.replace("<!DOCTYPE html>", "");
-            }*/
             
             // Make sure we're not in a script or style element
             if (!stack.last() || !special[stack.last()]) {
@@ -119,7 +116,15 @@
             }
             
             if (html == last) {
-                throw html;
+                var errorBefore = source.substring(0, source.indexOf(last));
+                var errorLine = last.split('\n')[0];
+                var lineNumber = errorBefore.split('\n').length;
+                var lastLine = errorBefore.split('\n')[lineNumber - 1];
+                throw {
+                    lineNumber: lineNumber,
+                    pos: lastLine.length,
+                    lineLength: errorLine.length
+                };
             }
             last = html;
         }
@@ -186,6 +191,7 @@
     
     this.HTMLtoXML = function(html) {
         var results = "";
+        source = html;
         
         HTMLParser(html, {
             start: function(tag, attrs, unary) {

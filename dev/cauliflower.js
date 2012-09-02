@@ -7,99 +7,56 @@
  * TODO:License書く
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
+ * やるべきことはTODOで検索
  * 例題ボタン
- * previewからこのファイルを参照すればフォーカス問題はクリアできるかもしれない。
+ * docとdomの変数名が混じっている
+ * READMEの外部ライブラリ情報更新
+ * previewからファイルを参照すればフォーカス問題はクリアできる
  * getElementを全部jquery方式へ
  * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
  * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）
  * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
  * HTMLパースエラーがあるときにも強引に編集できるようにする
  * HTMLフォーマット改善 ->ペンディング
- * 重要！！！Chromeの再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
- * 重要！！！Firefoxのワークスペースの右クリックメニューの位置がおかしい（Firefoxのみ発生する現象）
- * parseHTML2DOMのException変更
+ * 重要！！！再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない
  * windowsのsafariバージョン5.1.7でファイル保存と読込が動かない（winはサポート終了？）
  * ブラウザチェックを入れる
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
  * ブラウザの対応状況のまとめをREADMEに書くこと
- * 重要：エラーハンドリング全部書き直す！！！
- * 新規Windowを開くをJqueryへ
- * 中心のテスト（上下ずれる）
  * jqueryアップデートしたいかも
  * ダイアログ表示関数にボタンとfunctionのセットを渡すように変更する
- * HTMLパーサーでがんばれば行番号と文字列数が取得できると思う
  */
+//Codemirrorコンポーネント
 var HTMLEditor;
 var JavaScriptPreview;
 
-var errorLine;
+// clearErrorMarks関数用
+var errorMemento = {};
+
+//JavaScriptの差分表示用
 var previousCode;
+
+//DOCTYPEタグの削除・復活フラグ
 var hasDoctype;
-var previewWindow;
 
-function initializeBlocklyFrame(blockly) {
-
-    window.Blockly = blockly;
-    
-    if (Blockly.Toolbox) {
-        setTimeout(function() {
-            //取れてるかチェックせよ
-            document.getElementById('blockly-frame').style.minWidth = (Blockly.Toolbox.width - 38) + 'px';
-            // Account for the 19 pixel margin and on each side.
-        }, 1);
-    }
-    
-    setTimeout(function() {
-        Blockly.fireUiEvent(this, window, 'resize');
-    }, 1);
-    
-    setTimeout(restoreBlocks, 0);
-    Blockly.bindEvent_(window, 'unload', null, backupBlocks);
-}
-
-$(document).ready(function() {
-    initializeTabs();
-    initializeButtons();
-    initializeHTMLEditor();
-    initializeDialogs();
-    
-    $('#tab-htmlsub-ref-contents').accordion({
-        collapsible: true,
-        autoHeight: false,
-        active: false
-    });
-    
-    restoreHTML();
-    resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
-    HTMLEditor.refresh();
-    
-    setTimeout(updateHTMLDesignPreview, 300);
-    
-    initializeJavaScriptPreview();
-});
-
-$(window).unload(function() {
-    backupHTML();
-});
+//パースエラー時に使うDOMのnull object
+var nullDOM;
 
 function initializeTabs() {
     $('#tabs').tabs({
         cookie: {
-            expires: 3 //選択タブをcookieで3日間保存
+            expires: 3
         },
         select: function(event, ui) {
             if (HTMLEditor != null) {
                 switch (ui.panel.id) {
                     case 'tab-javascript':
-                        try {
-                            validateHTML();
-                        } catch (e) {
+                        //JavaScriptタブ選択時にDOMパースをする（結果は捨てる）
+                        parseHTMLToDOM(function() {
                             $('#tabs').tabs('select', 0);
-                            alert(e);
                             event.preventDefault();
-                            return;
-                        }
+                        });
                 }
             }
         },
@@ -119,123 +76,11 @@ function initializeTabs() {
             }
         }
     });
-    
     $('#tab-htmlsub').tabs({
         cookie: {
-            expires: 3 //選択タブをcookieで3日間保存
+            expires: 3
         }
     });
-}
-
-function validateHTML() {
-
-    var doc = parseHTML2DOM(true);
-    //debugdom(doc);
-    if (doc.getElementsByTagName('parsererror').length != 0) {
-        if (doc.getElementsByTagName('sourcetext').length != 0) {
-            var sourcetext = doc.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue;
-        }
-        //        throw doc.getElementsByTagName('parsererror')[0].childNodes[0].nodeValue;
-        throw sourcetext + 'HTMLが見つかりません';
-    }
-    if (doc.getElementsByTagName('html').length == 0) {
-        throw 'htmlタグが見つかりません';
-    }
-    if (doc.getElementsByTagName('body').length == 0) {
-        throw 'bodyタグが見つかりません';
-    }
-}
-
-function saveToFile(properties) {
-    //Jquery化できるはず
-    var form = document.createElement('form');
-    form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
-    form.setAttribute('method', 'post');
-    form.style.display = 'none';
-    document.body.appendChild(form);
-    for (var prop in properties) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', prop);
-        input.setAttribute('value', properties[prop]);
-        form.appendChild(input);
-    }
-    form.submit();
-}
-
-function save() {
-    var data = {
-        filename: guessSaveFileName(),
-        contents: createXML()
-    };
-    saveToFile(data);
-}
-
-function guessSaveFileName() {
-    var ext = '.calf';
-    var defaultFileName = '新規Cauliflowerファイル' + ext;
-    var doc = parseHTML2DOM(false);
-    if (doc != null) {
-        var titles = doc.getElementsByTagName('title');
-        if (titles.length != 0) {
-            var fileName = trimStringForFileName(titles[0].firstChild.nodeValue);
-            if (fileName.length != 0) {
-                return fileName + ext;
-            } else {
-                return defaultFileName;
-            }
-        } else {
-            return defaultFileName;
-        }
-    } else {
-        return defaultFileName;
-    }
-}
-
-
-
-function initializeHTMLEditor() {
-
-    var delay;
-    
-    HTMLEditor = CodeMirror.fromTextArea(document.getElementById('html-textarea'), {
-        mode: 'text/html',
-        theme: 'html-editor',
-        tabMode: 'indent',
-        lineNumbers: true,
-        fixedGutter: true,
-        electricChars: true,
-        closeTagIndent: true,
-        autofocus: true,
-        tabSize: 2,
-        extraKeys: {
-            "'>'": function(cm) {
-                cm.closeTag(cm, '>');
-            },
-            "'/'": function(cm) {
-                cm.closeTag(cm, '/');
-            }
-        },
-        onChange: function() {
-            // var html = getHTMLCode();
-            // if(html.charAt(html.length-1)!=)
-            HTMLEditor.clearMarks();
-            clearTimeout(delay);
-            delay = setTimeout(updateHTMLDesignPreview, 300);
-            updateHTMLToolBar();
-            
-        },
-        onCursorActivity: function() {
-            HTMLEditor.setLineClass(hlLine, null, null);
-            hlLine = HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, 'CodeMirror-activeline');
-        }
-    });
-    
-    HTMLEditor.setSize('50%', '502px');
-    HTMLEditor.addClass('html-editor'); //独自拡張で個別にclass指定
-    var hlLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
-    
-    
 }
 
 function showConfirmDialog(title, message, func) {
@@ -245,7 +90,8 @@ function showConfirmDialog(title, message, func) {
         buttons: {
             OK: func,
             'キャンセル': function() {
-                $(this).dialog('close');
+            
+                $('#dialog').dialog('close');
             }
         }
     });
@@ -261,7 +107,7 @@ function showNoticeDialog(title, message, func) {
             OK: func
         }
     });
-    $('#dialog-message').html(message);
+    $('#dialog-message').html('<p>' + message + '</p>');
     $('#dialog').dialog('open');
 }
 
@@ -273,29 +119,12 @@ function showErrorDialog(title, message, func) {
             OK: func
         }
     });
-    $('#dialog-message').html(message);
+    $('#dialog-message').html('<p>' + message + '</p>');
     $('#dialog').dialog('open');
 }
 
-function initializeDialogs() {
-    $('#dialog').dialog({
-        autoOpen: false,
-        modal: true,
-        draggable: false,
-        resizable: false,
-        show: 'clip',
-        hide: 'clip'
-    });
-    // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
-}
-
-//Blocklyがreference errorになる場合があるのをチェック
-function getJavaScriptCode() {
-    if (typeof Blockly === 'undefined') {
-        return '\n\n';
-    }
-    var code = '\n' + Blockly.Generator.workspaceToCode('JavaScript');
-    return code;
+function removeAllWhiteSpaces(s) {
+    return s.replace(/[ 　\t\r\n]/g, "");
 }
 
 //fortest
@@ -305,132 +134,37 @@ function debugdom(dom) {
     console.log(code);
 }
 
-
-//ここで再度throwするように変更せよ
-function parseHTML2DOM(dialog) {
-
-    //前処理としてHTMLをXMLに変換
-    try {
-        var xml = HTMLtoXML(getHTMLCode());
-        if (xml.indexOf('<doctype') != -1) {
-            hasDoctype = true;
-            xml = xml.replace(/<doctype.*?>/, '').replace('</doctype>', '');
-            xml = xml.trim();
-        } else {
-            hasDoctype = false;
-        }
-    } catch (e) {//変換できなければエラー表示して終了
-        if (dialog) {
-            errorLine = e.split('\n');
-            if (errorLine.length > 1) {
-                errorLine = errorLine[0] + '\n' + errorLine[1];
-            } else {
-                errorLine = errorLine[0];
-            }
-            var message = '<p>HTMLの構文エラーです。</p><p>エラー箇所:<br><b><code style="background: #ffaaaa;">' + escapeHTML(errorLine) + '</code></b></p><p>HTMLエディタのハイライト部分やその周辺を修正してください。</p>';
-            
-            showErrorDialog('HTML構文エラー', message, function() {
-                $(this).dialog('close');
-                $('#tabs').tabs('select', 0);
-                mark(errorLine);
-            });
-            // $('#error_dialog-message').html(message);
-        
-        }
-        return null;
-    }
-    
-    //DOMにパース
-    var parser = new DOMParser();
-    try {
-        var dom = parser.parseFromString(xml, 'text/xml');
-    } catch (e) {
-        alert(e);
-    }
-    //debugdom(dom);
-    return dom;
-}
-
-function getAllCode(dialog) {
-    var doc = parseHTML2DOM(dialog);
-    if (doc == null) {
-        return '解析不能';//一時的にnullは返さないようにしておく
-    }
-    
-    //JavaScriptタグとコードのノードを生成
-    var js = doc.createElement('script');
-    js.appendChild(doc.createTextNode('\n'));
-    js.setAttribute('type', 'text/javascript');
-    js.appendChild(doc.createComment(getJavaScriptCode()));
-    js.appendChild(doc.createTextNode('\n'));
-    
-    //生成したノードを追加
-    var body = doc.getElementsByTagName('body')[0];
-    if (body != null) {
-        body.insertBefore(js, body.firstChild);
-        body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
-        var serializer = new XMLSerializer();
-        var code = serializer.serializeToString(doc);
-        
-        //titleが空で<title/>となるとbodyがレンダリングされない
-        code = code.replace('<title/>', '<title></title>');
-        
-        return code;//TODO:最後に行頭のDOCTYPEを追加すること hasDoctypeを調べる
-        //console.log( serializer.serializeToString(body)); 
-    } else {
-        throw 'bodyタグが見つかりません';//TODO:dialogにすること,previewからの呼び出し時に対応すること
-    }
-}
-
-function updateHTMLDesignPreview() {
-    //jqueryへ変更
-    var previewFrame = document.getElementById('html-design-preview');
-    var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
-    preview.open();
-    preview.write(HTMLEditor.getValue());
-    preview.close();
-}
-
-function mark(s) {
-    HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, '');
-    HTMLEditor.matchHighlight('CodeMirror-matchhighlight', s);
-}
-
-function clearMarks() {
-    HTMLEditor.clearMarks();
-}
-
-function openPreviewWindow() {
-    //事前にチェック（やり方考えること）
-    //TODO:bodyタグが見つからなったときのエラー処理をしていないので追加すること
-    if (parseHTML2DOM(true) != null) {
-        previewWindow = window.open('preview.html', 'previewWindow', ', scrollbars=yes,width=600,height=600,top=' + ((screen.height - 600) / 2) + ',left=' + ((screen.width - 600) / 2));
-        previewWindow.focus();
-    }
-}
-
-function initializeJavaScriptPreview() {
-    //Jqueryのgetが使えるか検討
-    JavaScriptPreview = CodeMirror.fromTextArea(document.getElementById('blockly-text'), {
-        mode: 'javascript',
-        theme: 'eclipse-jspreview',
-        tabMode: 'indent',
-        lineNumbers: true,
-        fixedGutter: true,
-        electricChars: true,
-        readOnly: true
+function handleXMLParseError(e) {
+    clearErrorMarks();
+    var errorString = HTMLEditor.getRange({
+        line: e.lineNumber - 1,
+        ch: e.pos
+    }, {
+        line: e.lineNumber - 1,
+        ch: e.pos + e.lineLength
+    })
+    var title = 'HTML構文エラー';
+    var message = 'HTMLの構文エラーです。HTMLエディタのハイライト部分を修正してください。';
+    message += '<div class="dialog-error-string">';
+    message += 'エラー箇所 ［' + e.lineNumber + '行目］：<br>'
+    message += '<code class="CodeMirror-matchhighlight">' + escapeHTML(errorString) + '</code></div>';
+    showErrorDialog(title, message, function() {
+        $('#dialog').dialog('close');
+        $('#tabs').tabs('select', 0);
+        HTMLEditor.setMarker(e.lineNumber - 1, '<span style="color: #900;">●%N%</span>');
+        errorMemento.markedLine = e.lineNumber - 1;
+        HTMLEditor.setCursor({
+            line: e.lineNumber - 1,
+            ch: e.pos
+        });
+        highlightErrorString(e);
+        HTMLEditor.focus();
     });
-    JavaScriptPreview.setSize('100%', '530px');
-    
-    
-    //独自拡張で個別にclass指定
-    JavaScriptPreview.addClass('eclipse-jspreview');
 }
 
 function load() {
     var reader = new FileReader();//Safari5では実行不能
     var fileData = $('#load').get()[0].files[0];
-    
     //onabort	abort	強制停止(abort()関数)で止めた時点
     //onerror	error	リクエストがエラーだった（404とか）
     //onloadend	loadend	リクエスト完了時（エラーでも成功でも関係なく、送信が完了した時点で呼ばれる）
@@ -449,12 +183,13 @@ function load() {
         var count = Blockly.mainWorkspace.getAllBlocks().length;
         
         if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
+        
             Blockly.mainWorkspace.clear();
         }
-        
         var blockxml = document.createElement('xml');
         var blocks = xml.getElementsByTagName('block');
         while (blocks.length != 0) {
+        
             blockxml.appendChild(blocks[0]);
         }
         Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blockxml);
@@ -516,6 +251,323 @@ function getUserEnv() {
 /**************************************************
  * 以下OK
  **************************************************/
+//OK
+function parseHTMLToDOM(errorFunction) {
+    var html = getHTMLCode();
+    if (removeAllWhiteSpaces(html).length == 0) {
+        return nullDOM;
+    }
+    
+    //前処理としてHTMLをXMLに変換する
+    try {
+        var xml = HTMLtoXML(html);
+        if (xml.indexOf('<doctype') != -1) {
+            hasDoctype = true;
+        } else {
+            hasDoctype = false;
+        }
+    } catch (e) {//XMLの変換エラーをハンドリング
+        handleXMLParseError(e);
+        errorFunction();//コールバック関数を実行
+    }
+    
+    //次にDOMに変換
+    try {
+        var parser = new DOMParser();
+        var dom = parser.parseFromString(xml, 'text/xml');
+        //エラーチェック
+        var parseDOMError = dom.getElementsByTagName('parsererror');
+        
+        if (parseDOMError.length != 0) {
+            var errorString = parseDOMError[0].childNodes[0].data;
+            if (errorString == null) {
+                errorString = parseDOMError[0].childNodes[1].innerHTML;
+            }
+            if (dom.getElementsByTagName('sourcetext').length != 0) {
+                errorString = dom.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue + '\n' + errorString;
+                console.error(errorString);
+            }
+            var title = 'HTML構文エラー';
+            var message = 'HTMLの構文エラーです。HTMLを修正してください。';
+            message += '<div class="dialog-error-string">';
+            message += 'エラーの原因：<br>'
+            message += escapeHTML(errorString).replace(/\n/g, '<br>') + '</div>';
+            showErrorDialog(title, message, function() {
+                $('#dialog').dialog('close');
+                $('#tabs').tabs('select', 0);
+                HTMLEditor.focus();
+            });
+            errorFunction();//コールバック関数を実行
+            return nullDOM;
+        }
+        
+        //htmlタグのチェック
+        if (dom.getElementsByTagName('html').length == 0) {
+            var title = 'HTML構文エラー';
+            var message = 'htmlタグが見つかりません。タグの対応関係等を見直し、HTMLを修正してください。';
+            showErrorDialog(title, message, function() {
+            
+                $('#dialog').dialog('close');
+                $('#tabs').tabs('select', 0);
+                HTMLEditor.focus();
+            });
+            return nullDOM();
+        }
+        
+        //bodyタグのチェック
+        if (dom.getElementsByTagName('body').length == 0) {
+            var title = 'HTML構文エラー';
+            var message = 'bodyタグが見つかりません。タグの対応関係等を見直し、HTMLを修正してください。';
+            showErrorDialog(title, message, function() {
+                $('#dialog').dialog('close');
+                $('#tabs').tabs('select', 0);
+                HTMLEditor.focus();
+            });
+            return nullDOM;
+        }
+        return dom;
+    } catch (e) {
+        errorFunction();
+        return nullDOM;//エラーの場合はダミーのDOMを返す
+    }
+}
+
+//OK
+function openPreviewWindow() {
+    var url = 'preview.html';
+    var name = 'previewWindow';
+    var width = 600;
+    var height = 600;
+    var top = (screen.height - 600) / 2;
+    var left = (screen.width - 600) / 2;
+    var option = 'scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left;
+    var previewWindow = window.open(url, name, option);
+    previewWindow.focus();
+}
+
+//OK
+function initializeDialogs() {
+    $('#dialog').dialog({
+        autoOpen: false,
+        modal: true,
+        draggable: false,
+        resizable: false,
+        show: 'clip',
+        hide: 'clip'
+    });
+    // memo show/hideの一覧
+    // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
+}
+
+//OK
+function getAllCode(doc) {
+    //JavaScriptタグとコードのノードを生成
+    var js = doc.createElement('script');
+    js.appendChild(doc.createTextNode('\n'));
+    js.setAttribute('type', 'text/javascript');
+    js.appendChild(doc.createComment(getJavaScriptCode()));
+    js.appendChild(doc.createTextNode('\n'));
+    
+    //生成したノードを追加（docにbodyタグがあることが前提）
+    var body = doc.getElementsByTagName('body')[0];
+    body.insertBefore(js, body.firstChild);
+    body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
+    var serializer = new XMLSerializer();
+    var code = serializer.serializeToString(doc);
+    
+    //titleが空で<title/>となるとbodyがレンダリングされない
+    code = code.replace('<title/>', '<title></title>');
+    
+    if (hasDoctype) {
+        code = code.replace(/<doctype.*?>/, '').replace('</doctype>', '');
+        code = code.trim();
+        code = '<!DOCTYPE html>\n' + code;
+    }
+    return code;
+}
+
+//OK
+function getJavaScriptCode() {
+    if (Blockly != null) {
+        var code = '\n' + Blockly.Generator.workspaceToCode('JavaScript');
+        return code;
+    } else {
+        console.error('Bockly is undefined!');
+        return '\n\n';
+    }
+}
+
+//OK
+function createNullDOM() {
+    var nullDOM = document.createElement('html');
+    nullDOM.appendChild(document.createElement('body'));
+    return nullDOM;
+}
+
+//OK
+function highlightErrorString(e) {
+    errorMemento.highlight = HTMLEditor.markText({
+        line: e.lineNumber - 1,
+        ch: e.pos
+    }, {
+        line: e.lineNumber - 1,
+        ch: e.pos + e.lineLength
+    }, 'CodeMirror-matchhighlight');
+}
+
+//OK
+function clearErrorMarks() {
+    if (errorMemento.markedLine != null) {
+        HTMLEditor.clearMarker(errorMemento.markedLine);
+    }
+    
+    if (errorMemento.highlight != null) {
+        errorMemento.highlight.clear();
+    }
+}
+
+//OK
+function initializeHTMLReferenceAccordion() {
+    $('#tab-htmlsub-ref-contents').accordion({
+        collapsible: true,
+        autoHeight: false,
+        active: false
+    });
+}
+
+//OK
+function updateHTMLDesignPreview() {
+    var previewFrame = $('#html-design-preview').get(0);
+    var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    preview.open();
+    preview.write(HTMLEditor.getValue());
+    preview.close();
+}
+
+//OK
+$(document).ready(function() {
+    initializeTabs();
+    initializeHTMLReferenceAccordion();
+    initializeButtons();
+    initializeJavaScriptPreview();
+    initializeHTMLEditor();
+    resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
+    restoreHTML();
+    HTMLEditor.refresh();
+    window.setTimeout(updateHTMLDesignPreview, 300);
+    $(window).bind('unload', function() {
+    
+        backupHTML();
+    });
+    initializeDialogs();
+    nullDOM = createNullDOM();
+});
+
+//OK
+function initializeJavaScriptPreview() {
+    JavaScriptPreview = CodeMirror.fromTextArea($('#blockly-text').get(0), {
+        mode: 'javascript',
+        theme: 'eclipse-jspreview',
+        tabMode: 'indent',
+        lineNumbers: true,
+        fixedGutter: true,
+        electricChars: true,
+        readOnly: true
+    });
+    JavaScriptPreview.setSize('100%', '530px');
+    JavaScriptPreview.addClass('eclipse-jspreview');
+}
+
+//OK
+function initializeBlocklyFrame(blockly) {
+    window.Blockly = blockly;
+    window.setTimeout(function() {
+        Blockly.fireUiEvent(this, window, 'resize');
+    }, 1);
+    window.setTimeout(restoreBlocks, 0);
+    Blockly.bindEvent_(window, 'unload', null, backupBlocks);
+}
+
+//OK
+function initializeHTMLEditor() {
+    var delay;
+    HTMLEditor = CodeMirror.fromTextArea($('#html-textarea').get(0), {
+        mode: 'text/html',
+        theme: 'html-editor',
+        tabMode: 'indent',
+        lineNumbers: true,
+        fixedGutter: true,
+        electricChars: true,
+        closeTagIndent: true,
+        autofocus: true,
+        tabSize: 2,
+        extraKeys: {
+            "'>'": function(cm) {
+                cm.closeTag(cm, '>');
+            },
+            "'/'": function(cm) {
+                cm.closeTag(cm, '/');
+            }
+        },
+        onChange: function() {
+            clearErrorMarks();
+            clearTimeout(delay);
+            delay = setTimeout(updateHTMLDesignPreview, 300);
+            updateHTMLToolBar();
+        },
+        onCursorActivity: function() {
+            HTMLEditor.setLineClass(activeLine, null, null);
+            activeLine = HTMLEditor.setLineClass(HTMLEditor.getCursor().line, null, 'CodeMirror-activeline');
+        }
+    });
+    var activeLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
+    HTMLEditor.setSize('50%', '502px');
+    HTMLEditor.addClass('html-editor');
+}
+
+//OK
+function getFileNameForSave(doc) {
+    var ext = '.calf';
+    var defaultFileName = '新規Cauliflowerファイル' + ext;
+    var titles = doc.getElementsByTagName('title');
+    if (titles.length != 0 && titles[0].firstChild != null) {
+        var fileName = trimStringForFileName(titles[0].firstChild.nodeValue);
+        if (fileName.length != 0) {
+            return fileName + ext;
+        }
+    }
+    return defaultFileName;
+}
+
+//OK
+function save() {
+    var dom = parseHTMLToDOM();
+    debugdom(dom);
+    saveToFile({
+        filename: getFileNameForSave(dom),
+        contents: createXML()
+    });
+}
+
+//OK
+function saveToFile(properties) {
+    // TODO:jquery
+    var form = document.createElement('form');
+    form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+    form.setAttribute('method', 'post');
+    form.style.display = 'none';
+    document.body.appendChild(form);
+    for (var prop in properties) {
+    
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', prop);
+        input.setAttribute('value', properties[prop]);
+        form.appendChild(input);
+    }
+    form.submit();
+}
+
 //OK
 function updateHTMLToolBar() {
     var history = HTMLEditor.historySize();
@@ -628,11 +680,10 @@ function discardBlocks() {
         var message = '計' + count + '個のブロックを削除しますか？';
         showConfirmDialog(title, message, function() {
             clearBlocklyWorkspace();
-            $(this).dialog('close');
+            $('#dialog').dialog('close');
         });
     }
 }
-
 
 //OK
 function clearBlocklyWorkspace() {
@@ -664,7 +715,7 @@ function initalizeNewButton() {
         showConfirmDialog(title, message, function() {
             loadHTMLTemplate();
             clearBlocklyWorkspace();
-            $(this).dialog('close');
+            $('#dialog').dialog('close');
         });
     });
 }
@@ -679,7 +730,6 @@ function initalizeLoadButton() {
     }).click(function() {
         $('#load').click();
     });
-    
     //開くボタンのinputフォーム
     $('#load').bind('change', function() {
         load();
@@ -733,8 +783,9 @@ function loadHTMLTemplateConfirm() {
         discardHTML();
         var o = $.get('html_template.txt', function() {
             HTMLEditor.setValue(o.responseText);
+        }).complete(function() {
+            $('#dialog').dialog('close');
         });
-        $(this).dialog('close');
     });
 }
 
@@ -758,6 +809,7 @@ function escapeHTML(s) {
     s = s.replace(/&/g, '&amp;');
     s = s.replace(/>/g, '&gt;');
     s = s.replace(/</g, '&lt;');
+    s = s.replace(/ /g, '&nbsp;');
     return s;
 }
 
@@ -766,22 +818,19 @@ function createXML() {
     //version属性は保存ファイルの後方互換用に付与
     var root = document.createElement('cauliflower');
     root.setAttribute('version', '1.0');
-    
     var htmTag = document.createElement('html');
     htmTag.appendChild(document.createTextNode(getHTMLCode()));
     root.appendChild(htmTag);
-    
     var blocksTag = document.createElement('blocks');
     var blocksDOM = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var blocks = blocksDOM.getElementsByTagName('block');
     while (blocks.length != 0) {
+    
         blocksTag.appendChild(blocks[0]);
     }
     root.appendChild(blocksTag);
-    
     var serializer = new XMLSerializer();
     var xml = serializer.serializeToString(root);
-    
     //FirefoxでXMLにxmlns属性が付与されると引数付き関数が復元できないため除去
     xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
     
@@ -807,12 +856,10 @@ function formatXML(xml) {
         } else {
             indent = 0;
         }
-        
         var padding = '';
         for (var i = 0; i < pad; i++) {
             padding += '  ';
         }
-        
         formatted += padding + node + '\r\n';
         pad += indent;
     });

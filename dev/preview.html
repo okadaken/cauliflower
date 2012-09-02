@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>実行 - Cauliflower</title>
+    <title>実行結果 - Cauliflower</title>
     <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
@@ -41,6 +41,7 @@
   <body>
     <script>
       var SourcePreview;
+      var pageTitle;
       
       function initalizeExportButton() {
           $('#export-button').button({
@@ -50,7 +51,7 @@
           }).click(function() {
               saveToFileForPreviewWindow({
                   filename: getExportFileName(),
-                  contents: window.opener.getAllCode(true)
+                  contents: SourcePreview.getValue()
               });
           });
       }
@@ -85,17 +86,6 @@
           }
       }
       
-      function getPageTitle() {
-          var doc = window.opener.parseHTML2DOM(false);
-          if (doc != null) {
-              var titles = doc.getElementsByTagName('title');
-              if (titles.length != 0 && titles[0].firstChild != null) {
-                  return titles[0].firstChild.nodeValue;
-              }
-          }
-          return null;
-      }
-      
       function initalizeSourcePreview() {
           //Jqueryのgetが使えるか検討
           SourcePreview = CodeMirror.fromTextArea(document.getElementById('src-preview'), {
@@ -108,8 +98,6 @@
               readOnly: true
           });
           SourcePreview.setSize('100%', '465px');
-          
-          //独自拡張で個別にclass指定
           SourcePreview.addClass('html-preview');
       }
       
@@ -143,20 +131,19 @@
           initalizeExportButton();
           initalizeSourcePreview();
           
-          try {
-              var code = window.opener.getAllCode(true);
-              
-              var pageTitle = getPageTitle();
-              if (pageTitle != null) {
-                  $('title').text(pageTitle);
-              }
-              
-              updateHTMLPreview(code);
-              SourcePreview.setValue(code);
-          } catch (e) {
-              //window.close();
-              window.opener.alert(e);//dialogにすること
+          var dom = window.opener.parseHTMLToDOM(function() {
+              //エラーが発生したときはウィンドウを閉じる
+              window.close();
+          });
+          var code = window.opener.getAllCode(dom);
+          var titles = dom.getElementsByTagName('title');
+          if (titles.length != 0 && titles[0].firstChild != null) {
+              pageTitle = titles[0].firstChild.nodeValue;
+              $('title').text(pageTitle);
           }
+          
+          updateHTMLPreview(code);
+          SourcePreview.setValue(code);
           
           /*
            もし関数外のコードを許すなら、一度実行しないと、document.writeなどが実行されない
@@ -169,7 +156,7 @@
       });
     </script>
     <div id="preview-menu">
-      <button id="export-button" title="HTMLとJavaScriptとHTMLファイルとして保存します">HTMLファイルとしてエクスポート</button>
+      <button id="export-button" title="ソースタブに表示されている内容をHTMLファイルとして保存します">HTMLファイルとしてエクスポート</button>
     </div>
     <div id="tabs-preview">
       <ul>

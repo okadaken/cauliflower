@@ -265,7 +265,7 @@ Blockly.Procedures.mutateCallers = function(name, workspace,
 
 Blockly.Procedures.allEventFunctions = function() {
 	var funcNameList = [];
-	var dom = window.parent.parseHTML2DOM(false);
+	var dom = window.parent.parseHTMLToDOM();
 	var body = dom.getElementsByTagName("body");
 
 	Blockly.Procedures.searchEventFunctions( body[0], funcNameList );
