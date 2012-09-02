@@ -133,7 +133,7 @@
           var dom = window.opener.parseHTMLToDOM(function() {
               //エラーが発生したときはウィンドウを閉じる
               window.close();
-          });
+          }, true);
           var code = window.opener.getAllCode(dom);
           var titles = dom.getElementsByTagName('title');
           if (titles.length != 0 && titles[0].firstChild != null) {

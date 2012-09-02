@@ -52,7 +52,7 @@
       #dialog-icon {
           vertical-align: middle;
           float: left;
-          margin: 3px 15px 5px 0px;
+          margin: 10px 0px 0px 0px;
       }
       
       #load {
@@ -64,7 +64,7 @@
       #exec-button {
           background: url("jquery/css/images/ui-bg_flat_55_fbec88_40x100.png") repeat-x scroll 50% 50% #FBEC88;
           border: 1px solid #FAD42E;
-          margin-left: 30px;
+          margin-left: 40px;
       }
       
       #html-design-preview {
@@ -181,10 +181,16 @@
           height: 200px;
       }
       
+      .dialog-string {
+          width: 220px;
+          margin-left: 50px;
+          margin-top: 10px;
+      }
+      
       .dialog-error-string {
           width: 225px;
           margin-right: 28px;
-          margin-left: 48px;
+          margin-left: 0px;
           word-wrap: break-word;
       }
     </style>
@@ -205,6 +211,7 @@
         <button id="load-button" title="作業内容を読み込みます">開く</button>
         <button id="save-button" title="作業内容を保存します">保存</button>
       </span>
+      <button id="help-button" title="ヘルプを表示します">ヘルプ</button>
       <button id="exec-button" title="ブラウザによる実行結果を確認します">実行</button>
       <input id="load" type="file"></div>
     <div id="tabs">
