@@ -78,7 +78,6 @@
       function getExportFileName() {
           var ext = '.html';
           var defaultFileName = '新規HTMLファイル' + ext;
-          var pageTitle = getPageTitle();
           if (pageTitle != null) {
               return window.opener.trimStringForFileName(pageTitle + ext);
           } else {

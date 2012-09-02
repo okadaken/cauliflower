@@ -542,7 +542,6 @@ function getFileNameForSave(doc) {
 //OK
 function save() {
     var dom = parseHTMLToDOM();
-    debugdom(dom);
     saveToFile({
         filename: getFileNameForSave(dom),
         contents: createXML()
