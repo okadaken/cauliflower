@@ -8,8 +8,7 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * やるべきことはTODOで検索
- * ヘルプつける（対応ブラウザ等）
- * 例題ボタン
+ * ヘルプ実装
  * docとdomの変数名が混じっている
  * READMEの外部ライブラリ情報更新
  * previewからファイルを参照すればフォーカス問題はクリアできる
@@ -24,6 +23,8 @@
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
  * ブラウザの対応状況のまとめをREADMEに書くこと
  * jqueryアップデートしたいかも
+ * jquery/menuの余分なファイル削除
+ * 追加読み込み時にブロックが重なるのが嫌
  */
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -124,6 +125,7 @@ function initializeButtons() {
     initalizeNewButton();
     initalizeLoadButton();
     initalizeSaveButton();
+    initalizeSampleButton();
     initalizeExecButton();
     initalizeHelpButton();
 }
@@ -160,7 +162,24 @@ function initalizeSaveButton() {
         }
     }).click(function() {
         save();
-    }).parent().buttonset();
+    });
+}
+
+function initalizeSampleButton() {
+    $('#sample-button').button({
+        icons: {
+            primary: 'ui-icon-triangle-1-s'
+        }
+    });
+    
+    $.get('samples.html', function(data) {
+        $('#sample-button').menu({
+            content: data,
+            width: 230,
+            flyOut: true,
+            showSpeed: 100
+        });
+    });
 }
 
 function initalizeExecButton() {
@@ -181,7 +200,8 @@ function initalizeHelpButton() {
         }
     }).click(function() {
         help();
-    });
+    }).parent().buttonset();
+    ;
 }
 
 function initializeDialogs() {
@@ -284,7 +304,7 @@ function load(event) {
         var reader = new FileReader();
     } catch (e) {
         //Safari v5.1.7はFileReader未対応
-        var title = 'ファイル保存エラー';
+        var title = 'ファイルの読み込みエラー';
         var message = 'お使いのブラウザではファイルを開くことができません。ヘルプから対応ブラウザを確認してください。';
         var buttons = {
             OK: function() {
@@ -422,6 +442,42 @@ function showLoadErrorDialog() {
     };
     showDialog('error', title, message, buttons);
     $('#load').val('');
+}
+
+function loadSample(path) {
+
+    if (path == '#') {//#はカテゴリなので無視
+        return;
+    }
+    
+    //FIX:load関数と重複コードあり
+    //エラー処理なし（正しいpath、ネットワーク接続ありと仮定）
+    $.get(path, function(xml) {
+        var htmls = xml.getElementsByTagName('html');
+        if (htmls.length != 0) {
+            HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
+        }
+        var count = Blockly.mainWorkspace.getAllBlocks().length;
+        if (count) {
+            var title = '読み込みの確認';
+            var message = 'JavaScriptエディタにブロックがあります。';
+            message += 'ブロックを削除して新規に読み込むか、ブロックを追加するかを選択してください。';
+            var buttons = {
+                '新規に読み込む': function() {
+                    Blockly.mainWorkspace.clear();
+                    $('#dialog').dialog('close');
+                    loadXML(xml);
+                },
+                'ブロックを追加する': function() {
+                    $('#dialog').dialog('close');
+                    loadXML(xml);
+                }
+            };
+            showDialog('confirm', title, message, buttons);
+        } else {
+            loadXML(xml);
+        }
+    });
 }
 
 /**************************************************
