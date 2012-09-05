@@ -112,7 +112,7 @@ Blockly.Generator.get = function(name) {
         throw 'Expecting code from statement block "' + input.type + '".';
       }
       if (code) {
-        code = Blockly.Generator.prefixLines(code, '  ');
+        code = Blockly.Generator.prefixLines(code, '\t');
       }
       return code;
     };

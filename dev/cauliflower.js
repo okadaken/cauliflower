@@ -228,7 +228,9 @@ function initializeJavaScriptPreview() {
         lineNumbers: true,
         fixedGutter: true,
         electricChars: true,
-        readOnly: true
+        readOnly: true,
+        indentWithTabs: true,
+        tabSize: 3
     });
     JavaScriptPreview.setSize('100%', '530px');
     JavaScriptPreview.addClass('eclipse-jspreview');
@@ -1036,9 +1038,9 @@ function diff(text1, text2) {
                         highLightJavaScriptPreview(start.line, start.ch, line, cIndex, 'CodeMirror-update');
                         line++;
                         cIndex = 0;
-                    } else if (diffs[diff][1][i] == ' ') {
+                    } else if (diffs[diff][1][i] == '\t') {
                         highLightJavaScriptPreview(start.line, start.ch, line, cIndex, 'CodeMirror-update');
-                        if (cIndex > 0 && i > 0 && diffs[diff][1][i - 1] != ' ') {
+                        if (cIndex > 0 && i > 0 && diffs[diff][1][i - 1] != '\t') {
                             cIndex++;
                         } else {
                             cIndex++;

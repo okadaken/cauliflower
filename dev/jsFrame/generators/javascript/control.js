@@ -97,7 +97,7 @@ Blockly.JavaScript.controls_forEach = function() {
   var indexVar = Blockly.JavaScript.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
   if (argument0.match(/^\w+$/)) {
-    branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
+    branch0 = '\t' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
         branch0;
     code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
         branch0 + '}\n';
@@ -106,7 +106,7 @@ Blockly.JavaScript.controls_forEach = function() {
     // Cache it to a variable to prevent repeated look-ups.
     var listVar = Blockly.JavaScript.variableDB_.getDistinctName(
         variable0 + '_list', Blockly.Variables.NAME_TYPE);
-    branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' +
+    branch0 = '\t' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' +
         branch0;
     code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
         'for (var ' + indexVar + ' in ' + listVar + ') {\n' +

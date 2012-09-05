@@ -21,6 +21,17 @@
 .cm-s-eclipse-jspreview span.cm-attribute {color: #00c;}
 .cm-s-eclipse-jspreview span.cm-link {color: #219;}
 
+.cm-s-eclipse-jspreview span.cm-tab {
+          /*矢印のみ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMBAMAAADWlCNiAAAAA3NCSVQICAjb4U/gAAAAFVBMVEWtra2+vr7d3d23t7fMzMzv7+////+4Fhp0AAAAB3RSTlP///////8AGksDRgAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAAAJ0lEQVR4nGNIwwEYqCSRGIZDIok1jcEYK2DApYMFh0SyG9Wci08CAKEzbPZ8I6DcAAAAAElFTkSuQmCC);*/
+         /*
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+          background-position: right;
+          background-repeat: no-repeat;
+      }*/
+                  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMBAMAAADWlCNiAAAAA3NCSVQICAjb4U/gAAAAElBMVEW9vb3MzMzV1dXn5+fFxcX///9mHZHJAAAABnRSTlP//////wCzv6S/AAAACXBIWXMAAArwAAAK8AFCrDSYAAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlhIEZpcmV3b3JrcyBNWLuRKiQAAAAoSURBVHicYwjFARioJCEcgkPCwCCUwQUbcGDApUMBh4RTANWci08CAEmAXNPFWwbNAAAAAElFTkSuQmCC);
+          background-position: right;
+          background-repeat: no-repeat;
+}
 .cm-s-eclipse-jspreview .CodeMirror-matchingbracket {
 	border:1px solid grey;
 	color:black !important;;

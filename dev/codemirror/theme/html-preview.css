@@ -1,7 +1,7 @@
 
 
 
-.cm-s-html-preview span.cm-keyword {color: #708;}
+.cm-s-html-preview span.cm-keyword {line-height: 1em; font-weight: bold; color: #7F0055;}
 .cm-s-html-preview span.cm-atom {color: #219;}
 .cm-s-html-preview span.cm-number {color: #164;}
 .cm-s-html-preview span.cm-def {color: #00f;}
@@ -29,6 +29,13 @@
 .cm-s-html-preview span.cm-em {font-style: italic;}
 .cm-s-html-preview span.cm-emstrong {font-style: italic; font-weight: bold;}
 .cm-s-html-preview span.cm-link {text-decoration: underline;}
+
+.cm-s-html-preview span.cm-tab {
+          /*矢印のみ background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMBAMAAADWlCNiAAAAA3NCSVQICAjb4U/gAAAAFVBMVEWtra2+vr7d3d23t7fMzMzv7+////+4Fhp0AAAAB3RSTlP///////8AGksDRgAAAAlwSFlzAAAK8AAACvABQqw0mAAAACB0RVh0U29mdHdhcmUATWFjcm9tZWRpYSBGaXJld29ya3MgTVi7kSokAAAAJ0lEQVR4nGNIwwEYqCSRGIZDIok1jcEYK2DApYMFh0SyG9Wci08CAKEzbPZ8I6DcAAAAAElFTkSuQmCC);*/
+                  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMBAMAAADWlCNiAAAAA3NCSVQICAjb4U/gAAAAElBMVEW9vb3MzMzV1dXn5+fFxcX///9mHZHJAAAABnRSTlP//////wCzv6S/AAAACXBIWXMAAArwAAAK8AFCrDSYAAAAIHRFWHRTb2Z0d2FyZQBNYWNyb21lZGlhIEZpcmV3b3JrcyBNWLuRKiQAAAAoSURBVHicYwjFARioJCEcgkPCwCCUwQUbcGDApUMBh4RTANWci08CAEmAXNPFWwbNAAAAAElFTkSuQmCC);
+          background-position: right;
+          background-repeat: no-repeat;
+      }
 
 .cm-s-html-preview div.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}
 .cm-s-html-previewr div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
