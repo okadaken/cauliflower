@@ -4,20 +4,19 @@
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to message files.
  */
-
 // Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = '複製';
-Blockly.MSG_REMOVE_COMMENT = 'Remove Comment';
-Blockly.MSG_ADD_COMMENT = 'Add Comment';
-Blockly.MSG_EXTERNAL_INPUTS = 'External Inputs';
-Blockly.MSG_INLINE_INPUTS = 'Inline Inputs';
-Blockly.MSG_DELETE_BLOCK = 'Delete Block';
-Blockly.MSG_DELETE_X_BLOCKS = 'Delete %1 Blocks';
-Blockly.MSG_COLLAPSE_BLOCK = 'Collapse Block';
-Blockly.MSG_EXPAND_BLOCK = 'Expand Block';
-Blockly.MSG_DISABLE_BLOCK = 'Disable Block';
-Blockly.MSG_ENABLE_BLOCK = 'Enable Block';
-Blockly.MSG_HELP = 'Help';
+Blockly.MSG_REMOVE_COMMENT = 'コメントを削除';
+Blockly.MSG_ADD_COMMENT = 'コメントを追加';
+Blockly.MSG_EXTERNAL_INPUTS = '外部入力形態';
+Blockly.MSG_INLINE_INPUTS = '行内埋め込み形態';
+Blockly.MSG_DELETE_BLOCK = '削除';
+Blockly.MSG_DELETE_X_BLOCKS = '%1個のブロックを削除';
+Blockly.MSG_COLLAPSE_BLOCK = '折りたたむ';
+Blockly.MSG_EXPAND_BLOCK = '広げる';
+Blockly.MSG_DISABLE_BLOCK = '無効にする';
+Blockly.MSG_ENABLE_BLOCK = '有効にする';
+Blockly.MSG_HELP = 'ヘルプ';
 Blockly.MSG_ALL_BLOCKS_DELETE = '全てのブロックを削除';
 
 // Variable renaming.
@@ -43,12 +42,12 @@ Blockly.LANG_CATEGORY_CONTROLS = 'Control';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
-               'Otherwise, do the second block of statements.';
+'Otherwise, do the second block of statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
-               'Otherwise, if the second value is true, do the second block of statements.';
+'Otherwise, if the second value is true, do the second block of statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
-               'Otherwise, if the second value is true, do the second block of statements.\n' +
-               'If none of the values are true, do the last block of statements.';
+'Otherwise, if the second value is true, do the second block of statements.\n' +
+'If none of the values are true, do the last block of statements.';
 Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
@@ -56,7 +55,7 @@ Blockly.LANG_CONTROLS_IF_MSG_THEN = 'then';
 
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
-                    'to reconfigure this if block.';
+'to reconfigure this if block.';
 
 Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
@@ -65,7 +64,7 @@ Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
 Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT= 'repeat';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = 'repeat';
 Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'do';
 Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'while';
 Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'until';
@@ -80,17 +79,17 @@ Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'from';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'to';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'do';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
-    'For each count, set the current count number to\n' +
-    'variable "%1", and then do some statements.';        
+'For each count, set the current count number to\n' +
+'variable "%1", and then do some statements.';
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = 'for each';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'item'; 
+Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'item';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'in list';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'do';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\n' +
-  'variable "%1", and then do some statements.';
+'variable "%1", and then do some statements.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'of loop';
@@ -98,10 +97,10 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\n' +
-    'continue with the next iteration.';
+'continue with the next iteration.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
-    'This block may only\n' +
-    'be used within a loop.';
+'This block may only\n' +
+'be used within a loop.';
 
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = 'Logic';
@@ -109,13 +108,13 @@ Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(m
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Return true if the first input is smaller\n' +
-      'than the second input.';
+'than the second input.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Return true if the first input is smaller\n' +
-       'than or equal to the second input.';
+'than or equal to the second input.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Return true if the first input is greater\n' +
-      'than the second input.';
+'than the second input.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Return true if the first input is greater\n' +
-       'than or equal to the second input.';
+'than or equal to the second input.';
 
 Blockly.LANG_LOGIC_OPERATION_HELPURL = 'http://code.google.com/p/blockly/wiki/And_Or';
 Blockly.LANG_LOGIC_OPERATION_AND = 'and';
@@ -126,7 +125,7 @@ Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = 'Return true if either inputs are true
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
 Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'not';
 Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = 'Returns true if the input is false.\n' +
-                    'Returns false if the input is true.';
+'Returns false if the input is true.';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
 Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'true';
@@ -144,7 +143,7 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Return the difference of the two n
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\n' +
-    'the power of the second number.';
+'the power of the second number.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
@@ -179,7 +178,7 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
 Blockly.LANG_MATH_ONLIST_HELPURL = '';
 Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'of list';
-Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'sum'; 
+Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'sum';
 Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'min';
 Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'max';
 Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'average';
@@ -211,12 +210,12 @@ Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
 Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n' +
-    'specified limits, inclusive.';
+'specified limits, inclusive.';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
-    '0.0 (inclusive) and 1.0 (exclusive).';
+'0.0 (inclusive) and 1.0 (exclusive).';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = 'Text';
@@ -226,7 +225,7 @@ Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = 'A letter, word, or line of text.';
 Blockly.LANG_TEXT_JOIN_HELPURL = '';
 Blockly.LANG_TEXT_JOIN_TITLE_CREATEWITH = 'create text with';
 Blockly.LANG_TEXT_JOIN_TOOLTIP_1 = 'Create a piece of text by joining\n' +
-                    'together any number of items.';
+'together any number of items.';
 
 Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN = 'join';
 Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this text block.';
@@ -234,11 +233,11 @@ Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = 'Add, remove, or reorder sections to r
 Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = 'item';
 Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP_1 = 'Add an item to the text.';
 
-Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html'; 
+Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'length';
 Blockly.LANG_TEXT_LENGTH_TOOLTIP_1 = 'Returns number of letters (including spaces)\n' +
-                    'in the provided text.';
-                    
+'in the provided text.';
+
 Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'is empty';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP_1 = 'Returns true if the provided text is empty.';
@@ -254,8 +253,8 @@ Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'find';
 Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = 'occurrence of text';
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = 'in text';
 Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
-                    'of first text in the second text.\n' +
-                    'Returns 0 if text is not found.';
+'of first text in the second text.\n' +
+'Returns 0 if text is not found.';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'first';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'last';
 
@@ -276,7 +275,7 @@ Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90
 Blockly.LANG_TEXT_TRIM_TITLE_SPACE = 'trim spaces from';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
 Blockly.LANG_TEXT_TRIM_TOOLTIP_1 = 'Return a copy of the text with spaces\n' +
-                    'removed from one or both ends.';
+'removed from one or both ends.';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'side';
 Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'both';
@@ -315,7 +314,7 @@ Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'with item';
 Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = 'repeated';
 Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';
 Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = 'Creates a list consisting of the given value\n' +
-                    'repeated the specified number of times.';
+'repeated the specified number of times.';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'length';
@@ -330,8 +329,8 @@ Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'find';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = 'occurrence of item';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
-                    'of the item in the list.\n' +
-                    'Returns 0 if text is not found.';
+'of the item in the list.\n' +
+'Returns 0 if text is not found.';
 Blockly.LANG_LISTS_INDEX_OF_FIRST = 'first';
 Blockly.LANG_LISTS_INDEX_OF_LAST = 'last';
 
@@ -372,8 +371,8 @@ Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'return';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = 'A procedure with a return value.';
 
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning:\n' +
-    'This procedure has\n' +
-    'duplicate parameters.';
+'This procedure has\n' +
+'duplicate parameters.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'call';
