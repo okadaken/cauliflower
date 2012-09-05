@@ -545,7 +545,6 @@ function createXML() {
     var blocksDOM = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var blocks = blocksDOM.getElementsByTagName('block');
     while (blocks.length != 0) {
-    
         blocksTag.appendChild(blocks[0]);
     }
     root.appendChild(blocksTag);
@@ -630,7 +629,6 @@ function parseHTMLToDOM(errorFunction, isPreviewWindowCall) {
         //エラーチェック
         var parseDOMError = dom.getElementsByTagName('parsererror');
         
-        
         if (parseDOMError.length != 0) {
             var errorLines;
             var errorString;
@@ -640,9 +638,9 @@ function parseHTMLToDOM(errorFunction, isPreviewWindowCall) {
                 errorString = errorLines[0] + '\n' + errorLines[2];
             } else if (parseDOMError[0].childNodes[0].innerText != null) {
                 //WebKit系はエラー時のDOM構造が違うので対応
-                errorString = parseDOMError[0].childNodes[0].innerText;
+                errorString = parseDOMError[0].childNodes[0].innerHTML;
                 if (parseDOMError[0].childNodes[1] != null) {
-                    sourcetext = parseDOMError[0].childNodes[1].innerText;
+                    sourcetext = parseDOMError[0].childNodes[1].innerHTML;
                     errorString = errorString + '\n' + sourcetext;
                 }
             }
@@ -653,7 +651,7 @@ function parseHTMLToDOM(errorFunction, isPreviewWindowCall) {
                 if (getRealStringLength(sourcetext) > 42) {//一行が長すぎる場合は位置マーカーを付けない
                     sourcetext = sourcetext.split('\n')[0];
                 }
-                errorString = sourcetext + '\n' + errorString;
+                errorString = sourcetext.replace(/\\\"/g, '') + '\n' + errorString;
                 console.error(errorString);//for debug
             }
             
