@@ -4,12 +4,12 @@
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to message files.
  */
-// Context menus.
+// 日本語化終了 Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = '複製';
 Blockly.MSG_REMOVE_COMMENT = 'コメントを削除';
 Blockly.MSG_ADD_COMMENT = 'コメントを追加';
-Blockly.MSG_EXTERNAL_INPUTS = '外部入力形態';
-Blockly.MSG_INLINE_INPUTS = '行内埋め込み形態';
+Blockly.MSG_EXTERNAL_INPUTS = '不要？外部型へ変形';
+Blockly.MSG_INLINE_INPUTS = '不要？：行内型へ変形';
 Blockly.MSG_DELETE_BLOCK = '削除';
 Blockly.MSG_DELETE_X_BLOCKS = '%1個のブロックを削除';
 Blockly.MSG_COLLAPSE_BLOCK = '折りたたむ';

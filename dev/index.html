@@ -48,7 +48,7 @@
       }
       
       #top {
-          padding: 10px 4px;
+          margin-bottom: 10px;
       }
       
       #dialog-icon {
@@ -62,11 +62,24 @@
           visibility: hidden;
       }
       
-      /*とりあえず色を変えただけ 要グラデーション*/
+      #exec-button:hover {
+          background: url("jquery/css/images/ui-bg_highlight-soft_75_ffe45c_1x100.png") repeat-x scroll 50% 50% #FBEC88;
+          border: 1px solid #d2691e;
+          margin-left: 20px;
+      }
+      
       #exec-button {
-          background: url("jquery/css/images/ui-bg_flat_55_fbec88_40x100.png") repeat-x scroll 50% 50% #FBEC88;
+          background: url("jquery/css/images/ui-bg_glass_100_fdf5ce_1x400.png") repeat-x scroll 50% 50% #FBEC88;
           border: 1px solid #FAD42E;
           margin-left: 20px;
+      }
+      
+      #exec-button.ui-button span.ui-button-icon-primary {
+          background-image: url("jquery/css/images/ui-icons_ef8c08_256x240.png");
+      }
+      
+      #exec-button.ui-button:hover span.ui-button-icon-primary {
+          background-image: url("jquery/css/images/ui-icons_cd0a0a_256x240.png");
       }
       
       #html-design-preview {
@@ -116,8 +129,7 @@
           font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
           text-align: right;
           vertical-align: middle;
-          font-size: 50px;
-          height: 100px;
+          font-size: 25px;
           color: #1B75BB;
           margin-right: 20px;
       }
@@ -198,10 +210,7 @@
           word-wrap: break-word;
       }
       
-      #exec-button.ui-button span.ui-button-icon-primary {
-          background-image: url("jquery/css/images/ui-icons_f35f07_256x240.png")
-      }
-      
+      ui-icons_ffd27a_256x240.png
       /* 以下 jquery menu用 別ファイルにしたい*/
       .fg-button {
           clear: left;
@@ -263,6 +272,7 @@
   </head>
   <body>
     <div id="top">
+      <!--       <img style="widht:160px;vertical-align: bottom; padding-left: 5px; padding-right: 10px; vertical-align: bottom;margin-bottom:-5px" src="img/logotest.png"> -->
       <span class="title">Cauliflower v0.1</span>
       <span>
         <button id="new-button" title="新規にHTMLとJavaScriptを作成します">新規</button>

@@ -498,6 +498,27 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     };
     options.push(duplicateOption);
 
+    // Option to delete this block.
+    // Count the number of blocks that are nested in this block.
+    var descendantCount = this.getDescendants().length;
+    if (block.nextConnection && block.nextConnection.targetConnection) {
+      // Blocks in the current stack would survive this block's deletion.
+      descendantCount -= this.nextConnection.targetBlock().
+          getDescendants().length;
+    }
+    var deleteOption = {
+      text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
+          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
+      enabled: true,
+      callback: function() {
+        Blockly.playAudio('delete');
+        block.destroy(true);
+        window.parent.updateJavaScriptPreview();
+      }
+    };
+    options.push(deleteOption);
+  }
+
     if (Blockly.Comment && !this.collapsed) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
@@ -513,23 +534,6 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
         };
       }
       options.push(commentOption);
-    }
-
-    // Option to make block inline.
-    if (!this.collapsed) {
-      for (var i = 0; i < this.inputList.length; i++) {
-        if (this.inputList[i].type == Blockly.INPUT_VALUE) {
-          // Only display this option if there is a value input on the block.
-          var inlineOption = {enabled: true};
-          inlineOption.text = this.inputsInline ? Blockly.MSG_EXTERNAL_INPUTS :
-                                                  Blockly.MSG_INLINE_INPUTS;
-          inlineOption.callback = function() {
-            block.setInputsInline(!block.inputsInline);
-          };
-          options.push(inlineOption);
-          break;
-        }
-      }
     }
 
     // Option to collapse/expand block.
@@ -560,27 +564,23 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       }
     };
     options.push(disableOption);
-
-    // Option to delete this block.
-    // Count the number of blocks that are nested in this block.
-    var descendantCount = this.getDescendants().length;
-    if (block.nextConnection && block.nextConnection.targetConnection) {
-      // Blocks in the current stack would survive this block's deletion.
-      descendantCount -= this.nextConnection.targetBlock().
-          getDescendants().length;
-    }
-    var deleteOption = {
-      text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
-          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
-      enabled: true,
-      callback: function() {
-        Blockly.playAudio('delete');
-        block.destroy(true);
-        window.parent.updateJavaScriptPreview();
+    
+        // Option to make block inline.
+    if (!this.collapsed) {
+      for (var i = 0; i < this.inputList.length; i++) {
+        if (this.inputList[i].type == Blockly.INPUT_VALUE) {
+          // Only display this option if there is a value input on the block.
+          var inlineOption = {enabled: true};
+          inlineOption.text = this.inputsInline ? Blockly.MSG_EXTERNAL_INPUTS :
+                                                  Blockly.MSG_INLINE_INPUTS;
+          inlineOption.callback = function() {
+            block.setInputsInline(!block.inputsInline);
+          };
+          options.push(inlineOption);
+          break;
+        }
       }
-    };
-    options.push(deleteOption);
-  }
+    }
 
   // Option to get help.
   var url = (typeof this.helpUrl == 'function') ? this.helpUrl() : this.helpUrl;
@@ -589,7 +589,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   helpOption.callback = function() {
     block.showHelp_();
   };
-  options.push(helpOption);
+  //とりあえず非表示 options.push(helpOption);
   
   // Allow the block to add or modify options.
   if (this.customContextMenu) {
@@ -1156,6 +1156,7 @@ Blockly.Block.prototype.setDisabled = function(disabled) {
   this.disabled = disabled;
   this.svg_.updateDisabled();
   this.workspace.fireChangeEvent();
+  window.parent.updateJavaScriptPreview();
 };
 
 /**

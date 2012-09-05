@@ -176,8 +176,8 @@ function initalizeSampleButton() {
         $('#sample-button').menu({
             content: data,
             width: '240px',
-            flyOut: true,
-            showSpeed: 100
+            flyOut: true
+            //showSpeed: 150
         });
     });
 }
