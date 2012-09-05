@@ -1,14 +1,18 @@
 <cauliflower version="1.0">
   <html>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"/&gt;
-    &lt;title&gt;ボタンクリック時の実行&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-5 --&gt;
-    &lt;input type="button" value="Click me!" onclick="button1_onclick()"&gt;
-  &lt;/body&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;ボタンクリック時の実行&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;input type="button" value="Click me!" onclick="button1_onclick()"&gt;
+		&lt;p&gt;
+			&lt;a href="http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-5 " target="_blank"&gt;
+				http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-5 
+			&lt;/a&gt;
+		&lt;/p&gt;
+	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
     <block type="procedures_defnoreturn" x="14" y="6">

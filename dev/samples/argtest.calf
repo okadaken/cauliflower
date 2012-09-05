@@ -1,14 +1,14 @@
 <cauliflower version="1.0">
   <html>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;title&gt;引数保存テスト&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- ここにHTMLを書きます --&gt;
-  &lt;button onclick="hoge()"&gt;hoge&lt;/button&gt;
-&lt;/body&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;ページタイトルを書きます&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;!-- ここから下にHTMLの内容を書きます --&gt;
+		&lt;h1&gt;Hello, world!&lt;/h1&gt;
+	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
     <block type="procedures_defnoreturn" x="-258" y="-367">

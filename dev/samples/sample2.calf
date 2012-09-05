@@ -1,19 +1,17 @@
 <cauliflower version="1.0">
   <html>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"/&gt;
-    &lt;title&gt;マウスを重ねた時の実行&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!--
-			（ブロック開発中のため）JavaScriptは例題と若干違うので注意
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;マウスを重ねた時の実行&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;!--（ブロック開発中のため）JavaScriptは例題と若干違うので注意--&gt;
+		&lt;div id="div1" onmouseover="div1_onmouseover()" onmouseout="div1_onmouseout()"&gt;マウスカーソルを重ねてください。&lt;/div&gt;
+		&lt;a href="http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-6" target="_blank"&gt;
 			http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-6
-		--&gt;
-    &lt;div id="div1" onmouseover="div1_onmouseover()" onmouseout="div1_onmouseout()"&gt;
-      マウスカーソルを重ねてください。
-    &lt;/div&gt;
-  &lt;/body&gt;
+		&lt;/a&gt;
+	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
     <block type="procedures_defnoreturn" x="14" y="124">

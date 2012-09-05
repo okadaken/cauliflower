@@ -1,37 +1,35 @@
-<cauliflower xmlns="http://www.w3.org/1999/xhtml" version="1.0">
+<cauliflower version="1.0">
   <html>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;title&gt;ファイル保存・読込のテストプログラム&lt;/title&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;ファイル保存・読込のテストプログラム&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;!-- これはファイル保存・読込のテストプログラムです  --&gt;
-  &lt;h2&gt;ボタンを押すと3回ダイアログを出します&lt;/h2&gt;
-  &lt;button id="hoge" onclick="hoge()"&gt;押してね&lt;/button&gt;
-  &lt;h2&gt;以下はブラウザごとの対応状況メモですよ。&lt;/h2&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Windows&lt;/li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Firefox:OK&lt;/li&gt;
-      &lt;li&gt;Chrome:OK&lt;/li&gt;
-      &lt;li&gt;Safari:NG(5.1.7)&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;li&gt;Mac&lt;/li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Firefox:OK&lt;/li&gt;
-      &lt;li&gt;Chrome:OK&lt;/li&gt;
-      &lt;li&gt;Safari:NG(5.1.7)&lt;/li&gt;
-      &lt;li&gt;Safari:OK(6.0)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/ul&gt;
+	&lt;!-- これはファイル保存・読込のテストプログラムです  --&gt;
+	&lt;h2&gt;ボタンを押すと3回ダイアログを出します&lt;/h2&gt;
+	&lt;button id="hoge" onclick="hoge()"&gt;押してね&lt;/button&gt;
+	&lt;h2&gt;以下はブラウザごとの対応状況メモですよ。&lt;/h2&gt;
+	&lt;ul&gt;
+		&lt;li&gt;Windows&lt;/li&gt;
+		&lt;ul&gt;
+			&lt;li&gt;Firefox:OK&lt;/li&gt;
+			&lt;li&gt;Chrome:OK&lt;/li&gt;
+			&lt;li&gt;Safari:NG(5.1.7)&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;li&gt;Mac&lt;/li&gt;
+		&lt;ul&gt;
+			&lt;li&gt;Firefox:OK&lt;/li&gt;
+			&lt;li&gt;Chrome:OK&lt;/li&gt;
+			&lt;li&gt;Safari:NG(5.1.7)&lt;/li&gt;
+			&lt;li&gt;Safari:OK(6.0)&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/ul&gt;
 &lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
     <block type="procedures_defnoreturn" x="-56" y="-333">
       <mutation>
-        <arg name="x">
-        </arg>
       </mutation>
       <title name="NAME">hoge</title>
       <statement name="STACK">
