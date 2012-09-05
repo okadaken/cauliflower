@@ -175,7 +175,7 @@ function initalizeSampleButton() {
     $.get('samples.html', function(data) {
         $('#sample-button').menu({
             content: data,
-            width: 230,
+            width: '240px',
             flyOut: true,
             showSpeed: 100
         });
@@ -240,6 +240,7 @@ function initializeHTMLEditor() {
         mode: 'text/html',
         theme: 'html-editor',
         tabMode: 'indent',
+        indentWithTabs: true,
         lineNumbers: true,
         fixedGutter: true,
         electricChars: true,
@@ -361,18 +362,20 @@ function load(event) {
         }
         var count = Blockly.mainWorkspace.getAllBlocks().length;
         if (count) {
-            var title = '読み込みの確認';
-            var message = 'JavaScriptエディタにブロックがあります。';
-            message += 'ブロックを削除して新規に読み込むか、ブロックを追加するかを選択してください。';
+            var title = '編集のブロックがあります';
+            var message = 'JavaScriptエディタに編集中のブロックがあります。編集中のブロックの扱いを選択してください。';
             var buttons = {
-                '新規に読み込む': function() {
+                '削除': function() {
                     Blockly.mainWorkspace.clear();
                     $('#dialog').dialog('close');
                     loadXML(xml);
                 },
-                'ブロックを追加する': function() {
+                '残す': function() {
                     $('#dialog').dialog('close');
                     loadXML(xml);
+                },
+                'キャンセル': function() {
+                    $('#dialog').dialog('close');
                 }
             };
             showDialog('confirm', title, message, buttons);
@@ -423,7 +426,7 @@ function loadXML(xml) {
     $('#load').val('');
     
     var title = '読み込み完了';
-    var message = 'ファイルの読み込みが完了しました。';
+    var message = '<div style="margin-top:1.5em;">ファイルの読み込みが完了しました。</div>';
     var buttons = {
         OK: function() {
             $('#dialog').dialog('close');
@@ -452,25 +455,40 @@ function loadSample(path) {
     
     //FIX:load関数と重複コードあり
     //エラー処理なし（正しいpath、ネットワーク接続ありと仮定）
-    $.get(path, function(xml) {
+    $.get(path, function(data) {
+        var xml;
+        try {
+            if (!(data instanceof Document)) {
+                var parser = new DOMParser();
+                xml = parser.parseFromString(data, 'text/xml');
+            } else {
+                xml = data;
+            }
+        } catch (e) {//想定しているブラウザはExceptionをthrowしないはず
+            console.error('Error parsing XML:\n' + e);
+            return;
+        }
+        
         var htmls = xml.getElementsByTagName('html');
         if (htmls.length != 0) {
             HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
         }
         var count = Blockly.mainWorkspace.getAllBlocks().length;
         if (count) {
-            var title = '読み込みの確認';
-            var message = 'JavaScriptエディタにブロックがあります。';
-            message += 'ブロックを削除して新規に読み込むか、ブロックを追加するかを選択してください。';
+            var title = '編集のブロックがあります';
+            var message = 'JavaScriptエディタに編集中のブロックがあります。編集中のブロックの扱いを選択してください。';
             var buttons = {
-                '新規に読み込む': function() {
+                '削除': function() {
                     Blockly.mainWorkspace.clear();
                     $('#dialog').dialog('close');
                     loadXML(xml);
                 },
-                'ブロックを追加する': function() {
+                '残す': function() {
                     $('#dialog').dialog('close');
                     loadXML(xml);
+                },
+                'キャンセル': function() {
+                    $('#dialog').dialog('close');
                 }
             };
             showDialog('confirm', title, message, buttons);
@@ -610,18 +628,26 @@ function parseHTMLToDOM(errorFunction, isPreviewWindowCall) {
         //エラーチェック
         var parseDOMError = dom.getElementsByTagName('parsererror');
         
+        
         if (parseDOMError.length != 0) {
-            var errorLines = parseDOMError[0].childNodes[0].data.split('\n');
-            var errorString = errorLines[0] + '\n' + errorLines[2];
-            
-            //WebKit系はエラー時のDOM構造が違うので対応
-            if (errorString == null) {
-                errorString = parseDOMError[0].childNodes[1].innerHTML;
+            var errorLines;
+            var errorString;
+            var sourcetext;
+            if (parseDOMError[0].childNodes[0].nodeValue != null) {
+                errorLines = parseDOMError[0].childNodes[0].nodeValue.split('\n');
+                errorString = errorLines[0] + '\n' + errorLines[2];
+            } else if (parseDOMError[0].childNodes[0].innerText != null) {
+                //WebKit系はエラー時のDOM構造が違うので対応
+                errorString = parseDOMError[0].childNodes[0].innerText;
+                if (parseDOMError[0].childNodes[1] != null) {
+                    sourcetext = parseDOMError[0].childNodes[1].innerText;
+                    errorString = errorString + '\n' + sourcetext;
+                }
             }
             
             //WebKit系はsourcetextはないのでここは実行されない
             if (dom.getElementsByTagName('sourcetext').length != 0) {
-                var sourcetext = dom.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue;
+                sourcetext = dom.getElementsByTagName('sourcetext')[0].childNodes[0].nodeValue;
                 if (getRealStringLength(sourcetext) > 42) {//一行が長すぎる場合は位置マーカーを付けない
                     sourcetext = sourcetext.split('\n')[0];
                 }
@@ -1054,7 +1080,6 @@ function highLightJavaScriptPreview(startLine, startCh, endLine, endCh, classNam
         ch: endCh
     }, className);
 }
-
 
 /**************************************************
  * ユーティリティ
