@@ -1,3 +1,4 @@
+
 /**
  * Visual Blocks Language
  *
@@ -16,13 +17,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * @fileoverview Control blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
  */
-
-if (!Blockly.Language) Blockly.Language = {};
+if (!Blockly.Language) 
+  Blockly.Language = {};
 
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
@@ -34,8 +34,7 @@ Blockly.Language.controls_if = {
     this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['controls_if_elseif',
-                                         'controls_if_else']));
+    this.setMutator(new Blockly.Mutator(['controls_if_elseif', 'controls_if_else']));
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -114,34 +113,31 @@ Blockly.Language.controls_if = {
     var clauseBlock = containerBlock.getInputTargetBlock('STACK');
     while (clauseBlock) {
       switch (clauseBlock.type) {
-        case 'controls_if_elseif':
-          this.elseifCount_++;
-          var ifInput = this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE,
-              'IF' + this.elseifCount_, Boolean);
-          var doInput = this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT,
-              'DO' + this.elseifCount_);
-          // Reconnect any child blocks.
-          if (clauseBlock.valueInput_) {
-            ifInput.connect(clauseBlock.valueInput_);
-          }
-          if (clauseBlock.statementInput_) {
-            doInput.connect(clauseBlock.statementInput_);
-          }
-          break;
-        case 'controls_if_else':
-          this.elseCount_++;
-          var elseInput = this.appendInput(this.MSG_ELSE,
-              Blockly.NEXT_STATEMENT, 'ELSE');
-          // Reconnect any child blocks.
-          if (clauseBlock.statementInput_) {
-            elseInput.connect(clauseBlock.statementInput_);
-          }
-          break;
-        default:
-          throw 'Unknown block type.';
+      case 'controls_if_elseif':
+        this.elseifCount_++;
+        var ifInput = this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + this.elseifCount_, Boolean);
+        var doInput = this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO' + this.elseifCount_);
+        // Reconnect any child blocks.
+        if (clauseBlock.valueInput_) {
+          ifInput.connect(clauseBlock.valueInput_);
+        }
+        if (clauseBlock.statementInput_) {
+          doInput.connect(clauseBlock.statementInput_);
+        }
+        break;
+      case 'controls_if_else':
+        this.elseCount_++;
+        var elseInput = this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
+        // Reconnect any child blocks.
+        if (clauseBlock.statementInput_) {
+          elseInput.connect(clauseBlock.statementInput_);
+        }
+        break;
+      default:
+        throw 'Unknown block type.';
       }
       clauseBlock = clauseBlock.nextConnection &&
-          clauseBlock.nextConnection.targetBlock();
+      clauseBlock.nextConnection.targetBlock();
     }
   },
   saveConnections: function(containerBlock) {
@@ -150,22 +146,22 @@ Blockly.Language.controls_if = {
     var x = 1;
     while (clauseBlock) {
       switch (clauseBlock.type) {
-        case 'controls_if_elseif':
-          var inputIf = this.getInput('IF' + x);
-          var inputDo = this.getInput('DO' + x);
-          clauseBlock.valueInput_ = inputIf && inputIf.targetConnection;
-          clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
-          x++;
-          break;
-        case 'controls_if_else':
-          var inputDo = this.getInput('ELSE');
-          clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
-          break;
-        default:
-          throw 'Unknown block type.';
+      case 'controls_if_elseif':
+        var inputIf = this.getInput('IF' + x);
+        var inputDo = this.getInput('DO' + x);
+        clauseBlock.valueInput_ = inputIf && inputIf.targetConnection;
+        clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
+        x++;
+        break;
+      case 'controls_if_else':
+        var inputDo = this.getInput('ELSE');
+        clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
+        break;
+      default:
+        throw 'Unknown block type.';
       }
       clauseBlock = clauseBlock.nextConnection &&
-          clauseBlock.nextConnection.targetBlock();
+      clauseBlock.nextConnection.targetBlock();
     }
   }
 };
@@ -173,7 +169,7 @@ Blockly.Language.controls_if = {
 Blockly.Language.controls_if_if = {
   // If condition.
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_IF_IF_TITLE_IF);
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip(Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1);
@@ -184,7 +180,7 @@ Blockly.Language.controls_if_if = {
 Blockly.Language.controls_if_elseif = {
   // Else-If condition.
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -196,7 +192,7 @@ Blockly.Language.controls_if_elseif = {
 Blockly.Language.controls_if_else = {
   // Else condition.
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE);
     this.setPreviousStatement(true);
     this.setTooltip(Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1);
@@ -209,13 +205,12 @@ Blockly.Language.controls_whileUntil = {
   category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL,
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'MODE');
     this.appendInput('', Blockly.INPUT_VALUE, 'BOOL', Boolean);
-    this.appendInput(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO,
-                     Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -227,9 +222,7 @@ Blockly.Language.controls_whileUntil = {
   }
 };
 
-Blockly.Language.controls_whileUntil.OPERATORS =
-    [[Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
-     [Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
+Blockly.Language.controls_whileUntil.OPERATORS = [[Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'], [Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
 
 Blockly.Language.controls_whileUntil.TOOLTIPS = {
   WHILE: Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE,
@@ -241,25 +234,19 @@ Blockly.Language.controls_for = {
   category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FOR_HELPURL,
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH,
-        Blockly.LOCAL_VARIABLE, 'VAR').setText(
-        Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM,
-        Blockly.INPUT_VALUE, 'FROM', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO,
-        Blockly.INPUT_VALUE, 'TO', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO,
-        Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM, Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO, Blockly.INPUT_VALUE, 'TO', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1.replace('%1',
-          thisBlock.getInputVariable('VAR'));
+      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1.replace('%1', thisBlock.getInputVariable('VAR'));
     });
   },
   getVars: function() {
@@ -277,22 +264,17 @@ Blockly.Language.controls_forEach = {
   category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FOREACH_HELPURL,
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     this.appendTitle(Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM,
-        Blockly.LOCAL_VARIABLE, 'VAR').setText(
-        Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST,
-        Blockly.INPUT_VALUE, 'LIST', Array);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_DO,
-        Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST, Blockly.INPUT_VALUE, 'LIST', Array);
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1.replace('%1',
-          thisBlock.getInputVariable('VAR'));
+      return Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1.replace('%1', thisBlock.getInputVariable('VAR'));
     });
   },
   getVars: function() {
@@ -310,7 +292,7 @@ Blockly.Language.controls_flow_statements = {
   category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL,
   init: function() {
-    this.setColour(120);
+    this.setColour('#ffa500');
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'FLOW');
     this.appendTitle(Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
@@ -332,13 +314,14 @@ Blockly.Language.controls_flow_statements = {
     var block = this;
     do {
       if (block.type == 'controls_forEach' ||
-          block.type == 'controls_for' ||
-          block.type == 'controls_whileUntil') {
+      block.type == 'controls_for' ||
+      block.type == 'controls_whileUntil') {
         legal = true;
         break;
       }
       block = block.getSurroundParent();
-    } while (block);
+    }
+    while (block);
     if (legal) {
       this.setWarningText(null);
     } else {
@@ -347,9 +330,7 @@ Blockly.Language.controls_flow_statements = {
   }
 };
 
-Blockly.Language.controls_flow_statements.OPERATORS =
-    [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-     [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+Blockly.Language.controls_flow_statements.OPERATORS = [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'], [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
 
 Blockly.Language.controls_flow_statements.TOOLTIPS = {
   BREAK: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
