@@ -151,20 +151,37 @@ Blockly.BlockSvg.prototype.destroy = function() {
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {
-  var hexColour = Blockly.makeColour(this.block_.getColour());
-  var r = window.parseInt(hexColour.charAt(1), 16);
-  var g = window.parseInt(hexColour.charAt(2), 16);
-  var b = window.parseInt(hexColour.charAt(3), 16);
-  var HEX = '0123456789abcdef';
-  var rLight = HEX.charAt(Math.min(r + 3, 15));
-  var gLight = HEX.charAt(Math.min(g + 2, 15));
-  var bLight = HEX.charAt(Math.min(b + 2, 15));
-  var rDark = HEX.charAt(Math.max(r - 4, 0));
-  var gDark = HEX.charAt(Math.max(g - 4, 0));
-  var bDark = HEX.charAt(Math.max(b - 4, 0));
-  this.svgPathLight_.setAttribute('stroke', '#' + rLight + gLight + bLight);
-  this.svgPathDark_.setAttribute('fill', '#' + rDark + gDark + bDark);
-  this.svgPath_.setAttribute('fill', hexColour);
+  if (this.block_.getColour().toString().charAt(0) == '#') {
+    var c = this.block_.getColour().toString();
+    var r = window.parseInt(c.substring(1, 2), 16);
+    var g = window.parseInt(c.substring(3, 4), 16);
+    var b = window.parseInt(c.substring(5, 6), 16);
+    var HEX = '0123456789abcdef';
+    var rLight = HEX.charAt(Math.min(r + 3, 15));
+    var gLight = HEX.charAt(Math.min(g + 2, 15));
+    var bLight = HEX.charAt(Math.min(b + 2, 15));
+    var rDark = HEX.charAt(Math.max(r - 4, 0));
+    var gDark = HEX.charAt(Math.max(g - 4, 0));
+    var bDark = HEX.charAt(Math.max(b - 4, 0));
+    this.svgPathLight_.setAttribute('stroke', '#' + rLight + gLight + bLight);
+    this.svgPathDark_.setAttribute('fill', '#' + rDark + gDark + bDark);
+    this.svgPath_.setAttribute('fill', c);
+  } else {
+    var hexColour = Blockly.makeColour(this.block_.getColour());
+    var r = window.parseInt(hexColour.charAt(1), 16);
+    var g = window.parseInt(hexColour.charAt(2), 16);
+    var b = window.parseInt(hexColour.charAt(3), 16);
+    var HEX = '0123456789abcdef';
+    var rLight = HEX.charAt(Math.min(r + 3, 15));
+    var gLight = HEX.charAt(Math.min(g + 2, 15));
+    var bLight = HEX.charAt(Math.min(b + 2, 15));
+    var rDark = HEX.charAt(Math.max(r - 4, 0));
+    var gDark = HEX.charAt(Math.max(g - 4, 0));
+    var bDark = HEX.charAt(Math.max(b - 4, 0));
+    this.svgPathLight_.setAttribute('stroke', '#' + rLight + gLight + bLight);
+    this.svgPathDark_.setAttribute('fill', '#' + rDark + gDark + bDark);
+    this.svgPath_.setAttribute('fill', hexColour);
+  }
 };
 
 /**

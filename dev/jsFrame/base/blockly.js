@@ -50,6 +50,10 @@ Blockly.HSV_VALUE = 0.65;
  * @return {string} RGB code, e.g. '#84c'.
  */
 Blockly.makeColour = function(hue) {
+  if (hue && hue.toString().charAt(0) == '#') {
+    return hue;
+  }
+    
   hue %= 360;
   var topLimit = Blockly.HSV_VALUE;
   var bottomLimit = Blockly.HSV_VALUE * (1 - Blockly.HSV_SATURATION);
