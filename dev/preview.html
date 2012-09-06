@@ -87,7 +87,7 @@
       
       function initalizeSourcePreview() {
           //Jqueryのgetが使えるか検討
-          SourcePreview = CodeMirror.fromTextArea(document.getElementById('src-preview'), {
+          SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
               mode: 'htmlmixed',
               theme: 'html-preview',
               tabMode: 'indent',
