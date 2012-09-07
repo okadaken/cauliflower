@@ -740,6 +740,13 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
             rightEdge - Blockly.BlockSvg.TAB_WIDTH -
             Blockly.BlockSvg.SEP_SPACE_X - input.labelWidth;
         var labelY = cursorY + 18;
+        
+        // レベルが選択式でなければ、ソケット前のラベルを少し右にずらす
+        // 分岐の条件などのソケットの意味が分かりやすくなる
+        // Macでテストしていないし、延バグに注意。やばかったら削除すること。
+        if(!input.label.EDITABLE){
+            labelX+=8;
+        }
         labelElement.setAttribute('transform',
             'translate(' + labelX + ',' + labelY + ')');
       }
