@@ -130,6 +130,9 @@ Blockly.Toolbox.init = function() {
 
   // If the document resizes, reposition the toolbox.
   Blockly.bindEvent_(window, 'resize', null, Blockly.Toolbox.position_);
+  
+  //特殊カテゴリのmapを先に作ってしまう
+  categoryNameToID[Blockly.MSG_VARIABLE_CATEGORY] = 'variables';
 };
 
 /**
@@ -199,7 +202,7 @@ Blockly.Toolbox.redraw = function() {
   if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
     // Variables have a special category that is dynamic.
     options.push({text: Blockly.MSG_VARIABLE_CATEGORY,
-                  cat: Blockly.MSG_VARIABLE_CATEGORY});
+                  cat: Blockly.MSG_VARIABLE_CATEGORY,classDef:'variables'});
   }
   if (Blockly.Language.procedures_defnoreturn ||
       Blockly.Language.procedures_defreturn) {
@@ -228,16 +231,10 @@ Blockly.Toolbox.redraw = function() {
     };
   }
 
+//カテゴリーの色マーカーをつけるためにoptionToDomを改造して移設した
 function optionToDomForToolBox(text) {
-  /* Here's the SVG we create:
-    <g class="blocklyMenuDiv">
-      <rect height="20"/>
-      <text class="blocklyMenuText" x="20" y="15">Make It So</text>
-    </g>
-  */
   var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'},
                                           null);
-
   var rectElement = Blockly.createSvgElement('rect',
       {
           height: Blockly.ContextMenu.Y_HEIGHT,

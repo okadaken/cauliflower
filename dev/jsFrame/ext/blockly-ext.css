@@ -56,7 +56,7 @@
     font-size: 13px;
 }
 
-/* 文字列操作*/
+/* 文字列*/
 .text > rect {
     fill: #4a6cd4;
 }
@@ -70,7 +70,7 @@
     font-size: 13px;
 }
 
-/* 配列操作*/
+/* 配列*/
 .list > rect {
     fill: #d94d11;
 }
@@ -80,6 +80,20 @@
 }
 
 .list {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 変数*/
+.variables > rect {
+    fill: #f3761d;
+}
+
+.variables-catmaker {
+    fill: #f3761d;
+}
+
+.variables {
     font-weight: bold;
     font-size: 13px;
 }

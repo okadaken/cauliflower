@@ -38,7 +38,7 @@ Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
 Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 
 // Control Blocks
-Blockly.LANG_CATEGORY_CONTROLS = '制御構造';
+Blockly.LANG_CATEGORY_CONTROLS = '制御';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
@@ -104,7 +104,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
 'be used within a loop.';
 
 // Logic Blocks.
-Blockly.LANG_CATEGORY_LOGIC = '論理演算';
+Blockly.LANG_CATEGORY_LOGIC = '論理';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
@@ -134,7 +134,7 @@ Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
 
 // Math Blocks.
-Blockly.LANG_CATEGORY_MATH = '数値演算';
+Blockly.LANG_CATEGORY_MATH = '数値';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
 Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = 'A number.';
 
@@ -221,7 +221,7 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' 
 Blockly.LANG_MATH_PARSE_INT ='整数変換';
 
 // Text Blocks.
-Blockly.LANG_CATEGORY_TEXT = '文字列操作';
+Blockly.LANG_CATEGORY_TEXT = '文字列';
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
 Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = 'A letter, word, or line of text.';
 
@@ -297,7 +297,7 @@ Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'text';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'number';
 
 // Lists Blocks.
-Blockly.LANG_CATEGORY_LISTS = '配列操作';
+Blockly.LANG_CATEGORY_LISTS = '配列';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
 Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = 'create empty list';
 Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = 'Returns a list, of length 0, containing no data records';
