@@ -1,0 +1,16 @@
+/**
+ * Cauliflower用の拡張CSS
+ * inject.jsでパス指定して読み込んでいる
+ */
+.blocklySvg {
+    background-color: #66696B;
+    /*
+     background-color: #75787B;
+     background-color:  #7C8083;
+     */
+}
+
+.blocklyFlyoutBackground {
+    background-color: #66696B;
+}
+
