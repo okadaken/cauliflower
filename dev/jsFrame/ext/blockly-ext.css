@@ -14,3 +14,74 @@
     background-color: #66696B;
 }
 
+/* 制御構造*/
+.control > rect {
+    fill: #ff8c00;
+}
+
+.control-catmaker {
+    fill: #ff8c00;
+}
+
+.control {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 論理演算*/
+.logic > rect {
+    fill: #62c213;
+}
+
+.logic-catmaker {
+    fill: #62c213;
+}
+
+.logic {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 数値演算*/
+.math > rect {
+    fill: #cf4ad9;
+}
+
+.math-catmaker {
+    fill: #cf4ad9;
+}
+
+.math {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 文字列操作*/
+.text > rect {
+    fill: #4a6cd4;
+}
+
+.text-catmaker {
+    fill: #4a6cd4;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 配列操作*/
+.list > rect {
+    fill: #d94d11;
+}
+
+.list-catmaker {
+    fill: #d94d11;
+}
+
+.list {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+

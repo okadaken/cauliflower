@@ -17,6 +17,8 @@
  * limitations under the License.
  */
 
+var mathColor = '#cf4ad9';
+
 /**
  * @fileoverview Math blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
@@ -26,10 +28,11 @@ if (!Blockly.Language) Blockly.Language = {};
 
 Blockly.Language.math_number = {
   // Numeric value.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.appendTitle(new Blockly.FieldTextInput('0',
         Blockly.Language.math_number.validator), 'NUM');
     this.setOutput(true, Number);
@@ -46,10 +49,11 @@ Blockly.Language.math_number.validator = function(text) {
 
 Blockly.Language.math_arithmetic = {
   // Basic arithmetic operator.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_ARITHMETIC_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     this.appendInput('', Blockly.INPUT_VALUE, 'A', Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
@@ -81,10 +85,11 @@ Blockly.Language.math_arithmetic.TOOLTIPS = {
 
 Blockly.Language.math_change = {
   // Add to a variable in place.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_CHANGE_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.appendTitle(Blockly.LANG_MATH_CHANGE_TITLE_CHANGE);
     this.appendTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange),
@@ -113,10 +118,11 @@ Blockly.Language.math_change = {
 
 Blockly.Language.math_single = {
   // Advanced math operators with single operand.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_SINGLE_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
@@ -151,10 +157,11 @@ Blockly.Language.math_single.TOOLTIPS = {
 
 Blockly.Language.math_round = {
   // Rounding functions.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_ROUND_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
@@ -169,10 +176,11 @@ Blockly.Language.math_round.OPERATORS =
 
 Blockly.Language.math_trig = {
   // Trigonometry operators.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_TRIG_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
@@ -205,10 +213,11 @@ Blockly.Language.math_trig.TOOLTIPS = {
 Blockly.Language.math_on_list = {
   // Evaluate a list of numbers to return sum, average, min, max, etc.
   // Some functions also work on text (min, max, mode, median).
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_ONLIST_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, [Number, Array]);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'OP');
@@ -246,10 +255,11 @@ Blockly.Language.math_on_list.TOOLTIPS = {
 
 Blockly.Language.math_constrain = {
   // Constrain a number between two limits.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_CONSTRAIN_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     this.appendInput(Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN,
         Blockly.INPUT_VALUE, 'VALUE', Number);
@@ -264,10 +274,11 @@ Blockly.Language.math_constrain = {
 
 Blockly.Language.math_modulo = {
   // Remainder of a division.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_MODULO_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     this.appendInput(Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND,
         Blockly.INPUT_VALUE, 'DIVIDEND', Number);
@@ -279,10 +290,11 @@ Blockly.Language.math_modulo = {
 
 Blockly.Language.math_random_int = {
   // Random integer between [X] and [Y].
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_RANDOM_INT_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     this.appendTitle(Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM);
     this.appendInput(Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM,
@@ -297,10 +309,11 @@ Blockly.Language.math_random_int = {
 
 Blockly.Language.math_random_float = {
   // Random fraction between 0 and 1.
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL,
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
     this.setOutput(true, Number);
     this.appendTitle(Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1);
@@ -308,15 +321,16 @@ Blockly.Language.math_random_float = {
 };
 
 Blockly.Language.math_parseInt = {
-  category: Blockly.LANG_CATEGORY_MATH,
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID:'math',
   helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,
   
   init: function() {
-    this.setColour(230);
+    this.setColour(mathColor);
 	
-	this.appendTitle('整数化');
+	this.appendTitle(Blockly.LANG_MATH_PARSE_INT);
 	this.appendInput( '', Blockly.INPUT_VALUE, 'VALUE', null);
-	this.setInputsInline(true);
+	//this.setInputsInline(true);
 		
 	this.setOutput( true, Number );
   }

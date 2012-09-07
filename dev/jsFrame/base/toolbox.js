@@ -151,6 +151,9 @@ Blockly.Toolbox.position_ = function() {
  */
 Blockly.Toolbox.PREFIX_ = 'cat_';
 
+/** カテゴリ名（例：cat_制御構造）をkeyにclass指定用半角のID（例：control）を保持しておく **/
+var categoryNameToID = {};
+
 /**
  * Build the hierarchical tree of block types.
  * @return {!Object} Tree object.
@@ -162,12 +165,16 @@ Blockly.Toolbox.buildTree_ = function() {
   for (var name in Blockly.Language) {
     var block = Blockly.Language[name];
     // Blocks without a category are fragments used by the mutator dialog.
-    if (block.category) {
-      var cat = Blockly.Toolbox.PREFIX_ + window.encodeURI(block.category);
+    if (block.categoryName) {
+      var cat = Blockly.Toolbox.PREFIX_ + window.encodeURI(block.categoryName);
       if (cat in tree) {
         tree[cat].push(name);
       } else {
         tree[cat] = [name];
+      }
+      if(block.categoryID&&categoryNameToID[cat]==null){
+        var catID = window.encodeURI(block.categoryID);
+        categoryNameToID[cat] = catID
       }
     }
   }
@@ -185,6 +192,7 @@ Blockly.Toolbox.redraw = function() {
     option.text =
         window.decodeURI(cat.substring(Blockly.Toolbox.PREFIX_.length));
     option.cat = cat;
+    option.classDef = categoryNameToID[cat];
     options.push(option);
   }
   var option = {};
@@ -220,6 +228,31 @@ Blockly.Toolbox.redraw = function() {
     };
   }
 
+function optionToDomForToolBox(text) {
+  /* Here's the SVG we create:
+    <g class="blocklyMenuDiv">
+      <rect height="20"/>
+      <text class="blocklyMenuText" x="20" y="15">Make It So</text>
+    </g>
+  */
+  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'},
+                                          null);
+
+  var rectElement = Blockly.createSvgElement('rect',
+      {
+          height: Blockly.ContextMenu.Y_HEIGHT,
+      }, gElement);
+    var makerElement = Blockly.createSvgElement('rect',
+      {'fill':'#000','class': text.classDef+'-catmaker','x':'8' ,'y':'4','width':'7', height: Blockly.ContextMenu.Y_HEIGHT-8,'rx':'1','ry':'1'}, gElement);
+  var textElement = Blockly.createSvgElement('text',
+      {'class': 'blocklyMenuText '+ text.classDef,
+      x: 18,
+      y: 15}, gElement);
+  var textNode = Blockly.svgDoc.createTextNode(text.text);
+  textElement.appendChild(textNode);
+  return gElement;
+};
+
   // Erase all existing options.
   Blockly.removeChildren_(Blockly.Toolbox.svgOptions_);
 
@@ -227,7 +260,7 @@ Blockly.Toolbox.redraw = function() {
   var maxWidth = 0;
   var resizeList = [Blockly.Toolbox.svgBackground_];
   for (var x = 0, option; option = options[x]; x++) {
-    var gElement = Blockly.ContextMenu.optionToDom(option.text);
+    var gElement = optionToDomForToolBox(option);
     var rectElement = gElement.firstChild;
     var textElement = gElement.lastChild;
     Blockly.Toolbox.svgOptions_.appendChild(gElement);
@@ -282,6 +315,7 @@ Blockly.Toolbox.selectOption_ = function(newSelectedOption) {
   if (newSelectedOption) {
     Blockly.addClass_(newSelectedOption, 'blocklyMenuSelected');
     var cat = newSelectedOption.cat;
+    Blockly.addClass_(newSelectedOption, categoryNameToID[cat]);
     var blockSet = Blockly.Toolbox.languageTree[cat] || cat;
     Blockly.Toolbox.flyout_.show(blockSet);
   }
@@ -294,6 +328,7 @@ Blockly.Toolbox.clearSelection = function() {
   var oldSelectedOption = Blockly.Toolbox.selectedOption_;
   if (oldSelectedOption) {
     Blockly.removeClass_(oldSelectedOption, 'blocklyMenuSelected');
+    Blockly.removeClass_(oldSelectedOption, categoryNameToID[oldSelectedOption.cat]);
     Blockly.Toolbox.selectedOption_ = null;
   }
   Blockly.Toolbox.flyout_.hide();

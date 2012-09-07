@@ -38,7 +38,7 @@ Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
 Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 
 // Control Blocks
-Blockly.LANG_CATEGORY_CONTROLS = 'Control';
+Blockly.LANG_CATEGORY_CONTROLS = '制御構造';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
@@ -48,19 +48,20 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the fi
 Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
 'Otherwise, if the second value is true, do the second block of statements.\n' +
 'If none of the values are true, do the last block of statements.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'then';
+Blockly.LANG_CONTROLS_IF_MSG_IF = '分岐';
+Blockly.LANG_CONTROLS_IF_MSG_CONDITION = '条件';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '条件';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'それ以外';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = '真ならば';
 
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = '分岐';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
 'to reconfigure this if block.';
 
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = '追加条件';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
 
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'それ以外';
 Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
@@ -103,7 +104,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
 'be used within a loop.';
 
 // Logic Blocks.
-Blockly.LANG_CATEGORY_LOGIC = 'Logic';
+Blockly.LANG_CATEGORY_LOGIC = '論理演算';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
@@ -133,7 +134,7 @@ Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
 
 // Math Blocks.
-Blockly.LANG_CATEGORY_MATH = '数値計算';
+Blockly.LANG_CATEGORY_MATH = '数値演算';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
 Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = 'A number.';
 
@@ -217,8 +218,10 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
 '0.0 (inclusive) and 1.0 (exclusive).';
 
+Blockly.LANG_MATH_PARSE_INT ='整数変換';
+
 // Text Blocks.
-Blockly.LANG_CATEGORY_TEXT = 'Text';
+Blockly.LANG_CATEGORY_TEXT = '文字列操作';
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
 Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = 'A letter, word, or line of text.';
 
@@ -294,7 +297,7 @@ Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'text';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'number';
 
 // Lists Blocks.
-Blockly.LANG_CATEGORY_LISTS = 'Lists';
+Blockly.LANG_CATEGORY_LISTS = '配列操作';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
 Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = 'create empty list';
 Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = 'Returns a list, of length 0, containing no data records';
