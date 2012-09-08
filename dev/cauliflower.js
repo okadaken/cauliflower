@@ -472,6 +472,7 @@ function loadSample(path) {
       return;
     }
     
+    var oldHTML = HTMLEditor.getValue();
     var htmls = xml.getElementsByTagName('html');
     if (htmls.length != 0) {
       HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
@@ -492,6 +493,7 @@ function loadSample(path) {
           loadXML(xml);
         },
         'キャンセル': function() {
+          HTMLEditor.setValue(oldHTML);
           $('#dialog').dialog('close');
         }
       };
