@@ -1,9 +1,9 @@
-// Text strings (factored out to make multi-language easier).
+// ここはこれから追加されるはず Toolbox.
+Blockly.MSG_VARIABLE_CATEGORY = '変数';
+Blockly.MSG_PROCEDURE_CATEGORY = '関数';
+Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
+Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 
-/**
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to message files.
- */
 // 日本語化終了 Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = '複製';
 Blockly.MSG_REMOVE_COMMENT = 'コメントを削除';
@@ -31,12 +31,6 @@ Blockly.MSG_NEW_PROCEDURE = 'New procedure...';//現状未使用
 Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';//現状未使用
 Blockly.MSG_RENAME_PROCEDURE = '一覧にない関数を新しく定義する';
 Blockly.MSG_RENAME_PROCEDURE_TITLE = '新しく定義する関数の名前を入力してください。';
-
-// ここはこれから追加されるはず Toolbox.
-Blockly.MSG_VARIABLE_CATEGORY = '変数';
-Blockly.MSG_PROCEDURE_CATEGORY = '関数';
-Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
-Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 
 //日本語化終了 Control Blocks
 Blockly.LANG_CATEGORY_CONTROLS = '制御';
@@ -87,9 +81,9 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = '走査する対象に含まれる要素を先頭から順番に、\n要素変数の"%1"に代入しながら繰り返します。';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'ジャンプ';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '繰り返しの後の処理に';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繰り返しの先頭の処理に';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'の処理にジャンプ';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '繰り返しの後';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繰り返しの先頭';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = '繰り返し処理を中断して、次の処理にジャンプします。\n繰り返しの後に何も処理がない場合はプログラムが終了します。';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'この後の処理をスキップして、繰り返しの先頭の処理にジャンプします。';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +
@@ -342,16 +336,18 @@ Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'to';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 'Sets the value at the specified position in a list.';
 
-// Variables Blocks.
+//日本語化終了 Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_GET_TITLE_1 = 'get';
-Blockly.LANG_VARIABLES_GET_ITEM = 'item';
-Blockly.LANG_VARIABLES_GET_TOOLTIP_1 = 'Returns the value of this variable.';
+Blockly.LANG_VARIABLES_GET_TITLE_1 = '変数';
+Blockly.LANG_VARIABLES_GET_TITLE_2 = 'の値';
+Blockly.LANG_VARIABLES_GET_ITEM = 'x';
+Blockly.LANG_VARIABLES_GET_TOOLTIP_1 = '変数に格納されている値を取得します。';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_SET_TITLE_1 = 'set';
-Blockly.LANG_VARIABLES_SET_ITEM = 'item';
-Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = 'Sets this variable to be equal to the input.';
+Blockly.LANG_VARIABLES_SET_TITLE_1 = '変数';
+Blockly.LANG_VARIABLES_SET_TITLE_2 = 'に代入';
+Blockly.LANG_VARIABLES_SET_ITEM = 'x';
+Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = '変数に値を代入します。';
 
 // Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
