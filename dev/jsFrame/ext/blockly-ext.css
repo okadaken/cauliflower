@@ -14,7 +14,7 @@
     background-color: #66696B;
 }
 
-/* 制御構造*/
+/* 制御*/
 .control > rect {
     fill: #ff8c00;
 }
@@ -28,7 +28,7 @@
     font-size: 13px;
 }
 
-/* 論理演算*/
+/* 論理*/
 .logic > rect {
     fill: #62c213;
 }
@@ -42,7 +42,7 @@
     font-size: 13px;
 }
 
-/* 数値演算*/
+/* 数値*/
 .math > rect {
     fill: #cf4ad9;
 }
@@ -98,4 +98,17 @@
     font-size: 13px;
 }
 
+/* 関数 */
+.procedures > rect {
+    fill: #5566aa;
+}
+
+.procedures-catmaker {
+    fill: #5566aa;
+}
+
+.procedures {
+    font-weight: bold;
+    font-size: 13px;
+}
 

@@ -57,7 +57,7 @@ Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'どの条件も満たさないとき�
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = '繰り返し';
-Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = '';
+Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = '処理';
 Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = '継続条件';
 Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = '終了条件';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = '一度処理を繰り返すごとに、継続条件が真（成立する）か調べ、\n挟んだブロックを繰り返します。\n継続条件が偽（成立しない）になった段階で繰り返しは終了します。';
@@ -69,7 +69,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'カウンタ変数';
 Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'i';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = '開始';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = '終了';
-Blockly.LANG_CONTROLS_FOR_INPUT_DO = '';
+Blockly.LANG_CONTROLS_FOR_INPUT_DO = '処理';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = '一度処理を繰り返すごとにカウンタ変数の値を1ずつ増加させます。\n繰り返しが終了するとカウンタ変数の値は終了に設定した値より\n1だけ大きくなることに注意してください。';
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
@@ -77,7 +77,7 @@ Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = '繰り返し';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = '要素変数';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'element';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = '走査対象';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '処理';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = '走査する対象に含まれる要素を先頭から順番に、\n要素変数の"%1"に代入しながら繰り返します。';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
@@ -204,7 +204,7 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
 '0.0 (inclusive) and 1.0 (exclusive).';
 
-Blockly.LANG_MATH_PARSE_INT = '整数変換';
+Blockly.LANG_MATH_PARSE_INT = '整数に変換';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';
@@ -349,33 +349,34 @@ Blockly.LANG_VARIABLES_SET_TITLE_2 = 'に代入';
 Blockly.LANG_VARIABLES_SET_ITEM = 'x';
 Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = '変数に値を代入します。';
 
-// Procedures Blocks.
+// 日本語化終了 Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'procedure';
-Blockly.LANG_PROCEDURES_DEFNORETURN_DO = 'do';
-Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1 = 'A procedure with no return value.';
+Blockly.LANG_PROCEDURES_DEFNORETURN_PREFIX = '関数';
+Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '定義';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1 = '戻り値のない関数を定義します。';
 
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
-Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'return';
-Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = 'A procedure with a return value.';
+Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = '戻り値';
+Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = '戻り値のある関数を定義します。';
 
-Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning:\n' +
-'This procedure has\n' +
-'duplicate parameters.';
+Blockly.LANG_PROCEDURES_DEF_ARGS = '引数：'
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING =  '警告：\n' +
+'引数の変数名が重複しています。';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'call';
+Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'を実行する';
 Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'procedure';
-Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1 = 'Call a procedure with no return value.';
+Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1 = '戻り値のない関数を実行します。';
 
 Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-Blockly.LANG_PROCEDURES_CALLRETURN_CALL = Blockly.LANG_PROCEDURES_CALLNORETURN_CALL;
+Blockly.LANG_PROCEDURES_CALLRETURN_CALL = 'を実行して戻り値を得る';
 Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE;
-Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return value.';
+Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = '戻り値のある関数を実行します。';
 
-Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'parameters';
-Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'variable:';
+Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = '引数の定義';
+Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = '変数：';
 
-Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight Procedure';
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = '関数定義をハイライトする';

@@ -133,6 +133,7 @@ Blockly.Toolbox.init = function() {
   
   //特殊カテゴリのmapを先に作ってしまう
   categoryNameToID[Blockly.MSG_VARIABLE_CATEGORY] = 'variables';
+  categoryNameToID[Blockly.MSG_PROCEDURE_CATEGORY] = 'procedures';
 };
 
 /**
@@ -208,10 +209,10 @@ Blockly.Toolbox.redraw = function() {
       Blockly.Language.procedures_defreturn) {
     // Procedures have a special category that is dynamic.
     options.push({text: Blockly.MSG_PROCEDURE_CATEGORY,
-                  cat: Blockly.MSG_PROCEDURE_CATEGORY});
+                  cat: Blockly.MSG_PROCEDURE_CATEGORY,classDef:'procedures'});
   }
   if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
-    // Procedures have a special category that is dynamic.
+    // Mydocument have a special category that is dynamic.
     options.push({text: Blockly.MSG_MYDOCUMENT_CATEGORY,
                   cat: Blockly.MSG_MYDOCUMENT_CATEGORY});
   }
