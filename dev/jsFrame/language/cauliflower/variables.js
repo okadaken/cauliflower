@@ -28,7 +28,7 @@ if (!Blockly.Language)
 Blockly.Language.variables_get = {
   // Variable getter.
   categoryName: null, // Variables are handled specially.
-  categoryID: 'variables',
+  categoryID: null,
   helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
     this.setColour(valiablesColor);
@@ -51,7 +51,7 @@ Blockly.Language.variables_get = {
 Blockly.Language.variables_set = {
   // Variable setter.
   categoryName: null, // Variables are handled specially.
-  categoryID: 'variables', // Variables are handled specially.
+  categoryID: null, // Variables are handled specially.
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
     this.setColour(valiablesColor);
