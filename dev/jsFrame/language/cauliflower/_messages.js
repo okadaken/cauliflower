@@ -19,89 +19,81 @@ Blockly.MSG_ENABLE_BLOCK = '有効にする';
 Blockly.MSG_HELP = 'ヘルプ';
 Blockly.MSG_ALL_BLOCKS_DELETE = '全てのブロックを削除';
 
-// Variable renaming.
-Blockly.MSG_CHANGE_VALUE_TITLE = 'Change value:';
-Blockly.MSG_NEW_VARIABLE = 'New variable...';
-Blockly.MSG_NEW_VARIABLE_TITLE = 'New variable name:';
-Blockly.MSG_RENAME_VARIABLE = 'Rename variable...';
-Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
+//日本語化終了 Variable renaming.
+Blockly.MSG_CHANGE_VALUE_TITLE = 'Change value:';//Opera (11.61)用のハックなので和訳しない
+Blockly.MSG_NEW_VARIABLE = '新しい変数を定義する';
+Blockly.MSG_NEW_VARIABLE_TITLE = '新しい変数の変数名を入力してください。';
+Blockly.MSG_RENAME_VARIABLE = '変数名を変更する';
+Blockly.MSG_RENAME_VARIABLE_TITLE = '変数 "%1" の新しい変数名を入力してください。';
 
-Blockly.MSG_NEW_PROCEDURE = 'New procedure...';
-Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';
-Blockly.MSG_RENAME_PROCEDURE = '関数名を入力して変更する';
-Blockly.MSG_RENAME_PROCEDURE_TITLE = '関数名"%1"を変更する:';
+//日本語化終了 Procedure renaming.
+Blockly.MSG_NEW_PROCEDURE = 'New procedure...';//現状未使用
+Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';//現状未使用
+Blockly.MSG_RENAME_PROCEDURE = '一覧にない関数を新しく定義する';
+Blockly.MSG_RENAME_PROCEDURE_TITLE = '新しく定義する関数の名前を入力してください。';
 
-// Toolbox.
+// ここはこれから追加されるはず Toolbox.
 Blockly.MSG_VARIABLE_CATEGORY = '変数';
 Blockly.MSG_PROCEDURE_CATEGORY = '関数';
 Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
 Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
 
-// Control Blocks
+//日本語化終了 Control Blocks
 Blockly.LANG_CATEGORY_CONTROLS = '制御';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
-'Otherwise, do the second block of statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
-'Otherwise, if the second value is true, do the second block of statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
-'Otherwise, if the second value is true, do the second block of statements.\n' +
-'If none of the values are true, do the last block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = '条件を評価し、結果が真（成立する）なら挟んだブロックを実行します。';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = '条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '結果が偽（成立しない）なら、二番目に挟んだブロックを実行します。';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = '最初の条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '最初の条件が真（成立する）以外なら、順番に上から別の条件を評価し、\n結果が真（成立する）のところに挟んだブロックを実行します。';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = '最初の条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '最初の条件が真（成立する）以外なら、順番に上から別の条件を評価し、\n結果が真（成立する）のところに挟んだブロックを実行します。\n' + 'どの条件も結果が真（成立する）にならない場合は、\n最後の偽の場合に挟んであるブロックを実行します。';
 Blockly.LANG_CONTROLS_IF_MSG_IF = '分岐';
-Blockly.LANG_CONTROLS_IF_MSG_CONDITION = '条件式';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '条件式';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'それ以外';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = '真ならば';
+Blockly.LANG_CONTROLS_IF_MSG_CONDITION = '条件';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '別の条件';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = '偽の場合';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = '真の場合';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF_THEN = '次の条件が真の場合';
 
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = '分岐';
-Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
-'to reconfigure this if block.';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'この右側のブロックを挟んで分岐の形を変更します。';
 
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = '条件式';
-Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = '追加条件';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = '条件を追加する場合は、このブロックを使います。';
 
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'それ以外';
-Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = '偽の場合';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'どの条件も満たさないときに実行したいブロックがある場合は、これを使います。';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = 'repeat';
-Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'do';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'while';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'until';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'While a value is true, then do some statements.';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'While a value is false, then do some statements.';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = '繰り返し';
+Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = '';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = '継続条件';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = '終了条件';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = '一度処理を繰り返すごとに、継続条件が真（成立する）か調べ、\n挟んだブロックを繰り返します。\n継続条件が偽（成立しない）になった段階で繰り返しは終了します。';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = '一度処理を繰り返しごとに、終了条件が偽（成立しない）か調べ、\n挟んだブロックを繰り返します。\n終了条件が真（成立する）になった段階で繰り返しは終了します。';
 
 Blockly.LANG_CONTROLS_FOR_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
-Blockly.LANG_CONTROLS_FOR_TITLE_COUNT = 'count';
-Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'with';
-Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
-Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'from';
-Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'to';
-Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'do';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
-'For each count, set the current count number to\n' +
-'variable "%1", and then do some statements.';
+Blockly.LANG_CONTROLS_FOR_TITLE_COUNT = '繰り返し';
+Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'カウンタ変数';
+Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'i';
+Blockly.LANG_CONTROLS_FOR_INPUT_FROM = '開始';
+Blockly.LANG_CONTROLS_FOR_INPUT_TO = '終了';
+Blockly.LANG_CONTROLS_FOR_INPUT_DO = '';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = '一度処理を繰り返すごとにカウンタ変数の値を1ずつ増加させます。\n繰り返しが終了するとカウンタ変数の値は終了に設定した値より\n1だけ大きくなることに注意してください。';
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
-Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = 'for each';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'item';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'in list';
-Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'do';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\n' +
-'variable "%1", and then do some statements.';
+Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = '繰り返し';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = '要素変数';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'element';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = '走査対象';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = '走査する対象に含まれる要素を先頭から順番に、\n要素変数の"%1"に代入しながら繰り返します。';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'of loop';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\n' +
-'continue with the next iteration.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
-'This block may only\n' +
-'be used within a loop.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'ジャンプ';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '繰り返しの後の処理に';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繰り返しの先頭の処理に';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = '繰り返し処理を中断して、次の処理にジャンプします。\n繰り返しの後に何も処理がない場合はプログラムが終了します。';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'この後の処理をスキップして、繰り返しの先頭の処理にジャンプします。';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +
+'繰り返しブロックに\n挟んで使ってください。';
 
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '論理';
@@ -218,7 +210,7 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
 '0.0 (inclusive) and 1.0 (exclusive).';
 
-Blockly.LANG_MATH_PARSE_INT ='整数変換';
+Blockly.LANG_MATH_PARSE_INT = '整数変換';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';

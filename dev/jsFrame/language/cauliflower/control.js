@@ -267,7 +267,7 @@ Blockly.Language.controls_for = {
 
 Blockly.Language.controls_forEach = {
   // For each loop.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
+  categoryName: Blockly.LANG_CATEGORY_CONTROLS,
   categoryID: 'control',
   helpUrl: Blockly.LANG_CONTROLS_FOREACH_HELPURL,
   init: function() {
