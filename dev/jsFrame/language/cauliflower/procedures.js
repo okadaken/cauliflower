@@ -166,6 +166,10 @@ Blockly.Language.procedures_defnoreturn = {
   renameProcedure: function(oldName, newName) {
     if (Blockly.Names.equals(oldName, this.getTitleText('NAME'))) {
       this.setTitleText(newName, 'NAME');
+      if (oldName != newName) {
+          //本当は名前を変更したいが、とりあえず削除するようにする
+          Blockly.Procedures.destroyCallers(oldName, this.workspace);
+      }
     }
   },
 };
