@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var proceduresColor = '#5566aa';
+var proceduresColor = '#55aa88'; //次候補はBlockyの青 '#5566aa';
 
 /**
  * @fileoverview Procedure blocks for Blockly.
@@ -303,7 +303,7 @@ Blockly.Language.procedures_callnoreturn = {
     this.arguments_ = [].concat(paramNames);
     this.quarkArguments_ = paramIds;
     for (var x = 0; x < this.arguments_.length; x++) {
-      var input = this.appendInput(this.arguments_[x], Blockly.INPUT_VALUE, 'ARG' + x, null);
+      var input = this.appendInput(Blockly.LANG_PROCEDURES_DEF_ARGS +this.arguments_[x], Blockly.INPUT_VALUE, 'ARG' + x, null);
       if (this.quarkArguments_) {
         // Reconnect any child blocks.
         var quarkName = this.quarkArguments_[x];
@@ -339,7 +339,7 @@ Blockly.Language.procedures_callnoreturn = {
     for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
       if (childNode.tagName && childNode.tagName.toLowerCase() == 'arg') {
         var paramName = childNode.getAttribute('name');
-        this.appendInput(paramName, Blockly.INPUT_VALUE, 'ARG' + this.arguments_.length, null);
+        this.appendInput(Blockly.LANG_PROCEDURES_DEF_ARGS + paramName, Blockly.INPUT_VALUE, 'ARG' + this.arguments_.length, null);
         this.arguments_.push(paramName);
       }
     }
