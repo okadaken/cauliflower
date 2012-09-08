@@ -358,6 +358,7 @@ function load(event) {
       return;
     }
     
+    var oldHTML = HTMLEditor.getValue();
     var htmls = xml.getElementsByTagName('html');
     if (htmls.length != 0) {
       HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
@@ -378,6 +379,7 @@ function load(event) {
           loadXML(xml);
         },
         'キャンセル': function() {
+          HTMLEditor.setValue(oldHTML);
           $('#dialog').dialog('close');
         }
       };
