@@ -17,7 +17,6 @@
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない→部分的に対応
- * ブラウザチェックを入れる
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
  * ブラウザの対応状況のまとめをREADMEに書くこと
  * jqueryアップデートしたいかも
@@ -58,6 +57,8 @@ $(document).ready(function() {
   });
   initializeDialogs();
   nullDOM = createNullDOM();
+  
+  validateBrowser();
 });
 
 /**************************************************
@@ -1142,6 +1143,20 @@ function escapeHTML(s) {
 /**************************************************
  * 要FIX
  **************************************************/
+function validateBrowser() {
+  var env = getUserEnv();
+  if (env.browser == 'IE' || env.browser == 'Opera' || env.browser == 'Gecko') {
+    var title = '未対応のブラウザでアクセスしています';
+    var message = 'お使いのブラウザでは正常に動作しない可能性があります。ヘルプから対応ブラウザを確認し、アクセスしてください。';
+    var buttons = {
+      OK: function() {
+        $('#dialog').dialog('close');
+      }
+    };
+    showDialog('error', title, message, buttons);
+  }
+}
+
 function getUserEnv() {
   var ua = window.navigator.userAgent.toLowerCase();
   var env = {};
@@ -1185,6 +1200,6 @@ function getUserEnv() {
   } else {
     env['browser'] = null;
   }
-  console.log(env);
+  //console.log(env);
   return env;
 }
