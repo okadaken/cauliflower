@@ -112,3 +112,17 @@
     font-size: 13px;
 }
 
+/* HTML */
+.myDocument > rect {
+    fill: #8e56e3;
+}
+
+.myDocument-catmaker {
+    fill: #8e56e3;
+}
+
+.myDocument {
+    font-weight: bold;
+    font-size: 13px;
+}
+

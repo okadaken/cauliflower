@@ -134,6 +134,7 @@ Blockly.Toolbox.init = function() {
   //特殊カテゴリのmapを先に作ってしまう
   categoryNameToID[Blockly.MSG_VARIABLE_CATEGORY] = 'variables';
   categoryNameToID[Blockly.MSG_PROCEDURE_CATEGORY] = 'procedures';
+  categoryNameToID[Blockly.MSG_MYDOCUMENT_CATEGORY] = 'myDocument';
 };
 
 /**
@@ -214,7 +215,7 @@ Blockly.Toolbox.redraw = function() {
   if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
     // Mydocument have a special category that is dynamic.
     options.push({text: Blockly.MSG_MYDOCUMENT_CATEGORY,
-                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY});
+                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY,classDef:'myDocument'});
   }
 
 

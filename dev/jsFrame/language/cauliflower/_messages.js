@@ -2,7 +2,7 @@
 Blockly.MSG_VARIABLE_CATEGORY = '変数';
 Blockly.MSG_PROCEDURE_CATEGORY = '関数';
 Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
-Blockly.MSG_MYDOCUMENT_CATEGORY = 'ID'
+Blockly.MSG_MYDOCUMENT_CATEGORY = 'HTML'
 
 // 日本語化終了 Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = '複製';

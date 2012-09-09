@@ -17,6 +17,8 @@
  * limitations under the License.
  */
 
+var myDocumentColor = '#8e56e3';
+
 /**
  * @fileoverview Control blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
@@ -56,9 +58,10 @@ function getOption( tagName ){
 }
 
 Blockly.Language.myDocument_set = {
-  category: null,
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
   init: function() {
-    this.setColour(45);
+    this.setColour(myDocumentColor);
 	
 	var ids = Blockly.MyDocument.allId();
 	var first = ids[0];
@@ -83,9 +86,10 @@ Blockly.Language.myDocument_set = {
 };
 
 Blockly.Language.myDocument_get = {
-  category: null,
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
   init: function() {
-    this.setColour(45);
+    this.setColour(myDocumentColor);
 	
 	var ids = Blockly.MyDocument.allId();
 	var first = ids[0];
