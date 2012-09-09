@@ -108,6 +108,7 @@ Blockly.Language.logic_boolean = {
   init: function() {
     this.setColour(logicColor);
     this.setOutput(true, Boolean);
+    this.appendTitle(Blockly.LANG_LOGIC_BOOLEAN_VALUE);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'BOOL');
     this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1);

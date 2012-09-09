@@ -91,6 +91,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +
 
 //日本語化終了 Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '論理';
+Blockly.LANG_LOGIC_BOOLEAN_VALUE = '真偽値';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = '両辺の値が等しいときに真を返します。'
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = '両辺の値が等しくないときに真を返します。';
