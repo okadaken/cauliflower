@@ -158,8 +158,10 @@ Blockly.Language.lists_length = {
   helpUrl: Blockly.LANG_LISTS_LENGTH_HELPURL,
   init: function() {
     this.setColour(listColor);
-    this.appendInput(Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH, Blockly.INPUT_VALUE, 'VALUE', [Array, String]);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [Array, String]);
     this.setOutput(true, Number);
+    this.appendInput(Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_LENGTH_TOOLTIP_1);
   }
 };
@@ -171,8 +173,10 @@ Blockly.Language.lists_isEmpty = {
   helpUrl: Blockly.LANG_LISTS_IS_EMPTY_HELPURL,
   init: function() {
     this.setColour(listColor);
-    this.appendInput(Blockly.LANG_LISTS_INPUT_IS_EMPTY, Blockly.INPUT_VALUE, 'VALUE', [Array, String]);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [Array, String]);
     this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_LISTS_INPUT_IS_EMPTY, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_TOOLTIP_1);
   }
 };

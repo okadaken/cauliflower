@@ -300,11 +300,11 @@ Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';//使っていない
 Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = '同じ要素を指定した要素数だけ入れた配列を作ります。';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = '配列の長さ';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'の長さ';
 Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = '配列の長さ（要素数）を取得します。';
 
 Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_INPUT_IS_EMPTY = '配列が空かどうか';
+Blockly.LANG_LISTS_INPUT_IS_EMPTY = 'が空か';
 Blockly.LANG_LISTS_TOOLTIP_1 = '配列の要素がないかどうかを調べます。';
 
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
