@@ -89,35 +89,30 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'この後の処理を�
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +
 '繰り返しブロックに\n挟んで使ってください。';
 
-// Logic Blocks.
+//日本語化終了 Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '論理';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Return true if the first input is smaller\n' +
-'than the second input.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Return true if the first input is smaller\n' +
-'than or equal to the second input.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Return true if the first input is greater\n' +
-'than the second input.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Return true if the first input is greater\n' +
-'than or equal to the second input.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = '両辺の値が等しいときに真を返します。'
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = '両辺の値が等しくないときに真を返します。';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = '左辺の値が右辺の値より小さければ真を返します。';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = '左辺の値が右辺の値より小さいか等しければ真を返します。';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = '左辺の値が右辺の値より大きければ真を返します。.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = '左辺の値が右辺の値より大きいか等しければ真を返します。';
 
 Blockly.LANG_LOGIC_OPERATION_HELPURL = 'http://code.google.com/p/blockly/wiki/And_Or';
-Blockly.LANG_LOGIC_OPERATION_AND = 'and';
-Blockly.LANG_LOGIC_OPERATION_OR = 'or';
-Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND = 'Return true if both inputs are true.';
-Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = 'Return true if either inputs are true.';
+Blockly.LANG_LOGIC_OPERATION_AND = 'かつ';
+Blockly.LANG_LOGIC_OPERATION_OR = 'または';
+Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND = '両辺の値が真の場合に真を返します。';
+Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = '両辺のどちらかが真の場合に真を返します。';
 
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
-Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'not';
-Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = 'Returns true if the input is false.\n' +
-'Returns false if the input is true.';
+Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'ではない';
+Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = '真偽を反転させます。';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
-Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'true';
-Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
-Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
+Blockly.LANG_LOGIC_BOOLEAN_TRUE = '真';
+Blockly.LANG_LOGIC_BOOLEAN_FALSE = '偽';
+Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = '真か偽を返します。';
 
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = '数値';
@@ -363,7 +358,7 @@ Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = '戻り値';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = '戻り値のある関数を定義します。';
 
 Blockly.LANG_PROCEDURES_DEF_ARGS = '引数：'
-Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING =  '警告：\n' +
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = '警告：\n' +
 '引数の変数名が重複しています。';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';

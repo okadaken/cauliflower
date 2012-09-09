@@ -1,29 +1,34 @@
 /**
- * Cauliflower v0.1
- * Copyright (c) 2012 Ken Okada<>, Manabu Sugiura<>
- *
+ * Cauliflower
+ * Copyright (c) 2012 Ken Okada & Manabu Sugiura
  * http://github.com/okadaken/cauliflower
  *
  * TODO:License書く
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
- * やるべきことはTODOで検索
- * favcon入れる
- * ヘルプ実装
- * docとdomの変数名が混じっている
- * READMEの外部ライブラリ情報更新
- * previewからファイルを参照すればフォーカス問題はクリアできる
- * getElementを全部jquery方式へ
- * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
- * HTMLフォーマット改善 ->ペンディング
- * 重要！！！再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
+ * ■見た目
+ * ヘルプを完成させる
+ * faviconの設定
+ * ロゴの設定
  * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない→部分的に対応
+ * ■機能要求
+ * 追加読み込み時にブロックが重なるのが嫌
+ * 呼び出しポイントは分からないがconsole.logブロックは欲しい
+ * 再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
- * ブラウザの対応状況のまとめをREADMEに書くこと
+ * ■リファクタリング
+ * docとdomの変数名が混じっている
+ * previewからファイルを参照すればフォーカス問題はクリアできる
+ * getElementなどはjquery方式へ
+ * HTMLフォーマット改善 ->ペンディング
  * jqueryアップデートしたいかも
  * jquery/menuの余分なファイル削除
- * 追加読み込み時にブロックが重なるのが嫌
+ * ■レポジトリ整備
+ * READMEの外部ライブラリ情報更新
  */
+//バージョン
+var version = '1.0 [Build:xxxxxxxx]';
+
 //CodeMirrorコンポーネント
 var HTMLEditor;
 var JavaScriptPreview;
@@ -62,7 +67,7 @@ $(document).ready(function() {
   
   validateBrowser();
   
-  $('.version').replaceWith("1.0");
+  $('.version').replaceWith(version);
 });
 
 /**************************************************

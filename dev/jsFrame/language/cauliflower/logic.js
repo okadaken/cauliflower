@@ -16,20 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 var logicColor = '#62c213';
 
 /**
  * @fileoverview Logic blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
  */
-
-if (!Blockly.Language) Blockly.Language = {};
+if (!Blockly.Language) 
+  Blockly.Language = {};
 
 Blockly.Language.logic_compare = {
   // Comparison operator.
   categoryName: Blockly.LANG_CATEGORY_LOGIC,
-  categoryID:'logic',
+  categoryID: 'logic',
   helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
     this.setColour(logicColor);
@@ -47,13 +46,7 @@ Blockly.Language.logic_compare = {
   }
 };
 
-Blockly.Language.logic_compare.OPERATORS =
-    [['=', 'EQ'],
-     ['\u2260', 'NEQ'],
-     ['<', 'LT'],
-     ['\u2264', 'LTE'],
-     ['>', 'GT'],
-     ['\u2265', 'GTE']];
+Blockly.Language.logic_compare.OPERATORS = [['=', 'EQ'], ['\u2260', 'NEQ'], ['<', 'LT'], ['\u2266', 'LTE'], ['>', 'GT'], ['\u2267', 'GTE']];
 
 Blockly.Language.logic_compare.TOOLTIPS = {
   EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
@@ -67,7 +60,7 @@ Blockly.Language.logic_compare.TOOLTIPS = {
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
   categoryName: Blockly.LANG_CATEGORY_LOGIC,
-  categoryID:'logic',
+  categoryID: 'logic',
   helpUrl: Blockly.LANG_LOGIC_OPERATION_HELPURL,
   init: function() {
     this.setColour(logicColor);
@@ -85,9 +78,7 @@ Blockly.Language.logic_operation = {
   }
 };
 
-Blockly.Language.logic_operation.OPERATORS =
-    [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'],
-     [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
+Blockly.Language.logic_operation.OPERATORS = [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'], [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
 
 Blockly.Language.logic_operation.TOOLTIPS = {
   AND: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND,
@@ -97,13 +88,14 @@ Blockly.Language.logic_operation.TOOLTIPS = {
 Blockly.Language.logic_negate = {
   // Negation.
   categoryName: Blockly.LANG_CATEGORY_LOGIC,
-  categoryID:'logic',
+  categoryID: 'logic',
   helpUrl: Blockly.LANG_LOGIC_NEGATE_HELPURL,
   init: function() {
     this.setColour(logicColor);
     this.setOutput(true, Boolean);
-    this.appendInput(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT,
-        Blockly.INPUT_VALUE, 'BOOL', Boolean);
+    this.appendInput('', Blockly.INPUT_VALUE, 'BOOL', Boolean);
+    this.appendInput(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1);
   }
 };
@@ -111,7 +103,7 @@ Blockly.Language.logic_negate = {
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
   categoryName: Blockly.LANG_CATEGORY_LOGIC,
-  categoryID:'logic',
+  categoryID: 'logic',
   helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
   init: function() {
     this.setColour(logicColor);
@@ -122,6 +114,4 @@ Blockly.Language.logic_boolean = {
   }
 };
 
-Blockly.Language.logic_boolean.OPERATORS =
-    [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'],
-     [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
+Blockly.Language.logic_boolean.OPERATORS = [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'], [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
