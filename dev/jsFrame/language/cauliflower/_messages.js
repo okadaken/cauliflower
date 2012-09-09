@@ -277,59 +277,56 @@ Blockly.LANG_TEXT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified t
 Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'text';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'number';
 
-// Lists Blocks.
+// 日本語化終了 Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = '配列';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
-Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = 'create empty list';
-Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = 'Returns a list, of length 0, containing no data records';
+Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = '空の配列を作る';
+Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = '空の配列を作成します。';
 
-Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH = 'create list with';
-Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP_1 = 'Create a list with any number of items.';
+Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH = '配列を作る';
+Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP_1 = '要素を指定して配列を作ります。';
 
-Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = 'list';
-Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this list block.';
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = '配列';
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したい要素数の分だけ要素ブロックを加えてください。';
 
-Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = 'item';
-Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP_1 = 'Add an item to the list.';
+Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = '要素';
+Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP_1 = '配列の中に指定したい要素数だけ入れてください。';
 
 Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_REPEAT_TITLE_CREATELIST = 'create list';
-Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'with item';
-Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = 'repeated';
-Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';
-Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = 'Creates a list consisting of the given value\n' +
-'repeated the specified number of times.';
+Blockly.LANG_LISTS_REPEAT_TITLE_CREATELIST = '配列を作る';
+Blockly.LANG_LISTS_REPEAT_INPUT_WITH = '共通の要素';
+Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = '要素の数';
+Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';//使っていない
+Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = '同じ要素を指定した要素数だけ入れた配列を作ります。';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'length';
-Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = 'Returns the length of a list.';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = '配列の長さ';
+Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = '配列の長さ（要素数）を取得します。';
 
 Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_INPUT_IS_EMPTY = 'is empty';
-Blockly.LANG_LISTS_TOOLTIP_1 = 'Returns true if the list is empty.';
+Blockly.LANG_LISTS_INPUT_IS_EMPTY = '配列が空かどうか';
+Blockly.LANG_LISTS_TOOLTIP_1 = '配列の要素がないかどうかを調べます。';
 
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'find';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = 'occurrence of item';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
-'of the item in the list.\n' +
-'Returns 0 if text is not found.';
-Blockly.LANG_LISTS_INDEX_OF_FIRST = 'first';
-Blockly.LANG_LISTS_INDEX_OF_LAST = 'last';
+Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'に見つかる要素の番地';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '検索する要素';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '検索する配列';
+Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = '指定した配列に含まれている要素の番地を検索します。\n' + '要素が見つからない場合の結果は0となります。';
+Blockly.LANG_LISTS_INDEX_OF_FIRST = '最初';
+Blockly.LANG_LISTS_INDEX_OF_LAST = '最後';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_GET_INDEX_TITLE = 'get item';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = 'at';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = 'Returns the value at the specified position in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TITLE = '配列から取得した要素';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = '番地';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '配列';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = '番地を指定して配列の要素を取得します。';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_TITLE = 'set item';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = 'at';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'to';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 'Sets the value at the specified position in a list.';
+Blockly.LANG_LISTS_SET_INDEX_TITLE = '配列に要素を代入';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = '番地';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = '配列';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '要素';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入します。';
 
 //日本語化終了 Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
