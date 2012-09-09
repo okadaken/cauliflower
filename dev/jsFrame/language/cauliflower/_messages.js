@@ -377,8 +377,7 @@ Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログに表示する';
 Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログを表示します。';
 
 Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
-Blockly.LANG_MYDOCUMENT_PROMPT_TITLE1 = '用の';
-Blockly.LANG_MYDOCUMENT_PROMPT_TITLE2 = 'というプロンプトの入力結果';
+Blockly.LANG_MYDOCUMENT_PROMPT_TITLE = 'というプロンプトに入力された';
 Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified text.';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT = '文字列';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';
