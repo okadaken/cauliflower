@@ -8,6 +8,7 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * やるべきことはTODOで検索
+ * favcon入れる
  * ヘルプ実装
  * docとdomの変数名が混じっている
  * READMEの外部ライブラリ情報更新
@@ -46,6 +47,7 @@ $(document).ready(function() {
   initializeTabs();
   initializeHTMLReferenceAccordion();
   initializeButtons();
+  initializeHelp();
   initializeJavaScriptPreview();
   initializeHTMLEditor();
   restoreHTML();
@@ -59,6 +61,8 @@ $(document).ready(function() {
   nullDOM = createNullDOM();
   
   validateBrowser();
+  
+  $('.version').replaceWith("1.0");
 });
 
 /**************************************************
@@ -213,6 +217,24 @@ function initializeDialogs() {
     hide: 'clip',
     open: function(event, ui) {
       $(".ui-dialog-titlebar-close").hide();//閉じるボタンを消す
+    }
+  });
+  // memo show/hideの一覧
+  // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
+}
+
+function initializeHelp() {
+  $('#help').dialog({
+    autoOpen: false,
+    modal: true,
+    draggable: false,
+    resizable: false,
+    width: 500,
+    height: 500,
+    show: 'clip',
+    hide: 'clip',
+    open: function(event, ui) {
+        //$(".ui-dialog-titlebar-close").hide();//閉じるボタンを消す
     }
   });
   // memo show/hideの一覧
@@ -410,7 +432,14 @@ function openPreviewWindow() {
 }
 
 function help() {
-  alert('未実装（最低でも対応ブラウザは書くこと）');
+  $('#help').dialog({
+    buttons: {
+      '閉じる': function() {
+        $('#help').dialog('close');
+      }
+    }
+  });
+  $('#help').dialog('open');
 }
 
 /**************************************************
@@ -1145,7 +1174,7 @@ function escapeHTML(s) {
  **************************************************/
 function validateBrowser() {
   var env = getUserEnv();
-  if (env.browser == 'IE' || env.browser == 'Opera' || env.browser == 'Gecko') {
+  if (env.browser == 'IE' || env.browser == 'Opera') {
     var title = '未対応のブラウザでアクセスしています';
     var message = 'お使いのブラウザでは正常に動作しない可能性があります。ヘルプから対応ブラウザを確認し、アクセスしてください。';
     var buttons = {

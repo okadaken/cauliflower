@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Cauliflower v0.1</title>
+    <title>Cauliflower</title>
     <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
@@ -209,7 +209,15 @@
           word-wrap: break-word;
       }
       
-      ui-icons_ffd27a_256x240.png
+      .help-section {
+          padding: 5px;
+          font-size: 12px;
+      }
+      
+      #help > p {
+          padding-left: 5px;
+      }
+      
       /* 以下 jquery menu用 別ファイルにしたい*/
       .fg-button {
           clear: left;
@@ -271,7 +279,7 @@
   </head>
   <body>
     <div id="top">
-      <img style="height:70px;vertical-align: bottom; padding-left: 5px; padding-right: 10px; vertical-align: bottom;margin-bottom:-8px;margin-top:-5px" src="dummy.png"><!--       <img style="widht:160px;vertical-align: bottom; padding-left: 5px; padding-right: 10px; vertical-align: bottom;margin-bottom:-5px" src="img/logotest.png"> --><!--<span class="title">Cauliflower v0.1</span>-->
+      <img style="vertical-align: bottom; padding-left: 5px; padding-right: 10px; vertical-align: bottom;margin-bottom:-8px;margin-top:-5px" src="img/logo/logo-small.png"><!--       <img style="widht:160px;vertical-align: bottom; padding-left: 5px; padding-right: 10px; vertical-align: bottom;margin-bottom:-5px" src="img/logotest.png"> --><!--<span class="title">Cauliflower v0.1</span>-->
       <span>
         <button id="new-button" title="新規にHTMLとJavaScriptを作成します">新規</button>
         <button id="load-button" title="作業内容を読み込みます">開く</button>
@@ -405,6 +413,31 @@
         <img id="dialog-icon">
         <div id="dialog-message"></div>
       </div>
-    </div>
-  </body>
-</html>
+      <div id="help" title="ヘルプ">
+        <div style=" text-align: center;">
+          <img src="img/logo/logo-large.png"/>
+          <p>
+            Version:
+            <span class="version"></span>
+          </p>
+          <p>Copyright &copy; 2012 CreW Project. All rights reserved.</p>
+        </div>
+        <div class="help-section ui-state-default ui-corner-all">Cauliflowerとは？</div>
+        <p>READMEから転載予定。</p>
+        <div class="help-section ui-state-default ui-corner-all">対応ブラウザ</div>
+        <div style="padding:5px;">
+          <img src="img/icon/firefox.png" style="vertical-align:middle;"/>&nbsp;Firefox (Win/Mac) 13.0以降
+        </div>
+        <div style="padding:5px;">
+          <img src="img/icon/chrome.png" style="vertical-align:middle;"/>&nbsp;Chrome (Win/Mac) 19.0以降
+        </div>
+        <div style="padding:5px;">
+          <img src="img/icon/safari.png" style="vertical-align:middle;"/>&nbsp;Safari (Win/Mac) 6.0以降
+          <div style="padding-left:30px;">※Safari 5.1.7以下は、ファイルを開く機能が使えません。</div>
+        </div>
+        <div class="help-section ui-state-default ui-corner-all">開発</div>
+        <p>Ken Okada (okadaken[at]gmail.com)</p>
+        <p>Manabu Sugiura (manabu[at]sfc.keio.ac.jp)</p>
+      </div>
+      </body>
+    </html>
