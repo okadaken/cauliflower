@@ -118,38 +118,45 @@ Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = '真か偽を返します。';
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = '数値';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
-Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = 'A number.';
+Blockly.LANG_MATH_NUMBER_VALUE = '数値';
+Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = '数値を表現したブロックです。';
 
 Blockly.LANG_MATH_ARITHMETIC_HELPURL = 'http://en.wikipedia.org/wiki/Arithmetic';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Return the sum of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Return the difference of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\n' +
-'the power of the second number.';
+Blockly.LANG_MATH_POW = '累乗';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = '二数の和を計算します。';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = '二数の差を計算します。';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = '二数の積を計算します。';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = '二数の商を計算します。';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = '左辺を右辺で累乗します。';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
-Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
-Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
-Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
-Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "%1".';
+Blockly.LANG_MATH_CHANGE_TITLE_CHANGE1 = '変数';
+Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'x';
+Blockly.LANG_MATH_CHANGE_TITLE_CHANGE2 = 'に';
+Blockly.LANG_MATH_CHANGE_INPUT_BY = 'を加える';
+Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = '変数"%1"に指定された数値を加えます。';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
-Blockly.LANG_MATH_SINGLE_OP_ROOT = 'square root';
-Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'absolute';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = 'Return the square root of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = 'Return the absolute value of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_NEG = 'Return the negation of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = 'Return the natural logarithm of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = 'Return the base 10 logarithm of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = 'Return e to the power of a number.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';
+Blockly.LANG_MATH_SINGLE_OP_ROOT = 'の平方根';
+Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'の絶対値';
+Blockly.LANG_MATH_SINGLE_OP_NEG = 'の符号を反転した値';
+Blockly.LANG_MATH_SINGLE_OP_LN = 'の自然対数';
+Blockly.LANG_MATH_SINGLE_OP_LOG10 = 'の常用対数';
+Blockly.LANG_MATH_SINGLE_OP_EXP = 'を指数としたeの累乗';
+
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = '平方根を計算します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = '絶対値を計算します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_NEG = '符号を反転します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = '自然対数を計算します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = '常用対数を計算します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = '自然対数の底 (e) を、指定した値を指数として累乗します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';//Exceptionがでるので外した。
 
 Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
-Blockly.LANG_MATH_ROUND_TOOLTIP_1 = 'Round a number up or down.';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'round';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'round up';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'round down';
+Blockly.LANG_MATH_ROUND_TOOLTIP_1 = '切り捨てや四捨五入を行います。';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'の小数点以下を四捨五入した値';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'の小数点以下を切り上げた値';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'の小数点以下を切り捨てた値';
 
 Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
 Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree.';
@@ -200,7 +207,7 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
 '0.0 (inclusive) and 1.0 (exclusive).';
 
-Blockly.LANG_MATH_PARSE_INT = '整数に変換';
+Blockly.LANG_MATH_PARSE_INT = 'を整数に変換した値';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';
