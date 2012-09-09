@@ -274,17 +274,6 @@ Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'both';
 Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'left';
 Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'right';
 
-Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_PRINT_TITLE_PRINT = 'print';
-Blockly.LANG_TEXT_PRINT_TOOLTIP_1 = 'Print the specified text, number or other value.';
-
-Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
-Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = 'prompt for';
-Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = 'with message';
-Blockly.LANG_TEXT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified text.';
-Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'text';
-Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'number';
-
 // 日本語化終了 Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = '配列';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
@@ -380,3 +369,16 @@ Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = '引数の定義';
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = '変数：';
 
 Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = '関数定義をハイライトする';
+
+// HTML Blocks. 直接書いているのはなるべく外部化すること。
+
+Blockly.LANG_MYDOCUMENT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログに表示する';
+Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログを表示します。';
+
+Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
+Blockly.LANG_MYDOCUMENT_PROMPT_TITLE1 = '用の';
+Blockly.LANG_MYDOCUMENT_PROMPT_TITLE2 = 'というプロンプトの入力結果';
+Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified text.';
+Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT = '文字列';
+Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';

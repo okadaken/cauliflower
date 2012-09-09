@@ -186,21 +186,3 @@ Blockly.JavaScript.text_trim.OPERATORS = {
   RIGHT: '.replace(/\\s+$/, \'\')',
   BOTH: '.replace(/^\\s+|\\s+$/g, \'\')'
 };
-
-Blockly.JavaScript.text_print = function() {
-  // Print statement.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return 'window.alert(' + argument0 + ');\n';
-};
-
-Blockly.JavaScript.text_prompt = function() {
-  // Prompt function.
-  var msg = Blockly.JavaScript.quote_(this.getTitleValue('TEXT'));
-  var code = 'window.prompt(' + msg + ')';
-  var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
-  if (toNumber) {
-    code = 'window.parseFloat(' + code + ')';
-  }
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};

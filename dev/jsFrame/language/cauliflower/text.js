@@ -291,39 +291,3 @@ Blockly.Language.text_trim.OPERATORS =
     [[Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH, 'BOTH'],
      [Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT, 'LEFT'],
      [Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT, 'RIGHT']];
-
-Blockly.Language.text_print = {
-  // Print statement.
-  categoryName: Blockly.LANG_CATEGORY_TEXT,
-  categoryID: 'text',
-  helpUrl: Blockly.LANG_TEXT_PRINT_HELPURL,
-  init: function() {
-    this.setColour(textColor);
-    this.appendTitle(Blockly.LANG_TEXT_PRINT_TITLE_PRINT);
-    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip(Blockly.LANG_TEXT_PRINT_TOOLTIP_1);
-  }
-};
-
-Blockly.Language.text_prompt = {
-  // Prompt function.
-  categoryName: Blockly.LANG_CATEGORY_TEXT,
-  categoryID: 'text',
-  helpUrl: Blockly.LANG_TEXT_PROMPT_HELPURL,
-  init: function() {
-    this.setColour(textColor);
-    this.appendTitle(Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR);
-    var menu = new Blockly.FieldDropdown(this.TYPES);
-    this.appendTitle(menu, 'TYPE');
-    this.appendTitle(Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE);
-    this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
-    this.setOutput(true, [Number, String]);
-    this.setTooltip(Blockly.LANG_TEXT_PROMPT_TOOLTIP_1);
-  }
-};
-
-Blockly.Language.text_prompt.TYPES =
-    [[Blockly.LANG_TEXT_PROMPT_TYPE_TEXT, 'TEXT'],
-     [Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER, 'NUMBER']];

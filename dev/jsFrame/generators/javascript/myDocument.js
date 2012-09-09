@@ -16,18 +16,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * @fileoverview Generating JavaScript for control blocks.
  * @author fraser@google.com (Neil Fraser)
  */
-
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
+
+Blockly.JavaScript.myDocument_print = function() {
+  // Print statement.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_NONE) ||
+  '\'\'';
+  return 'window.alert(' + argument0 + ');\n';
+};
+
+Blockly.JavaScript.myDocument_prompt = function() {
+  // Prompt function.
+  var msg = Blockly.JavaScript.quote_(this.getTitleValue('TEXT'));
+  var code = 'window.prompt(' + msg + ')';
+  var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    code = 'window.parseFloat(' + code + ')';
+  }
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
 Blockly.JavaScript.myDocument_set = function() {
-	
-  var target = this.getTitleText( 'TARGET' );
-  var action = this.getTitleValue( 'ACTION');
+
+  var target = this.getTitleText('TARGET');
+  var action = this.getTitleValue('ACTION');
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE');
   
   var code = 'document.getElementById(\'' + target + '\').' + action + ' = ' + value + ';';
@@ -35,9 +52,9 @@ Blockly.JavaScript.myDocument_set = function() {
 };
 
 Blockly.JavaScript.myDocument_get = function() {
-	
-  var target = this.getTitleText( 'TARGET' );
-  var attr = this.getTitleValue( 'ATTRIBUTE');
+
+  var target = this.getTitleText('TARGET');
+  var attr = this.getTitleValue('ATTRIBUTE');
   
   var code = 'document.getElementById(\'' + target + '\').' + attr;
   return [code, Blockly.JavaScript.ORDER_ATOMIC];

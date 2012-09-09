@@ -47,7 +47,7 @@
             </block>
           </value>
           <statement name="DO">
-            <block type="text_print" inline="false">
+            <block type="myDocument_print" inline="false">
               <value name="TEXT">
                 <block type="text_join" inline="false">
                   <mutation items="2">

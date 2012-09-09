@@ -20,7 +20,7 @@
       </mutation>
       <title name="NAME">button1_onclick</title>
       <statement name="STACK">
-        <block type="text_print" inline="false">
+        <block type="myDocument_print" inline="false">
           <value name="TEXT">
             <block type="text">
               <title name="TEXT">ボタンが押されました。</title>
