@@ -13,8 +13,6 @@
  * READMEの外部ライブラリ情報更新
  * previewからファイルを参照すればフォーカス問題はクリアできる
  * getElementを全部jquery方式へ
- * 特殊文字対応 http://pst.co.jp/powersoft/html/index.php?f=3401（XMLパースで失敗する）
- * 実体参照をいれるとだめ（text/htmlにすればよいがインデントがくずれる）
  * 呼び出しポイントは分からないがconsole.logブロックは欲しい。
  * HTMLフォーマット改善 ->ペンディング
  * 重要！！！再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
@@ -628,6 +626,9 @@ function parseHTMLToDOM(errorFunction, isPreviewWindowCall) {
   
   //次にDOMに変換
   try {
+  
+    //XMLパーサーでエラーがでるので、特殊文字をコメントにしておく
+    xml = commentHtmlEntity(xml);
     var parser = new DOMParser();
     var dom = parser.parseFromString(xml, 'text/xml');
     //エラーチェック
@@ -775,6 +776,9 @@ function getAllCode(doc) {
   
   //titleが空で<title/>となるとbodyがレンダリングされない
   code = code.replace(/<title\/>/g, '<title></title>');
+  
+  //コメントアウトしていたEntityを戻す
+  code = uncommentHtmlEntity(code);
   
   if (hasDoctype) {
     code = code.replace(/<doctype.*?>/, '').replace('</doctype>', '');
@@ -1090,6 +1094,21 @@ function highLightJavaScriptPreview(startLine, startCh, endLine, endCh, classNam
 /**************************************************
  * ユーティリティ
  **************************************************/
+function commentHtmlEntity(s) {
+  //良く使うものでエラーがでるのは、&nbsp;と&copy;
+  //別のものを置換しないようにCALCOMMENTをつけてコメントアウトする
+  s = s.replace(/&nbsp;/g, '<!--CALCOMMENT-&nbsp;-->');
+  s = s.replace(/&copy;/g, '<!--CALCOMMENT-&copy;-->');
+  return s;
+}
+
+function uncommentHtmlEntity(s) {
+  s = s.replace(/<!--CALCOMMENT-&nbsp;-->/g, '&nbsp;');
+  s = s.replace(/<!--CALCOMMENT-&copy;-->/g, '&copy;');
+  return s;
+}
+
+
 function removeAllWhiteSpaces(s) {
   return s.replace(/[ \s]/g, "");
 }
