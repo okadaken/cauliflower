@@ -25,6 +25,24 @@ var logicColor = '#62c213';
 if (!Blockly.Language) 
   Blockly.Language = {};
 
+
+Blockly.Language.logic_boolean = {
+  // Boolean data type: true and false.
+  categoryName: Blockly.LANG_CATEGORY_LOGIC,
+  categoryID: 'logic',
+  helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
+  init: function() {
+    this.setColour(logicColor);
+    this.setOutput(true, Boolean);
+    this.appendTitle(Blockly.LANG_LOGIC_BOOLEAN_VALUE);
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
+    this.appendTitle(dropdown, 'BOOL');
+    this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1);
+  }
+};
+
+Blockly.Language.logic_boolean.OPERATORS = [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'], [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
+
 Blockly.Language.logic_compare = {
   // Comparison operator.
   categoryName: Blockly.LANG_CATEGORY_LOGIC,
@@ -99,20 +117,3 @@ Blockly.Language.logic_negate = {
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1);
   }
 };
-
-Blockly.Language.logic_boolean = {
-  // Boolean data type: true and false.
-  categoryName: Blockly.LANG_CATEGORY_LOGIC,
-  categoryID: 'logic',
-  helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
-  init: function() {
-    this.setColour(logicColor);
-    this.setOutput(true, Boolean);
-    this.appendTitle(Blockly.LANG_LOGIC_BOOLEAN_VALUE);
-    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendTitle(dropdown, 'BOOL');
-    this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1);
-  }
-};
-
-Blockly.Language.logic_boolean.OPERATORS = [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'], [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
