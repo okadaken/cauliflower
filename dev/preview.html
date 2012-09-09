@@ -24,11 +24,30 @@
     }
     
     .ui-button {
-        font-size: 11px;
+        font-size: 12px;
+    }
+    
+    .ui-tabs-panel .ui-button {
+        font-size: 12px;
+    }
+    
+    .console-icon {
+        float: left;
+    }
+    
+    .console-msg {
+        font-size: 13px;
+        color: #EE0000;
+        vertical-align: middle;
     }
     
     #preview-menu {
         margin: 5px;
+        text-align: right;
+    }
+    
+    #console-menu {
+        margin: 0px;
         text-align: right;
     }
     
@@ -44,117 +63,139 @@
       var pageTitle;
       
       function initalizeExportButton() {
-          $('#export-button').button({
-              icons: {
-                  primary: 'ui-icon-circle-arrow-s'
-              }
-          }).click(function() {
-              saveToFileForPreviewWindow({
-                  filename: getExportFileName(),
-                  contents: SourcePreview.getValue()
-              });
+        $('#export-button').button({
+          icons: {
+            primary: 'ui-icon-circle-arrow-s'
+          }
+        }).click(function() {
+          saveToFileForPreviewWindow({
+            filename: getExportFileName(),
+            contents: SourcePreview.getValue()
           });
+        });
+      }
+      
+      function initalizeConsoleClearButton() {
+        $('#console-clear-button').button({
+          icons: {
+            primary: 'ui-icon-circle-close'
+          }
+        }).click(function() {
+          $('#error-console').html('');
+        });
       }
       
       //cauliflower.jsのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
       //ファイル分割して読み込みを検討すること
       function saveToFileForPreviewWindow(properties) {
-          //Jquery化できるはず
-          var form = document.createElement('form');
-          form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
-          form.setAttribute('method', 'post');
-          form.style.display = 'none';
-          document.body.appendChild(form);
-          for (var prop in properties) {
-              var input = document.createElement('input');
-              input.setAttribute('type', 'hidden');
-              input.setAttribute('name', prop);
-              input.setAttribute('value', properties[prop]);
-              form.appendChild(input);
-          }
-          form.submit();
+        //Jquery化できるはず
+        var form = document.createElement('form');
+        form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+        form.setAttribute('method', 'post');
+        form.style.display = 'none';
+        document.body.appendChild(form);
+        for (var prop in properties) {
+          var input = document.createElement('input');
+          input.setAttribute('type', 'hidden');
+          input.setAttribute('name', prop);
+          input.setAttribute('value', properties[prop]);
+          form.appendChild(input);
+        }
+        form.submit();
       }
       
       function getExportFileName() {
-          var ext = '.html';
-          var defaultFileName = '新規HTMLファイル' + ext;
-          if (pageTitle != null) {
-              return window.opener.trimStringForFileName(pageTitle + ext);
-          } else {
-              return defaultFileName;
-          }
+        var ext = '.html';
+        var defaultFileName = '新規HTMLファイル' + ext;
+        if (pageTitle != null) {
+          return window.opener.trimStringForFileName(pageTitle + ext);
+        } else {
+          return defaultFileName;
+        }
       }
       
       function initalizeSourcePreview() {
-          //Jqueryのgetが使えるか検討
-          SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
-              mode: 'htmlmixed',
-              theme: 'html-preview',
-              tabMode: 'indent',
-              lineNumbers: true,
-              fixedGutter: true,
-              electricChars: true,
-              readOnly: true,
-              indentWithTabs: true,
-              tabSize: 3
-          });
-          SourcePreview.setSize('100%', '465px');
-          SourcePreview.addClass('html-preview');
+        //Jqueryのgetが使えるか検討
+        SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
+          mode: 'htmlmixed',
+          theme: 'html-preview',
+          tabMode: 'indent',
+          lineNumbers: true,
+          fixedGutter: true,
+          electricChars: true,
+          readOnly: true,
+          indentWithTabs: true,
+          tabSize: 3
+        });
+        SourcePreview.setSize('100%', '465px');
+        SourcePreview.addClass('html-preview');
       }
       
       function initalizePreviewWindowTabs() {
-          $('#tabs-preview').tabs({
-              cookie: {
-                  expires: 3 //選択タブをcookieで3日間保存
-              },
-              show: function(event, ui) {
-                  switch (ui.panel.id) {
-                      case 'tab-preview-src':
-                          if (SourcePreview != null) {
-                              SourcePreview.refresh();
-                          }
-                          break;
-                  }
+        $('#tabs-preview').tabs({
+          cookie: {
+            expires: 3 //選択タブをcookieで3日間保存
+          },
+          show: function(event, ui) {
+            switch (ui.panel.id) {
+            case 'tab-preview-src':
+              if (SourcePreview != null) {
+                SourcePreview.refresh();
               }
-          });
+              break;
+            }
+          }
+        });
       }
       
       function updateHTMLPreview(code) {
-          var previewFrame = document.getElementById('contents-preview');
-          var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
-          preview.open();
-          preview.write(code);
-          preview.close();
+        var previewFrame = document.getElementById('contents-preview');
+        var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+        preview.open();
+        preview.write(code);
+        preview.close();
       }
       
       $(document).ready(function() {
-          initalizePreviewWindowTabs();
-          initalizeExportButton();
-          initalizeSourcePreview();
-          
-          var dom = window.opener.parseHTMLToDOM(function() {
-              //エラーが発生したときはウィンドウを閉じる
-              window.close();
-          }, true);
-          var code = window.opener.getAllCode(dom);
-          var titles = dom.getElementsByTagName('title');
-          if (titles.length != 0 && titles[0].firstChild != null) {
-              pageTitle = titles[0].firstChild.nodeValue;
-              $('title').text(pageTitle);
-          }
-          
-          updateHTMLPreview(code);
-          SourcePreview.setValue(code);
-          
-          /*
-           もし関数外のコードを許すなら、一度実行しないと、document.writeなどが実行されない
-           復活させるべきコードだと思われる。HTMLの書きだしの順番は考慮すべき。
-           try {
-           eval(window.opener.getJavaScriptCode());
-           } catch (e) {
-           alert('Program error:\n' + e);
-           }*/
+        initalizePreviewWindowTabs();
+        initalizeExportButton();
+        initalizeConsoleClearButton();
+        initalizeSourcePreview();
+        
+        var dom = window.opener.parseHTMLToDOM(function() {
+          //エラーが発生したときはウィンドウを閉じる
+          window.close();
+        }, true);
+        var code = window.opener.getAllCode(dom);
+        var titles = dom.getElementsByTagName('title');
+        if (titles.length != 0 && titles[0].firstChild != null) {
+          pageTitle = titles[0].firstChild.nodeValue;
+          $('title').text(pageTitle);
+        }
+        
+        SourcePreview.setValue(code);
+        
+        //エラーコンソールにエラーを表示するためのコードを挿入
+        var onerrorHandler = 'this.onerror=function(msg,url,linenumber){'
+        onerrorHandler += 'window.parent.updateConsole(msg,url,linenumber)};\n';
+        var targetCode = '<script type="text/javascript">\n<!--\n';
+        var code = code.replace(targetCode, targetCode + onerrorHandler);
+        
+        updateHTMLPreview(code);
+        
+        /*
+         もし関数外のコードを許すなら、一度実行しないと、document.writeなどが実行されない
+         復活させるべきコードだと思われる。HTMLの書きだしの順番は考慮すべき。
+         try {
+         eval(window.opener.getJavaScriptCode());
+         } catch (e) {
+         alert('Program error:\n' + e);
+         }*/
       });
+      
+      function updateConsole(msg, url, linenumber) {
+        $('#error-console').append('<p ><img class="console-icon" src="img/icon/error-console-icon.png"><span class="console-msg">' + msg + '</span></p>');
+      }
     </script>
     <div id="preview-menu">
       <button id="export-button" title="ソースタブに表示されている内容をHTMLファイルとして保存します">HTMLファイルとしてエクスポート</button>
@@ -167,12 +208,21 @@
         <li>
           <a href="#tab-preview-src">ソース</a>
         </li>
+        <li>
+          <a href="#tab-error-console">エラーコンソール</a>
+        </li>
       </ul>
       <div id="tab-preview-preview">
         <iframe id="contents-preview"></iframe>
       </div>
       <div id="tab-preview-src">
         <textarea id="src-preview"></textarea>
+      </div>
+      <div id="tab-error-console">
+        <div id="console-menu">
+          <button id="console-clear-button" title="コンソールの表示内容を消去します。">クリア</button>
+        </div>
+        <div id="error-console"></div>
       </div>
     </div>
   </body>

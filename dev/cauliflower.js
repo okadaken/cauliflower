@@ -370,7 +370,6 @@ function load(event) {
       var buttons = {
         '削除': function() {
           Blockly.mainWorkspace.clear();
-          Blockly.mainWorkspace.render();
           $('#dialog').dialog('close');
           loadXML(xml);
         },
@@ -486,7 +485,6 @@ function loadSample(path) {
       var buttons = {
         '削除': function() {
           Blockly.mainWorkspace.clear();
-          Blockly.mainWorkspace.render();
           $('#dialog').dialog('close');
           loadXML(xml);
         },
@@ -821,6 +819,7 @@ function restoreBlocks() {
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
     updateJavaScriptPreview();
     Blockly.mainWorkspace.render();//Chromeだと再描画されないので入れてある
+    Blockly.Toolbox.redraw();
   }
 }
 
@@ -845,6 +844,7 @@ function discardBlocks() {
 function clearBlocklyWorkspace() {
   Blockly.mainWorkspace.clear();
   Blockly.mainWorkspace.render();
+  Blockly.Toolbox.redraw();
   updateJavaScriptPreview();
   if ('localStorage' in window) {
     window.localStorage.removeItem('cauliflower_blocks');

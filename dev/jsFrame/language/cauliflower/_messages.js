@@ -42,8 +42,8 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = '最初の条件を評価し、結果が真
 Blockly.LANG_CONTROLS_IF_MSG_IF = '分岐';
 Blockly.LANG_CONTROLS_IF_MSG_CONDITION = '条件';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '別の条件';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = '偽の場合';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = '真の場合';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = '偽ならば';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = '真ならば';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF_THEN = '次の条件が真の場合';
 
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = '分岐';
@@ -52,7 +52,7 @@ Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'この右側のブロックを挟んで
 Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = '追加条件';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = '条件を追加する場合は、このブロックを使います。';
 
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = '偽の場合';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = '偽ならば';
 Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'どの条件も満たさないときに実行したいブロックがある場合は、これを使います。';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';

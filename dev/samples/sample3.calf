@@ -1,0 +1,64 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;フォームの活用&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;form&gt;
+			お名前をどうぞ: &lt;input id="text1" type="text" size="20"&gt;&lt;input type="button" value="OK" onclick="hello()"&gt;
+		&lt;/form&gt;
+		&lt;p&gt;
+			&lt;a href="http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-7" target="_blank"&gt;
+				http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-7 
+			&lt;/a&gt;
+		&lt;/p&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="7" y="17">
+      <mutation>
+      </mutation>
+      <title name="NAME">hello</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">yourname</title>
+          <value name="VALUE">
+            <block type="myDocument_get">
+              <title name="TARGET">text1</title>
+              <title name="ATTRIBUTE">value</title>
+            </block>
+          </value>
+          <next>
+            <block type="text_print" inline="false">
+              <value name="TEXT">
+                <block type="text_join" inline="false">
+                  <mutation items="3">
+                  </mutation>
+                  <comment pinned="false" x="70" y="-153" h="73" w="348">コード生成がちょっと嫌かな。
+数字が結合できる仕様なので、仕方ないかもしれない。</comment>
+                  <value name="ADD0">
+                    <block type="text">
+                      <title name="TEXT">こんにちは、</title>
+                    </block>
+                  </value>
+                  <value name="ADD1">
+                    <block type="variables_get">
+                      <title name="VAR">yourname</title>
+                    </block>
+                  </value>
+                  <value name="ADD2">
+                    <block type="text">
+                      <title name="TEXT">さん</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
