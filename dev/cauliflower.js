@@ -235,7 +235,7 @@ function initializeHelp() {
     draggable: false,
     resizable: false,
     width: 500,
-    height: 600,
+    height: 650,
     show: 'clip',
     hide: 'clip'
   });
