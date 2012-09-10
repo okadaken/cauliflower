@@ -1,0 +1,53 @@
+<div>
+  <div style=" text-align: center;">
+    <img src="img/logo/logo-large.png"/>
+    <p>
+      Version: 
+      <span class="version"></span>
+    </p>
+    <p>
+      Copyright &copy; 2012 
+      <a href="http://crew-lab.sfc.keio.ac.jp/" target="_blank" style="text-decoration: none;">CreW Project</a>. All rights reserved.
+    </p>
+  </div>
+  <div class="help-section ui-state-default ui-corner-all">Cauliflowerとは？</div>
+  <p>JavaScriptプログラミングの導入教育を支援するオンラインエディタです。</p>
+  <p>プログラミングの未経験者が、一般的なJavaScriptプログラミングの学習（テキストエディタとWebブラウザ、統合開発環境などを使ったもの）に円滑に移行できるようなScaffoldingを行うことをねらいとしています。</p>
+  <div class="help-section ui-state-default ui-corner-all">対応ブラウザ</div>
+  <div style="padding:5px;">
+    <img src="img/icon/firefox.png" style="vertical-align:middle;"/>&nbsp;Firefox (Win/Mac) 13.0以降
+  </div>
+  <div style="padding:5px;">
+    <img src="img/icon/chrome.png" style="vertical-align:middle;"/>&nbsp;Chrome (Win/Mac) 19.0以降
+  </div>
+  <div style="padding:5px;">
+    <img src="img/icon/safari.png" style="vertical-align:middle;"/>&nbsp;Safari (Win/Mac) 6.0以降
+    <div style="padding-left:30px;">※Safari 5.1.7以下は、ファイルを開く機能が使えません。</div>
+  </div>
+  <div class="help-section ui-state-default ui-corner-all">想定ユーザ</div>
+  <p>基礎的なHTMLをタグを使って作成することができ、これからJavaScriptの学習をはじめようとしているプログラミングの未経験者</p>
+  <div class="help-section ui-state-default ui-corner-all">開発</div>
+  <p>Manabu Sugiura (manabu[at]sfc.keio.ac.jp)</p>
+  <p>Ken Okada (okadaken[at]gmail.com)</p>
+  <div class="help-section ui-state-default ui-corner-all">設計の意図</div>
+  <p>CauliflowerがねらいとするScaffoldingは次の2点で、これらを達成するためのUIと機能設計を行っています。また、Cauliflowerを卒業し、本来の目標であるテキストエディタとブラウザ、その他の統合開発環境を使った（テキストによる）JavaScriptプログラミングに移行しやすいように、Fadingに関しても考慮をしたつもりです。</p>
+  <div class="help-subsection ui-state-default ui-corner-all">#1 プログラミングの基礎とJavaScriptによる表現に慣れる</div>
+  <p>1つめのScaffoldingは、（オブジェクト指向を除く）プログラミングの基礎概念を理解し、それらの概念を使って自分で考えたアルゴリズムをJavaScriptではどのように表現するかの理解を支援することです。</p>
+  <p>
+    教師がプログラミングの基礎概念や動作について説明する際には、言葉や図解を利用します。JavaScriptを編集するエディタ上でそれが可能なように、
+    <a href="http://code.google.com/p/blockly/" target="_blank">Google Blockly</a>ベースのブロックエディタを採用しています。
+    ブロックの表記はプログラムで使われている概念が理解でき、動作結果が予測しやすいように、説明的な日本語表記としてあります。
+    ブロックエディタはブロックと日本語によるJavaScriptのコードインサイト機能の一種であると考えています（≠日本語プログラミング）。
+  </p>
+  <p>ブロックで作成したプログラムから生成されるJavaScriptのコードは、同一の画面にリアルタイムに表示されます。また、ブロックの編集によって変更された部分のJavaScriptコードが確認しやすいようにUIを設計してあります。これにより、プログラムにおける重要概念（変数、論理演算、制御構造等）をどのようにJavaScriptで表現するのか、また、自分の考えたアルゴリズムをJavaScriptで記述する場合はどのようになるのかを学習しながらプログラミングを行うことができます。</p>
+  <p>プログラミングの初学者はJavaScriptの文法規則に関する理解が十分でないため、テキストエディタを使ってプログラムを記述すると、構文エラーに悩まされます。構文エラーを解決するプロセスもプログラミングの重要な学習事項の1つではありますが、構文エラーを起こさないようにすることのみが学習目標になってしまい、アルゴリズムを考える段階まで到達するのに時間がかかります。</p>
+  <p>
+    プログラミング学習の初期段階において、言語の文法を覚えつつ、アルゴリズムを考えるという２つのことを同時にすることは、それそれの学習に悪影響を与えると考えています。ブロックエディタを使うことで構文エラーの発生を防ぎ、プログラムの基礎概念とJavaScriptでの表現方法を段階的に習得できると考えました。プログラミング学習の初期段階において、「<strong>アルゴリズムを考えることがプログラミングの本質であり、言語の文法規則を習得するだけがプログラミングではない</strong>」と理解してもらうことが重要です。
+  </p>
+  <div class="help-subsection ui-state-default ui-corner-all">#2 JavaScriptの仕組みの理解と開発作業に慣れる</div>
+  <p>2つめのScaffoldingは、HTMLとJavaScriptがどのように連携して動作するかの仕組みの理解と、（Cauliflowerを利用しない場合の汎用的な）JavaScript開発の作業プロセスを理解することです。</p>
+  <p>HTMLのDOM要素をJavaScriptから参照したり、イベントによってJavaScriptの関数呼び出しを行えるといった、HTMLとJavaScriptの連携が理解がしやすいように設計されています。HTMLから呼び出しを行っている関数名が関数名候補としてブロックエディタに表示されたり、HTMLの要素ID一覧がブロックの引数として表示されるという機能を付加しています。これにより、関数名やIDなどをキーとして、HTMLとJavaScriptの相互連携が行えるということを直感的に理解できます。</p>
+  <p>しかし、HTMLの中で参照している関数名を変更しても、すでにブロックエディタ上で定義された関数名は変更されない等、HTMLエディタとブロックエディタ間の連携はわざと不完全に設計してあります。2つのエディタが完全に自動で連携する機能を付けることは、テキストエディタを使って関数名やIDを自由に（間違いなく）記述する作業とのギャップが大きくなってしまいます。テキストエディタとブラウザ、統合開発環境とのギャップが大きくなりすぎ、Cauliflowerから卒業しにくくならないように、Fadingについても考慮してエディタが持つ機能を設計してあります。</p>
+  <p>Cauliflower自体がWebアプリケーションとして実装されているため、自分が作ったJavaScriptプログラムとCauliflower本体の区別が分かりにくいという欠点があります。そこで、作成したプログラムを実行する際には、別のウィンドウを表示させ、実行しているプログラムのソースと実行結果を合わせて表示するようにしてあります。これにより、自分が作成したJavaScriptプログラムを実行しているのはWebブラウザであり、プログラムのソースを編集した場合は、最新の結果をブラウザに読み込ませて実行結果を確認するという、テキストエディタとブラウザを使ったJavaScriptの開発プロセスに似せるように設計してあります。</p>
+  <p>また、その実行結果を確認するウィンドウからは、ソースをHTMLファイルとして書き出せる機能が備わっています。Cauliflowerから次の段階の学習に移行する際には、この機能を使って書きだした（Cauliflowerを使って作った）ソースを、Emacsなどのテキストエディタで開くことから始められるような設計としてあります。</p>
+</div>
