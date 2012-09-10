@@ -139,12 +139,14 @@ Blockly.Language.text_create_join_item = {
     this.contextMenu = false;
   }
 };
+
 Blockly.Language.text_append = {
   // Append to a variable in place.
-  category: Blockly.LANG_CATEGORY_TEXT,
+  categoryName: Blockly.LANG_CATEGORY_TEXT,
+  categoryID: 'text',
   helpUrl: Blockly.LANG_TEXT_APPEND_HELPURL,
   init: function() {
-    this.setColour(160);
+    this.setColour(textColor);
     this.appendTitle(Blockly.LANG_TEXT_APPEND_TO);
     this.appendTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange),
@@ -169,6 +171,7 @@ Blockly.Language.text_append = {
     }
   }
 };
+
 Blockly.Language.text_length = {
   // String length.
   categoryName: Blockly.LANG_CATEGORY_TEXT,
