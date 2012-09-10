@@ -64,10 +64,11 @@ Blockly.Language.myDocument_prompt = {
   helpUrl: Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL,
   init: function() {
     this.setColour(myDocumentColor);
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_PROMPT_TITLE1);
     this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
-    this.appendTitle(Blockly.LANG_MYDOCUMENT_PROMPT_TITLE);
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_PROMPT_TITLE2);
     var menu = new Blockly.FieldDropdown(this.TYPES);
-    this.appendTitle(menu, 'TYPE');    
+    this.appendTitle(menu, 'TYPE');
     this.setOutput(true, [Number, String]);
     this.setTooltip(Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1);
   }
