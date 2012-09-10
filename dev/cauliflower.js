@@ -235,15 +235,18 @@ function initializeHelp() {
     draggable: false,
     resizable: false,
     width: 500,
-    height: 500,
+    height: 630,
     show: 'clip',
-    hide: 'clip',
-    open: function(event, ui) {
-        //$(".ui-dialog-titlebar-close").hide();//閉じるボタンを消す
-    }
+    hide: 'clip'
   });
   // memo show/hideの一覧
   // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
+  
+  $.get('help.html', function(data) {
+    $('#help').html(data);
+    $('.version').replaceWith(version);
+  });
+  
 }
 
 function initializeJavaScriptPreview() {
@@ -445,6 +448,9 @@ function help() {
     }
   });
   $('#help').dialog('open');
+  //一度focusさせてからでないとscrollTopが効かない
+  $('#help').focus();
+  $('#help').scrollTop(0);
 }
 
 /**************************************************
