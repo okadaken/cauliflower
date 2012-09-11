@@ -118,7 +118,12 @@ Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
     blocks.push(block);
     gaps.push(margin * 2);
   }
-    
+  if (Blockly.Language.myDocument_joker) {
+    var block = new Blockly.Block(workspace, 'myDocument_joker');
+    block.initSvg();
+    blocks.push(block);
+    gaps.push(margin * 2);
+  } 
 	
   var idList = Blockly.MyDocument.allId();
 

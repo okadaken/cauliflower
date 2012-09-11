@@ -26,7 +26,18 @@ if (!Blockly.Language)
   Blockly.Language = {};
 
 function allOption() {
-  return [['all', [['HTML', 'innerHTML'], ['値', 'value']]], ['div', [['スタイルの背景色', 'style.backgroundColor']]]];
+  return [
+  	['all', [
+		['自身', '' ],
+		['のHTML', '.innerHTML'],
+		['の値', '.value']
+		]
+	],
+	['div', [
+		['のスタイルの背景色', '.style.backgroundColor']
+		]
+	]
+  ];
 }
 
 function getOption(tagName) {
@@ -92,7 +103,6 @@ Blockly.Language.myDocument_set = {
     
     this.appendTitle('ID');
     this.appendTitle(idDropDown, 'TARGET');
-    this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ACTION');
     this.appendTitle('を');
     this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);
@@ -101,7 +111,6 @@ Blockly.Language.myDocument_set = {
     
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    //this.setOutput( false, Object );
   }
 };
 
@@ -120,9 +129,28 @@ Blockly.Language.myDocument_get = {
     
     this.appendTitle('ID');
     this.appendTitle(idDropDown, 'TARGET');
-    this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ATTRIBUTE');
     
     this.setOutput(true, Object);
   }
 };
+
+Blockly.Language.myDocument_joker = {
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  helpUrl: Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL,
+  init: function() {
+    this.setColour(myDocumentColor);
+    
+	this.appendTitle('要素');
+	this.appendTitle(new Blockly.FieldTextInput('ああ'), 'ATTRIBUTE');
+	this.appendTitle('、');
+    this.appendInput('', Blockly.INPUT_VALUE, 'TARGET', null);
+    this.appendInput('の', Blockly.DUMMY_INPUT );
+	this.setInputsInline(true);
+    
+    this.setOutput(true, Object);
+  }
+};
+Blockly.Language.myDocument_joker.TYPES = [[Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT, 'TEXT'], [Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER, 'NUMBER']];
+

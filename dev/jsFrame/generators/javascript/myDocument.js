@@ -47,7 +47,7 @@ Blockly.JavaScript.myDocument_set = function() {
   var action = this.getTitleValue('ACTION');
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE');
   
-  var code = 'document.getElementById(\'' + target + '\').' + action + ' = ' + value + ';';
+  var code = 'document.getElementById(\'' + target + '\')' + action + ' = ' + value + ';';
   return code + '\n';
 };
 
@@ -56,7 +56,15 @@ Blockly.JavaScript.myDocument_get = function() {
   var target = this.getTitleText('TARGET');
   var attr = this.getTitleValue('ATTRIBUTE');
   
-  var code = 'document.getElementById(\'' + target + '\').' + attr;
+  var code = 'document.getElementById(\'' + target + '\')' + attr;
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+Blockly.JavaScript.myDocument_joker = function() {
+
+  var target = Blockly.JavaScript.valueToCode(this, 'TARGET', Blockly.JavaScript.ORDER_NONE);
+  var attr = this.getTitleText('ATTRIBUTE');
+  
+  var code = target + '.' + attr;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
