@@ -269,7 +269,6 @@ Blockly.Procedures.allEventFunctions = function() {
 	var body = dom.getElementsByTagName("body");
 
 	Blockly.Procedures.searchEventFunctions( body[0], funcNameList );
-
 	return funcNameList;
 };
 
@@ -304,7 +303,7 @@ Blockly.Procedures.searchEventFunctions = function( element, funcNameList ){
 	}
 	for ( var i=0 ; i < Blockly.Procedures.eventTarget.length ; i++ ) {
 		var func = element.getAttribute( Blockly.Procedures.eventTarget[i] );
-		if ( func && funcNameList.indexOf(func)==-1 ) {
+		if ( func && funcNameList.indexOf(func)==-1 && func.indexOf('(')!=-1 ) {
 			funcNameList.push(func);
 		}
 	}
@@ -318,9 +317,9 @@ Blockly.Procedures.dropdownCreate = function( initValue ) {
 	function removeBrackets( funcList ){
 		for( var i=0 ; i<funcList.length ; i++ ){
 			var tmp = funcList[i].replace(' ','');
-			if( tmp.slice(tmp.length-2) == '()' ){
-				funcList[i] = tmp.slice( 0, tmp.length-2 );
-			}
+			if( tmp.indexOf('(') != -1 ){
+				funcList[i] = tmp.slice( 0, tmp.indexOf('(') );
+			} 
 		}
 	}
 
@@ -332,7 +331,7 @@ Blockly.Procedures.dropdownCreate = function( initValue ) {
     this.initValue = this.getText();
   }
   funcList.unshift( this.initValue );
-
+  
   funcList.push(Blockly.MSG_RENAME_PROCEDURE);
 
   var options = [];
