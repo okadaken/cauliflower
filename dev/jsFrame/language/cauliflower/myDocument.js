@@ -51,7 +51,21 @@ Blockly.Language.myDocument_onloadA = {
     this.appendTitle('ページが読み込まれたら実行する 案A');
     this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
     this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
-    this.contextMenu = false;
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    } else {
+      for (var i in this.workspace.getTopBlocks()) {
+        var top = this.workspace.getTopBlocks()[i];
+        if (top != this && top.type == 'myDocument_onloadA') {
+          this.setWarningText('警告（仮）：\n同じのが二個あると\n正常に動作しませんよ！！！');
+          return;
+        }
+      }
+      this.setWarningText(null);
+    }
   }
 };
 
@@ -64,7 +78,6 @@ Blockly.Language.myDocument_onloadB = {
     this.appendTitle('ページが読み込まれたら実行する 案B');
     this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
     this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
-    this.contextMenu = false;
   }
 };
 
