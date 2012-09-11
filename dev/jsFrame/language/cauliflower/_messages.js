@@ -78,7 +78,7 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = '要素変数';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'element';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = '走査対象';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '処理';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = '走査する対象に含まれる要素を先頭から順番に、\n要素変数の"%1"に代入しながら繰り返します。';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = '走査する対象に含まれる要素を先頭から順番に、\n要素変数の"%1"に代入しながら繰り返し処理を行います。';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'の処理にジャンプ';
