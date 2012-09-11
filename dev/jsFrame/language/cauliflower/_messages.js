@@ -382,6 +382,9 @@ Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = '関数定義をハイライトする';
 
 // HTML Blocks. 直接書いているのはなるべく外部化すること。
 
+Blockly.LANG_MYDOCUMENT_WRITE_TITLE = 'ページに出力する';
+Blockly.LANG_MYDOCUMENT_WRITE_TOOLTIP_1 = 'スクリプト要素が呼び出された場所に、指定した内容\nを出力します（内容は文字列に変換されます）。\nこの命令はページの他のコンテンツを削除します。\nページにコンテンツに追加する場合は、innerHTML\nプロパティなどを使います。';
+
 Blockly.LANG_MYDOCUMENT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログを表示して待つ';
 Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログウィンドウを表示します。';

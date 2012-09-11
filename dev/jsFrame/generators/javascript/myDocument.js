@@ -22,6 +22,11 @@
  */
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
+Blockly.JavaScript.myDocument_write = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_NONE) ||
+  '\'\'';
+  return 'document.write(' + argument0 + ');\n';
+};
 
 Blockly.JavaScript.myDocument_print = function() {
   // Print statement.

@@ -105,6 +105,12 @@ Blockly.MyDocument.dropdownChange = function(text) {
  */
 Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
     
+  if (Blockly.Language.myDocument_write) {
+    var block = new Blockly.Block(workspace, 'myDocument_write');
+    block.initSvg();
+    blocks.push(block);
+    gaps.push(margin * 2);
+  }
     
   if (Blockly.Language.myDocument_print) {
     var block = new Blockly.Block(workspace, 'myDocument_print');

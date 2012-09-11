@@ -26,18 +26,7 @@ if (!Blockly.Language)
   Blockly.Language = {};
 
 function allOption() {
-  return [
-  	['all', [
-		['要素', '' ],
-		['要素のHTML', '.innerHTML'],
-		['要素の値', '.value']
-		]
-	],
-	['div', [
-		['要素のスタイルの背景色', '.style.backgroundColor']
-		]
-	]
-  ];
+  return [['all', [['要素', ''], ['要素のHTML', '.innerHTML'], ['要素の値', '.value']]], ['div', [['要素のスタイルの背景色', '.style.backgroundColor']]]];
 }
 
 function getOption(tagName) {
@@ -52,6 +41,20 @@ function getOption(tagName) {
   }
   return options;
 }
+
+Blockly.Language.myDocument_write = {
+  // Print statement.
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  init: function() {
+    this.setColour(myDocumentColor);
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_WRITE_TITLE);
+    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.LANG_MYDOCUMENT_WRITE_TOOLTIP_1);
+  }
+};
 
 Blockly.Language.myDocument_print = {
   // Print statement.
@@ -130,7 +133,7 @@ Blockly.Language.myDocument_get = {
     
     this.appendTitle('ID');
     this.appendTitle(idDropDown, 'TARGET');
-        this.appendTitle('の');
+    this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ATTRIBUTE');
     
     this.setOutput(true, Object);
@@ -145,11 +148,11 @@ Blockly.Language.myDocument_joker = {
     this.setColour(myDocumentColor);
     
     this.appendInput('', Blockly.INPUT_VALUE, 'TARGET', null);
-    this.appendInput('の', Blockly.DUMMY_INPUT );
-	var input = new Blockly.FieldTextInput('');
-	this.appendInput( [input,'ATTRIBUTE'], Blockly.DUMMY_INPUT, 'ATTRIBUTE', String );
-
-	this.setInputsInline(true);
+    this.appendInput('の', Blockly.DUMMY_INPUT);
+    var input = new Blockly.FieldTextInput('');
+    this.appendInput([input, 'ATTRIBUTE'], Blockly.DUMMY_INPUT, 'ATTRIBUTE', String);
+    
+    this.setInputsInline(true);
     this.setOutput(true, Object);
   }
 };
