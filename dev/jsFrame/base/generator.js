@@ -134,7 +134,12 @@ Blockly.Generator.workspaceToCode = function(name) {
   var blocks = Blockly.mainWorkspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
   	
+	// procedure 以外は出力しない
 	if( block.isRoot == undefined ){
+		continue;
+	}
+	// disable 状態のprocedureは出力しない
+	if( block.disabled == true ){
 		continue;
 	}
 	
