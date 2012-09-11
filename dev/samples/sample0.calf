@@ -5,8 +5,7 @@
 		&lt;meta charset="UTF-8"/&gt;
 		&lt;title&gt;はじめてのプログラム&lt;/title&gt;
 	&lt;/head&gt;
-	&lt;body onload="hello()"&gt;
-		&lt;p&gt;いまはスクリプトが直に書けないので、bodyのonloadを使うしかない。&lt;/p&gt;
+	&lt;body&gt;
 		&lt;p&gt;
 			&lt;a href="http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-5" target="_blank"&gt;
 				http://ipl.sfc.keio.ac.jp/text/pro-2012-4/lecture-02/#i-5 
@@ -15,11 +14,8 @@
 	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
-    <block type="procedures_defnoreturn" x="1" y="1">
-      <mutation>
-      </mutation>
-      <title name="NAME">hello</title>
-      <statement name="STACK">
+    <block type="myDocument_onloadB" x="-6" y="5">
+      <statement name="DO">
         <block type="myDocument_write" inline="false">
           <value name="TEXT">
             <block type="text">
