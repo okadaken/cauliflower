@@ -77,6 +77,36 @@ Blockly.Language.math_arithmetic.TOOLTIPS = {
   POWER: Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER
 };
 
+//parseIntとparseFloat（オリジナル）
+Blockly.Language.math_parse = {
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID: 'math',
+  helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,
+  init: function() {
+    this.setColour(mathColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [String]);
+    this.appendInput(Blockly.LANG_MATH_PARSE_TITLE1, Blockly.DUMMY_INPUT, '', null);
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
+    this.appendInput([dropdown, 'TYPE'], Blockly.DUMMY_INPUT, '', Number);
+    this.setOutput(true, Number);
+    this.appendInput(Blockly.LANG_MATH_PARSE_TITLE2, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var type = thisBlock.getTitleValue('TYPE');
+      return Blockly.Language.math_parse.TOOLTIPS[type];
+    });
+  }
+};
+
+Blockly.Language.math_parse.OPERATORS = [[Blockly.LANG_MATH_PARSE_TYPE_INT, 'INT'], [Blockly.LANG_MATH_PARSE_TYPE_FLOAT, 'FLOAT']];
+Blockly.Language.math_parse.TOOLTIPS = {
+  INT: Blockly.LANG_MATH_PARSE_TOOLTIP_INT,
+  FLOAT: Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT
+};
+
 Blockly.Language.math_change = {
   // Add to a variable in place.
   categoryName: Blockly.LANG_CATEGORY_MATH,
@@ -157,20 +187,6 @@ Blockly.Language.math_round = {
     this.appendInput([dropdown, 'OP'], Blockly.DUMMY_INPUT, 'NUM', Number);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_ROUND_TOOLTIP_1);
-  }
-};
-
-//parseFloatも作らないとだめかもしれない
-Blockly.Language.math_parseInt = {
-  categoryName: Blockly.LANG_CATEGORY_MATH,
-  categoryID: 'math',
-  helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,
-  init: function() {
-    this.setColour(mathColor);
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [Number, String]);
-    this.setOutput(true, Number);
-    this.appendInput(Blockly.LANG_MATH_PARSE_INT, Blockly.DUMMY_INPUT, '', null);
-    this.setInputsInline(true);
   }
 };
 

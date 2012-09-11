@@ -129,6 +129,13 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = '二数の積を計算します�
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = '二数の商を計算します。';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = '左辺を右辺で累乗します。';
 
+Blockly.LANG_MATH_PARSE_TITLE1 = 'を';
+Blockly.LANG_MATH_PARSE_TITLE2 = 'に変換した値';
+Blockly.LANG_MATH_PARSE_TYPE_INT = '整数';
+Blockly.LANG_MATH_PARSE_TYPE_FLOAT = '実数';
+Blockly.LANG_MATH_PARSE_TOOLTIP_INT = '指定された文字列を整数に変換します。\n小数点以下は切り捨てられます。\n文字列が変換できない場合はNaNを返します。';
+Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT = '指定された文字列を実数に変換します。\n文字列が変換できない場合はNaNを返します。';
+
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE1 = '変数';
 Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'x';
@@ -151,7 +158,6 @@ Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = '自然対数を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = '常用対数を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = '自然対数の底 (e) を、指定した値を指数として累乗します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';//Exceptionがでるので外した。
-
 Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
 Blockly.LANG_MATH_ROUND_TOOLTIP_1 = '切り捨てや四捨五入を行います。';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'の小数点以下を四捨五入した値';
@@ -207,8 +213,6 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
 '0.0 (inclusive) and 1.0 (exclusive).';
 
-Blockly.LANG_MATH_PARSE_INT = 'を整数に変換した値';
-
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
@@ -225,7 +229,7 @@ Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = 'Add, remove, or reorder sections to r
 Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = 'item';
 Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP_1 = 'Add an item to the text.';
 
-Blockly.LANG_TEXT_APPEND_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html'; 
+Blockly.LANG_TEXT_APPEND_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_APPEND_TO = 'to';
 Blockly.LANG_TEXT_APPEND_APPENDTEXT = 'append text';
 Blockly.LANG_TEXT_APPEND_VARIABLE = 'item';
