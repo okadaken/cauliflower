@@ -116,6 +116,21 @@ Blockly.Generator.get = function(name) {
       }
       return code;
     };
+    
+    //読み込み時に実行用
+    generator.statementToCodeWithNoIndent = function(block, name) {
+      var input = block.getInputTargetBlock(name);
+      var code = this.blockToCode(input);
+      if (typeof code != 'string') {
+        // Value blocks must return code and order of operations info.
+        // Statement blocks must only return code.
+        throw 'Expecting code from statement block "' + input.type + '".';
+      }
+      if (code) {
+        code = Blockly.Generator.prefixLines(code, '');
+      }
+      return code;
+    };
 
     Blockly.Generator.languages[name] = generator;
   }

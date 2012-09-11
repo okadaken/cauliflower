@@ -42,6 +42,32 @@ function getOption(tagName) {
   return options;
 }
 
+Blockly.Language.myDocument_onloadA = {
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  isRoot: true,//コード生成する
+  init: function() {
+    this.setColour(myDocumentColor);
+    this.appendTitle('ページが読み込まれたら実行する 案A');
+    this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
+    this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Language.myDocument_onloadB = {
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  isRoot: true,//コード生成する
+  init: function() {
+    this.setColour(myDocumentColor);
+    this.appendTitle('ページが読み込まれたら実行する 案B');
+    this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
+    this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
+    this.contextMenu = false;
+  }
+};
+
 Blockly.Language.myDocument_write = {
   // Print statement.
   categoryName: null, // myDocument are handled specially.
