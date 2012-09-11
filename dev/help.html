@@ -1,11 +1,11 @@
 <div>
   <div style=" text-align: center;">
     <img title="Cauliflower Powered by Google Blockly" src="img/logo/logo-large.png"/>
-    <p>
+    <p style="margin-top:0">
       Version: 
       <span class="version"></span>
     </p>
-    <p>
+    <p style="font-size:10px;">
       Copyright &copy; 2012 
       <a href="http://crew-lab.sfc.keio.ac.jp/" target="_blank" style="text-decoration: none;">CreW Project</a>. All rights reserved.
     </p>
@@ -23,15 +23,13 @@
   </div>
   <div style="padding:5px;">
     <img src="img/icon/safari.png" style="vertical-align:middle;"/>&nbsp;Safari (Win/Mac) 6.0以降
-    <div style="padding-left:30px;">※Safari 5.1.7以下は、ファイルを開く機能が使えません。</div>
+    <p style="padding-left:33px;margin-top:0px;font-size:11px;">※Safari 5.1.7以下は、ファイルを開く機能が使えません。</p>
   </div>
-  <div class="help-section ui-state-default ui-corner-all">想定ユーザ</div>
+  <div class="help-section ui-state-default ui-corner-all">対象ユーザ</div>
   <p>基礎的なHTMLをタグを使って作成することができ、これからJavaScriptの学習をはじめようとしているプログラミングの未経験者</p>
   <div class="help-section ui-state-default ui-corner-all">開発</div>
-  <ul>
-      <li>Ken Okada (okadaken[at]gmail.com)</li>
-      <li>Manabu Sugiura (manabu[at]sfc.keio.ac.jp)</li>
-  </ul>
+  <p>Ken Okada (okadaken[at]gmail.com)</p>
+  <p>Manabu Sugiura (manabu[at]sfc.keio.ac.jp)</p>
   <p>問い合わせなどは上記のメールアドレスへお願いします。</p>
   <div class="help-section ui-state-default ui-corner-all">設計の意図</div>
   <p>CauliflowerがねらいとするScaffoldingは次の2点で、これらを達成するためのUI/機能設計を行っています。また、Cauliflowerを卒業し、本来の目標であるテキストエディタとWebブラウザ、その他の統合開発環境を使った（テキストによる）JavaScriptプログラミングに移行しやすいように、Fadingに関しても考慮をしたつもりです。</p>
@@ -53,5 +51,5 @@
   <p>HTMLのDOM要素をJavaScriptから参照したり、イベントによってJavaScriptの関数呼び出しを行えるといった、HTMLとJavaScriptの連携が理解がしやすいように設計されています。HTMLから呼び出しを行っている関数名が関数名候補としてブロックエディタに表示されたり、HTMLの要素ID一覧がブロックの引数として表示されるという機能を付加しています。これにより、関数名やIDなどをキーとして、HTMLとJavaScriptの相互連携が行えるということを直感的に理解できます。</p>
   <p>しかし、HTMLの中で参照している関数名を変更しても、すでにブロックエディタ上で定義された関数名は変更されない等、HTMLエディタとブロックエディタ間の連携はわざと不完全に設計してあります。2つのエディタが完全に自動で連携する機能を付けることは、テキストエディタ等を使って関数名やIDを自由に（間違いなく）記述する開発作業とのギャップが大きくなってしまいます。テキストエディタとWebブラウザによる開発、統合開発環境とのギャップが大きくなりすぎ、Cauliflowerから卒業しにくくならないように、Fadingについても考慮し、HTMLエディタとブロックエディタの機能を制限しています。</p>
   <p>Cauliflower自体がWebアプリケーションとして実装されているため、自分が作ったJavaScriptプログラムとCauliflower本体の区別が分かりにくいという欠点があります。そこで、作成したプログラムを実行する際には、別のウィンドウを表示させ、実行しているプログラムのソースと実行結果やエラーコンソールを表示するようにしてあります（必要最低限の機能を持った小さなWebブラウザを模倣）。これにより、自分が作成したJavaScriptプログラムを実行しているのはWebブラウザであり、プログラムのソースを編集した場合は、最新の結果をWebブラウザに読み込ませて実行結果を確認したり、実行時エラーをエラーコンソールで確認したりという、テキストエディタとWebブラウザを使った（より汎用的な）JavaScriptの開発プロセスに似せるように設計してあります。</p>
-  <p>また、その実行結果を確認するウィンドウからは、ソースをHTMLファイルとして書き出せる機能が備わっています。Cauliflowerから次の段階の学習に移行する際には、この機能を使って書きだした（Cauliflowerを使って作った）ソースを、MiやEmacsなどのテキストエディタで開くことから始められるような設計としてあります。</p>
+  <p>また、その実行結果を確認するウィンドウからは、ソースをHTMLファイルとして書き出せる機能が備わっています。Cauliflowerから次の段階の学習に移行する際には、この機能を使って書きだした（Cauliflowerを使って作った）ソースをテキストエディタで開くことからはじめられる設計としてあります。</p>
 </div>

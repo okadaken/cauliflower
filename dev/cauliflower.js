@@ -229,9 +229,12 @@ function initializeHelp() {
     draggable: false,
     resizable: false,
     width: 500,
-    height: 650,
+    height: 550,
     show: 'clip',
-    hide: 'clip'
+    hide: 'clip',
+    open: function(event, ui) {
+      $(".ui-dialog-titlebar-close").hide();//閉じるボタンを消す
+    }
   });
   // memo show/hideの一覧
   // 'blind', 'clip', 'drop', 'explode', 'fold', 'puff', 'slide', 'scale', 'size', 'pulsate','bounce'
