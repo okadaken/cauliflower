@@ -7,13 +7,17 @@
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
  * ■見た目
- * ヘルプを完成させる
- * faviconの設定
- * ロゴの設定
  * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない→部分的に対応
  * ■機能要求
+ * parseIntは選択肢でfloatもできるようにする
+ * 文字列連結は生成コードを変えるのでよさそう（仕様を見ること）
+ * HTMLタグレファレンス
+ * 保存時にサーバ側でファイルバックアップ
+ * 実行ウィンドウのサブミット対策 formに自動で埋め込む必要があるかもしれない
+ * http://blog.nomadscafe.jp/archives/000484.html
+ * 本体アップデートに伴うテスト
  * 追加読み込み時にブロックが重なるのが嫌
- * 呼び出しポイントは分からないがconsole.logブロックは欲しい
+ * 呼び出しポイントは分からないがconsole.logブロックは欲しいかも
  * 再読み込み後のJavaScriptエディタの位置がおかしい（再読み込みした後にワークスペースのフォーカス領域が変更される時がある）
  * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
  * ■リファクタリング
@@ -55,19 +59,9 @@ $(document).ready(function() {
   initializeHelp();
   initializeJavaScriptPreview();
   initializeHTMLEditor();
-  restoreHTML();
-  resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
-  HTMLEditor.refresh();
-  window.setTimeout(updateHTMLDesignPreview, 300);
-  $(window).bind('unload', function() {
-    backupHTML();
-  });
   initializeDialogs();
   nullDOM = createNullDOM();
-  
   validateBrowser();
-  
-  $('.version').replaceWith(version);
 });
 
 /**************************************************
@@ -300,6 +294,14 @@ function initializeHTMLEditor() {
   var activeLine = HTMLEditor.setLineClass(0, 'CodeMirror-activeline');
   HTMLEditor.setSize('50%', '502px');
   HTMLEditor.addClass('html-editor');
+  
+  restoreHTML();
+  resetHTMLEditUndoState();//再読み込み時にはUndoできなくする
+  HTMLEditor.refresh();
+  window.setTimeout(updateHTMLDesignPreview, 300);
+  $(window).bind('unload', function() {
+    backupHTML();
+  });
 }
 
 function initializeBlocklyFrame(blockly) {
