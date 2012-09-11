@@ -142,15 +142,12 @@ Blockly.Language.myDocument_joker = {
   init: function() {
     this.setColour(myDocumentColor);
     
-	this.appendTitle('要素');
-	this.appendTitle(new Blockly.FieldTextInput('ああ'), 'ATTRIBUTE');
-	this.appendTitle('、');
     this.appendInput('', Blockly.INPUT_VALUE, 'TARGET', null);
     this.appendInput('の', Blockly.DUMMY_INPUT );
+	var input = new Blockly.FieldTextInput('');
+	this.appendInput( [input,'ATTRIBUTE'], Blockly.DUMMY_INPUT, 'ATTRIBUTE', String );
+
 	this.setInputsInline(true);
-    
     this.setOutput(true, Object);
   }
 };
-Blockly.Language.myDocument_joker.TYPES = [[Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT, 'TEXT'], [Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER, 'NUMBER']];
-
