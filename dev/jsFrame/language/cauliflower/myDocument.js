@@ -28,13 +28,13 @@ if (!Blockly.Language)
 function allOption() {
   return [
   	['all', [
-		['自身', '' ],
-		['のHTML', '.innerHTML'],
-		['の値', '.value']
+		['要素', '' ],
+		['要素のHTML', '.innerHTML'],
+		['要素の値', '.value']
 		]
 	],
 	['div', [
-		['のスタイルの背景色', '.style.backgroundColor']
+		['要素のスタイルの背景色', '.style.backgroundColor']
 		]
 	]
   ];
@@ -103,6 +103,7 @@ Blockly.Language.myDocument_set = {
     
     this.appendTitle('ID');
     this.appendTitle(idDropDown, 'TARGET');
+    this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ACTION');
     this.appendTitle('を');
     this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);
@@ -129,6 +130,7 @@ Blockly.Language.myDocument_get = {
     
     this.appendTitle('ID');
     this.appendTitle(idDropDown, 'TARGET');
+        this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ATTRIBUTE');
     
     this.setOutput(true, Object);
