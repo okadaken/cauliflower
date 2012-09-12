@@ -14,7 +14,7 @@
 	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
-    <block type="myDocument_onloadB" x="-6" y="5">
+    <block type="myDocument_direct" x="-6" y="5">
       <statement name="DO">
         <block type="myDocument_write" inline="false">
           <value name="TEXT">

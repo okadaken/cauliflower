@@ -33,7 +33,7 @@
       </mutation>
       <title name="NAME">hoge</title>
       <statement name="STACK">
-        <block type="controls_for" inline="true">
+        <block type="controls_for" inline="false">
           <variable data="i" name="VAR">
           </variable>
           <value name="FROM">

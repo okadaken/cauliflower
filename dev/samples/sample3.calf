@@ -27,7 +27,7 @@
           <value name="VALUE">
             <block type="myDocument_get">
               <title name="TARGET">text1</title>
-              <title name="ATTRIBUTE">value</title>
+              <title name="ATTRIBUTE">.value</title>
             </block>
           </value>
           <next>

@@ -21,7 +21,7 @@
       <statement name="STACK">
         <block type="myDocument_set" inline="true">
           <title name="TARGET">div1</title>
-          <title name="ACTION">style.backgroundColor</title>
+          <title name="ACTION">.style.backgroundColor</title>
           <value name="VALUE">
             <block type="text">
               <title name="TEXT">white</title>
@@ -37,7 +37,7 @@
       <statement name="STACK">
         <block type="myDocument_set" inline="true">
           <title name="TARGET">div1</title>
-          <title name="ACTION">style.backgroundColor</title>
+          <title name="ACTION">.style.backgroundColor</title>
           <value name="VALUE">
             <block type="text">
               <title name="TEXT">yellow</title>
