@@ -148,6 +148,19 @@
         });
       }
       
+      function hasFormParent(target) {
+        while (true) {
+          var dom = target.parentNode;
+          if (dom.nodeName == 'form') {
+            return true;
+          } else if (dom.nodeName == 'body') {
+            return false;
+          } else {
+            dom = dom.parentNode;
+          }
+        }
+      }
+      
       function updateHTMLPreview(code) {
         var previewFrame = document.getElementById('contents-preview');
         var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
@@ -177,6 +190,7 @@
         SourcePreview.setValue(codeForView);
         
         //実際に動かすコードを作る
+        dom = window.opener.parseHTMLToDOM(null, false);
         
         //inputタグをチェックしてエンターを禁止する
         var inputs = dom.getElementsByTagName('input');
@@ -185,7 +199,7 @@
           if (input.getAttribute('type') != 'text') {
             continue;
           }
-          if (!input.hasAttribute('onkeypress')) {
+          if (hasFormParent(input) && !input.hasAttribute('onkeypress')) {
             input.setAttribute('onkeypress', 'return BlockEnter(event)');
           }
         }
