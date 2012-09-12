@@ -1006,8 +1006,8 @@ function loadHTMLTemplateConfirm() {
   var buttons = {
     OK: function() {
       discardHTML();
-      var o = $.get('html_template.txt', function() {
-        HTMLEditor.setValue(o.responseText);
+      $.get('html-template.txt', function(data) {
+        HTMLEditor.setValue(new XMLSerializer().serializeToString(data));
       }).complete(function() {
         $('#dialog').dialog('close');
       });
@@ -1021,8 +1021,8 @@ function loadHTMLTemplateConfirm() {
 
 function loadHTMLTemplate() {
   discardHTML();
-  var o = $.get('html_template.txt', function() {
-    HTMLEditor.setValue(o.responseText);
+  $.get('html-template.txt', function(data) {
+    HTMLEditor.setValue(new XMLSerializer().serializeToString(data));
   });
 }
 
