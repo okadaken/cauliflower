@@ -28,9 +28,14 @@ Blockly.JavaScript.objects = function() {
 
 	var code = '{';
 	for( var i=0 ; i<this.itemCount_ ; i++ ){
-		code += this.getTitleValue('NAME'+i);
-		code += ':';
-		code += Blockly.JavaScript.valueToCode(this, 'ADD' + i, Blockly.JavaScript.ORDER_COMMA) || 'null';
+		
+		var key = this.getTitleValue('NAME'+i);
+		var value = Blockly.JavaScript.valueToCode(this, 'ADD' + i, Blockly.JavaScript.ORDER_COMMA);
+		if( !(key && value) ){
+			continue;
+		}
+		
+		code += key + ":" + value;
 		
 		if( i+1 != this.itemCount_ ){
 			code += ',';
