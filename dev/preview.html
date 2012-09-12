@@ -1,7 +1,7 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>実行結果 - Cauliflower</title>
+    <meta charset="UTF-8">
+    <title>実行ウィンドウ - Cauliflower</title>
     <link rel="stylesheet" href="jquery/css/jquery-ui-1.8.22.custom.css"/>
     <script type="text/javascript" src="jquery/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery/jquery-ui-1.8.22.custom.min.js"></script>
@@ -180,7 +180,7 @@
           window.close();
         }, true);
         
-        //プレビュー用のコードを作る       
+        //プレビュー用のコードを作る
         var codeForView = window.opener.getAllCode(dom);
         var titles = dom.getElementsByTagName('title');
         if (titles.length != 0 && titles[0].firstChild != null) {
@@ -206,23 +206,26 @@
         
         var codeForExec = window.opener.getAllCode(dom);
         
-        //エラーコンソールにエラーを表示するためのコードを挿入
+        //エラーコンソールにエラーを表示するためのコード
+        var onerrorHandler = 'this.onerror=function(msg,url,linenumber){' +
+        'window.parent.updateConsole(msg,url,linenumber)};\n';
         
-        var onerrorHandler = 'this.onerror=function(msg,url,linenumber){'
-        onerrorHandler += 'window.parent.updateConsole(msg,url,linenumber)};\n';
-        
+        //フォームのエンター送信を禁止するためのコード
         var blockEnter = 'function BlockEnter(evt) {evt = (evt) ? evt : event;' +
         'var charCode = (evt.charCode) ? evt.charCode : ((evt.which) ? evt.which : evt.keyCode);' +
         'if (Number(charCode) == 13 || Number(charCode) == 3) {return false;} else {return true;}}\n';
         
+        //コードをオリジナルに挿入
         var targetCode = '<script type="text/javascript">\n<!--\n';
         codeForExec = codeForExec.replace(targetCode, targetCode + onerrorHandler + '\n' + blockEnter);
+        
         updateHTMLPreview(codeForExec)
       });
-      ;
       
       function updateConsole(msg, url, linenumber) {
-        $('#error-console').append('<p ><img class="console-icon" src="img/icon/error-console-icon.png"><span class="console-msg">' + window.opener.escapeHTML(msg) + '</span></p>');
+        var icon = '<img class="console-icon" src="img/icon/error-console-icon.png">';
+        var message = '<span class="console-msg">' + window.opener.escapeHTML(msg) + '</span>';
+        $('#error-console').append('<p>' + icon + message + '</p>');
       }
     </script>
     <div id="preview-menu">
