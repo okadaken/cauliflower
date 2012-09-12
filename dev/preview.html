@@ -207,6 +207,7 @@
         var codeForExec = window.opener.getAllCode(dom);
         
         //エラーコンソールにエラーを表示するためのコードを挿入
+        
         var onerrorHandler = 'this.onerror=function(msg,url,linenumber){'
         onerrorHandler += 'window.parent.updateConsole(msg,url,linenumber)};\n';
         
@@ -216,12 +217,12 @@
         
         var targetCode = '<script type="text/javascript">\n<!--\n';
         codeForExec = codeForExec.replace(targetCode, targetCode + onerrorHandler + '\n' + blockEnter);
-        
-        updateHTMLPreview(codeForExec);
+        updateHTMLPreview(codeForExec)
       });
+      ;
       
       function updateConsole(msg, url, linenumber) {
-        $('#error-console').append('<p ><img class="console-icon" src="img/icon/error-console-icon.png"><span class="console-msg">' + msg + '</span></p>');
+        $('#error-console').append('<p ><img class="console-icon" src="img/icon/error-console-icon.png"><span class="console-msg">' + window.opener.escapeHTML(msg) + '</span></p>');
       }
     </script>
     <div id="preview-menu">
