@@ -24,6 +24,12 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
+Blockly.JavaScript.variables_isundefined = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+  return [argument0 + ' == undefined', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+};
+
 Blockly.JavaScript.variables_get = function() {
   // Variable getter.
   var code = Blockly.JavaScript.variableDB_.getName(this.getTitleText('VAR'),

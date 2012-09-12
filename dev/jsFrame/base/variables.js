@@ -185,6 +185,14 @@ Blockly.Variables.flyoutCategory = function(blocks, gaps, margin, workspace) {
       gaps.push(margin * 2);
     }
   }
+  
+  if (Blockly.Language.variables_isundefined) {
+    var block = new Blockly.Block(workspace, 'variables_isundefined');
+    block.initSvg();
+    blocks.push(block);
+    gaps.push(margin * 2);
+  }
+  
 };
 
 /**

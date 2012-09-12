@@ -25,6 +25,19 @@ var valiablesColor = '#f3761d';
 if (!Blockly.Language) 
   Blockly.Language = {};
 
+Blockly.Language.variables_isundefined = {
+  categoryName: null, // Variables are handled specially.
+  categoryID: null,
+  init: function() {
+    this.setColour(valiablesColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);//nullでいいのか微妙なところ
+    this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_VARIABLES_IS_UNDEFINED_INPUT, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP_1);
+  }
+};
+
 Blockly.Language.variables_get = {
   // Variable getter.
   categoryName: null, // Variables are handled specially.
@@ -73,41 +86,42 @@ Blockly.Language.variables_set = {
 };
 
 /**
-* Return a new variable name that is not yet being used. This will try and
-* generate single letter variable names in the range 'i' to 'z' to start with.
-* If no unique name is located it will then try 'i1' to 'z1', then 'i2' to 'z2' etc.
-*
-* @return {string} New variable name
-*/
+ * Return a new variable name that is not yet being used. This will try and
+ * generate single letter variable names in the range 'i' to 'z' to start with.
+ * If no unique name is located it will then try 'i1' to 'z1', then 'i2' to 'z2' etc.
+ *
+ * @return {string} New variable name
+ */
 Blockly.Variables.generateUniqueName = function() {
   var variableList = Blockly.Variables.allVariables();
   var newName = "";
-  if ( variableList.length > 0 ) {
+  if (variableList.length > 0) {
     variableList.sort(Blockly.caseInsensitiveComparator);
-    var nameSuffix=0, potName = "i", i = 0, inUse = false;;
-    while ( newName === "" ) {
+    var nameSuffix = 0, potName = "i", i = 0, inUse = false;
+    ;
+    while (newName === "") {
       i = 0;
       inUse = false;
-      while ( (i < variableList.length) && (!inUse) ) {
-        if ( variableList[i].toLowerCase() === potName ) {
+      while ((i < variableList.length) && (!inUse)) {
+        if (variableList[i].toLowerCase() === potName) {
           // This potential name is already used
           inUse = true;
         }
         i++;
       }
-      if ( inUse ) {
+      if (inUse) {
         // Try the next potential name
-        if ( potName.charAt(0) === 'z' ) {
+        if (potName.charAt(0) === 'z') {
           // Reached the end of the character sequence so back to "i" but with a new suffix
           nameSuffix += 1;
           potName = "i";
         } else {
-          potName = String.fromCharCode(potName.charCodeAt(0)+1);
-          if(potName.charAt(0) === 'l'){
-            potName = String.fromCharCode(potName.charCodeAt(0)+1);
+          potName = String.fromCharCode(potName.charCodeAt(0) + 1);
+          if (potName.charAt(0) === 'l') {
+            potName = String.fromCharCode(potName.charCodeAt(0) + 1);
           }
         }
-        if ( nameSuffix > 0 ) {
+        if (nameSuffix > 0) {
           potName = potName + nameSuffix;
         }
       } else {
