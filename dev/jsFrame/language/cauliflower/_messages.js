@@ -412,3 +412,16 @@ Blockly.LANG_MYDOCUMENT_PROMPT_TITLE2 = 'に入力された';
 Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = '指定された内容でプロンプトを表示します。';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT = '文字列';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';
+
+// Object Blocks.
+Blockly.LANG_CATEGORY_OBJECT = 'オブジェクト';
+Blockly.LANG_OBJECT_CREATE = 'オブジェクト';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_NAME = '名';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_VALUE = '値';
+
+Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TITLE_ADD = 'オブジェクト';
+Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したい要素数の分だけ要素ブロックを加えてください。';
+
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = '要素';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'オブジェクトの中に指定したい要素数だけ入れてください。';
+
