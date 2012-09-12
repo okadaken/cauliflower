@@ -196,20 +196,3 @@ Blockly.Language.myDocument_get = {
     this.setOutput(true, Object);
   }
 };
-
-Blockly.Language.myDocument_joker = {
-  categoryName: null, // myDocument are handled specially.
-  categoryID: null,
-  helpUrl: Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL,
-  init: function() {
-    this.setColour(myDocumentColor);
-    
-    this.appendInput('', Blockly.INPUT_VALUE, 'TARGET', null);
-    this.appendInput('の', Blockly.DUMMY_INPUT);
-    var input = new Blockly.FieldTextInput('');
-    this.appendInput([input, 'ATTRIBUTE'], Blockly.DUMMY_INPUT, 'ATTRIBUTE', String);
-    
-    this.setInputsInline(true);
-    this.setOutput(true, Object);
-  }
-};

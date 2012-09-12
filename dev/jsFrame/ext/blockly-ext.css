@@ -126,3 +126,17 @@
     font-size: 13px;
 }
 
+/* ジョーカー */
+.joker > rect {
+    fill: #000000;
+}
+
+.joker-catmaker {
+    fill: #000000;
+}
+
+.joker {
+    font-weight: bold;
+    font-size: 13px;
+}
+

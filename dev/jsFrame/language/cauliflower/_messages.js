@@ -425,3 +425,7 @@ Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したい要素数�
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = '要素';
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'オブジェクトの中に指定したい要素数だけ入れてください。';
 
+// Joker Blocks.
+Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';
+Blockly.LANG_CATEGORY_JOKER_PREFIX = '*';
+
