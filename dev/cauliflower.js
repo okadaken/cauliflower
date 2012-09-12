@@ -107,10 +107,13 @@ function initializeTabs() {
 }
 
 function initializeHTMLReferenceAccordion() {
-  $('#tab-htmlsub-ref-contents').accordion({
-    collapsible: true,
-    autoHeight: false,
-    active: false
+  $.get('tagreference.html', function(data) {
+    $('#tab-htmlsub-ref').html(data);
+    $('#tab-htmlsub-ref-contents').accordion({
+      collapsible: true,
+      autoHeight: false,
+      active: false
+    });
   });
 }
 
