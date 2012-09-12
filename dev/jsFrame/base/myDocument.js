@@ -70,6 +70,20 @@ function search( idList, element ){
 
 Blockly.MyDocument.dropdownCreate = function(){
 	var idList = Blockly.MyDocument.allId();
+	
+	// 選択肢の中に内部保持している文字列が存在しない場合、これも選択肢として追加する。
+	// （HTML側でIDを変更したのにJavascript側では変更前のIDが残る場合に起こる）
+	// （この措置により、再読み込み時のブロック消滅を防止できる）
+	if( this.getText() ){
+		var ids = [];
+		for( var i=0 ; i<idList.length ; i++ ){
+			ids.push( idList[i][0] );
+		}
+		if( ids.indexOf( this.getText() ) == -1 ){
+		idList.push( [this.getText(),''] );
+		}
+	}
+
 	var dropdown = [];
 	for( var i=0 ; i < idList.length ; i++ ){
 		dropdown[i] = [ idList[i][0], idList[i][0] ];
