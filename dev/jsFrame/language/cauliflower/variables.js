@@ -34,7 +34,7 @@ Blockly.Language.variables_isundefined = {
     this.setOutput(true, Boolean);
     this.appendInput(Blockly.LANG_VARIABLES_IS_UNDEFINED_INPUT, Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP_1);
+    this.setTooltip(Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP1);
   }
 };
 

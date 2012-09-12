@@ -341,7 +341,7 @@ Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入�
 //日本語化終了 Variables Blocks.
 
 Blockly.LANG_VARIABLES_IS_UNDEFINED_INPUT = 'が未定義値か';
-Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP1 = '指定された値がundefined（未定義値）かどうか調べます。\n==の演算子を使っているのnullの場合も真と判定されることに気をつけてください。';
+Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP1 = '指定された値がundefined（未定義値）かどうか調べます。\n==の演算子を使っているので、値がnullの場合も真と判定される\nことに気をつけてください。';
 
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE_1 = '変数';
