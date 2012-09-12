@@ -6,10 +6,10 @@
  * TODO:License書く
  * http://sourceforge.jp/projects/opensource/wiki/licenses
  *
+ * 本家レポジトリの監視
  * ■見た目
  * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない→部分的に対応
  * ■機能要求
- * parseIntは選択肢でfloatもできるようにする
  * 文字列連結は生成コードを変えるのでよさそう（仕様を見ること）
  * HTMLタグレファレンス
  * 保存時にサーバ側でファイルバックアップ
