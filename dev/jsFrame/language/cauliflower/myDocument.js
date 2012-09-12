@@ -30,18 +30,18 @@ function allOption() {
   var options = [];
   
   {
-  	var allOptions = [];
-	allOptions.push( ['要素', ''] );
-	allOptions.push( ['要素のHTML', '.innerHTML'] );
-	allOptions.push( ['要素の値', '.value'] );
-	
-	options.push( ['all', allOptions] );
+    var allOptions = [];
+    allOptions.push(['要素', '']);
+    allOptions.push(['要素のHTML', '.innerHTML']);
+    allOptions.push(['要素の値', '.value']);
+    
+    options.push(['all', allOptions]);
   }
   {
-  	var divOptions = [];
-	divOptions.push( ['要素のスタイルの背景色', '.style.backgroundColor'] );
-	
-	options.push( ['div',divOptions] );
+    var divOptions = [];
+    divOptions.push(['要素のスタイルの背景色', '.style.backgroundColor']);
+    
+    options.push(['div', divOptions]);
   }
   
   return options;
@@ -60,15 +60,27 @@ function getOption(tagName) {
   return options;
 }
 
-Blockly.Language.myDocument_onloadA = {
+Blockly.Language.myDocument_direct = {
   categoryName: null, // myDocument are handled specially.
   categoryID: null,
   isRoot: true,//コード生成する
   init: function() {
     this.setColour(myDocumentColor);
-    this.appendTitle('ページが読み込まれたら実行する 案A');
-    this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
-    this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_DIRECT_TITLE);
+    this.appendInput(Blockly.LANG_MYDOCUMENT_DIRECT_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.setTooltip(Blockly.LANG_MYDOCUMENT_DIRECT_TOOLTIP_1);
+  }
+};
+
+Blockly.Language.myDocument_onload = {
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  isRoot: true,//コード生成する
+  init: function() {
+    this.setColour(myDocumentColor);
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_ONLOAD_TITLE);
+    this.appendInput(Blockly.LANG_MYDOCUMENT_ONLOAD_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.setTooltip(Blockly.LANG_MYDOCUMENT_ONLOAD_TOOLTIP_1);
   },
   onchange: function() {
     if (!this.workspace) {
@@ -77,25 +89,13 @@ Blockly.Language.myDocument_onloadA = {
     } else {
       for (var i in this.workspace.getTopBlocks()) {
         var top = this.workspace.getTopBlocks()[i];
-        if (top != this && top.type == 'myDocument_onloadA') {
-          this.setWarningText('警告（仮）：\n同じのが二個あると\n正常に動作しませんよ！！！');
+        if (top != this && top.type == 'myDocument_onload') {
+          this.setWarningText(Blockly.LANG_MYDOCUMENT_ONLOAD_WARNING);
           return;
         }
       }
       this.setWarningText(null);
     }
-  }
-};
-
-Blockly.Language.myDocument_onloadB = {
-  categoryName: null, // myDocument are handled specially.
-  categoryID: null,
-  isRoot: true,//コード生成する
-  init: function() {
-    this.setColour(myDocumentColor);
-    this.appendTitle('ページが読み込まれたら実行する 案B');
-    this.appendInput('処理', Blockly.NEXT_STATEMENT, 'DO');
-    this.setTooltip('ページが読み込まれたタイミングで\n指定した処理を実行します。');
   }
 };
 

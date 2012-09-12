@@ -22,16 +22,16 @@
  */
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.myDocument_onloadA = function() {
+Blockly.JavaScript.myDocument_onload = function() {
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   var code = 'window.onload = function(){\n'+branch+'};\n';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.myDocument_onloadB = function() {
+Blockly.JavaScript.myDocument_direct = function() {
   var branch = Blockly.JavaScript.statementToCodeWithNoIndent(this, 'DO');
   var code = branch + '\n';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.JavaScript.myDocument_write = function() {

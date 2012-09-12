@@ -385,6 +385,16 @@ Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = '関数定義をハイライトする';
 Blockly.LANG_MYDOCUMENT_WRITE_TITLE = 'ページに出力する';
 Blockly.LANG_MYDOCUMENT_WRITE_TOOLTIP_1 = 'スクリプト要素が呼び出された場所に、指定した内容\nを出力します（内容は文字列に変換されます）。\nこの命令が実行される前に読み込まれたコンテンツは削除されます。\nページにコンテンツに追加する場合は、innerHTML\nプロパティなどを使います。';
 
+Blockly.LANG_MYDOCUMENT_DIRECT_TITLE = 'ページが読み込まれたら実行する';
+Blockly.LANG_MYDOCUMENT_DIRECT_DO = '処理';
+Blockly.LANG_MYDOCUMENT_DIRECT_TOOLTIP_1 = 'scriptタグが読み込まれたタイミングで\n指定した処理を実行します。';
+
+Blockly.LANG_MYDOCUMENT_ONLOAD_TITLE = 'ページの読み込み完了後に実行する';
+Blockly.LANG_MYDOCUMENT_ONLOAD_DO = '処理';
+Blockly.LANG_MYDOCUMENT_ONLOAD_TOOLTIP_1 = 'ページの全ての要素の読み込みが完了するのを待ってから\n指定した処理を実行します。';
+Blockly.LANG_MYDOCUMENT_ONLOAD_WARNING = '警告：\n' +
+'このブロックを2つ以上配置すると\n意図と異なる動作をする可能性があります。';
+
 Blockly.LANG_MYDOCUMENT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログを表示して待つ';
 Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログウィンドウを表示します。';

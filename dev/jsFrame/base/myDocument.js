@@ -118,16 +118,16 @@ Blockly.MyDocument.dropdownChange = function(text) {
  * @param {!Blockly.Workspace} workspace The flyout's workspace.
  */
 Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
-
-  if (Blockly.Language.myDocument_onloadA) {
-    var block = new Blockly.Block(workspace, 'myDocument_onloadA');
+  
+  if (Blockly.Language.myDocument_direct) {
+    var block = new Blockly.Block(workspace, 'myDocument_direct');
     block.initSvg();
     blocks.push(block);
     gaps.push(margin * 2);
   }
   
-  if (Blockly.Language.myDocument_onloadB) {
-    var block = new Blockly.Block(workspace, 'myDocument_onloadB');
+  if (Blockly.Language.myDocument_onload) {
+    var block = new Blockly.Block(workspace, 'myDocument_onload');
     block.initSvg();
     blocks.push(block);
     gaps.push(margin * 2);
