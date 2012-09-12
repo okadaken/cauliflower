@@ -426,3 +426,7 @@ Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したいプロパ�
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = 'プロパティ';
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'プロパティを指定したい数だけ入れてください。';
 
+// Joker Blocks.
+Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';
+Blockly.LANG_CATEGORY_JOKER_PREFIX = '*';
+

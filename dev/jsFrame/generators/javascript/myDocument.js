@@ -77,14 +77,3 @@ Blockly.JavaScript.myDocument_get = function() {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.myDocument_joker = function() {
-
-  var target = Blockly.JavaScript.valueToCode(this, 'TARGET', Blockly.JavaScript.ORDER_NONE);
-  var attr = this.getTitleText('ATTRIBUTE');
-  var code = target;
-  
-  if (target.length != 0 && attr.length != 0) {
-    code += '.' + attr;
-  }
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
-};
