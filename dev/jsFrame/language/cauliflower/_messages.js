@@ -107,7 +107,7 @@ Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND = '両辺の値が真の場合に真を
 Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = '両辺のどちらかが真の場合に真を返します。';
 
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
-Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'ではない';
+Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'でない';
 Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = '真偽を反転させます。';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
@@ -135,6 +135,9 @@ Blockly.LANG_MATH_PARSE_TYPE_INT = '整数';
 Blockly.LANG_MATH_PARSE_TYPE_FLOAT = '実数';
 Blockly.LANG_MATH_PARSE_TOOLTIP_INT = '指定された文字列を整数に変換します。\n小数点以下は切り捨てられます。\n文字列が変換できない場合はNaNを返します。';
 Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT = '指定された文字列を実数に変換します。\n文字列が変換できない場合はNaNを返します。';
+
+Blockly.LANG_MATH_ISNAN_INPUT = 'が無効な数値か';
+Blockly.LANG_MATH_ISNAN_TOOLTIP_1 = '指定された値が無効な数値を表わす\n特殊な数値（NaN）か調べます。\n';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE1 = '変数';

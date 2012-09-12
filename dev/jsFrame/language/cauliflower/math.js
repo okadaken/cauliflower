@@ -107,6 +107,19 @@ Blockly.Language.math_parse.TOOLTIPS = {
   FLOAT: Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT
 };
 
+Blockly.Language.math_isnan = {
+  categoryName: Blockly.LANG_CATEGORY_MATH,
+  categoryID: 'math',
+  init: function() {
+    this.setColour(mathColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', Number);
+    this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_MATH_ISNAN_INPUT, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_MATH_ISNAN_TOOLTIP_1);
+  }
+};
+
 Blockly.Language.math_change = {
   // Add to a variable in place.
   categoryName: Blockly.LANG_CATEGORY_MATH,
