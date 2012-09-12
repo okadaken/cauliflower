@@ -26,7 +26,25 @@ if (!Blockly.Language)
   Blockly.Language = {};
 
 function allOption() {
-  return [['all', [['要素', ''], ['要素のHTML', '.innerHTML'], ['要素の値', '.value']]], ['div', [['要素のスタイルの背景色', '.style.backgroundColor']]]];
+
+  var options = [];
+  
+  {
+  	var allOptions = [];
+	allOptions.push( ['要素', ''] );
+	allOptions.push( ['要素のHTML', '.innerHTML'] );
+	allOptions.push( ['要素の値', '.value'] );
+	
+	options.push( ['all', allOptions] );
+  }
+  {
+  	var divOptions = [];
+	divOptions.push( ['要素のスタイルの背景色', '.style.backgroundColor'] );
+	
+	options.push( ['div',divOptions] );
+  }
+  
+  return options;
 }
 
 function getOption(tagName) {
