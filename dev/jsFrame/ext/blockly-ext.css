@@ -140,3 +140,17 @@
     font-size: 13px;
 }
 
+/* オブジェクト */
+.object > rect {
+    fill: #008b8b;
+}
+
+.object-catmaker {
+    fill: #008b8b;
+}
+
+.object {
+    font-weight: bold;
+    font-size: 13px;
+}
+

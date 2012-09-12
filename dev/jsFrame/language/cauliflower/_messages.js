@@ -415,15 +415,16 @@ Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';
 
 // Object Blocks.
 Blockly.LANG_CATEGORY_OBJECT = 'オブジェクト';
-Blockly.LANG_OBJECT_CREATE = 'オブジェクト';
-Blockly.LANG_OBJECT_CREATE_WITH_ITEM_NAME = '名';
+Blockly.LANG_OBJECT_CREATE = 'オブジェクトを作る';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_NAME = 'プロパティ名';
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_VALUE = '値';
+Blockly.LANG_OBJECT_CREATE_WITH_TOOLTIP_1 = 'オブジェクトを作成します。';
 
 Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TITLE_ADD = 'オブジェクト';
-Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したい要素数の分だけ要素ブロックを加えてください。';
+Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したいプロパティの数だけ\nプロパティブロックを加えてください。';
 
-Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = '要素';
-Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'オブジェクトの中に指定したい要素数だけ入れてください。';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = 'プロパティ';
+Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'プロパティを指定したい数だけ入れてください。';
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';
