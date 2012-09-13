@@ -116,3 +116,75 @@ Blockly.Language.objects_create_with_item = {
     this.contextMenu = false;
   }
 };
+
+Blockly.Language.dropdownForObjects = function() {
+  var variableList = Blockly.Variables.allVariables();
+
+  // Ensure that the currently selected variable is an option.
+  var name = this.getText();
+  if (name && variableList.indexOf(name) == -1) {
+    variableList.push(name);
+  }
+  variableList.sort(Blockly.caseInsensitiveComparator);
+
+  if( name && name.length == 0 && variableList.length > 1 ){
+  	this.setText( variableList[0] );
+  }
+
+  var options = [];
+  for (var x = 0; x < variableList.length; x++) {
+    options[x] = [variableList[x], variableList[x]];
+  }
+  if( options.length == 0 ){
+  	options.push(['（変更して下さい）','（変更して下さい）']);
+  }
+  
+  return options;
+};
+
+Blockly.Language.objects_get = {
+  categoryName: Blockly.LANG_CATEGORY_OBJECT,
+  categoryID: 'object',
+  init: function() {
+    this.setColour(objColor);
+    this.appendTitle(Blockly.LANG_OBJECT_GET);
+    this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
+    this.appendTitle(Blockly.LANG_OBJECT_GET_1);
+    this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
+
+	this.setOutput(true);
+  },
+  getVars: function() {
+    return [this.getTitleText('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
+      this.setTitleText(newName, 'VAR');
+    }
+  }
+};
+
+Blockly.Language.objects_set = {
+  categoryName: Blockly.LANG_CATEGORY_OBJECT,
+  categoryID: 'object',
+  init: function() {
+    this.setColour(objColor);
+    this.appendTitle(Blockly.LANG_OBJECT_SET);
+    this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
+    this.appendTitle(Blockly.LANG_OBJECT_SET_1);
+    this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
+    this.appendInput(Blockly.LANG_OBJECT_SET_2, Blockly.INPUT_VALUE, 'VALUE', null);
+	
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  },
+  getVars: function() {
+    return [this.getTitleText('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
+      this.setTitleText(newName, 'VAR');
+    }
+  }
+
+};
