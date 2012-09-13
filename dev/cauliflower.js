@@ -236,8 +236,9 @@ function initializeHelp() {
   $.get('help.html', function(data) {
     $('#help').html(data);
     $('.version').replaceWith(version);
+    $('#jockercheck').checkbox({cls:'jquery-safari-checkbox'});
+    restoreDevSettings();
   });
-  
 }
 
 function initializeJavaScriptPreview() {
@@ -298,6 +299,7 @@ function initializeHTMLEditor() {
   window.setTimeout(updateHTMLDesignPreview, 300);
   $(window).bind('unload', function() {
     backupHTML();
+    backupDevSettings();
   });
 }
 
@@ -1137,6 +1139,33 @@ function highLightJavaScriptPreview(startLine, startCh, endLine, endCh, classNam
     line: endLine,
     ch: endCh
   }, className);
+}
+
+/**************************************************
+ * 開発用設定
+ **************************************************/
+function showJocker() {
+  return $('#jockercheck').attr('checked');
+}
+
+function backupDevSettings() {
+  if ('localStorage' in window) {
+    if ($('#jockercheck').attr('checked')) {
+      window.localStorage.setItem('cauliflower_dev_jockercheck', 'on');
+    } else {
+      window.localStorage.setItem('cauliflower_dev_jockercheck', 'off');
+    }
+  }
+}
+
+function restoreDevSettings() {
+  if ('localStorage' in window && window.localStorage.cauliflower_dev_jockercheck) {
+    if (window.localStorage.cauliflower_dev_jockercheck == 'on') {
+      $('#jockercheck').attr('checked', true);
+    } else {
+      $('#jockercheck').attr('checked', false);
+    }
+  }
 }
 
 /**************************************************

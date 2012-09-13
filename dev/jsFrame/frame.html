@@ -24,7 +24,14 @@
     <script type="text/javascript" src="language/cauliflower/text.js"></script>
     <script type="text/javascript" src="language/cauliflower/lists.js"></script>
     <script type="text/javascript" src="language/cauliflower/objects.js"></script>
-    <script type="text/javascript" src="language/cauliflower/jokers.js"></script>
+    <script type="text/javascript">
+      if (parent.showJocker()) {
+        var script = document.createElement('script');
+        script.src = 'language/cauliflower/jokers.js';
+        script.type = 'text/javascript';
+        document.head.appendChild(script);
+      }
+    </script>
     <style>
       html, body {
           background-color: #fff;
@@ -41,6 +48,7 @@
     </style>
     <script>
       function init() {
+      
         Blockly.inject(document.body, {
           path: ''
         });
