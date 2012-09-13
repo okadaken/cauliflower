@@ -186,20 +186,6 @@ Blockly.Language.text_length = {
   }
 };
 
-Blockly.Language.text_isEmpty = {
-  // Is the string null?
-  categoryName: Blockly.LANG_CATEGORY_TEXT,
-  categoryID: 'text',
-  helpUrl: Blockly.LANG_TEXT_ISEMPTY_HELPURL,
-  init: function() {
-    this.setColour(textColor);
-    this.appendInput(Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY,
-        Blockly.INPUT_VALUE, 'VALUE', [String, Array]);
-    this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.LANG_TEXT_ISEMPTY_TOOLTIP_1);
-  }
-};
-
 Blockly.Language.text_endString = {
   // Return a leading or trailing substring.
   categoryName: Blockly.LANG_CATEGORY_TEXT,

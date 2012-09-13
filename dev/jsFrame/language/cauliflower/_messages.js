@@ -113,6 +113,15 @@ Blockly.LANG_LOGIC_BOOLEAN_TRUE = '真';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = '偽';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = '真か偽を返します。';
 
+Blockly.LANG_LOGIC_IS_UNDEFINED_INPUT = 'が未定義値か';
+Blockly.LANG_LOGIC_IS_UNDEFINED_TOOLTIP1 = '指定された値がundefined（未定義値）かどうか調べます。\n==の演算子を使っているので、値がnullの場合も真と判定される\nことに気をつけてください。';
+
+Blockly.LANG_LOGIC_ISNAN_INPUT = 'が無効な数値か';
+Blockly.LANG_LOGIC_ISNAN_TOOLTIP_1 = '指定された値が無効な数値を表わす\n特殊な数値（NaN）か調べます。\n';
+
+Blockly.LANG_LOGIC_ISEMPTY_INPUT_ISEMPTY = 'の要素が空か';
+Blockly.LANG_LOGIC_ISEMPTY_TOOLTIP_1 = '指定された値の内容が空か調べます。\n配列なら要素がないか、文字列なら空文字かを判定します。';
+
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = '数値';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
@@ -133,9 +142,6 @@ Blockly.LANG_MATH_PARSE_TYPE_INT = '整数';
 Blockly.LANG_MATH_PARSE_TYPE_FLOAT = '実数';
 Blockly.LANG_MATH_PARSE_TOOLTIP_INT = '指定された文字列を整数に変換します。\n小数点以下は切り捨てられます。\n文字列が変換できない場合はNaNを返します。';
 Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT = '指定された文字列を実数に変換します。\n文字列が変換できない場合はNaNを返します。';
-
-Blockly.LANG_MATH_ISNAN_INPUT = 'が無効な数値か';
-Blockly.LANG_MATH_ISNAN_TOOLTIP_1 = '指定された値が無効な数値を表わす\n特殊な数値（NaN）か調べます。\n';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE1 = '変数';
@@ -241,10 +247,6 @@ Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'length';
 Blockly.LANG_TEXT_LENGTH_TOOLTIP_1 = 'Returns number of letters (including spaces)\n' +
 'in the provided text.';
 
-Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'is empty';
-Blockly.LANG_TEXT_ISEMPTY_TOOLTIP_1 = 'Returns true if the provided text is empty.';
-
 Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_ENDSTRING_INPUT = 'letters in text';
 Blockly.LANG_TEXT_ENDSTRING_TOOLTIP_1 = 'Returns specified number of letters at the beginning or end of the text.';
@@ -311,10 +313,6 @@ Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTML
 Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'の長さ';
 Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = '配列の長さ（要素数）を取得します。';
 
-Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_INPUT_IS_EMPTY = 'が空か';
-Blockly.LANG_LISTS_TOOLTIP_1 = '配列の要素がないかどうかを調べます。';
-
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'に見つかる要素の番地';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '検索する要素';
@@ -337,9 +335,6 @@ Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '要素';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入します。';
 
 //日本語化終了 Variables Blocks.
-
-Blockly.LANG_VARIABLES_IS_UNDEFINED_INPUT = 'が未定義値か';
-Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP1 = '指定された値がundefined（未定義値）かどうか調べます。\n==の演算子を使っているので、値がnullの場合も真と判定される\nことに気をつけてください。';
 
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE_1 = '変数';

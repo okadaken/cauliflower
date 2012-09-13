@@ -65,12 +65,6 @@ Blockly.JavaScript.math_parse = function() {
   }
 };
 
-Blockly.JavaScript.math_isnan = function() {
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  return ['isNaN(' + argument0 + ')', Blockly.JavaScript.ORDER_LOGICAL_NOT];
-};
-
 Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA',

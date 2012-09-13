@@ -73,13 +73,6 @@ Blockly.JavaScript.text_length = function() {
   return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.JavaScript.text_isEmpty = function() {
-  // Is the string null?
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  return ['!' + argument0 + '.length', Blockly.JavaScript.ORDER_LOGICAL_NOT];
-};
-
 Blockly.JavaScript.text_endString = function() {
   // Return a leading or trailing substring.
   var first = this.getTitleValue('END') == 'FIRST';

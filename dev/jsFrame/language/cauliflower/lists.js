@@ -166,21 +166,6 @@ Blockly.Language.lists_length = {
   }
 };
 
-Blockly.Language.lists_isEmpty = {
-  // Is the list empty?
-  categoryName: Blockly.LANG_CATEGORY_LISTS,
-  categoryID: 'list',
-  helpUrl: Blockly.LANG_LISTS_IS_EMPTY_HELPURL,
-  init: function() {
-    this.setColour(listColor);
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [Array, String]);
-    this.setOutput(true, Boolean);
-    this.appendInput(Blockly.LANG_LISTS_INPUT_IS_EMPTY, Blockly.DUMMY_INPUT, '', null);
-    this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_LISTS_TOOLTIP_1);
-  }
-};
-
 Blockly.Language.lists_indexOf = {
   // Find an item in the list.
   categoryName: Blockly.LANG_CATEGORY_LISTS,

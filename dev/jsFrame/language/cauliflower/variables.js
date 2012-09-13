@@ -25,19 +25,6 @@ var valiablesColor = '#f3761d';
 if (!Blockly.Language) 
   Blockly.Language = {};
 
-Blockly.Language.variables_isundefined = {
-  categoryName: null, // Variables are handled specially.
-  categoryID: null,
-  init: function() {
-    this.setColour(valiablesColor);
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);//nullでいいのか微妙なところ
-    this.setOutput(true, Boolean);
-    this.appendInput(Blockly.LANG_VARIABLES_IS_UNDEFINED_INPUT, Blockly.DUMMY_INPUT, '', null);
-    this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_VARIABLES_IS_UNDEFINED_TOOLTIP1);
-  }
-};
-
 Blockly.Language.variables_get = {
   // Variable getter.
   categoryName: null, // Variables are handled specially.

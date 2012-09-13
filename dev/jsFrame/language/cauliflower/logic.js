@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var logicColor = '#62c213';
+var logicColor = '#0494dc';
 
 /**
  * @fileoverview Logic blocks for Blockly.
@@ -115,5 +115,44 @@ Blockly.Language.logic_negate = {
     this.appendInput(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT, Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1);
+  }
+};
+
+Blockly.Language.logic_isundefined = {
+  categoryName: Blockly.LANG_CATEGORY_LOGIC,
+  categoryID: 'logic',
+  init: function() {
+    this.setColour(logicColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);//nullでいいのか微妙なところ
+    this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_LOGIC_IS_UNDEFINED_INPUT, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_LOGIC_IS_UNDEFINED_TOOLTIP1);
+  }
+};
+
+Blockly.Language.logic_isnan = {
+  categoryName: Blockly.LANG_CATEGORY_LOGIC,
+  categoryID: 'logic',
+  init: function() {
+    this.setColour(logicColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', Number);
+    this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_LOGIC_ISNAN_INPUT, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_LOGIC_ISNAN_TOOLTIP_1);
+  }
+};
+
+Blockly.Language.logic_isEmpty = {
+  categoryName: Blockly.LANG_CATEGORY_LOGIC,
+  categoryID: 'text',
+  init: function() {
+    this.setColour(logicColor);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [String, Array]);
+    this.setOutput(true, Boolean);
+    this.appendInput(Blockly.LANG_LOGIC_ISEMPTY_INPUT_ISEMPTY, Blockly.DUMMY_INPUT, '', null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_LOGIC_ISEMPTY_TOOLTIP_1);
   }
 };

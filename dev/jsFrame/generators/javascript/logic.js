@@ -70,3 +70,21 @@ Blockly.JavaScript.logic_boolean = function() {
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'true' : 'false';
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
+
+Blockly.JavaScript.logic_isundefined = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+  return [argument0 + ' == undefined', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+};
+
+Blockly.JavaScript.logic_isnan = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+  return ['isNaN(' + argument0 + ')', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+};
+
+Blockly.JavaScript.logic_isEmpty = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+  return [ argument0 + '.length == 0', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+};

@@ -71,11 +71,6 @@ Blockly.JavaScript.lists_length = function() {
   return Blockly.JavaScript.text_length.call(this);
 };
 
-Blockly.JavaScript.lists_isEmpty = function() {
-  // Testing a list for being empty is the same as for a string.
-  return Blockly.JavaScript.text_isEmpty.call(this);
-};
-
 Blockly.JavaScript.lists_indexOf = function() {
   // Searching a list for a value is the same as search for a substring.
   return Blockly.JavaScript.text_indexOf.call(this);
