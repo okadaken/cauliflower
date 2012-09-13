@@ -105,7 +105,7 @@ Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND = '両辺の値が真の場合に真を
 Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = '両辺のどちらかが真の場合に真を返します。';
 
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
-Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'でない';
+Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'ではない';
 Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = '真偽を反転させます。';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
@@ -113,13 +113,13 @@ Blockly.LANG_LOGIC_BOOLEAN_TRUE = '真';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = '偽';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = '真か偽を返します。';
 
-Blockly.LANG_LOGIC_IS_UNDEFINED_INPUT = 'が未定義値か';
+Blockly.LANG_LOGIC_IS_UNDEFINED_INPUT = 'が未定義値';
 Blockly.LANG_LOGIC_IS_UNDEFINED_TOOLTIP1 = '指定された値がundefined（未定義値）かどうか調べます。\n==の演算子を使っているので、値がnullの場合も真と判定される\nことに気をつけてください。';
 
-Blockly.LANG_LOGIC_ISNAN_INPUT = 'が無効な数値か';
+Blockly.LANG_LOGIC_ISNAN_INPUT = 'が無効な数値';
 Blockly.LANG_LOGIC_ISNAN_TOOLTIP_1 = '指定された値が無効な数値を表わす\n特殊な数値（NaN）か調べます。\n';
 
-Blockly.LANG_LOGIC_ISEMPTY_INPUT_ISEMPTY = 'の要素が空か';
+Blockly.LANG_LOGIC_ISEMPTY_INPUT_ISEMPTY = 'の要素が空';
 Blockly.LANG_LOGIC_ISEMPTY_TOOLTIP_1 = '指定された値の内容が空か調べます。\n配列なら要素がないか、文字列なら空文字かを判定します。';
 
 // Math Blocks.
@@ -129,7 +129,7 @@ Blockly.LANG_MATH_NUMBER_VALUE = '数値';
 Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = '数値を表現したブロックです。';
 
 Blockly.LANG_MATH_ARITHMETIC_HELPURL = 'http://en.wikipedia.org/wiki/Arithmetic';
-Blockly.LANG_MATH_POW = '累乗';
+Blockly.LANG_MATH_POW = 'を右辺で累乗';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = '二数の和を計算します。';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = '二数の差を計算します。';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = '二数の積を計算します。';
@@ -151,74 +151,95 @@ Blockly.LANG_MATH_CHANGE_INPUT_BY = 'を加える';
 Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = '変数"%1"に指定された数値を加えます。';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
-Blockly.LANG_MATH_SINGLE_OP_ROOT = 'の平方根';
 Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'の絶対値';
+Blockly.LANG_MATH_SINGLE_OP_ROOT = 'の平方根';
 Blockly.LANG_MATH_SINGLE_OP_NEG = 'の符号を反転した値';
 Blockly.LANG_MATH_SINGLE_OP_LN = 'の自然対数';
 Blockly.LANG_MATH_SINGLE_OP_LOG10 = 'の常用対数';
 Blockly.LANG_MATH_SINGLE_OP_EXP = 'を指数としたeの累乗';
 
-Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = '平方根を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = '絶対値を計算します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = '平方根を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_NEG = '符号を反転します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = '自然対数を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = '常用対数を計算します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = '自然対数の底 (e) を、指定した値を指数として累乗します。';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';//Exceptionがでるので外した。
-Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
-Blockly.LANG_MATH_ROUND_TOOLTIP_1 = '切り捨てや四捨五入を行います。';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'の小数点以下を四捨五入した値';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'の小数点以下を切り上げた値';
-Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'の小数点以下を切り捨てた値';
+Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';//SINGLEに統合した
+Blockly.LANG_MATH_SINGLE_OPERATOR_ROUND = 'の小数点以下を四捨五入した値';
+Blockly.LANG_MATH_SINGLE_OPERATOR_ROUNDUP = 'の小数点以下を切り上げた値';
+Blockly.LANG_MATH_SINGLE_OPERATOR_ROUNDDOWN = 'の小数点以下を切り捨てた値';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROUND = '小数点以下を四捨五入します。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROUNDUP = '小数点以下を切り上げます。';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROUNDDOWN = '小数点以下を切り捨てます。';
 
 Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
-Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
+Blockly.LANG_MATH_TRIG_TITLE = 'の値'
+Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'ラジアンで指定した角度の正弦（サイン）の値です。\n結果の値は-1.0から1.0までの値です。';
+Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'ラジアンで指定した角度の余弦（コサイン）の値です。\n結果の値は-1.0から1.0までの値です。';
+Blockly.LANG_MATH_TRIG_TOOLTIP_TAN = 'ラジアンで指定した角度の正接（タンジェント）の値です。';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ASIN = 'ラジアンで指定した角度の逆正弦（アークサイン）の値です。\n結果の値は-π/2からπ/2までのラジアン値です。';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'ラジアンで指定した角度の逆余弦（アークコサイン）の値です。\n結果の値は0からπまでのラジアン値です。';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'ラジアンで指定した角度の逆正接（アークタンジェント）の値です。\n結果の値は-π/2からπ/2までのラジアン値です。';
 
-Blockly.LANG_MATH_ONLIST_HELPURL = '';
-Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'of list';
-Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'sum';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'min';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'max';
-Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'average';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = 'median';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = 'modes';
-Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = 'standard deviation';
-Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = 'random item';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_SUM = 'Return the sum of all the numbers in the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Return the smallest number in the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Return the largest number in the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_AVERAGE = 'Return the arithmetic mean of the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MEDIAN = 'Return the median number in the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Return a list of the most common item(s) in the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.';
+Blockly.LANG_MATH_DOUBLE_INPUT_TITLE = '2数のうち'
+Blockly.LANG_MATH_DOUBLE_MAX = '大きい値';
+Blockly.LANG_MATH_DOUBLE_MIN = '小さい値';
+Blockly.LANG_MATH_DOUBLE_TOOLTIP_MAX = '指定した2数のうち、大きい数の値です。';
+Blockly.LANG_MATH_DOUBLE_TOOLTIP_MIN = '指定した2数のうち、小さい数の値です。';
 
-Blockly.LANG_MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW = 'between (low)';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'and (high)';
-Blockly.LANG_MATH_CONSTRAIN_TOOLTIP_1 = 'Constrain a number to be between the specified limits (inclusive).';
+Blockly.LANG_MATH_CONST_TITLE = '定数';
+Blockly.LANG_MATH_CONST_PI = '円周率';
+Blockly.LANG_MATH_CONST_E = '自然定数の底';
+Blockly.LANG_MATH_CONST_TOOLTIP_PI = '円周率の値の定数です。';
+Blockly.LANG_MATH_CONST_TOOLTIP_E = '自然定数の底の値の定数です。';
 
 Blockly.LANG_MATH_MODULO_HELPURL = 'http://en.wikipedia.org/wiki/Modulo_operation';
-Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND = 'remainder of';
-Blockly.LANG_MATH_MODULO_TOOLTIP_1 = 'Return the remainder of dividing both numbers.';
-
-Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
-Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
-Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
-Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n' +
-'specified limits, inclusive.';
+Blockly.LANG_MATH_MODULO_TITLE1 = 'を';
+Blockly.LANG_MATH_MODULO_TITLE2 = 'で割った余り';
+Blockly.LANG_MATH_MODULO_TOOLTIP_1 = '右辺を左辺で割った余りを求めます。';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
-Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
-'0.0 (inclusive) and 1.0 (exclusive).';
+Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = '生成した乱数の値';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = '0.0（含む）から1.0（含まない）までの\n疑似乱数を生成し、その値を返します。';
+
+//
+/*//教育的観点から表示しない
+ Blockly.LANG_MATH_ONLIST_HELPURL = '';
+ Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'of list';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'sum';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'min';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'max';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'average';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = 'median';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = 'modes';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = 'standard deviation';
+ Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = 'random item';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_SUM = 'Return the sum of all the numbers in the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Return the smallest number in the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Return the largest number in the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_AVERAGE = 'Return the arithmetic mean of the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_MEDIAN = 'Return the median number in the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Return a list of the most common item(s) in the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
+ Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.';
+ */
+/*//教育的観点から表示しない
+ Blockly.LANG_MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
+ Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
+ Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW = 'between (low)';
+ Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'and (high)';
+ Blockly.LANG_MATH_CONSTRAIN_TOOLTIP_1 = 'Constrain a number to be between the specified limits (inclusive).';
+ */
+/*//教育的観点から表示しない
+ Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
+ Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
+ Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
+ Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
+ Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n' +
+ 'specified limits, inclusive.';
+ */
+//
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';
