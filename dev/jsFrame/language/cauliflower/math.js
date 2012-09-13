@@ -84,7 +84,7 @@ Blockly.Language.math_parse = {
   helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,
   init: function() {
     this.setColour(mathColor);
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', [String]);
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);
     this.appendInput(Blockly.LANG_MATH_PARSE_TITLE1, Blockly.DUMMY_INPUT, '', null);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'TYPE'], Blockly.DUMMY_INPUT, '', Number);
