@@ -200,25 +200,26 @@ Blockly.Toolbox.redraw = function() {
     option.classDef = categoryNameToID[cat];
     options.push(option);
   }
-  var option = {};
-  if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
-    // Variables have a special category that is dynamic.
-    options.push({text: Blockly.MSG_VARIABLE_CATEGORY,
-                  cat: Blockly.MSG_VARIABLE_CATEGORY,classDef:'variables'});
+  //sliceで6にしているジョーカーを最後にするため
+  if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
+    // Mydocument have a special category that is dynamic.
+    options.splice(6,0,{text: Blockly.MSG_MYDOCUMENT_CATEGORY,
+                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY,classDef:'myDocument'});
   }
+  
   if (Blockly.Language.procedures_defnoreturn ||
       Blockly.Language.procedures_defreturn) {
     // Procedures have a special category that is dynamic.
-    options.push({text: Blockly.MSG_PROCEDURE_CATEGORY,
+    options.splice(6,0,{text: Blockly.MSG_PROCEDURE_CATEGORY,
                   cat: Blockly.MSG_PROCEDURE_CATEGORY,classDef:'procedures'});
   }
-  if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
-    // Mydocument have a special category that is dynamic.
-    options.push({text: Blockly.MSG_MYDOCUMENT_CATEGORY,
-                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY,classDef:'myDocument'});
+  
+  if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
+    // Variables have a special category that is dynamic.
+    options.splice(6,0,{text: Blockly.MSG_VARIABLE_CATEGORY,
+                  cat: Blockly.MSG_VARIABLE_CATEGORY,classDef:'variables'});
   }
-
-
+ 
   function callbackFactory(element) {
     return function(e) {
       var oldSelectedOption = Blockly.Toolbox.selectedOption_;
