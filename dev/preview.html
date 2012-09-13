@@ -148,25 +148,19 @@
         });
       }
       
-      function hasFormParent(target) {
-        while (true) {
-          var dom = target.parentNode;
-          if (dom.nodeName == 'form') {
-            return true;
-          } else if (dom.nodeName == 'body') {
-            return false;
-          } else {
-            dom = dom.parentNode;
-          }
-        }
-      }
-      
       function updateHTMLPreview(code) {
         var previewFrame = document.getElementById('contents-preview');
         var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
         preview.open();
         preview.write(code);
         preview.close();
+        
+        //エンターキー入力を無効にする
+        $('#contents-preview').contents().find('form input').bind('keypress', function(e) {
+          if (e.keyCode != null && e.keyCode == 13) {
+            return false;
+          }
+        });
       }
       
       $(document).ready(function() {
@@ -189,37 +183,16 @@
         }
         SourcePreview.setValue(codeForView);
         
-        //実際に動かすコードを作る
-        dom = window.opener.parseHTMLToDOM(null, false);
-        
-        //inputタグをチェックしてエンターを禁止する
-        var inputs = dom.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++) {
-          var input = inputs[i];
-          if (input.getAttribute('type') != 'text') {
-            continue;
-          }
-          if (hasFormParent(input) && !input.hasAttribute('onkeypress')) {
-            input.setAttribute('onkeypress', 'return BlockEnter(event)');
-          }
-        }
-        
-        var codeForExec = window.opener.getAllCode(dom);
-        
+        //実際に動かすコードを作る   
         //エラーコンソールにエラーを表示するためのコード
         var onerrorHandler = 'this.onerror=function(msg,url,linenumber){' +
         'window.parent.updateConsole(msg,url,linenumber)};\n';
         
-        //フォームのエンター送信を禁止するためのコード
-        var blockEnter = 'function BlockEnter(evt) {evt = (evt) ? evt : event;' +
-        'var charCode = (evt.charCode) ? evt.charCode : ((evt.which) ? evt.which : evt.keyCode);' +
-        'if (Number(charCode) == 13 || Number(charCode) == 3) {return false;} else {return true;}}\n';
-        
         //コードをオリジナルに挿入
         var targetCode = '<script type="text/javascript">\n<!--\n';
-        codeForExec = codeForExec.replace(targetCode, targetCode + onerrorHandler + '\n' + blockEnter);
+        var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + '\n');
         
-        updateHTMLPreview(codeForExec)
+        updateHTMLPreview(codeForExec);
       });
       
       function updateConsole(msg, url, linenumber) {

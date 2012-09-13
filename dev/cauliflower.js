@@ -1037,10 +1037,18 @@ function discardHTML() {
  **************************************************/
 function updateHTMLDesignPreview() {
   var previewFrame = $('#html-design-preview').get(0);
+  
   var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
   preview.open();
   preview.write(HTMLEditor.getValue());
   preview.close();
+  
+  //エンターキー入力を無効にする
+  $('#html-design-preview').contents().find('form input').bind('keypress', function(e) {
+    if (e.keyCode != null && e.keyCode == 13) {
+      return false;
+    }
+  });
 }
 
 /**************************************************
