@@ -396,8 +396,8 @@ Blockly.LANG_MYDOCUMENT_ONLOAD_WARNING = '警告：\n' +
 'このブロックを2つ以上配置すると\n意図と異なる動作をする可能性があります。';
 
 Blockly.LANG_MYDOCUMENT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログを表示して待つ';
-Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログウィンドウを表示します。';
+Blockly.LANG_MYDOCUMENT_PRINT_TITLE_PRINT = 'ダイアログを表示する';
+Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアログウィンドウを表示して、\nOKボタンが押されるまで待ちます。';
 
 Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
 Blockly.LANG_MYDOCUMENT_PROMPT_TITLE1 = 'プロンプト';
