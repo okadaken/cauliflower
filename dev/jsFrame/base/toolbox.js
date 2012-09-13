@@ -201,25 +201,31 @@ Blockly.Toolbox.redraw = function() {
     options.push(option);
   }
   
-  //sliceでlength-2にしているジョーカーを最後にするため
-  if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
-    // Mydocument have a special category that is dynamic.
-    options.splice(options.length-2,0,{text: Blockly.MSG_MYDOCUMENT_CATEGORY,
-                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY,classDef:'myDocument'});
+  //カテゴリの位置順番調整（最後に配列とオブジェクトを配置する）
+  var sliceIndex = 2;
+  if(parent.showJocker()){  //ジョーカーを最後にするため
+        sliceIndex = 3;
+  }
+
+  if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
+    // Variables have a special category that is dynamic.
+    options.splice(options.length-sliceIndex,0,{text: Blockly.MSG_VARIABLE_CATEGORY,
+                  cat: Blockly.MSG_VARIABLE_CATEGORY,classDef:'variables'});
   }
   
   if (Blockly.Language.procedures_defnoreturn ||
       Blockly.Language.procedures_defreturn) {
     // Procedures have a special category that is dynamic.
-    options.splice(options.length-2,0,{text: Blockly.MSG_PROCEDURE_CATEGORY,
+    options.splice(options.length-sliceIndex,0,{text: Blockly.MSG_PROCEDURE_CATEGORY,
                   cat: Blockly.MSG_PROCEDURE_CATEGORY,classDef:'procedures'});
   }
   
-  if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
-    // Variables have a special category that is dynamic.
-    options.splice(options.length-2,0,{text: Blockly.MSG_VARIABLE_CATEGORY,
-                  cat: Blockly.MSG_VARIABLE_CATEGORY,classDef:'variables'});
-  }
+  if (Blockly.Language.myDocument_set || Blockly.Language.myDocument_get ) {
+    // Mydocument have a special category that is dynamic.
+    options.splice(options.length-sliceIndex,0,{text: Blockly.MSG_MYDOCUMENT_CATEGORY,
+                  cat: Blockly.MSG_MYDOCUMENT_CATEGORY,classDef:'myDocument'});
+  }  
+
   
 
   //.getElementById('jockercheck')
