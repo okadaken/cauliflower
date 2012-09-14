@@ -146,7 +146,7 @@ Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE1 = '変数';
 Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'x';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE2 = 'に';
-Blockly.LANG_MATH_CHANGE_INPUT_BY = 'を加える';
+Blockly.LANG_MATH_CHANGE_INPUT_BY = 'を加算する';
 Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = '変数"%1"に指定された数値を加えます。';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
@@ -243,70 +243,71 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = '0.0（含む）から1.0（含まな
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = '文字列';
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
-Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = 'A letter, word, or line of text.';
+Blockly.LANG_TEXT_TEXT_TITLE = '文字列';
+Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = '文字列を表現したブロックです。';
 
 Blockly.LANG_TEXT_JOIN_HELPURL = '';
-Blockly.LANG_TEXT_JOIN_TITLE_CREATEWITH = 'create text with';
-Blockly.LANG_TEXT_JOIN_TOOLTIP_1 = 'Create a piece of text by joining\n' +
-'together any number of items.';
+Blockly.LANG_TEXT_JOIN_TITLE_CREATEWITH = '文字列として連結';
+Blockly.LANG_TEXT_JOIN_TOOLTIP_1 = '要素を連結して文字列を作ります。';
 
-Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN = 'join';
-Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this text block.';
+Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN = '連結';
+Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = '要素ブロックを挟んで連結したい要素の数を決めます。';
 
-Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = 'item';
-Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP_1 = 'Add an item to the text.';
+Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = '要素';
+Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP_1 = '連結したい数だけ連結のブロックに加えてください。';
 
 Blockly.LANG_TEXT_APPEND_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_APPEND_TO = 'to';
-Blockly.LANG_TEXT_APPEND_APPENDTEXT = 'append text';
-Blockly.LANG_TEXT_APPEND_VARIABLE = 'item';
-Blockly.LANG_TEXT_APPEND_TOOLTIP_1 = 'Append some text to variable "%1".';
+Blockly.LANG_TEXT_APPEND_TO = '変数';
+Blockly.LANG_TEXT_APPEND_APPENDTEXT1 = 'に';
+Blockly.LANG_TEXT_APPEND_APPENDTEXT2 = 'を連結する';
+Blockly.LANG_TEXT_APPEND_VARIABLE = 'x';
+Blockly.LANG_TEXT_APPEND_TOOLTIP_1 = '変数"%1"の末尾に指定した文字列を加えます。\n変数の値は文字列に変換されるので注意してください。';
 
 Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'length';
-Blockly.LANG_TEXT_LENGTH_TOOLTIP_1 = 'Returns number of letters (including spaces)\n' +
-'in the provided text.';
+Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'の文字数';
+Blockly.LANG_TEXT_LENGTH_TOOLTIP_1 = 'スペースを含めた文字数を返します。';
 
 Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_ENDSTRING_INPUT = 'letters in text';
-Blockly.LANG_TEXT_ENDSTRING_TOOLTIP_1 = 'Returns specified number of letters at the beginning or end of the text.';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = 'first';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = 'last';
+Blockly.LANG_TEXT_ENDSTRING_INPUT1 = 'の';
+Blockly.LANG_TEXT_ENDSTRING_INPUT2 = '文字';
+Blockly.LANG_TEXT_ENDSTRING_TOOLTIP_1 = '最初か最後から、指定された文字数の文字を取り出します。';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = '最初の';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = '最後の';
 
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'find';
-Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = 'occurrence of text';
-Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = 'in text';
-Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
-'of first text in the second text.\n' +
-'Returns 0 if text is not found.';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'first';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'last';
+Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'に見つかる文字列の位置';
+Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = '探す文字列';
+Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = '検索対象';
+Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = '指定した文字列に含まれている文字列の位置を検索します。\n' + '文字列が見つからない場合の結果は0となります。';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = '最初';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = '最後';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm'
-Blockly.LANG_TEXT_CHARAT_TITLE_LETTER = 'letter';
-Blockly.LANG_TEXT_CHARAT_INPUT_AT = 'at';
-Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'in text';
-Blockly.LANG_TEXT_CHARAT_TOOLTIP_1 = 'Returns the letter at the specified position.';
+Blockly.LANG_TEXT_CHARAT_TITLE_LETTER = '文字目';
+Blockly.LANG_TEXT_CHARAT_INPUT_AT = 'の';
+Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = '番目の文字';
+Blockly.LANG_TEXT_CHARAT_TOOLTIP_1 = '何番目かの文字を取り出します。';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'to';
-Blockly.LANG_TEXT_CHANGECASE_TOOLTIP_1 = 'Return a copy of the text in a different case.';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'UPPER CASE';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'lower case';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'Title Case';
+Blockly.LANG_TEXT_CHANGECASE_TITLE_TO1 = 'を';
+Blockly.LANG_TEXT_CHANGECASE_TOOLTIP_1 = '大文字か小文字に変換します。日本語は変換しません。.';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = '大文字';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = '小文字';
+Blockly.LANG_TEXT_CHANGECASE_TITLE_TO2 = 'に変換した文字列';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = '';
 
-Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_TITLE_SPACE = 'trim spaces from';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
-Blockly.LANG_TEXT_TRIM_TOOLTIP_1 = 'Return a copy of the text with spaces\n' +
-'removed from one or both ends.';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'side';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'both';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'left';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'right';
-
+/*トリムは不要と判断
+ Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+ Blockly.LANG_TEXT_TRIM_TITLE_SPACE = 'trim spaces from';
+ Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
+ Blockly.LANG_TEXT_TRIM_TOOLTIP_1 = 'Return a copy of the text with spaces\n' +
+ 'removed from one or both ends.';
+ Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
+ Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'side';
+ Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'both';
+ Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'left';
+ Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'right';
+ */
 // 日本語化終了 Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = '配列';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
@@ -330,28 +331,27 @@ Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';//使っていない
 Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = '同じ要素を指定した要素数だけ入れた配列を作ります。';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'の長さ';
-Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = '配列の長さ（要素数）を取得します。';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'の要素数';
+Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = '配列の要素数を取得します。';
 
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'に見つかる要素の番地';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '検索する要素';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '検索する配列';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '探す要素';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '検索対象';
 Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = '指定した配列に含まれている要素の番地を検索します。\n' + '要素が見つからない場合の結果は0となります。';
 Blockly.LANG_LISTS_INDEX_OF_FIRST = '最初';
 Blockly.LANG_LISTS_INDEX_OF_LAST = '最後';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_GET_INDEX_TITLE = '配列から取得した要素';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = '番地';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '配列';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = 'の';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '番目の要素';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = '番地を指定して配列の要素を取得します。';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_TITLE = '配列に要素を代入';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = '番地';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = '配列';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '要素';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = '番目の要素に';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'を代入する';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'の';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入します。';
 
 //日本語化終了 Variables Blocks.
@@ -444,7 +444,6 @@ Blockly.LANG_OBJECT_GET_1 = 'のプロパティ';
 Blockly.LANG_OBJECT_SET = 'オブジェクト';
 Blockly.LANG_OBJECT_SET_1 = 'のプロパティ';
 Blockly.LANG_OBJECT_SET_2 = 'に代入';
-
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

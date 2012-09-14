@@ -173,6 +173,8 @@ Blockly.JavaScript.text_changeCase.OPERATORS = {
   TITLECASE: null
 };
 
+//不要と判断
+/*
 Blockly.JavaScript.text_trim = function() {
   // Trim spaces.
   var mode = this.getTitleValue('MODE');
@@ -186,4 +188,4 @@ Blockly.JavaScript.text_trim.OPERATORS = {
   LEFT: '.replace(/^\\s+/, \'\')',
   RIGHT: '.replace(/\\s+$/, \'\')',
   BOTH: '.replace(/^\\s+|\\s+$/g, \'\')'
-};
+};*/
