@@ -53,7 +53,6 @@ Blockly.Language.text_join = {
     this.setMutator(new Blockly.Mutator(['text_create_join_item']));
     this.setTooltip(Blockly.LANG_TEXT_JOIN_TOOLTIP_1);
     this.itemCount_ = 2;
-    this.setInputsInline(true);
   },
   mutationToDom: function() {
     var container = document.createElement('mutation');
