@@ -776,7 +776,7 @@ Blockly.ScrollbarSvg.prototype.onMouseDownKnob_ = function(e) {
   this.startDragKnob = parseFloat(
       this.svgKnob_.getAttribute(this.horizontal_ ? 'x' : 'y'));
   // Record the current mouse position.
-  this.startDragMouse = this.horizontal_ ? e.clientX : e.clientY;
+  this.startDragMouse = this.horizontal_ ? e.clientX*Blockly.editorScale : e.clientY*Blockly.editorScale;
   Blockly.ScrollbarSvg.onMouseUpWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
       'mouseup', this, this.onMouseUpKnob_);
   Blockly.ScrollbarSvg.onMouseMoveWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
@@ -790,7 +790,7 @@ Blockly.ScrollbarSvg.prototype.onMouseDownKnob_ = function(e) {
  * @private
  */
 Blockly.ScrollbarSvg.prototype.onMouseMoveKnob_ = function(e) {
-  var currentMouse = this.horizontal_ ? e.clientX : e.clientY;
+  var currentMouse = this.horizontal_ ? e.clientX*Blockly.editorScale : e.clientY*Blockly.editorScale;
   var mouseDelta = currentMouse - this.startDragMouse;
   var knobValue = this.startDragKnob + mouseDelta;
   // Position the bar.

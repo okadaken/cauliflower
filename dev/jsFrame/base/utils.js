@@ -104,8 +104,8 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
         if (e.changedTouches.length == 1) {
           // Map the touch event's properties to the event.
           var touchPoint = e.changedTouches[0];
-          e.clientX = touchPoint.clientX;
-          e.clientY = touchPoint.clientY;
+          e.clientX = touchPoint.clientX*Blockly.editorScale;
+          e.clientY = touchPoint.clientY*Blockly.editorScale;
         }
         func.apply(thisObject, arguments);
         // Stop the browser from scrolling/zooming the page

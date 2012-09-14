@@ -71,6 +71,13 @@ Blockly.createDom_ = function(container) {
   linkExt.setAttribute('rel', 'stylesheet');
   linkExt.setAttribute('type', 'text/css');
   
+  if (Blockly.editorScale == 1.2) {
+      var linkExt2 = doc.createElement('link');
+      linkExt2.setAttribute('href', Blockly.pathToBlockly + 'blockly-ext-forscaleon.css');
+      linkExt2.setAttribute('rel', 'stylesheet');
+      linkExt2.setAttribute('type', 'text/css');
+  }
+  
   link.setAttribute('onload', 'Blockly.cssLoaded()');
   var head = doc.head || doc.getElementsByTagName('head')[0];
   if (!head) {
@@ -78,6 +85,9 @@ Blockly.createDom_ = function(container) {
   }
   head.appendChild(link);
   head.appendChild(linkExt);
+  if (Blockly.editorScale == 1.2) {
+      head.appendChild(linkExt2);
+  }
 
   // Build the SVG DOM.
   /*

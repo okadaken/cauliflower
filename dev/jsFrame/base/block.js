@@ -343,7 +343,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      this.showContextMenu_(e.clientX, e.clientY);
+      this.showContextMenu_(e.clientX*Blockly.editorScale, e.clientY*Blockly.editorScale);
     }
   } else if (!this.editable) {
     // Allow uneditable blocks to be selected and context menued, but not
@@ -359,8 +359,8 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     this.startDragX = xy.x;
     this.startDragY = xy.y;
     // Record the current mouse position.
-    this.startDragMouseX = e.clientX;
-    this.startDragMouseY = e.clientY;
+    this.startDragMouseX = e.clientX*Blockly.editorScale;
+    this.startDragMouseY = e.clientY*Blockly.editorScale;
     Blockly.Block.dragMode_ = 1;
     Blockly.Block.onMouseUpWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
         'mouseup', this, this.onMouseUp_);
@@ -697,8 +697,8 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     return;
   }
   Blockly.removeAllRanges();
-  var dx = e.clientX - this.startDragMouseX;
-  var dy = e.clientY - this.startDragMouseY;
+  var dx = e.clientX*Blockly.editorScale - this.startDragMouseX;
+  var dy = e.clientY*Blockly.editorScale - this.startDragMouseY;
   if (Blockly.Block.dragMode_ == 1) {
     // Still dragging within the sticky DRAG_RADIUS.
     var dr = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));

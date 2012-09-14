@@ -43,6 +43,8 @@ var nullDOM;
 //タブクリックイベントのキャンセルフラグ
 var ignore = false;
 
+var blocklyscale = 1.0;
+
 $(document).ready(function() {
   initializeTabs();
   initializeHTMLReferenceAccordion();
@@ -236,7 +238,12 @@ function initializeHelp() {
   $.get('help.html', function(data) {
     $('#help').html(data);
     $('.version').replaceWith(version);
-    $('#jockercheck').checkbox({cls:'jquery-safari-checkbox'});
+    $('#jockercheck').checkbox({
+      cls: 'jquery-safari-checkbox'
+    });
+    $('#blocklyscale').checkbox({
+      cls: 'jquery-safari-checkbox'
+    });
     restoreDevSettings();
   });
 }
@@ -1148,22 +1155,48 @@ function showJocker() {
   return $('#jockercheck').attr('checked');
 }
 
+function getBlocklyScale() {
+  return blocklyscale;
+}
+
 function backupDevSettings() {
   if ('localStorage' in window) {
+    //ジョーカー設定
     if ($('#jockercheck').attr('checked')) {
       window.localStorage.setItem('cauliflower_dev_jockercheck', 'on');
     } else {
       window.localStorage.setItem('cauliflower_dev_jockercheck', 'off');
     }
+    
+    //描画倍率設定
+    if ($('#blocklyscale').attr('checked')) {
+      window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.2');
+    } else {
+      window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.0');
+    }
   }
 }
 
 function restoreDevSettings() {
-  if ('localStorage' in window && window.localStorage.cauliflower_dev_jockercheck) {
-    if (window.localStorage.cauliflower_dev_jockercheck == 'on') {
-      $('#jockercheck').attr('checked', true);
-    } else {
-      $('#jockercheck').attr('checked', false);
+  if ('localStorage' in window) {
+    //ジョーカーブロック設定
+    if (window.localStorage.cauliflower_dev_jockercheck) {
+      if (window.localStorage.cauliflower_dev_jockercheck == 'on') {
+        $('#jockercheck').attr('checked', true);
+      } else {
+        $('#jockercheck').attr('checked', false);
+      }
+    }
+    
+    //描画倍率設定
+    if (window.localStorage.cauliflower_dev_blocklyscale) {
+      if (window.localStorage.cauliflower_dev_blocklyscale == 1.2) {
+        blocklyscale = 1.2;
+        $('#blocklyscale').attr('checked', true);
+      } else {
+        blocklyscale = 1.0;
+        $('#blocklyscale').attr('checked', false);
+      }
     }
   }
 }
@@ -1184,7 +1217,6 @@ function uncommentHtmlEntity(s) {
   s = s.replace(/<!--CALCOMMENT-&copy;-->/g, '&copy;');
   return s;
 }
-
 
 function removeAllWhiteSpaces(s) {
   return s.replace(/[ \s]/g, "");

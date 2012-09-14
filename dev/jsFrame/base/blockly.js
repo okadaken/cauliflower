@@ -213,8 +213,13 @@ Blockly.svgSize = function() {
  * Record both the height/width and the absolute postion of the SVG image.
  */
 Blockly.svgResize = function() {
-  var width = Blockly.svg.parentNode.offsetWidth;
-  var height = Blockly.svg.parentNode.offsetHeight;
+
+  var width = Blockly.svg.parentNode.offsetWidth*Blockly.editorScale;
+  var height = Blockly.svg.parentNode.offsetHeight*Blockly.editorScale;
+  if (Blockly.editorScale != 1.0) {
+      Blockly.svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+  }
+   
   if (Blockly.svg.cachedWidth_ != width) {
     Blockly.svg.setAttribute('width', width + 'px');
     Blockly.svg.cachedWidth_ = width;
@@ -224,6 +229,7 @@ Blockly.svgResize = function() {
     Blockly.svg.cachedHeight_ = height;
   }
   var bBox = Blockly.svg.getBoundingClientRect();
+  
   Blockly.svg.cachedLeft_ = bBox.left;
   Blockly.svg.cachedTop_ = bBox.top;
 };
@@ -247,15 +253,15 @@ Blockly.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      Blockly.showContextMenu_(e.clientX, e.clientY);
+      Blockly.showContextMenu_(e.clientX*Blockly.editorScale, e.clientY*Blockly.editorScale);
     }
   } else if (e.target.nodeName == 'svg' || !Blockly.editable) {
     // If the workspace is editable, only allow dragging when gripping empty
     // space.  Otherwise, allow dragging when gripping anywhere.
     Blockly.mainWorkspace.dragMode = true;
     // Record the current mouse position.
-    Blockly.mainWorkspace.startDragMouseX = e.clientX;
-    Blockly.mainWorkspace.startDragMouseY = e.clientY;
+    Blockly.mainWorkspace.startDragMouseX = e.clientX*Blockly.editorScale;
+    Blockly.mainWorkspace.startDragMouseY = e.clientY*Blockly.editorScale;
     Blockly.mainWorkspace.startDragMetrics =
         Blockly.getMainWorkspaceMetrics();
     Blockly.mainWorkspace.startScrollX = Blockly.mainWorkspace.scrollX;
@@ -281,8 +287,8 @@ Blockly.onMouseUp_ = function(e) {
 Blockly.onMouseMove_ = function(e) {
   if (Blockly.mainWorkspace.dragMode) {
     Blockly.removeAllRanges();
-    var dx = e.clientX - Blockly.mainWorkspace.startDragMouseX;
-    var dy = e.clientY - Blockly.mainWorkspace.startDragMouseY;
+    var dx = e.clientX*Blockly.editorScale - Blockly.mainWorkspace.startDragMouseX;
+    var dy = e.clientY*Blockly.editorScale - Blockly.mainWorkspace.startDragMouseY;
     var metrics = Blockly.mainWorkspace.startDragMetrics;
     var x = Blockly.mainWorkspace.startScrollX + dx;
     var y = Blockly.mainWorkspace.startScrollY + dy;
@@ -549,6 +555,7 @@ Blockly.getMainWorkspaceMetrics = function() {
   if (Blockly.Toolbox && !Blockly.RTL) {
     absoluteLeft = Blockly.Toolbox.width;
   }
+  
   return {
     viewHeight: hwView.height,
     viewWidth: hwView.width,

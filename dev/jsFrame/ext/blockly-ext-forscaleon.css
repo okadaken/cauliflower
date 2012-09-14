@@ -1,0 +1,45 @@
+/**
+ * Cauliflower用の拡張CSS
+ * inject.jsでパス指定して読み込んでいる
+ * エディタのスケールが1.2倍になったときに必要な上書き部分だけ
+ */
+
+.control {
+    font-size: 14px;
+}
+
+.logic {
+    font-size: 14px;
+}
+
+.math {
+    font-size: 14px;
+}
+
+.text {
+    font-size: 14px;
+}
+
+.list {
+    font-size: 14px;
+}
+
+.variables {
+    font-size: 14px;
+}
+
+.procedures {
+    font-size: 14px;
+}
+
+.myDocument {
+    font-size: 14px;
+}
+
+.joker {
+    font-size: 14px;
+}
+.object {
+    font-size: 14px;
+}
+

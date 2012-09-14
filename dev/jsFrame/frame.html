@@ -48,12 +48,16 @@
     </style>
     <script>
       function init() {
-      
+        Blockly.editorScale = parent.getBlocklyScale();
+        
         Blockly.inject(document.body, {
           path: ''
         });
         
         window.parent.initializeBlocklyFrame(Blockly);
+        
+        
+        
       }
     </script>
   </head>

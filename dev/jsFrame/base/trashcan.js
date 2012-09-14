@@ -189,10 +189,10 @@ Blockly.Trashcan.prototype.onMouseMove = function(e) {
     top += node.offsetTop;
     node = node.offsetParent;
   }
-  var over = (e.clientX > left) &&
-             (e.clientX < left + this.WIDTH_) &&
-             (e.clientY > top) &&
-             (e.clientY < top + this.BODY_HEIGHT_ + this.LID_HEIGHT_);
+  var over = (e.clientX*Blockly.editorScale > left) &&
+             (e.clientX*Blockly.editorScale < left + this.WIDTH_) &&
+             (e.clientY*Blockly.editorScale > top) &&
+             (e.clientY*Blockly.editorScale < top + this.BODY_HEIGHT_ + this.LID_HEIGHT_);
   // For bonus points we might want to match the trapezoidal outline.
   if (this.isOpen != over) {
     this.setOpen_(over);
