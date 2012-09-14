@@ -38,13 +38,12 @@ Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_The
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = '条件を評価し、結果が真（成立する）なら挟んだブロックを実行します。';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = '条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '結果が偽（成立しない）なら、二番目に挟んだブロックを実行します。';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = '最初の条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '最初の条件が真（成立する）以外なら、順番に上から別の条件を評価し、\n結果が真（成立する）のところに挟んだブロックを実行します。';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = '最初の条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '最初の条件が真（成立する）以外なら、順番に上から別の条件を評価し、\n結果が真（成立する）のところに挟んだブロックを実行します。\n' + 'どの条件も結果が真（成立する）にならない場合は、\n最後の偽の場合に挟んであるブロックを実行します。';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = '最初の条件を評価し、結果が真（成立する）なら、一番上に挟んだブロックを実行します。\n' + '最初の条件が真（成立する）以外なら、順番に上から別の条件を評価し、\n結果が真（成立する）のところに挟んだブロックを実行します。\n' + 'どの条件も結果が真（成立する）にならない場合は、\n最後の偽ならばに挟んであるブロックを実行します。';
 Blockly.LANG_CONTROLS_IF_MSG_IF = '分岐';
 Blockly.LANG_CONTROLS_IF_MSG_CONDITION = '条件';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '別の条件';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = '偽ならば';
 Blockly.LANG_CONTROLS_IF_MSG_THEN = '真ならば';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF_THEN = '次の条件が真の場合';
 
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = '分岐';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'この右側のブロックを挟んで分岐の形を変更します。';
