@@ -1191,7 +1191,7 @@ function restoreDevSettings() {
     //描画倍率設定
     if (window.localStorage.cauliflower_dev_blocklyscale) {
       if (window.localStorage.cauliflower_dev_blocklyscale == 1.2) {
-        blocklyscale = 1.3;
+        blocklyscale = 1.2;
         $('#blocklyscale').attr('checked', true);
       } else {
         blocklyscale = 1.0;
