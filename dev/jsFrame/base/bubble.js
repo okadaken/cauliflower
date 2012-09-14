@@ -240,11 +240,11 @@ Blockly.Bubble.prototype.bubbleMouseDown_ = function(e) {
   Blockly.setCursorHand_(true);
   // Record the starting offset between the current location and the mouse.
   if (Blockly.RTL) {
-    this.dragDeltaX = this.relativeLeft_ + e.clientX;
+    this.dragDeltaX = this.relativeLeft_ + e.clientX*Blockly.editorScale;
   } else {
-    this.dragDeltaX = this.relativeLeft_ - e.clientX;
+    this.dragDeltaX = this.relativeLeft_ - e.clientX*Blockly.editorScale;
   }
-  this.dragDeltaY = this.relativeTop_ - e.clientY;
+  this.dragDeltaY = this.relativeTop_ - e.clientY*Blockly.editorScale;
 
   Blockly.Bubble.onMouseUpWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
       'mouseup', this, Blockly.Bubble.unbindDragEvents_);
@@ -309,7 +309,7 @@ Blockly.Bubble.prototype.resizeMouseDown_ = function(e) {
  */
 Blockly.Bubble.prototype.resizeMouseMove_ = function(e) {
   var w = this.resizeDeltaWidth;
-  var h = this.resizeDeltaHeight + e.clientY;
+  var h = this.resizeDeltaHeight + e.clientY*Blockly.editorScale;
   if (Blockly.RTL) {
     // RTL drags the bottom-left corner.
     w -= e.clientX*Blockly.editorScale;
