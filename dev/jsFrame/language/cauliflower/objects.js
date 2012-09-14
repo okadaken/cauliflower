@@ -136,7 +136,7 @@ Blockly.Language.dropdownForObjects = function() {
     options[x] = [variableList[x], variableList[x]];
   }
   if( options.length == 0 ){
-  	options.push(['（変更して下さい）','（変更して下さい）']);
+  	options.push(['x','x']);
   }
   
   return options;

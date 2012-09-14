@@ -439,10 +439,10 @@ Blockly.LANG_OBJECT_CREATE_WITH_CONTAINER_TOOLTIP_1 = '指定したいプロパ�
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TITLE = 'プロパティ';
 Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'プロパティを指定したい数だけ入れてください。';
 
-Blockly.LANG_OBJECT_GET = 'オブジェクト';
-Blockly.LANG_OBJECT_GET_1 = 'のプロパティ';
-Blockly.LANG_OBJECT_SET = 'オブジェクト';
-Blockly.LANG_OBJECT_SET_1 = 'のプロパティ';
+Blockly.LANG_OBJECT_GET = '変数';
+Blockly.LANG_OBJECT_GET_1 = 'のオブジェクトのプロパティ';
+Blockly.LANG_OBJECT_SET = '変数';
+Blockly.LANG_OBJECT_SET_1 = 'のオブジェクトのプロパティ';
 Blockly.LANG_OBJECT_SET_2 = 'に代入';
 
 // Joker Blocks.
