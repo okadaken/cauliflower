@@ -165,11 +165,7 @@ Blockly.Language.myDocument_set = {
     this.appendTitle(idDropDown, 'TARGET');
     this.appendTitle('の');
     this.appendTitle(fieldDropDown, 'ACTION');
-    this.appendTitle('を');
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);
-    this.appendInput('に変える', Blockly.DUMMY_INPUT, null);
-    this.setInputsInline(true);
-    
+    this.appendInput('に代入', Blockly.INPUT_VALUE, 'VALUE', null);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }

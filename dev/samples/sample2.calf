@@ -19,7 +19,7 @@
       </mutation>
       <title name="NAME">div1_onmouseout</title>
       <statement name="STACK">
-        <block type="myDocument_set" inline="true">
+        <block type="myDocument_set" inline="false">
           <title name="TARGET">div1</title>
           <title name="ACTION">.style.backgroundColor</title>
           <value name="VALUE">
@@ -35,7 +35,7 @@
       </mutation>
       <title name="NAME">div1_onmouseover</title>
       <statement name="STACK">
-        <block type="myDocument_set" inline="true">
+        <block type="myDocument_set" inline="false">
           <title name="TARGET">div1</title>
           <title name="ACTION">.style.backgroundColor</title>
           <value name="VALUE">
