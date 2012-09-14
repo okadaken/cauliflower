@@ -13,6 +13,8 @@
     <script type="text/javascript" src="codemirror/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="codemirror/mode/css/css.js"></script>
     <script type="text/javascript" src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <link rel="stylesheet" href="jquery/notification/css/jquery_notification.css"/>
+    <script type="text/javascript" src="jquery/notification/js/jquery_notification_v.1.js"></script>
   </head>
   <style type="text/css">
     .CodeMirror {
@@ -57,147 +59,162 @@
   </style>
   <body>
     <script>
-      var SourcePreview;
-      var pageTitle;
-      
-      function initalizeExportButton() {
-        $('#export-button').button({
-          icons: {
-            primary: 'ui-icon-circle-arrow-s'
-          }
-        }).click(function() {
-          saveToFileForPreviewWindow({
-            filename: getExportFileName(),
-            contents: SourcePreview.getValue()
-          });
-        });
-      }
-      
-      function initalizeConsoleClearButton() {
-        $('#console-clear-button').button({
-          icons: {
-            primary: 'ui-icon-circle-close'
-          }
-        }).click(function() {
-          $('#error-console').html('');
-        });
-      }
-      
-      //cauliflower.jsのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
-      //ファイル分割して読み込みを検討すること
-      function saveToFileForPreviewWindow(properties) {
-        //Jquery化できるはず
-        var form = document.createElement('form');
-        form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
-        form.setAttribute('method', 'post');
-        form.style.display = 'none';
-        document.body.appendChild(form);
-        for (var prop in properties) {
-          var input = document.createElement('input');
-          input.setAttribute('type', 'hidden');
-          input.setAttribute('name', prop);
-          input.setAttribute('value', properties[prop]);
-          form.appendChild(input);
+    var SourcePreview;
+    var pageTitle;
+    
+    function initalizeExportButton() {
+      $('#export-button').button({
+        icons: {
+          primary: 'ui-icon-circle-arrow-s'
         }
-        form.submit();
-      }
-      
-      function getExportFileName() {
-        var ext = '.html';
-        var defaultFileName = '新規HTMLファイル' + ext;
-        if (pageTitle != null) {
-          return window.opener.trimStringForFileName(pageTitle + ext);
-        } else {
-          return defaultFileName;
-        }
-      }
-      
-      function initalizeSourcePreview() {
-        //Jqueryのgetが使えるか検討
-        SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
-          mode: 'htmlmixed',
-          theme: 'html-preview',
-          tabMode: 'indent',
-          lineNumbers: true,
-          fixedGutter: true,
-          electricChars: true,
-          readOnly: true,
-          indentWithTabs: true,
-          tabSize: 3
+      }).click(function() {
+        saveToFileForPreviewWindow({
+          filename: getExportFileName(),
+          contents: SourcePreview.getValue()
         });
-        SourcePreview.setSize('100%', '465px');
-        SourcePreview.addClass('html-preview');
-      }
-      
-      function initalizePreviewWindowTabs() {
-        $('#tabs-preview').tabs({
-          cookie: {
-            expires: 3 //選択タブをcookieで3日間保存
-          },
-          show: function(event, ui) {
-            switch (ui.panel.id) {
-            case 'tab-preview-src':
-              if (SourcePreview != null) {
-                SourcePreview.refresh();
-              }
-              break;
-            }
-          }
-        });
-      }
-      
-      function updateHTMLPreview(code) {
-        var previewFrame = document.getElementById('contents-preview');
-        var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
-        preview.open();
-        preview.write(code);
-        preview.close();
-        
-        //エンターキー入力を無効にする
-        $('#contents-preview').contents().find('form input').bind('keypress', function(e) {
-          if (e.keyCode != null && e.keyCode == 13) {
-            return false;
-          }
-        });
-      }
-      
-      $(document).ready(function() {
-        initalizePreviewWindowTabs();
-        initalizeExportButton();
-        initalizeConsoleClearButton();
-        initalizeSourcePreview();
-        
-        var dom = window.opener.parseHTMLToDOM(function() {
-          //エラーが発生したときはウィンドウを閉じる
-          window.close();
-        }, true);
-        
-        //プレビュー用のコードを作る
-        var codeForView = window.opener.getAllCode(dom);
-        var titles = dom.getElementsByTagName('title');
-        if (titles.length != 0 && titles[0].firstChild != null) {
-          pageTitle = titles[0].firstChild.nodeValue;
-          $('title').text(pageTitle);
-        }
-        SourcePreview.setValue(codeForView);
-        
-        //実際に動かすコードを作る   
-        //エラーコンソールにエラーを表示するためのコード
-        var onerrorHandler = 'this.onerror=function(msg,url,linenumber){' +
-        'window.parent.updateConsole(msg,url,linenumber)};\n';
-        
-        //コードをオリジナルに挿入
-        var targetCode = '<script type="text/javascript">\n<!--\n';
-        var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + '\n');
-        
-        updateHTMLPreview(codeForExec);
       });
+    }
+    
+    function initalizeConsoleClearButton() {
+      $('#console-clear-button').button({
+        icons: {
+          primary: 'ui-icon-circle-close'
+        }
+      }).click(function() {
+        $('#error-console').html('');
+      });
+    }
+    
+    //cauliflower.jsのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
+    //ファイル分割して読み込みを検討すること
+    function saveToFileForPreviewWindow(properties) {
+      //Jquery化できるはず
+      var form = document.createElement('form');
+      form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+      form.setAttribute('method', 'post');
+      form.style.display = 'none';
+      document.body.appendChild(form);
+      for (var prop in properties) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', prop);
+        input.setAttribute('value', properties[prop]);
+        form.appendChild(input);
+      }
+      form.submit();
+    }
+    
+    function getExportFileName() {
+      var ext = '.html';
+      var defaultFileName = '新規HTMLファイル' + ext;
+      if (pageTitle != null) {
+        return window.opener.trimStringForFileName(pageTitle + ext);
+      } else {
+        return defaultFileName;
+      }
+    }
+    
+    function initalizeSourcePreview() {
+      //Jqueryのgetが使えるか検討
+      SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
+        mode: 'htmlmixed',
+        theme: 'html-preview',
+        tabMode: 'indent',
+        lineNumbers: true,
+        fixedGutter: true,
+        electricChars: true,
+        readOnly: true,
+        indentWithTabs: true,
+        tabSize: 3
+      });
+      SourcePreview.setSize('100%', '465px');
+      SourcePreview.addClass('html-preview');
+    }
+    
+    function initalizePreviewWindowTabs() {
+      $('#tabs-preview').tabs({
+        cookie: {
+          expires: 3 //選択タブをcookieで3日間保存
+        },
+        show: function(event, ui) {
+          switch (ui.panel.id) {
+          case 'tab-preview-src':
+            if (SourcePreview != null) {
+              SourcePreview.refresh();
+            }
+            break;
+          }
+        }
+      });
+    }
+    
+    function updateHTMLPreview(code) {
+      var previewFrame = document.getElementById('contents-preview');
+      var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+      preview.open();
+      preview.write(code);
+      preview.close();
       
-      function updateConsole(msg, url, linenumber) {
-        var icon = '<img class="console-icon" src="img/icon/error-console-icon.png">';
+      //エンターキー入力を無効にする
+      $('#contents-preview').contents().find('form input').bind('keypress', function(e) {
+        if (e.keyCode != null && e.keyCode == 13) {
+          return false;
+        }
+      });
+    }
+    
+    $(document).ready(function() {
+      initalizePreviewWindowTabs();
+      initalizeExportButton();
+      initalizeConsoleClearButton();
+      initalizeSourcePreview();
+      
+      var dom = window.opener.parseHTMLToDOM(function() {
+        //エラーが発生したときはウィンドウを閉じる
+        window.close();
+      }, true);
+      
+      //プレビュー用のコードを作る
+      var codeForView = window.opener.getAllCode(dom);
+      var titles = dom.getElementsByTagName('title');
+      if (titles.length != 0 && titles[0].firstChild != null) {
+        pageTitle = titles[0].firstChild.nodeValue;
+        $('title').text(pageTitle);
+      }
+      SourcePreview.setValue(codeForView);
+      
+      //実際に動かすコードを作る   
+      //コンソールにエラーを表示するためのコード
+      var onerrorHandler = 'this.onerror=function(msg,url,linenumber){' +
+      'window.parent.updateConsole(\'error\',msg,url,linenumber)};\n';
+      
+      //コードをオリジナルに挿入
+      var targetCode = '<script type="text/javascript">\n<!--\n';
+      var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + '\n');
+      
+      updateHTMLPreview(codeForExec);
+    });
+    
+    function updateConsole(type, msg, url, linenumber) {
+      switch (type) {
+      case 'error':
+        var icon = '<img class="console-icon" src="img/icon/error-console-icon.png"/>';
         var message = '<span class="console-msg">' + window.opener.escapeHTML(msg) + '</span>';
         $('#error-console').append('<p>' + icon + message + '</p>');
+        showNotification({
+          message: icon + '実行時エラーが発生しています。コンソールを確認してください。',
+          type: 'error',
+          autoClose: true,
+          duration: 3
+        });
+        break;
+      case 'notice':
+        //
+        break;
+      default:
+        throw 'Unknown console type.';
       }
+    }
     </script>
     <div id="preview-menu">
       <button id="export-button" title="ソースタブに表示されている内容をHTMLファイルとして保存します">HTMLファイルとしてエクスポート</button>
@@ -211,7 +228,7 @@
           <a href="#tab-preview-src">ソース</a>
         </li>
         <li>
-          <a href="#tab-error-console">エラーコンソール</a>
+          <a href="#tab-error-console">コンソール</a>
         </li>
       </ul>
       <div id="tab-preview-preview">
@@ -222,7 +239,7 @@
       </div>
       <div id="tab-error-console">
         <div id="console-menu">
-          <button id="console-clear-button" title="コンソールに表示されている内容を消去します。">コンソールをクリア</button>
+          <button id="console-clear-button" title="コンソールに表示されている内容を消去します。">クリア</button>
         </div>
         <div id="error-console"></div>
       </div>
