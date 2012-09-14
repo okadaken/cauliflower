@@ -1015,8 +1015,8 @@ function loadHTMLTemplateConfirm() {
   var buttons = {
     OK: function() {
       discardHTML();
-      $.get('html-template.txt', function(data) {
-        HTMLEditor.setValue(new XMLSerializer().serializeToString(data));
+      var o = $.get('html-template.txt', function() {
+        HTMLEditor.setValue(o.responseText);
       }).complete(function() {
         $('#dialog').dialog('close');
       });
@@ -1030,8 +1030,8 @@ function loadHTMLTemplateConfirm() {
 
 function loadHTMLTemplate() {
   discardHTML();
-  $.get('html-template.txt', function(data) {
-    HTMLEditor.setValue(new XMLSerializer().serializeToString(data));
+  var o = $.get('html-template.txt', function() {
+    HTMLEditor.setValue(o.responseText);
   });
 }
 
@@ -1191,7 +1191,7 @@ function restoreDevSettings() {
     //描画倍率設定
     if (window.localStorage.cauliflower_dev_blocklyscale) {
       if (window.localStorage.cauliflower_dev_blocklyscale == 1.2) {
-        blocklyscale = 1.2;
+        blocklyscale = 1.3;
         $('#blocklyscale').attr('checked', true);
       } else {
         blocklyscale = 1.0;
