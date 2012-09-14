@@ -16,12 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * @fileoverview Generating JavaScript for text blocks.
  * @author fraser@google.com (Neil Fraser)
  */
-
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.text = function() {
@@ -36,40 +34,47 @@ Blockly.JavaScript.text_join = function() {
   if (this.itemCount_ == 0) {
     return ['\'\'', Blockly.JavaScript.ORDER_ATOMIC];
   } else if (this.itemCount_ == 1) {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'ADD0',
-        Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    code = 'String(' + argument0 + ')';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'ADD0', Blockly.JavaScript.ORDER_NONE) ||
+    '\'\'';
+    code = getJoinCode(argument0);
     return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
   } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'ADD0',
-        Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    var argument1 = Blockly.JavaScript.valueToCode(this, 'ADD1',
-        Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    code = 'String(' + argument0 + ') + String(' + argument1 + ')';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'ADD0', Blockly.JavaScript.ORDER_NONE) ||
+    '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(this, 'ADD1', Blockly.JavaScript.ORDER_NONE) ||
+    '\'\'';
+    code = getJoinCode(argument0) + ' + ' + getJoinCode(argument1);
     return [code, Blockly.JavaScript.ORDER_ADDITION];
   } else {
     code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-      code[n] = Blockly.JavaScript.valueToCode(this, 'ADD' + n,
-          Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+      code[n] = Blockly.JavaScript.valueToCode(this, 'ADD' + n, Blockly.JavaScript.ORDER_COMMA) ||
+      '\'\'';
+      code[n] = getJoinCode(code[n]);
     }
-    code = '[' + code.join(',') + '].join(\'\')';
+    code = code.join(' + ');
     return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
   }
 };
+function getJoinCode(arg) {
+  if (arg.charAt(0) == '\'' && arg.charAt(arg.length - 1) == '\'') {
+    return arg;
+  } else {
+    return 'String(' + arg + ')';
+  }
+}
+
 Blockly.JavaScript.text_append = function() {
   // Append to a variable in place.
-  var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return code = varName +
-      ' = String(' + varName + ') + String(' + argument0 + ');\n';
+  var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('VAR'), Blockly.Variables.NAME_TYPE);
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_NONE) ||
+  '\'\'';
+  return varName + ' = String(' + varName + ') + ' + getJoinCode(argument0) + ';\n';
 };
 Blockly.JavaScript.text_length = function() {
   // String length.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_FUNCTION_CALL) ||
+  '\'\'';
   return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
 
@@ -78,51 +83,50 @@ Blockly.JavaScript.text_endString = function() {
   var first = this.getTitleValue('END') == 'FIRST';
   var code;
   if (first) {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
-        Blockly.JavaScript.ORDER_COMMA) || '1';
-    var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-        Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', Blockly.JavaScript.ORDER_COMMA) ||
+    '1';
+    var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_MEMBER) ||
+    '\'\'';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    if (!Blockly.JavaScript.definitions_['text_tailString']) {
-      var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
-          'text_tailString', Blockly.Generator.NAME_TYPE);
-      Blockly.JavaScript.text_endString.text_tailString = functionName;
-      var func = [];
-      func.push('function ' + functionName + '(n, myString) {');
-      func.push('  // Return a trailing substring of n characters.');
-      func.push('  return myString.substring(myString.length - n);');
-      func.push('}');
-      Blockly.JavaScript.definitions_['text_tailString'] = func.join('\n');
-    }
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
-        Blockly.JavaScript.ORDER_COMMA) || '1';
-    var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-        Blockly.JavaScript.ORDER_COMMA) || '\'\'';
-    code = Blockly.JavaScript.text_endString.text_tailString +
-        '(' + argument0 + ', ' + argument1 + ')';
+    /*
+     if (!Blockly.JavaScript.definitions_['text_tailString']) {
+     var functionName = Blockly.JavaScript.variableDB_.getDistinctName('text_tailString', Blockly.Generator.NAME_TYPE);
+     Blockly.JavaScript.text_endString.text_tailString = functionName;
+     var func = [];
+     func.push('function ' + functionName + '(n, myString) {');
+     func.push('  // Return a trailing substring of n characters.');
+     func.push('  return myString.substring(myString.length - n);');
+     func.push('}');
+     Blockly.JavaScript.definitions_['text_tailString'] = func.join('\n');
+     }
+     */
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', Blockly.JavaScript.ORDER_COMMA) ||
+    '1';
+    var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_COMMA) ||
+    '\'\'';
+    code = argument1 + '.slice(-' + argument0 + ')';
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.JavaScript.text_indexOf = function() {
   // Search the text for a substring.
-  var operator = this.getTitleValue('END') == 'FIRST' ?
-      'indexOf' : 'lastIndexOf';
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND',
-      Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+  var operator = this.getTitleValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND', Blockly.JavaScript.ORDER_NONE) ||
+  '\'\'';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_MEMBER) ||
+  '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
   return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 Blockly.JavaScript.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'AT',
-      Blockly.JavaScript.ORDER_NONE) || '1';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'AT', Blockly.JavaScript.ORDER_NONE) ||
+  '1';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_MEMBER) ||
+  '\'\'';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -131,7 +135,7 @@ Blockly.JavaScript.text_charAt = function() {
     // If the index is dynamic, decrement it in code.
     argument0 += ' - 1';
   }
-  var code = argument1 + '[' + argument0 + ']';
+  var code = argument1 + '.charAt(' + argument0 + ')';
   return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
@@ -142,27 +146,28 @@ Blockly.JavaScript.text_changeCase = function() {
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-        Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_MEMBER) ||
+    '\'\'';
     code = argument0 + operator;
   } else {
     if (!Blockly.JavaScript.definitions_['text_toTitleCase']) {
       // Title case is not a native JavaScript function.  Define one.
-      var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
-          'text_toTitleCase', Blockly.Generator.NAME_TYPE);
+      var functionName = Blockly.JavaScript.variableDB_.getDistinctName('text_toTitleCase', Blockly.Generator.NAME_TYPE);
       Blockly.JavaScript.text_changeCase.toTitleCase = functionName;
       var func = [];
       func.push('function ' + functionName + '(str) {');
       func.push('  return str.replace(/\\S+/g,');
       func.push('      function(txt) {return txt.charAt(0).toUpperCase() + ' +
-                'txt.substr(1).toLowerCase();});');
+      'txt.substr(1).toLowerCase();});');
       func.push('}');
       Blockly.JavaScript.definitions_['text_toTitleCase'] = func.join('\n');
     }
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-        Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_NONE) ||
+    '\'\'';
     code = Blockly.JavaScript.text_changeCase.toTitleCase +
-        '(' + argument0 + ')';
+    '(' +
+    argument0 +
+    ')';
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
@@ -175,17 +180,30 @@ Blockly.JavaScript.text_changeCase.OPERATORS = {
 
 //不要と判断
 /*
-Blockly.JavaScript.text_trim = function() {
-  // Trim spaces.
-  var mode = this.getTitleValue('MODE');
-  var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  return [argument0 + operator, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};
 
-Blockly.JavaScript.text_trim.OPERATORS = {
-  LEFT: '.replace(/^\\s+/, \'\')',
-  RIGHT: '.replace(/\\s+$/, \'\')',
-  BOTH: '.replace(/^\\s+|\\s+$/g, \'\')'
-};*/
+ Blockly.JavaScript.text_trim = function() {
+
+ // Trim spaces.
+
+ var mode = this.getTitleValue('MODE');
+
+ var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
+
+ var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
+
+ Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+
+ return [argument0 + operator, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+
+ };
+
+ Blockly.JavaScript.text_trim.OPERATORS = {
+
+ LEFT: '.replace(/^\\s+/, \'\')',
+
+ RIGHT: '.replace(/\\s+$/, \'\')',
+
+ BOTH: '.replace(/^\\s+|\\s+$/g, \'\')'
+
+ };*/
+
