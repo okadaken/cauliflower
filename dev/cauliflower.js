@@ -396,6 +396,7 @@ function load(event) {
     }
     
     var oldHTML = HTMLEditor.getValue();
+    var oldBlocks = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var htmls = xml.getElementsByTagName('html');
     if (htmls.length != 0) {
       HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
@@ -408,11 +409,35 @@ function load(event) {
         '削除': function() {
           Blockly.mainWorkspace.clear();
           $('#dialog').dialog('close');
-          loadXML(xml);
+          try {
+            loadXML(xml);
+          } catch (e) {
+            Blockly.mainWorkspace.clear();
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+            updateJavaScriptPreview();
+            Blockly.mainWorkspace.render();
+            Blockly.Toolbox.redraw();
+            HTMLEditor.setValue(oldHTML);
+            showLoadErrorDialog();
+            console.error(e);
+            return;
+          }
         },
         '残す': function() {
           $('#dialog').dialog('close');
-          loadXML(xml);
+          try {
+            loadXML(xml);
+          } catch (e) {
+            Blockly.mainWorkspace.clear();
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+            updateJavaScriptPreview();
+            Blockly.mainWorkspace.render();
+            Blockly.Toolbox.redraw();
+            HTMLEditor.setValue(oldHTML);
+            showLoadErrorDialog();
+            console.error(e);
+            return;
+          }
         },
         'キャンセル': function() {
           HTMLEditor.setValue(oldHTML);
@@ -421,7 +446,15 @@ function load(event) {
       };
       showDialog('confirm', title, message, buttons);
     } else {
-      loadXML(xml);
+      try {
+        loadXML(xml);
+      } catch (e) {
+        Blockly.mainWorkspace.clear();
+        HTMLEditor.setValue(oldHTML);
+        showLoadErrorDialog();
+        console.error(e);
+        return;
+      }
     }
   }
   reader.readAsText(fileData, 'UTF-8');
@@ -521,6 +554,7 @@ function loadSample(path) {
     }
     
     var oldHTML = HTMLEditor.getValue();
+    var oldBlocks = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var htmls = xml.getElementsByTagName('html');
     if (htmls.length != 0) {
       HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
@@ -533,11 +567,35 @@ function loadSample(path) {
         '削除': function() {
           Blockly.mainWorkspace.clear();
           $('#dialog').dialog('close');
-          loadXML(xml);
+          try {
+            loadXML(xml);
+          } catch (e) {
+            Blockly.mainWorkspace.clear();
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+            updateJavaScriptPreview();
+            Blockly.mainWorkspace.render();
+            Blockly.Toolbox.redraw();
+            HTMLEditor.setValue(oldHTML);
+            showLoadErrorDialog();
+            console.error(e);
+            return;
+          }
         },
         '残す': function() {
           $('#dialog').dialog('close');
-          loadXML(xml);
+          try {
+            loadXML(xml);
+          } catch (e) {
+            Blockly.mainWorkspace.clear();
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+            updateJavaScriptPreview();
+            Blockly.mainWorkspace.render();
+            Blockly.Toolbox.redraw();
+            HTMLEditor.setValue(oldHTML);
+            showLoadErrorDialog();
+            console.error(e);
+            return;
+          }
         },
         'キャンセル': function() {
           HTMLEditor.setValue(oldHTML);
@@ -546,7 +604,15 @@ function loadSample(path) {
       };
       showDialog('confirm', title, message, buttons);
     } else {
-      loadXML(xml);
+      try {
+        loadXML(xml);
+      } catch (e) {
+        Blockly.mainWorkspace.clear();
+        HTMLEditor.setValue(oldHTML);
+        showLoadErrorDialog();
+        console.error(e);
+        return;
+      }
     }
   });
 }
