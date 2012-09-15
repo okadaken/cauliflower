@@ -260,7 +260,7 @@ function initializeJavaScriptPreview() {
     indentWithTabs: true,
     tabSize: 3
   });
-  JavaScriptPreview.setSize('100%', '530px');
+  JavaScriptPreview.setSize('100%', '529px');
   JavaScriptPreview.addClass('eclipse-jspreview');
 }
 
