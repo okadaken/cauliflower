@@ -253,7 +253,7 @@ Blockly.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      Blockly.showContextMenu_(e.clientX*Blockly.editorScale, e.clientY*Blockly.editorScale);
+      Blockly.showContextMenu_(e.clientX, e.clientY);
     }
   } else if (e.target.nodeName == 'svg' || !Blockly.editable) {
     // If the workspace is editable, only allow dragging when gripping empty

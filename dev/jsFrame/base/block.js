@@ -348,7 +348,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      this.showContextMenu_(e.clientX*Blockly.editorScale, e.clientY*Blockly.editorScale);
+      this.showContextMenu_(e.clientX, e.clientY);
     }
   } else if (!this.editable) {
     // Allow uneditable blocks to be selected and context menued, but not
