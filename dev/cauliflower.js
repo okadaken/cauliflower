@@ -570,7 +570,7 @@ function getFileNameForSave(doc) {
 function saveToFile(properties) {
   // TODO:jquery
   var form = document.createElement('form');
-  form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+  form.setAttribute('action', 'http://msatellite.info/cauliflower-support/save.php');
   form.setAttribute('method', 'post');
   form.style.display = 'none';
   document.body.appendChild(form);
