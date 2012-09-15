@@ -146,8 +146,8 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
       Blockly.bindEvent_(htmlInput, 'blur', this, this.onHtmlInputBlur_);
   // Bind to keyup -- trap Enter and Esc; resize after every keystroke.
   htmlInput.onKeyUpWrapper_ =
-      Blockly.bindEvent_(htmlInput, 'keyup', this,
-                         this.onHtmlInputKeyUp_);
+      Blockly.bindEvent_(htmlInput, 'keydown', this,
+                         this.onHtmlInputKeyUp_);//元々keyupだったが、変換確定用のenterを無視したいのでkeydownに変更
   // Bind to keyPress -- repeatedly resize when holding down a key.
   htmlInput.onKeyPressWrapper_ =
       Blockly.bindEvent_(htmlInput, 'keypress', this, this.resizeEditor_);
