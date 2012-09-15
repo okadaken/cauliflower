@@ -76,6 +76,11 @@
   font-size: 11pt;
   fill: #fff;
 }
+
+.warningBlocklyText {
+    fill: #000;
+}
+
 .blocklyHeader {
   cursor: default !important;
   font-family: sans-serif;

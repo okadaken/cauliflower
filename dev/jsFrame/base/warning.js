@@ -121,7 +121,7 @@ Blockly.Warning.prototype.createIcon_ = function() {
  */
 Blockly.Warning.prototype.textToDom_ = function(text) {
   var paragraph = Blockly.createSvgElement('text',
-      {'class': 'blocklyText', y: Blockly.Bubble.BORDER_WIDTH}, null);
+      {'class': 'blocklyText warningBlocklyText', y: Blockly.Bubble.BORDER_WIDTH}, null);
   var lines = text.split('\n');
   for (var i = 0; i < lines.length; i++) {
     var tspanElement = Blockly.createSvgElement('tspan',
@@ -203,7 +203,11 @@ Blockly.Warning.prototype.setVisible_ = function(visible) {
  * @private
  */
 Blockly.Warning.prototype.iconClick_ = function(e) {
-  this.setPinned(!this.isPinned_);
+  if (Blockly.Block.dragMode_ == 0) {
+    this.setPinned(true);
+    this.setVisible_(true);
+  }
+  //this.setPinned(!this.isPinned_);
 };
 
 /**
@@ -212,9 +216,13 @@ Blockly.Warning.prototype.iconClick_ = function(e) {
  * @private
  */
 Blockly.Warning.prototype.iconMouseOver_ = function(e) {
-  if (!this.isPinned_ && Blockly.Block.dragMode_ == 0) {
+    if (Blockly.Block.dragMode_ == 0) {
+        this.setPinned(true);
+        this.setVisible_(true);
+    }
+  /*if (!this.isPinned_ && Blockly.Block.dragMode_ == 0) {
     this.setVisible_(true);
-  }
+  }*/
 };
 
 /**
@@ -223,9 +231,13 @@ Blockly.Warning.prototype.iconMouseOver_ = function(e) {
  * @private
  */
 Blockly.Warning.prototype.iconMouseOut_ = function(e) {
-  if (!this.isPinned_ && Blockly.Block.dragMode_ == 0) {
+    if (Blockly.Block.dragMode_ == 0) {
+        this.setPinned(false);
+        this.setVisible_(false);
+    }
+  /*if (!this.isPinned_ && Blockly.Block.dragMode_ == 0) {
     this.setVisible_(false);
-  }
+  }*/
 };
 
 /**

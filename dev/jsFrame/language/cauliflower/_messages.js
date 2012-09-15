@@ -83,8 +83,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '繰り返しの後';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繰り返しの先頭';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = '繰り返し処理を中断して、次の処理にジャンプします。\n繰り返しの後に何も処理がない場合はプログラムが終了します。';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'この後の処理をスキップして、繰り返しの先頭の処理にジャンプします。';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +
-'繰り返しブロックに\n挟んで使ってください。';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +'繰り返しブロックに\n挟んで使ってください。';
 
 //日本語化終了 Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '論理';
