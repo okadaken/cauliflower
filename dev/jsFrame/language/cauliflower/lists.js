@@ -210,8 +210,9 @@ Blockly.Language.lists_setIndex = {
   init: function() {
     this.setColour(listColor);
     this.appendInput('', Blockly.INPUT_VALUE, 'LIST', Array);
-    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO, Blockly.INPUT_VALUE, 'TO', null);
     this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT, Blockly.INPUT_VALUE, 'AT', Number);
+    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO, Blockly.INPUT_VALUE, 'TO', null);
+
     this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST, Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
     this.setPreviousStatement(true);

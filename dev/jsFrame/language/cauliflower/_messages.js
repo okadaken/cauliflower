@@ -277,7 +277,7 @@ Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/ln
 Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'に見つかる文字列の位置';
 Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = '探す文字列';
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = '走査対象';
-Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = '指定した文字列に含まれている文字列の位置を検索します。\n' + '文字列が見つからない場合の結果は0となります。';
+Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = '指定した文字列に含まれている文字列の位置を検索します。\n' + '文字列が見つからない場合の結果は-1となります。';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = '最初';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = '最後';
 
@@ -285,7 +285,7 @@ Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnx
 Blockly.LANG_TEXT_CHARAT_TITLE_LETTER = '文字目';
 Blockly.LANG_TEXT_CHARAT_INPUT_AT = 'の';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = '番目の文字';
-Blockly.LANG_TEXT_CHARAT_TOOLTIP_1 = '何番目かの文字を取り出します。';
+Blockly.LANG_TEXT_CHARAT_TOOLTIP_1 = '何番目かの文字を取り出します。\n文字の番目は0からはじまります。';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_CHANGECASE_TITLE_TO1 = 'を';
@@ -337,7 +337,7 @@ Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/
 Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'に見つかる要素の番地';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '探す要素';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '走査対象';
-Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = '指定した配列に含まれている要素の番地を検索します。\n' + '要素が見つからない場合の結果は0となります。';
+Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = '指定した配列に含まれている要素の番地を検索します。\n' + '要素が見つからない場合の結果は-1となります。';
 Blockly.LANG_LISTS_INDEX_OF_FIRST = '最初';
 Blockly.LANG_LISTS_INDEX_OF_LAST = '最後';
 
@@ -345,13 +345,13 @@ Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter
 Blockly.LANG_LISTS_GET_INDEX_TITLE = '配列から取得した要素';
 Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = 'の';
 Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '番目の要素';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = '番地を指定して配列の要素を取得します。';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = '番地を指定して配列の要素を取得します。\n番地は0が先頭です。';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = '番目の要素に';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = 'の';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'を代入する';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'の';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入します。';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '番目の要素に';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = '指定した番地に要素を代入します。\n先頭の番地は0です。';
 
 //日本語化終了 Variables Blocks.
 
