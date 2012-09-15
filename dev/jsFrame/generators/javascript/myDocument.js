@@ -58,6 +58,12 @@ Blockly.JavaScript.myDocument_prompt = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
+Blockly.JavaScript.myDocument_consolelog = function() {
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', Blockly.JavaScript.ORDER_NONE) ||
+  '\'\'';
+  return 'console.log(' + argument0 + ');\n';
+};
+
 Blockly.JavaScript.myDocument_set = function() {
   var target = this.getTitleText('TARGET');
   var action = this.getTitleValue('ACTION');

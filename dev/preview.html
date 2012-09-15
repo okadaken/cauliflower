@@ -37,10 +37,20 @@
         float: left;
     }
     
-    .console-msg {
+    .console-msg-line-div {
         font-size: 13px;
+        padding: 3px 0px;
+    }
+    
+    .console-msg-error {
         color: #EE0000;
         vertical-align: middle;
+        margin-left: 2px;
+    }
+    
+    .console-msg-notice {
+        vertical-align: middle;
+        margin-left: 2px;
     }
     
     #preview-menu {
@@ -49,6 +59,7 @@
     }
     
     #console-menu {
+        margin-bottom: 13px;
     }
     
     #contents-preview {
@@ -81,7 +92,7 @@
           primary: 'ui-icon-circle-close'
         }
       }).click(function() {
-        $('#error-console').html('');
+        $('#preview-console').html('');
       });
     }
     
@@ -188,9 +199,23 @@
       var onerrorHandler = 'this.onerror=function(msg,url,linenumber){' +
       'window.parent.updateConsole(\'error\',msg,url,linenumber)};\n';
       
+      var consolelog = 'var consolebak = console;' +
+      'delete console; console={};' +
+      'console.log = function(s) {' +
+      'consolebak.log(s);' +
+      'window.parent.updateConsole(\'notice\', s);' +
+      '};\n';
+      +'console.debug = function(s) {consolebak.debug(s)};' +
+      'console.info = function(s) {consolebak.info(s)};' +
+      'console.warn = function(s) {consolebak.warn(s)};' +
+      'console.error = function(s) {consolebak.error(s)};' +
+      'consolebak.trace()= function(s) {consolebak.trace()};' +
+      'consolebak.time()= function(s) {consolebak.time()};' +
+      'consolebak.timeEnd()= function(s) {consolebak.timeEnd()};';
+      
       //コードをオリジナルに挿入
       var targetCode = '<script type="text/javascript">\n<!--\n';
-      var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + '\n');
+      var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + consolelog + '\n');
       
       updateHTMLPreview(codeForExec);
     });
@@ -198,21 +223,56 @@
     function updateConsole(type, msg, url, linenumber) {
       switch (type) {
       case 'error':
-        var icon = '<img class="console-icon" src="img/icon/error-console-icon.png"/>';
-        var message = '<span class="console-msg">' + window.opener.escapeHTML(msg) + '</span>';
-        $('#error-console').append('<p>' + icon + message + '</p>');
+        var errorIcon = '<img class="console-icon" src="img/icon/console-error-icon.png" />';
+        var errorMessage = '<span class="console-msg-error">' + window.opener.escapeHTML(msg) + '</span>';
+        $('#preview-console').append('<div class="console-msg-line-div">' + errorIcon + errorMessage + '</div>');
         showNotification({
-          message: icon + 'エラーが発生しています。コンソールを確認してください。',
+          message: errorIcon + ' エラーが発生しています。コンソールを確認してください。',
           type: 'error',
           autoClose: true,
-          duration: 3
+          duration: 2
         });
         break;
       case 'notice':
-        //
+        var noticeIcon = '<img  class="console-icon" src="img/icon/console-notice-icon.png" />';
+        var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '</span>';
+        $('#preview-console').append('<div class="console-msg-line-div">' + noticeIcon + noticeMessage + '</span>');
+        showNotification({
+          message: noticeIcon + ' コンソールに出力しました。',
+          type: 'information',
+          autoClose: true,
+          duration: 2
+        });
         break;
       default:
         throw 'Unknown console type.';
+      }
+    }
+    
+    function getLogString(o) {
+      if (o == null) {
+        return o;
+      }
+      
+      if ($.isPlainObject(o) || $.isArray(o)) {
+        try {
+          return window.opener.escapeHTML(o.toSource().unescape());
+        } catch (e) {//toSourceがない
+          return JSON.stringify(o);
+        }
+      } else {
+        return window.opener.escapeHTML(o.toString());
+      }
+    }
+    
+    if (!String.prototype.escape) {
+      String.prototype.escape = function() {
+        return unescape(escape(this).replace(/%u(\w{4})/g, '\\u$1'));
+      }
+    }
+    if (!String.prototype.unescape) {
+      String.prototype.unescape = function() {
+        return unescape(escape(this).replace(/%5c/ig, '\\').replace(/\\u(\w{4})/ig, '%u$1'));
       }
     }
     </script>
@@ -228,7 +288,7 @@
           <a href="#tab-preview-src">ソース</a>
         </li>
         <li>
-          <a href="#tab-error-console">コンソール</a>
+          <a href="#tab-preview-console">コンソール</a>
         </li>
       </ul>
       <div id="tab-preview-preview">
@@ -237,11 +297,11 @@
       <div id="tab-preview-src">
         <textarea id="src-preview"></textarea>
       </div>
-      <div id="tab-error-console">
+      <div id="tab-preview-console">
         <div id="console-menu">
           <button id="console-clear-button" title="コンソールに表示されている内容を消去します。">クリア</button>
         </div>
-        <div id="error-console"></div>
+        <div id="preview-console"></div>
       </div>
     </div>
   </body>

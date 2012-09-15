@@ -426,6 +426,9 @@ Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = '指定された内容でプロンプ
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT = '文字列';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';
 
+Blockly.LANG_MYDOCUMENT_CONSOLE_LOG = 'コンソールに出力する';
+Blockly.LANG_MYDOCUMENT_CONSOLE_LOG_TOOLTIP_1 = 'コンソールに出力します。デバッグに利用してください。';
+
 // Object Blocks.
 Blockly.LANG_CATEGORY_OBJECT = 'オブジェクト';
 Blockly.LANG_OBJECT_CREATE = 'オブジェクトを作る';

@@ -148,6 +148,19 @@ Blockly.Language.myDocument_prompt = {
 Blockly.Language.myDocument_prompt.TYPES = [[Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT, 'TEXT'], [Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER, 'NUMBER']];
 
 
+Blockly.Language.myDocument_consolelog = {
+  categoryName: null, // myDocument are handled specially.
+  categoryID: null,
+  init: function() {
+    this.setColour('#3C3C3C');
+    this.appendTitle(Blockly.LANG_MYDOCUMENT_CONSOLE_LOG);
+    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.LANG_MYDOCUMENT_CONSOLE_LOG_TOOLTIP_1);
+  }
+};
+
 Blockly.Language.myDocument_set = {
   categoryName: null, // myDocument are handled specially.
   categoryID: null,
@@ -192,3 +205,5 @@ Blockly.Language.myDocument_get = {
     this.setOutput(true, Object);
   }
 };
+
+

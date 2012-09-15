@@ -51,4 +51,4 @@ Support Target: [http://ipl.sfc.keio.ac.jp/text/pro-2012-4/%E3%83%9B%E3%83%BC%E3
 * [http://code.google.com/p/google-diff-match-patch/](http://code.google.com/p/google-diff-match-patch/) diff_match_patch_20120106.zip 
 * [http://codemirror.net/](http://codemirror.net/) v2.32
 * [http://github.com/dcneiner/Downloadify](https://github.com/dcneiner/Downloadify) v0.2.1 Jan 23, 2010
-* [http://www.9lessons.info/2011/10/jquery-notification-plugin.html] Jquery Notification Plugin version 1.0 10/4/2011
+* http://www.9lessons.info/2011/10/jquery-notification-plugin.html Jquery Notification Plugin version 1.0 10/4/2011

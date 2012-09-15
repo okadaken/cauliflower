@@ -1,0 +1,133 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;コンソールのテスト&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;button onclick="error()"&gt;エラー&lt;/button&gt;
+		&lt;button onclick="debuglog()"&gt;デバッグ出力&lt;/button&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="27" y="12">
+      <mutation>
+      </mutation>
+      <title name="NAME">debuglog</title>
+      <statement name="STACK">
+        <block type="myDocument_consolelog" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <title name="TEXT">これはコンソールの出力テストです。</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_consolelog" inline="false">
+              <value name="TEXT">
+                <block type="logic_boolean">
+                  <title name="BOOL">TRUE</title>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_consolelog" inline="false">
+                  <value name="TEXT">
+                    <block type="math_number">
+                      <title name="NUM">3</title>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="myDocument_consolelog" inline="false">
+                      <value name="TEXT">
+                        <block type="math_const">
+                          <title name="TYPE">PI</title>
+                        </block>
+                      </value>
+                      <next>
+                        <block type="myDocument_consolelog" inline="false">
+                          <value name="TEXT">
+                            <block type="math_random_float">
+                            </block>
+                          </value>
+                          <next>
+                            <block type="myDocument_consolelog" inline="false">
+                              <value name="TEXT">
+                                <block type="math_parse" inline="true">
+                                  <title name="TYPE">INT</title>
+                                  <value name="VALUE">
+                                    <block type="text">
+                                      <title name="TEXT">ほげ</title>
+                                    </block>
+                                  </value>
+                                </block>
+                              </value>
+                              <next>
+                                <block type="myDocument_consolelog" inline="false">
+                                  <value name="TEXT">
+                                    <block type="variables_get">
+                                      <title name="VAR">x</title>
+                                    </block>
+                                  </value>
+                                  <next>
+                                    <block type="myDocument_consolelog" inline="false">
+                                      <value name="TEXT">
+                                        <block type="lists_repeat" inline="false">
+                                          <value name="ITEM">
+                                            <block type="text">
+                                              <title name="TEXT">ほげ</title>
+                                            </block>
+                                          </value>
+                                          <value name="NUM">
+                                            <block type="math_number">
+                                              <title name="NUM">3</title>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </value>
+                                      <next>
+                                        <block type="myDocument_consolelog" inline="false">
+                                          <value name="TEXT">
+                                            <block type="objects" inline="false">
+                                              <mutation items="3">
+                                              </mutation>
+                                              <title name="NAME0">'１'</title>
+                                              <title name="NAME1">'3'</title>
+                                              <title name="NAME2">'4'</title>
+                                              <value name="ADD0">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
+                                              <value name="ADD1">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
+                                              <value name="ADD2">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </next>
+                                </block>
+                              </next>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

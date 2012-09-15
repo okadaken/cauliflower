@@ -152,13 +152,14 @@ Blockly.MyDocument.flyoutCategory = function(blocks, gaps, margin, workspace) {
     blocks.push(block);
     gaps.push(margin * 2);
   }
-  if (Blockly.Language.myDocument_joker) {
-    var block = new Blockly.Block(workspace, 'myDocument_joker');
+  
+  if (Blockly.Language.myDocument_consolelog) {
+    var block = new Blockly.Block(workspace, 'myDocument_consolelog');
     block.initSvg();
     blocks.push(block);
     gaps.push(margin * 2);
-  } 
-	
+  }
+
   var idList = Blockly.MyDocument.allId();
 
   if( idList.length > 0 ){	
