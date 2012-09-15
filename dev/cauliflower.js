@@ -43,7 +43,7 @@ var nullDOM;
 //タブクリックイベントのキャンセルフラグ
 var ignore = false;
 
-var blocklyscale = 1.0;
+var blocklyscale = 1.2;
 
 $(document).ready(function() {
   initializeTabs();
