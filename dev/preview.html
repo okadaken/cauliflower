@@ -235,7 +235,7 @@
         break;
       case 'notice':
         var noticeIcon = '<img  class="console-icon" src="img/icon/console-notice-icon.png" />';
-        var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '</span>';
+        var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '&nbsp;</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + noticeIcon + noticeMessage + '</span>');
         showNotification({
           message: noticeIcon + ' コンソールに出力しました。',
