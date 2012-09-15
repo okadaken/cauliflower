@@ -35,7 +35,7 @@ Blockly.JavaScript.objects = function() {
 			continue;
 		}
 		
-		code += key + ":" + value;
+		code += "\"" + key + "\":" + value;
 		
 		if( i+1 != this.itemCount_ ){
 			code += ',';
