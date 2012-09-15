@@ -137,10 +137,20 @@
   stroke-width: 1px;
   stroke: #ccc;
 }
+
+.blocklyIconShieldWarning{
+  fill: #f00;
+}
+
 .blocklyIconGroup:hover>.blocklyIconShield {
   fill: #00f;
   stroke: #fff;
 }
+
+.blocklyIconGroup:hover>.blocklyIconShieldWarning{
+  fill: #f00;
+}
+
 .blocklyIconMark {
   cursor: default !important;
   font-family: sans-serif;
