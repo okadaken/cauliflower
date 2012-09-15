@@ -11,7 +11,7 @@
 	&lt;/body&gt;
 &lt;/html&gt;</html>
   <blocks>
-    <block type="procedures_defnoreturn" x="27" y="12">
+    <block type="procedures_defnoreturn" x="56" y="23">
       <mutation>
       </mutation>
       <title name="NAME">debuglog</title>
@@ -71,15 +71,61 @@
                                   <next>
                                     <block type="myDocument_consolelog" inline="false">
                                       <value name="TEXT">
-                                        <block type="lists_repeat" inline="false">
-                                          <value name="ITEM">
+                                        <block type="lists_create_with" inline="false">
+                                          <mutation items="6">
+                                          </mutation>
+                                          <value name="ADD0">
+                                            <block type="logic_boolean">
+                                              <title name="BOOL">TRUE</title>
+                                            </block>
+                                          </value>
+                                          <value name="ADD1">
+                                            <block type="math_number">
+                                              <title name="NUM">2</title>
+                                            </block>
+                                          </value>
+                                          <value name="ADD2">
                                             <block type="text">
                                               <title name="TEXT">ほげ</title>
                                             </block>
                                           </value>
-                                          <value name="NUM">
-                                            <block type="math_number">
-                                              <title name="NUM">3</title>
+                                          <value name="ADD3">
+                                            <block type="variables_get">
+                                              <title name="VAR">x</title>
+                                            </block>
+                                          </value>
+                                          <value name="ADD4">
+                                            <block type="lists_create_with" inline="false">
+                                              <mutation items="2">
+                                              </mutation>
+                                              <value name="ADD0">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
+                                              <value name="ADD1">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
+                                            </block>
+                                          </value>
+                                          <value name="ADD5">
+                                            <block type="objects" inline="false">
+                                              <mutation items="2">
+                                              </mutation>
+                                              <title name="NAME0">hoge</title>
+                                              <title name="NAME1">ほげ</title>
+                                              <value name="ADD0">
+                                                <block type="text">
+                                                  <title name="TEXT">hoge</title>
+                                                </block>
+                                              </value>
+                                              <value name="ADD1">
+                                                <block type="text">
+                                                  <title name="TEXT">ほげ</title>
+                                                </block>
+                                              </value>
                                             </block>
                                           </value>
                                         </block>
