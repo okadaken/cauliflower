@@ -316,6 +316,12 @@ Blockly.isRightButton = function(e) {
  * @return {!SVGPoint} Object with x and y properties in SVG coordinates.
  */
 Blockly.mouseToSvg = function(x, y) {
+  
+  //Safariは他のブラウザと変換後の座標が違う
+  if(Blockly.safari&&Blockly.editorScale!=1.0){
+      return {x:x*Blockly.editorScale,y:y*Blockly.editorScale};
+  }
+    
   var svgPoint = Blockly.svg.createSVGPoint();
   svgPoint.x = x;
   svgPoint.y = y;

@@ -1319,6 +1319,7 @@ function escapeHTML(s) {
  **************************************************/
 function validateBrowser() {
   var env = getUserEnv();
+
   if (env.browser == 'IE' || env.browser == 'Opera') {
     var title = '未対応のブラウザでアクセスしています';
     var message = 'お使いのブラウザでは正常に動作しない可能性があります。ヘルプから対応ブラウザを確認し、アクセスしてください。';

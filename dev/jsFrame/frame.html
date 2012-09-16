@@ -50,14 +50,19 @@
       function init() {
         Blockly.editorScale = parent.getBlocklyScale();
         
+        //mouseToSvg用にチェックしておく
+        var env = parent.getUserEnv();
+        if (env.browser == 'Safari') {
+          Blockly.safari = true;
+        } else {
+          Blockly.safari = false;
+        }
+        
         Blockly.inject(document.body, {
           path: ''
         });
         
         window.parent.initializeBlocklyFrame(Blockly);
-        
-        
-        
       }
     </script>
   </head>
