@@ -16,56 +16,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
  * @fileoverview Generating JavaScript for list blocks.
  * @author fraser@google.com (Neil Fraser)
  */
-
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.objects = function() {
 
-	var code = '{';
-	for( var i=0 ; i<this.itemCount_ ; i++ ){
-		
-		var key = this.getTitleValue('NAME'+i);
-		var value = Blockly.JavaScript.valueToCode(this, 'ADD' + i, Blockly.JavaScript.ORDER_COMMA);
-		if( !(key && value) ){
-			continue;
-		}
-		
-		code += "\"" + key + "\":" + value;
-		
-		if( i+1 != this.itemCount_ ){
-			code += ',';
-		}
-	}
-	code += '}';
-	return [code,Blockly.JavaScript.ORDER_ATOMIC];
+  var code = '{';
+  for (var i = 0; i < this.itemCount_; i++) {
+  
+    var key = this.getTitleValue('NAME' + i);
+    var value = Blockly.JavaScript.valueToCode(this, 'ADD' + i, Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+    if (!(key && value)) {
+      continue;
+    }
+    
+    //プロパティ名として妥当でなければ"をつける
+    if (!key.match(/^[a-zA-Z][a-zA-Z0-9]+$/)) {
+      key = '"' + key + '"';
+    }
+    code += key + ': ' + value;
+    
+    if (i != this.itemCount_ - 1) {
+      code += ', ';
+    }
+  }
+  code += '}';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.objects_get= function() {
+Blockly.JavaScript.objects_get = function() {
 
-	var code = '';
-	var variable = this.getTitleValue('VAR');
-	var property = this.getTitleValue('PROPERTY');
-	
-	if( variable && variable.length > 0 && property && property.length > 0 ){
-		code = variable + "." + property;
-	}
-	return [code,Blockly.JavaScript.ORDER_ATOMIC];
+  var code = '';
+  var variable = this.getTitleValue('VAR');
+  var property = this.getTitleValue('PROPERTY') || '';
+  
+  if (property.length != 0) {
+    property = '.' + property;
+  }
+  code = variable + property;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.objects_set= function() {
+Blockly.JavaScript.objects_set = function() {
 
-	var code = '';
-	var variable = this.getTitleValue('VAR');
-	var property = this.getTitleValue('PROPERTY');
-	var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA);
-	
-	if( variable && variable.length > 0 && property && property.length > 0 ){
-		code = variable + "." + property + "=" + value + ";\n";
-	}
-	return code;
+  var code = '';
+  var variable = this.getTitleValue('VAR');
+  var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+  var property = this.getTitleText('PROPERTY') || '';
+  
+  if (property.length != 0) {
+    property = '.' + property;
+  }
+  
+  code = variable + property + " = " + value + ";\n";
+  return code;
 };
