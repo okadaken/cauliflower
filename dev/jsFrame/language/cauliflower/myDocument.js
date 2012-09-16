@@ -152,7 +152,7 @@ Blockly.Language.myDocument_consolelog = {
   categoryName: null, // myDocument are handled specially.
   categoryID: null,
   init: function() {
-    this.setColour('#3C3C3C');
+    this.setColour('#AA80EA');//#3C3C3C'
     this.appendTitle(Blockly.LANG_MYDOCUMENT_CONSOLE_LOG);
     this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
     this.setPreviousStatement(true);
