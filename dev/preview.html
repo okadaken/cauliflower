@@ -38,19 +38,24 @@
     }
     
     .console-msg-line-div {
-        font-size: 13px;
+        font-size: 12px;
         padding: 3px 0px;
     }
     
     .console-msg-error {
         color: #EE0000;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: 2px;
     }
     
     .console-msg-notice {
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: 2px;
+    }
+    
+    #info_message .message_area {
+        vertical-align: top;
+        font-size: 12px;
     }
     
     #preview-menu {
@@ -227,7 +232,7 @@
         var errorMessage = '<span class="console-msg-error">' + window.opener.escapeHTML(msg) + '</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + errorIcon + errorMessage + '</div>');
         showNotification({
-          message: errorIcon + ' エラーが発生しています。コンソールを確認してください。',
+          message: errorIcon + '&nbsp;エラーが発生しています。コンソールを確認してください。',
           type: 'error',
           autoClose: true,
           duration: 2
@@ -238,7 +243,7 @@
         var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '&nbsp;</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + noticeIcon + noticeMessage + '</span>');
         showNotification({
-          message: noticeIcon + ' コンソールに出力しました。',
+          message: noticeIcon + '&nbsp;コンソールに出力しました。',
           type: 'information',
           autoClose: true,
           duration: 2
@@ -256,7 +261,10 @@
       
       if ($.isPlainObject(o) || $.isArray(o)) {
         try {
-          return window.opener.escapeHTML(o.toSource().unescape());
+          //Firefoxだけはここが使われる。
+          //オブジェクトや配列の要素からundefinedが参照されるとvoid 0という表記になるので、
+          //とりあえずundefinedに変更しているが、正しいかどうかは検証が必要そう。
+          return window.opener.escapeHTML(o.toSource().unescape().replace(/\(void 0\)/g, 'undefined'));
         } catch (e) {//toSourceがない
           return JSON.stringify(o);
         }
