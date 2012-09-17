@@ -53,7 +53,10 @@ Blockly.JavaScript.objects_get = function() {
   var variable = this.getTitleValue('VAR');
   var property = this.getTitleValue('PROPERTY') || '';
   
-  if (property.length != 0) {
+  if (property.length != 0 && !property.match(/^[a-z][a-zA-Z0-9]*$/)) {
+    //プロパティ名としてそのまま記述できない場合
+    property = '[\'' + property + '\']';
+  } else if (property.length != 0) {
     property = '.' + property;
   }
   code = variable + property;
@@ -67,7 +70,10 @@ Blockly.JavaScript.objects_set = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
   var property = this.getTitleText('PROPERTY') || '';
   
-  if (property.length != 0) {
+  if (property.length != 0 && !property.match(/^[a-z][a-zA-Z0-9]*$/)) {
+    //プロパティ名としてそのまま記述できない場合
+    property = '[\'' + property + '\']';
+  } else if (property.length != 0) {
     property = '.' + property;
   }
   
