@@ -104,17 +104,18 @@
     function saveToFileForPreviewWindow(properties) {
       //Jquery化できるはず
       var form = document.createElement('form');
-      form.setAttribute('action', 'http://crew-lab.sfc.keio.ac.jp/cauliflower-support/save.php');
+      form.setAttribute('action', 'http://msatellite.info/cauliflower-support/save.php');
       form.setAttribute('method', 'post');
       form.style.display = 'none';
       document.body.appendChild(form);
+       var input = document.createElement('input');
       for (var prop in properties) {
-        var input = document.createElement('input');
         input.setAttribute('type', 'hidden');
         input.setAttribute('name', prop);
         input.setAttribute('value', properties[prop]);
         form.appendChild(input);
       }
+      input.setAttribute('type', 'html');
       form.submit();
     }
     
@@ -226,24 +227,24 @@
     function updateConsole(type, msg, url, linenumber) {
       switch (type) {
       case 'error':
-        var errorIcon = '<img class="console-icon"  style="margin-top:-1.2px;" src="img/icon/console-error-icon.png" />';
+        var errorIcon = '<img class="console-icon" src="img/icon/console-error-icon.png" />';
         var errorMessage = '<span class="console-msg-error">' + window.opener.escapeHTML(msg) + '</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + errorIcon + errorMessage + '</div>');
         showNotification({
           message: '<img class="console-icon" src="img/icon/console-error-icon.png" />' + 'エラーが発生しています。コンソールを確認してください。',
           type: 'error',
-          autoClose: false,
+          autoClose: true,
           duration: 2
         });
         break;
       case 'notice':
-        var noticeIcon = '<img  class="console-icon" style="margin-top:-1.2px;"" src="img/icon/console-notice-icon.png" />';
+        var noticeIcon = '<img  class="console-icon" src="img/icon/console-notice-icon.png" />';
         var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '&nbsp;</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + noticeIcon + noticeMessage + '</span>');
         showNotification({
           message: '<img  class="console-icon" src="img/icon/console-notice-icon.png" />' + 'コンソールに出力しました。',
           type: 'information',
-          autoClose: false,
+          autoClose: true,
           duration: 2
         });
         break;
