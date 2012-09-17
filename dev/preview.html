@@ -44,7 +44,6 @@
     
     .console-msg-error {
         color: #EE0000;
-        vertical-align: top;
         margin-left: 2px;
     }
     
@@ -55,7 +54,6 @@
     
     #info_message .message_area {
         vertical-align: top;
-        font-size: 12px;
     }
     
     #preview-menu {
@@ -228,24 +226,24 @@
     function updateConsole(type, msg, url, linenumber) {
       switch (type) {
       case 'error':
-        var errorIcon = '<img class="console-icon" src="img/icon/console-error-icon.png" />';
+        var errorIcon = '<img class="console-icon"  style="margin-top:-1.2px;" src="img/icon/console-error-icon.png" />';
         var errorMessage = '<span class="console-msg-error">' + window.opener.escapeHTML(msg) + '</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + errorIcon + errorMessage + '</div>');
         showNotification({
-          message: errorIcon + '&nbsp;エラーが発生しています。コンソールを確認してください。',
+          message: '<img class="console-icon" src="img/icon/console-error-icon.png" />' + 'エラーが発生しています。コンソールを確認してください。',
           type: 'error',
-          autoClose: true,
+          autoClose: false,
           duration: 2
         });
         break;
       case 'notice':
-        var noticeIcon = '<img  class="console-icon" src="img/icon/console-notice-icon.png" />';
+        var noticeIcon = '<img  class="console-icon" style="margin-top:-1.2px;"" src="img/icon/console-notice-icon.png" />';
         var noticeMessage = '<span class="console-msg-notice">' + getLogString(msg) + '&nbsp;</span>';
         $('#preview-console').append('<div class="console-msg-line-div">' + noticeIcon + noticeMessage + '</span>');
         showNotification({
-          message: noticeIcon + '&nbsp;コンソールに出力しました。',
+          message: '<img  class="console-icon" src="img/icon/console-notice-icon.png" />' + 'コンソールに出力しました。',
           type: 'information',
-          autoClose: true,
+          autoClose: false,
           duration: 2
         });
         break;
