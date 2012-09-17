@@ -78,7 +78,11 @@ Blockly.Language.objects = {
     
     // NAMEを元に戻す
     for (var x = 0; x < this.itemCount_; x++) {
-      this.setTitleValue(names[x], 'NAME' + x);
+      var name = names[x];
+      if (name == null) {
+        name = '';
+      }
+      this.setTitleValue(name, 'NAME' + x);
     }
   },
   saveConnections: function(containerBlock) {
@@ -119,24 +123,24 @@ Blockly.Language.objects_create_with_item = {
 
 Blockly.Language.dropdownForObjects = function() {
   var variableList = Blockly.Variables.allVariables();
-
+  
   // Ensure that the currently selected variable is an option.
   var name = this.getText();
   if (name && variableList.indexOf(name) == -1) {
     variableList.push(name);
   }
   variableList.sort(Blockly.caseInsensitiveComparator);
-
-  if( name && name.length == 0 && variableList.length > 1 ){
-  	this.setText( variableList[0] );
+  
+  if (name && name.length == 0 && variableList.length > 1) {
+    this.setText(variableList[0]);
   }
-
+  
   var options = [];
   for (var x = 0; x < variableList.length; x++) {
     options[x] = [variableList[x], variableList[x]];
   }
-  if( options.length == 0 ){
-  	options.push(['x','x']);
+  if (options.length == 0) {
+    options.push(['x', 'x']);
   }
   
   return options;
@@ -151,8 +155,8 @@ Blockly.Language.objects_get = {
     this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
     this.appendTitle(Blockly.LANG_OBJECT_GET_1);
     this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
-
-	this.setOutput(true);
+    
+    this.setOutput(true);
   },
   getVars: function() {
     return [this.getTitleText('VAR')];
@@ -174,7 +178,7 @@ Blockly.Language.objects_set = {
     this.appendTitle(Blockly.LANG_OBJECT_SET_1);
     this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
     this.appendInput(Blockly.LANG_OBJECT_SET_2, Blockly.INPUT_VALUE, 'VALUE', null);
-	
+    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   },
@@ -186,5 +190,5 @@ Blockly.Language.objects_set = {
       this.setTitleText(newName, 'VAR');
     }
   }
-
+  
 };
