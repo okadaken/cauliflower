@@ -33,9 +33,9 @@ Blockly.JavaScript.objects = function() {
       continue;
     }
     
-    //プロパティ名として妥当でなければ"をつける
+    //プロパティ名として妥当でなければ'をつける
     if (!key.match(/^[a-z][a-zA-Z0-9]*$/)) {
-      key = '"' + key + '"';
+      key = '\'' + key.replace(/'/g, '\\\'') + '\'';
     }
     code += key + ': ' + value;
     
