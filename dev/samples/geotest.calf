@@ -1,5 +1,4 @@
-<cauliflower version="1.0">
-  <html>&lt;!DOCTYPE html&gt;
+<cauliflower version="1.0"><html>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 	&lt;head&gt;
 		&lt;title&gt;ジョーカーを使ったGeocoderのテスト&lt;/title&gt;
@@ -11,154 +10,11 @@
 		
 		&lt;form&gt;
 			&lt;input id="addrArea" type="text" value="慶應義塾大学湘南藤沢キャンパス"&gt;
-			&lt;input type="button" value="OK" onclick="geocode2()"&gt;
+			&lt;input type="button" value="OK" onclick="geocode()"&gt;
 		&lt;/form&gt;
 		&lt;div id="resArea"&gt;
 		&lt;/div&gt;
 	&lt;/body&gt;
-&lt;/html&gt;</html>
-  <blocks>
-    <block type="procedures_defnoreturn" x="-7" y="-13">
-      <mutation>
-      </mutation>
-      <title name="NAME">geocode2</title>
-      <statement name="STACK">
-        <block type="variables_set" inline="false">
-          <title name="VAR">geocoder</title>
-          <value name="VALUE">
-            <block type="joker_4" inline="true">
-              <title name="ATTRIBUTE">maps.Geocoder()</title>
-              <value name="TARGET">
-                <block type="joker_2">
-                  <title name="CODE">new google</title>
-                </block>
-              </value>
-            </block>
-          </value>
-          <next>
-            <block type="variables_set" inline="false">
-              <title name="VAR">adress2</title>
-              <value name="VALUE">
-                <block type="myDocument_get">
-                  <title name="TARGET">addrArea</title>
-                  <title name="ATTRIBUTE">.value</title>
-                </block>
-              </value>
-              <next>
-                <block type="variables_set" inline="false">
-                  <title name="VAR">request</title>
-                  <value name="VALUE">
-                    <block type="objects" inline="false">
-                      <mutation items="1">
-                      </mutation>
-                      <title name="NAME0">address</title>
-                      <value name="ADD0">
-                        <block type="variables_get">
-                          <title name="VAR">adress2</title>
-                        </block>
-                      </value>
-                    </block>
-                  </value>
-                  <next>
-                    <block type="joker_3" inline="true">
-                      <title name="ATTRIBUTE">geocode(request,listResult);</title>
-                      <value name="TARGET">
-                        <block type="variables_get">
-                          <title name="VAR">geocoder</title>
-                        </block>
-                      </value>
-                    </block>
-                  </next>
-                </block>
-              </next>
-            </block>
-          </next>
-        </block>
-      </statement>
-    </block>
-    <block type="procedures_defnoreturn" x="0" y="175">
-      <mutation>
-        <arg name="results">
-        </arg>
-        <arg name="status">
-        </arg>
-      </mutation>
-      <title name="NAME">listResult</title>
-      <statement name="STACK">
-        <block type="variables_set" inline="false">
-          <title name="VAR">resElement</title>
-          <value name="VALUE">
-            <block type="myDocument_get">
-              <title name="TARGET">addrArea</title>
-              <title name="ATTRIBUTE">.innerHTML</title>
-            </block>
-          </value>
-          <next>
-            <block type="myDocument_set" inline="true">
-              <title name="TARGET">resArea</title>
-              <title name="ACTION">.innerHTML</title>
-              <value name="VALUE">
-                <block type="text">
-                  <title name="TEXT">
-                  </title>
-                </block>
-              </value>
-              <next>
-                <block type="controls_forEach" inline="false">
-                  <variable data="i" name="VAR">
-                  </variable>
-                  <value name="LIST">
-                    <block type="variables_get">
-                      <title name="VAR">results</title>
-                    </block>
-                  </value>
-                  <statement name="DO">
-                    <block type="myDocument_set" inline="true">
-                      <title name="TARGET">resArea</title>
-                      <title name="ACTION">.innerHTML</title>
-                      <value name="VALUE">
-                        <block type="text_join" inline="false">
-                          <mutation items="3">
-                          </mutation>
-                          <value name="ADD0">
-                            <block type="myDocument_get">
-                              <title name="TARGET">resArea</title>
-                              <title name="ATTRIBUTE">.innerHTML</title>
-                            </block>
-                          </value>
-                          <value name="ADD1">
-                            <block type="joker_4" inline="true">
-                              <title name="ATTRIBUTE">formatted_address</title>
-                              <value name="TARGET">
-                                <block type="variables_get">
-                                  <title name="VAR">i</title>
-                                </block>
-                              </value>
-                            </block>
-                          </value>
-                          <value name="ADD2">
-                            <block type="joker_4" inline="true">
-                              <title name="ATTRIBUTE">geometry.location</title>
-                              <value name="TARGET">
-                                <block type="variables_get">
-                                  <title name="VAR">i</title>
-                                </block>
-                              </value>
-                            </block>
-                          </value>
-                        </block>
-                      </value>
-                    </block>
-                  </statement>
-                </block>
-              </next>
-            </block>
-          </next>
-        </block>
-      </statement>
-    </block>
-  </blocks>
-</cauliflower>
-
+&lt;/html&gt;</html><blocks><block type="procedures_defnoreturn" x="-7" y="-13"><mutation></mutation><title name="NAME">geocode</title><statement name="STACK"><block type="variables_set" inline="false"><title name="VAR">geocoder</title><value name="VALUE"><block type="joker_4" inline="true"><title name="ATTRIBUTE">maps.Geocoder()</title><value name="TARGET"><block type="joker_2"><title name="CODE">new google</title></block></value></block></value><next><block type="variables_set" inline="false"><title name="VAR">adress2</title><value name="VALUE"><block type="myDocument_get"><title name="TARGET">addrArea</title><title name="ATTRIBUTE">.value</title></block></value><next><block type="variables_set" inline="false"><title name="VAR">request</title><value name="VALUE"><block type="objects" inline="false"><mutation items="1"></mutation><title name="NAME0">address</title><value name="ADD0"><block type="variables_get"><title name="VAR">adress2</title></block></value></block></value><next><block type="joker_3" inline="true"><title name="ATTRIBUTE">geocode(request,listResult);</title><value name="TARGET"><block type="variables_get"><title name="VAR">geocoder</title></block></value></block></next></block></next></block></next></block></statement></block><block type="procedures_defnoreturn" x="0" y="175"><mutation><arg name="results"></arg><arg name="status"></arg></mutation><title name="NAME">listResult</title><statement name="STACK"><block type="variables_set" inline="false"><title name="VAR">resElement</title><value name="VALUE"><block type="myDocument_get"><title name="TARGET">addrArea</title><title name="ATTRIBUTE">.innerHTML</title></block></value><next><block type="myDocument_set" inline="true"><title name="TARGET">resArea</title><title name="ACTION">.innerHTML</title><value name="VALUE"><block type="text"><title name="TEXT"></title></block></value><next><block type="controls_forEach" inline="false"><variable data="i" name="VAR"></variable><value name="LIST"><block type="variables_get"><title name="VAR">results</title></block></value><statement name="DO"><block type="myDocument_set" inline="true"><title name="TARGET">resArea</title><title name="ACTION">.innerHTML</title><value name="VALUE"><block type="text_join" inline="false"><mutation items="3"></mutation><value name="ADD0"><block type="myDocument_get"><title name="TARGET">resArea</title><title name="ATTRIBUTE">.innerHTML</title></block></value><value name="ADD1"><block type="joker_4" inline="true"><title name="ATTRIBUTE">formatted_address</title><value name="TARGET"><block type="variables_get"><title name="VAR">i</title></block></value></block></value><value name="ADD2"><block type="joker_4" inline="true"><title name="ATTRIBUTE">geometry.location</title><value name="TARGET"><block type="variables_get"><title name="VAR">i</title></block></value></block></value></block></value></block></statement></block></next></block></next></block></statement></block></blocks></cauliflower>
 
 

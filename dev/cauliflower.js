@@ -641,7 +641,7 @@ function saveToFile(properties) {
   form.setAttribute('method', 'post');
   form.style.display = 'none';
   document.body.appendChild(form);
-  properties.type='calf';
+  properties.type = 'calf';
   for (var prop in properties) {
     var input = document.createElement('input');
     input.setAttribute('type', 'hidden');
@@ -671,10 +671,13 @@ function createXML() {
   //FirefoxでXMLにxmlns属性が付与されると引数付き関数が復元できないため除去
   xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
   
-  return formatXML(xml);
+  //今はフォーマットしない  
+  //return formatXML(xml);
+  return xml;
 }
 
 function formatXML(xml) {
+  var formatted = '';
   var formatted = '';
   var reg = /(>)(<)(\/*)/g;
   xml = xml.replace(reg, '$1\r\n$2$3');
