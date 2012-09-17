@@ -641,14 +641,14 @@ function saveToFile(properties) {
   form.setAttribute('method', 'post');
   form.style.display = 'none';
   document.body.appendChild(form);
-  var input = document.createElement('input');
+  properties.type='calf';
   for (var prop in properties) {
+    var input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('name', prop);
     input.setAttribute('value', properties[prop]);
     form.appendChild(input);
   }
-  input.setAttribute('type', 'calf');
   form.submit();
 }
 
