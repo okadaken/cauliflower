@@ -671,13 +671,25 @@ function createXML() {
   //FirefoxでXMLにxmlns属性が付与されると引数付き関数が復元できないため除去
   xml = xml.replace(' xmlns="http://www.w3.org/1999/xhtml"', '');
   
-  //今はフォーマットしない  
-  //return formatXML(xml);
-  return xml;
+  var lines = xml.split('<');
+  var indent = '';
+  for (var x = 1; x < lines.length; x++) {
+    var nextChar = lines[x][0];
+    if (nextChar == '/') {
+      indent = indent.substring(2);
+    }
+    lines[x] = indent + '<' + lines[x];
+    if (nextChar != '/') {
+      indent += '  ';
+    }
+  }
+  var text = lines.join('\n');
+  text = text.replace(/(<(\w+)[^>]*>[^\n]*)\n *<\/\2>/g, '$1</$2>');
+  return text.replace(/^\n/, '');
 }
 
+//現在は未使用
 function formatXML(xml) {
-  var formatted = '';
   var formatted = '';
   var reg = /(>)(<)(\/*)/g;
   xml = xml.replace(reg, '$1\r\n$2$3');
@@ -702,6 +714,11 @@ function formatXML(xml) {
     formatted += padding + node + '\r\n';
     pad += indent;
   });
+  
+  //formatted = formatted.replace(/\r\n/g, '');
+  formatted = formatted.replace(/(<(\w+)[^>]*>[^\n]*)\n *<\/\2>/g, '$1</$2>');
+  // Trim leading blank line.
+  //formatted = formatted.replace(/^\n/, '');
   return formatted;
 }
 
