@@ -1056,6 +1056,10 @@ function commentSelection(isComment) {
     from: HTMLEditor.getCursor(true),
     to: HTMLEditor.getCursor(false)
   };
+  
+  if (rang.from.line == rang.to.line && rang.from.ch == rang.to.ch) {
+    return;
+  }
   HTMLEditor.commentRange(isComment, range.from, range.to);
   HTMLEditor.setCursor(cursor);
   HTMLEditor.focus();
