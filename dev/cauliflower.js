@@ -1027,7 +1027,7 @@ function updateHTMLToolBar() {
   }
 }
 
-function autoFormatHTML() {
+function autoFormatAllHTML() {
   var cursor = HTMLEditor.getCursor(true);
   CodeMirror.commands['selectAll'](HTMLEditor);
   var range = {
@@ -1035,6 +1035,28 @@ function autoFormatHTML() {
     to: HTMLEditor.getCursor(false)
   };
   HTMLEditor.autoFormatRange(range.from, range.to);
+  HTMLEditor.setCursor(cursor);
+  HTMLEditor.focus();
+}
+
+function autoFormatSelectedHTML() {
+  var cursor = HTMLEditor.getCursor(true);
+  var range = {
+    from: HTMLEditor.getCursor(true),
+    to: HTMLEditor.getCursor(false)
+  };
+  HTMLEditor.autoFormatRange(range.from, range.to);
+  HTMLEditor.setCursor(cursor);
+  HTMLEditor.focus();
+}
+
+function commentSelection(isComment) {
+  var cursor = HTMLEditor.getCursor(true);
+  var range = {
+    from: HTMLEditor.getCursor(true),
+    to: HTMLEditor.getCursor(false)
+  };
+  HTMLEditor.commentRange(isComment, range.from, range.to);
   HTMLEditor.setCursor(cursor);
   HTMLEditor.focus();
 }

@@ -330,17 +330,23 @@
         <div id="html-editor-div">
           <div id="html-toolbar" class="html-clearfix html-button-frame">
             <a id="template-button" class="html-button" title="HTMLテンプレートの読込" onclick="loadHTMLTemplateConfirm();">
-              <img border="0" src="img/silk/html.png"></a>
+              <img border="0" src="img/led-icons/html.png"></a>
             <a id="undo-button" class="html-button" title="元に戻す" onclick="undoHTMLEdit();">
-              <img border="0" src="img/silk/arrow_undo.png"></a>
+              <img border="0" src="img/led-icons/arrow_undo.png"></a>
             <a id="redo-button" class="html-button" title="やり直し" onclick="redoHTMLEdit();">
-              <img border="0" src="img/silk/arrow_redo.png"></a>
+              <img border="0" src="img/led-icons/arrow_redo.png"></a>
             <a id="large-font-button" class="html-button" title="フォントサイズを大きくする" onclick="setHTMLEditorFontLarger();">
-              <img border="0" src="img/silk/font_add.png"></a>
+              <img border="0" src="img/led-icons/magnifier_zoom_in.png"></a>
             <a id="small-font-button" class="html-button" title="フォントサイズを小さくする" onclick="setHTMLEditorFontSmaller();">
-              <img border="0" src="img/silk/font_delete.png"></a>
-            <a id="format-button" class="html-button" title="自動フォーマット" onclick="autoFormatHTML();">
-              <img border="0" src="img/silk/text_indent.png"></a>
+              <img border="0" src="img/led-icons/magnifier_zoom_out.png"></a>
+            <a id="format-selected-button" class="html-button" title="選択範囲をフォーマット" onclick="autoFormatSelectedHTML();">
+              <img border="0" src="img/led-icons/text_padding_bottom.png"></a>
+            <a id="format-all-button" class="html-button" title="全内容をフォーマット" onclick="autoFormatAllHTML();">
+              <img border="0" src="img/led-icons/text_padding_left.png"></a>
+            <a id="comment-button" class="html-button" title="選択範囲をコメントにする" onclick="commentSelection(true);">
+              <img border="0" src="img/led-icons/tag_on.png"></a>
+            <a id="uncomment-button" class="html-button" title="選択範囲のコメントを解除する" onclick="commentSelection(false);">
+              <img border="0" src="img/led-icons/tag_off.png"></a>
           </div>
           <textarea id="html-textarea"></textarea>
         </div>
