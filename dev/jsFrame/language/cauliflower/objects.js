@@ -192,3 +192,50 @@ Blockly.Language.objects_set = {
   }
   
 };
+
+Blockly.Language.objects_get_by_value = {
+  categoryName: Blockly.LANG_CATEGORY_OBJECT,
+  categoryID: 'object',
+  init: function() {
+    this.setColour(objColor);
+    this.appendTitle(Blockly.LANG_OBJECT_GET);
+    this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
+    this.appendInput(Blockly.LANG_OBJECT_GET_1, Blockly.INPUT_VALUE, 'PROPERTY', null);
+    
+    this.setInputsInline(true);
+    this.setOutput(true);
+  },
+  getVars: function() {
+    return [this.getTitleText('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
+      this.setTitleText(newName, 'VAR');
+    }
+  }
+};
+
+Blockly.Language.objects_set_by_value = {
+  categoryName: Blockly.LANG_CATEGORY_OBJECT,
+  categoryID: 'object',
+  init: function() {
+    this.setColour(objColor);
+    this.appendTitle(Blockly.LANG_OBJECT_SET);
+    this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
+    this.appendInput(Blockly.LANG_OBJECT_SET_1, Blockly.INPUT_VALUE, 'PROPERTY', null);
+    this.appendInput(Blockly.LANG_OBJECT_SET_2, Blockly.INPUT_VALUE, 'VALUE', null);
+    this.setInputsInline(true);
+   
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  },
+  getVars: function() {
+    return [this.getTitleText('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
+      this.setTitleText(newName, 'VAR');
+    }
+  }
+  
+};
