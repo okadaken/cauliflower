@@ -80,3 +80,27 @@ Blockly.JavaScript.objects_set = function() {
   code = variable + property + " = " + value + ";\n";
   return code;
 };
+
+Blockly.JavaScript.objects_get_by_value = function() {
+
+  var code = '';
+  var variable = this.getTitleValue('VAR');
+  var property = this.getTitleValue('PROPERTY') || '';
+  var property = Blockly.JavaScript.valueToCode(this, 'PROPERTY', Blockly.JavaScript.ORDER_COMMA);
+  property = '[' + property + ']';
+  
+  code = variable + property;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.JavaScript.objects_set_by_value = function() {
+
+  var code = '';
+  var variable = this.getTitleValue('VAR');
+  var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+  var property = Blockly.JavaScript.valueToCode(this, 'PROPERTY', Blockly.JavaScript.ORDER_COMMA);
+  property = '[' + property + ']';
+  
+  code = variable + property + " = " + value + ";\n";
+  return code;
+};
