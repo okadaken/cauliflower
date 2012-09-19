@@ -40,6 +40,7 @@ function allOption() {
   {
     var divOptions = [];
     divOptions.push(['要素のスタイルの背景色', '.style.backgroundColor']);
+    divOptions.push(['要素のスタイルの文字色', '.style.color']);
     
     options.push(['div', divOptions]);
   }
