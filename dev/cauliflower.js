@@ -1311,7 +1311,7 @@ function restoreDevSettings() {
       }
     } else {//デフォルトは1.2にしておく
       blocklyscale = 1.2;
-      $('#blocklyscale').attr('checked', true);
+      window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.2');
     }
   }
 }
