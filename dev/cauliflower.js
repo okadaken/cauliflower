@@ -22,7 +22,7 @@
  * READMEの外部ライブラリ情報更新
  */
 //バージョン
-var version = '1.0 [Build:xxxxxxxx]';
+var version = '1.0 [Build:2012092001]';
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
