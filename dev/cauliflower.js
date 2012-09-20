@@ -1309,6 +1309,8 @@ function restoreDevSettings() {
         blocklyscale = 1.0;
         $('#blocklyscale').attr('checked', false);
       }
+    } else {//デフォルトは1.2にしておく
+      blocklyscale = 1.2;
     }
   }
 }
