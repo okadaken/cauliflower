@@ -99,10 +99,7 @@
       });
     }
     
-    //cauliflower.jsのfunctionと同じだが、こちらに定義しないと実行時にフォーカスがはずれる
-    //ファイル分割して読み込みを検討すること
     function saveToFileForPreviewWindow(properties) {
-      //Jquery化できるはず
       var form = document.createElement('form');
       form.setAttribute('action', 'http://msatellite.info/cauliflower-support/save.php');
       form.setAttribute('method', 'post');
@@ -130,7 +127,6 @@
     }
     
     function initalizeSourcePreview() {
-      //Jqueryのgetが使えるか検討
       SourcePreview = CodeMirror.fromTextArea($('#src-preview').get(0), {
         mode: 'htmlmixed',
         theme: 'html-preview',

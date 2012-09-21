@@ -1,25 +1,25 @@
 /**
  * Cauliflower
- * Copyright (c) 2012 Ken Okada & Manabu Sugiura
- * http://github.com/okadaken/cauliflower
+ * Copyright (c) 2012 CreW Project
  *
- * TODO:License書く
- * http://sourceforge.jp/projects/opensource/wiki/licenses
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
  *
- * 本家レポジトリの監視
- * ■見た目
- * 実行プレビューにソース閲覧部分のJavaScriptがEclipseじゃない→部分的に対応
- * ■機能要求
- * 生成コードでいやらしいところあり文字列連結など（変数はグローバル変数しか使えないから仕方ないか）
- * ■リファクタリング
- * docとdomの変数名が混じっている
- * previewからファイルを参照すればフォーカス問題はクリアできる
- * getElementなどはjquery方式へ
- * HTMLフォーマット改善 ->ペンディング
- * jqueryアップデートしたいかも
- * jquery/menuの余分なファイル削除
- * ■レポジトリ整備
- * READMEの外部ライブラリ情報更新
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
 var version = '1.0  [Build:2012092101, Blockly:r419]';
@@ -1357,54 +1357,7 @@ function restoreDevSettings() {
 }
 
 /**************************************************
- * ユーティリティ
- **************************************************/
-function commentHtmlEntity(s) {
-  //良く使うものでエラーがでるのは、&nbsp;と&copy;
-  //別のものを置換しないようにCALCOMMENTをつけてコメントアウトする
-  s = s.replace(/&nbsp;/g, '<!--CALCOMMENT-&nbsp;-->');
-  s = s.replace(/&copy;/g, '<!--CALCOMMENT-&copy;-->');
-  return s;
-}
-
-function uncommentHtmlEntity(s) {
-  s = s.replace(/<!--CALCOMMENT-&nbsp;-->/g, '&nbsp;');
-  s = s.replace(/<!--CALCOMMENT-&copy;-->/g, '&copy;');
-  return s;
-}
-
-function removeAllWhiteSpaces(s) {
-  return s.replace(/[ \s]/g, "");
-}
-
-function getRealStringLength(s) {
-  var length = 0;
-  for (var i = 0; i < s.length; i++) {
-    var c = s.charCodeAt(i);
-    //  半角カタカナは不許可
-    if (c < 256 || (c >= 0xff61 && c <= 0xff9f)) {
-      length++;
-    } else {
-      length = length + 2;
-    }
-  }
-  return length;
-}
-
-function trimStringForFileName(s) {
-  return s.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '');
-}
-
-function escapeHTML(s) {
-  s = s.replace(/&/g, '&amp;');
-  s = s.replace(/>/g, '&gt;');
-  s = s.replace(/</g, '&lt;');
-  s = s.replace(/ /g, '&nbsp;');
-  return s;
-}
-
-/**************************************************
- * 要FIX
+ * ブラウザ判定関連
  **************************************************/
 function validateBrowser() {
   var env = getUserEnv();
@@ -1452,8 +1405,6 @@ function getUserEnv() {
     env['browser'] = 'Safari';
     if (ua.match('Safari/(\\d+(\\.\\d+)*)')) {
       env['browserv'] = match[1];
-      //Safariは6からFileAPI対応なので、調べられるようにしておく
-      //テストしましょう
     }
   } else if (ua.indexOf('opera') != -1) {
     env['browser'] = 'Opera';
@@ -1466,4 +1417,51 @@ function getUserEnv() {
   }
   //console.log(env);
   return env;
+}
+
+/**************************************************
+ * ユーティリティ
+ **************************************************/
+function commentHtmlEntity(s) {
+  //良く使うものでエラーがでるのは、&nbsp;と&copy;
+  //別のものを置換しないようにCALCOMMENTをつけてコメントアウトする
+  s = s.replace(/&nbsp;/g, '<!--CALCOMMENT-&nbsp;-->');
+  s = s.replace(/&copy;/g, '<!--CALCOMMENT-&copy;-->');
+  return s;
+}
+
+function uncommentHtmlEntity(s) {
+  s = s.replace(/<!--CALCOMMENT-&nbsp;-->/g, '&nbsp;');
+  s = s.replace(/<!--CALCOMMENT-&copy;-->/g, '&copy;');
+  return s;
+}
+
+function removeAllWhiteSpaces(s) {
+  return s.replace(/[ \s]/g, "");
+}
+
+function getRealStringLength(s) {
+  var length = 0;
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charCodeAt(i);
+    //  半角カタカナは不許可
+    if (c < 256 || (c >= 0xff61 && c <= 0xff9f)) {
+      length++;
+    } else {
+      length = length + 2;
+    }
+  }
+  return length;
+}
+
+function trimStringForFileName(s) {
+  return s.trim().replace(/[\\\/:\*\?\"\<\>\|]/gi, '');
+}
+
+function escapeHTML(s) {
+  s = s.replace(/&/g, '&amp;');
+  s = s.replace(/>/g, '&gt;');
+  s = s.replace(/</g, '&lt;');
+  s = s.replace(/ /g, '&nbsp;');
+  return s;
 }
