@@ -220,7 +220,7 @@ Blockly.Language.procedures_mutatorcontainer = {
     this.setColour(proceduresColor);
     this.appendTitle(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
-    this.setTooltip('');
+    this.setTooltip(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TOOLTIP1);
     this.contextMenu = false;
   }
 };
@@ -233,7 +233,7 @@ Blockly.Language.procedures_mutatorarg = {
     this.appendTitle(new Blockly.FieldTextInput('x', Blockly.Language.procedures_mutatorarg.validator), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(Blockly.LANG_PROCEDURES_MUTATORARG_TOOLTIP1);
     this.contextMenu = false;
   }
 };

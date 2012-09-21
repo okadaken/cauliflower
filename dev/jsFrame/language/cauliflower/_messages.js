@@ -387,6 +387,9 @@ Blockly.LANG_PROCEDURES_DEF_ARGS = '引数：'
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = '警告：\n' +
 '引数の変数名が重複しています。';
 
+Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TOOLTIP1 = '引数を設定したい数だけブロックを挟みます。';
+Blockly.LANG_PROCEDURES_MUTATORARG_TOOLTIP1 = '引数の変数名を設定し、\n引数の定義ブロックに移動します。'
+
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'を実行する';
 Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'procedure';
@@ -424,7 +427,7 @@ Blockly.LANG_MYDOCUMENT_PRINT_TOOLTIP_1 = '指定された内容のダイアロ�
 Blockly.LANG_MYDOCUMENT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
 Blockly.LANG_MYDOCUMENT_PROMPT_TITLE1 = 'プロンプト';
 Blockly.LANG_MYDOCUMENT_PROMPT_TITLE2 = 'に入力された';
-Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = '指定された内容でプロンプトを表示します。';
+Blockly.LANG_MYDOCUMENT_PROMPT_TOOLTIP_1 = '指定された内容でプロンプトを表示し、\nユーザが入力した内容の値を取得します。';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_TEXT = '文字列';
 Blockly.LANG_MYDOCUMENT_PROMPT_TYPE_NUMBER = '数値';
 
@@ -447,12 +450,14 @@ Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'プロパティを指定した
 Blockly.LANG_OBJECT_GET = '変数';
 Blockly.LANG_OBJECT_GET_1 = 'のオブジェクトのプロパティ';
 Blockly.LANG_OBJECT_GET_2 = 'の値';
+Blockly.LANG_OBJECT_GET_TOOLTIP_1 = '変数"%1"に格納されているオブジェクトから\n指定したプロパティに格納されている値を取得します。';
 Blockly.LANG_OBJECT_SET = '変数';
 Blockly.LANG_OBJECT_SET1_1 = 'のオブジェクトのプロパティ';
 Blockly.LANG_OBJECT_SET1_2 = 'に代入';
 Blockly.LANG_OBJECT_SET2_1 = 'のオブジェクトのプロパティ';
 Blockly.LANG_OBJECT_SET2_2 = 'に';
 Blockly.LANG_OBJECT_SET2_3 = 'を代入する';
+Blockly.LANG_OBJECT_SET_TOOLTIP_1 = '変数"%1"に格納されているオブジェクトの\n指定したプロパティの値を設定します。';
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

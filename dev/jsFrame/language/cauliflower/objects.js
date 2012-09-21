@@ -158,6 +158,11 @@ Blockly.Language.objects_get = {
     this.appendTitle(Blockly.LANG_OBJECT_GET_2);
     
     this.setOutput(true);
+    
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.LANG_OBJECT_GET_TOOLTIP_1.replace('%1', thisBlock.getTitleText('VAR'));
+    });
   },
   getVars: function() {
     return [this.getTitleText('VAR')];
@@ -182,6 +187,11 @@ Blockly.Language.objects_set = {
     
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.LANG_OBJECT_SET_TOOLTIP_1.replace('%1', thisBlock.getTitleText('VAR'));
+    });
   },
   getVars: function() {
     return [this.getTitleText('VAR')];
@@ -206,6 +216,12 @@ Blockly.Language.objects_get_by_value = {
     
     this.setInputsInline(true);
     this.setOutput(true);
+    
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.LANG_OBJECT_GET_TOOLTIP_1.replace('%1', thisBlock.getTitleText('VAR'));
+    });
+    
   },
   getVars: function() {
     return [this.getTitleText('VAR')];
@@ -231,6 +247,12 @@ Blockly.Language.objects_set_by_value = {
     
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.LANG_OBJECT_SET_TOOLTIP_1.replace('%1', thisBlock.getTitleText('VAR'));
+    });
+    
   },
   getVars: function() {
     return [this.getTitleText('VAR')];
