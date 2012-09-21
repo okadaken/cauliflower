@@ -43,6 +43,7 @@ var nullDOM;
 //タブクリックイベントのキャンセルフラグ
 var ignore = false;
 
+//ブロックエディタの拡大表示倍率
 var blocklyscale = 1.2;
 
 $(document).ready(function() {
@@ -1170,6 +1171,44 @@ function updateHTMLDesignPreview() {
       return false;
     }
   });
+}
+
+/**************************************************
+ * ブロックエディタ表示関連
+ **************************************************/
+function enterFullScreen() {
+  var editor = $('#blockly-frame').get(0);
+  if (editor.webkitRequestFullScreen) {
+    editor.webkitRequestFullScreen();
+  } else if (editor.mozRequestFullScreen) {
+    editor.mozRequestFullScreen();
+  } else if (editor.requestFullScreen) {
+    editor.requestFullScreen();
+  }
+  
+  if (document.mozFullScreen || document.webkitIsFullScreen) {
+    blockEditorFullScreen = true;
+  } else {
+    blockEditorFullScreen = false;
+  }
+}
+
+function exitFullScreen() {
+  if (document.webkitCancelFullScreen) {
+    document.webkitCancelFullScreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+  
+  if (!document.mozFullScreen || !document.webkitIsFullScreen) {
+    blockEditorFullScreen = false;
+  }
+}
+
+function isFullScreen() {
+  return document.mozFullScreen || document.webkitIsFullScreen;
 }
 
 /**************************************************

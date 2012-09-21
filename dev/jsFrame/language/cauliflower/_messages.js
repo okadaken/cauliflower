@@ -4,6 +4,9 @@ Blockly.MSG_PROCEDURE_CATEGORY = '関数';
 Blockly.MSG_EVENT_CATEGORY = 'イベント関数';
 Blockly.MSG_MYDOCUMENT_CATEGORY = 'HTML'
 
+Blockly.MSG_FULL_SCREEN_ON = 'フルスクリーンで表示';
+Blockly.MSG_FULL_SCREEN_OFF = 'フルスクリーンを解除';
+
 // 日本語化終了 Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = '複製';
 Blockly.MSG_REMOVE_COMMENT = 'コメントを削除';
@@ -83,7 +86,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '繰り返しの後';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繰り返しの先頭';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = '繰り返し処理を中断して、次の処理にジャンプします。\n繰り返しの後に何も処理がない場合はプログラムが終了します。';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'この後の処理をスキップして、繰り返しの先頭の処理にジャンプします。';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' +'繰り返しブロックに\n挟んで使ってください。';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = '警告：\n' + '繰り返しブロックに\n挟んで使ってください。';
 
 //日本語化終了 Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '論理';

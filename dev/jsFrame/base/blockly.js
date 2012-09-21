@@ -381,7 +381,7 @@ Blockly.showContextMenu_ = function(x, y) {
   var options = [];
   
   //Option to delete all blocks.
-   var deleteAllBlocksOption;
+  var deleteAllBlocksOption;
   if(Blockly.mainWorkspace.getAllBlocks().length>0){
        deleteAllBlocksOption = {enabled: true};
   }else{
@@ -392,6 +392,21 @@ Blockly.showContextMenu_ = function(x, y) {
       window.parent.discardBlocks();
   };
   options.push(deleteAllBlocksOption);
+  
+  var fullScreenOption = {enabled: true};
+  if (window.parent.isFullScreen()) {
+      fullScreenOption.text = Blockly.MSG_FULL_SCREEN_OFF;
+  } else {
+      fullScreenOption.text = Blockly.MSG_FULL_SCREEN_ON;
+  }
+  fullScreenOption.callback = function() {
+      if(window.parent.isFullScreen()){
+          window.parent.exitFullScreen();
+      }else{
+          window.parent.enterFullScreen();
+      }
+  };
+  options.push(fullScreenOption);
 
   // Option to get help.
   var helpOption = {enabled: false};
