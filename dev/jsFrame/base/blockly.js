@@ -327,7 +327,6 @@ Blockly.onKeyDown_ = function(e) {
     if (Blockly.selected && Blockly.selected.editable &&
         (!Blockly.Mutator || !Blockly.Mutator.isOpen)) {
       Blockly.hideChaff();
-      Blockly.playAudio('delete');
       Blockly.selected.destroy(true, true);
       window.parent.updateJavaScriptPreview();
     }
@@ -343,7 +342,6 @@ Blockly.onKeyDown_ = function(e) {
       } else if (e.keyCode == 88) {
         // 'x' for cut.
         Blockly.copy_(Blockly.selected);
-        Blockly.playAudio('delete');
         Blockly.selected.destroy(true, true);
       }
     }
