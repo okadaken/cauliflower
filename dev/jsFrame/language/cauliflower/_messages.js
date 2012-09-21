@@ -446,9 +446,13 @@ Blockly.LANG_OBJECT_CREATE_WITH_ITEM_TOOLTIP_1 = 'プロパティを指定した
 
 Blockly.LANG_OBJECT_GET = '変数';
 Blockly.LANG_OBJECT_GET_1 = 'のオブジェクトのプロパティ';
+Blockly.LANG_OBJECT_GET_2 = 'の値';
 Blockly.LANG_OBJECT_SET = '変数';
-Blockly.LANG_OBJECT_SET_1 = 'のオブジェクトのプロパティ';
-Blockly.LANG_OBJECT_SET_2 = 'に代入';
+Blockly.LANG_OBJECT_SET1_1 = 'のオブジェクトのプロパティ';
+Blockly.LANG_OBJECT_SET1_2 = 'に代入';
+Blockly.LANG_OBJECT_SET2_1 = 'のオブジェクトのプロパティ';
+Blockly.LANG_OBJECT_SET2_2 = 'に';
+Blockly.LANG_OBJECT_SET2_3 = 'を代入する';
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

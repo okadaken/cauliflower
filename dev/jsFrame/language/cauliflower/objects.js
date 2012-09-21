@@ -155,6 +155,7 @@ Blockly.Language.objects_get = {
     this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
     this.appendTitle(Blockly.LANG_OBJECT_GET_1);
     this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
+    this.appendTitle(Blockly.LANG_OBJECT_GET_2);
     
     this.setOutput(true);
   },
@@ -175,9 +176,9 @@ Blockly.Language.objects_set = {
     this.setColour(objColor);
     this.appendTitle(Blockly.LANG_OBJECT_SET);
     this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
-    this.appendTitle(Blockly.LANG_OBJECT_SET_1);
+    this.appendTitle(Blockly.LANG_OBJECT_SET1_1);
     this.appendTitle(new Blockly.FieldTextInput(''), 'PROPERTY');
-    this.appendInput(Blockly.LANG_OBJECT_SET_2, Blockly.INPUT_VALUE, 'VALUE', null);
+    this.appendInput(Blockly.LANG_OBJECT_SET1_2, Blockly.INPUT_VALUE, 'VALUE', null);
     
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -201,6 +202,7 @@ Blockly.Language.objects_get_by_value = {
     this.appendTitle(Blockly.LANG_OBJECT_GET);
     this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
     this.appendInput(Blockly.LANG_OBJECT_GET_1, Blockly.INPUT_VALUE, 'PROPERTY', null);
+    this.appendInput(Blockly.LANG_OBJECT_GET_2, Blockly.DUMMY_INPUT, '', null);
     
     this.setInputsInline(true);
     this.setOutput(true);
@@ -222,10 +224,11 @@ Blockly.Language.objects_set_by_value = {
     this.setColour(objColor);
     this.appendTitle(Blockly.LANG_OBJECT_SET);
     this.appendTitle(new Blockly.FieldDropdown(Blockly.Language.dropdownForObjects), 'VAR');
-    this.appendInput(Blockly.LANG_OBJECT_SET_1, Blockly.INPUT_VALUE, 'PROPERTY', null);
-    this.appendInput(Blockly.LANG_OBJECT_SET_2, Blockly.INPUT_VALUE, 'VALUE', null);
+    this.appendInput(Blockly.LANG_OBJECT_SET2_1, Blockly.INPUT_VALUE, 'PROPERTY', null);
+    this.appendInput(Blockly.LANG_OBJECT_SET2_2, Blockly.INPUT_VALUE, 'VALUE', null);
+    this.appendInput(Blockly.LANG_OBJECT_SET2_3, Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
-   
+    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   },
