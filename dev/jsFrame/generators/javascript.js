@@ -31,10 +31,14 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
  * accidentally clobbering a built-in object or function.
  * @private
  */
-Blockly.JavaScript.RESERVED_WORDS_ =
-    'Blockly', // In case JS is evaled in the current window.
+
+if (!Blockly.JavaScript.RESERVED_WORDS_) {
+  Blockly.JavaScript.RESERVED_WORDS_ = '';
+}
+	Blockly.JavaScript.RESERVED_WORDS_ +=
+       'Blockly', // In case JS is evaled in the current window.
     // https://developer.mozilla.org/en/JavaScript/Reference/Reserved_Words
-    'break,case,catch,continue,debugger,default,delete,do,else,finally,for,function,if,in,instanceof,new,return,switch,this,throw,try,typeof,var,void,while,with,' +
+ 'break,case,catch,continue,debugger,default,delete,do,else,finally,for,function,if,in,instanceof,new,return,switch,this,throw,try,typeof,var,void,while,with,' +
     'class,enum,export,extends,import,super,implements,interface,let,package,private,protected,public,static,yield,' +
     'const,null,true,false,' +
     // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects
