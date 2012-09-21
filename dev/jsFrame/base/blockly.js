@@ -412,7 +412,8 @@ Blockly.showContextMenu_ = function(x, y) {
   var helpOption = {enabled: false};
   helpOption.text = Blockly.MSG_HELP;
   helpOption.callback = function() {};
-  options.push(helpOption);
+  //とりあえずヘルプは表示しない
+  //options.push(helpOption);
   Blockly.ContextMenu.show(x, y, options);
 };
 
