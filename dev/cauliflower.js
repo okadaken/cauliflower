@@ -110,9 +110,25 @@ function initializeTabs() {
 }
 
 function initializeHTMLReferenceAccordion() {
+
   $.get('tagreference.html', function(data) {
     $('#tab-htmlsub-ref').html(data);
-    $('#tab-htmlsub-ref-contents').accordion({
+    $('#tab-htmlsub-ref-tab').tabs({
+      cookie: {
+        expires: 3
+      }
+    });
+    $('#tab-htmlsub-ref-tab-1').accordion({
+      collapsible: true,
+      autoHeight: false,
+      active: false
+    });
+    $('#tab-htmlsub-ref-tab-2').accordion({
+      collapsible: true,
+      autoHeight: false,
+      active: false
+    });
+    $('#tab-htmlsub-ref-tab-3').accordion({
       collapsible: true,
       autoHeight: false,
       active: false

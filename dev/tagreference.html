@@ -1,84 +1,520 @@
-<dvi>
-  <p>とりあえず仮設置 目的別にタグと使用例を書けばよさそう</p>
-  <div id="tab-htmlsub-ref-contents">
-  <h3>
-    <a href="#">Section 1</a>
-  </h3>
-  <div>
-    <pre class="prettyprint">&lt;h1&gt;これは大きな表題です。&lt;/h1&gt;</pre>
-    <pre class="prettyprint">
+<!--
+表
+テキストに対する意味付け
+-->
+<style type="text/css">
+  #tab-htmlsub-ref .ui-accordion .ui-accordion-content {
+      padding: 0em 1em 1em 1em;
+  }
+  
+  #tab-htmlsub-ref .ui-accordion .ui-accordion-header {
+      margin-top: 0px;
+  }
+  
+  #tab-htmlsub-ref p {
+      margin-top: 0.5em;
+  }
+  
+  #tab-htmlsub-ref h4 {
+      margin-top: 0.5em;
+      margin-bottom: -0.8em;
+  }
+  
+  #tab-htmlsub-ref-tab-1 {
+      height: 400px;
+      width: 94%;
+  }
+  
+  #tab-htmlsub-ref-tab-1 .ui-accordion-content {
+      height: 220px;
+  }
+  
+  #tab-htmlsub-ref-tab-2 {
+      height: 400px;
+      width: 94%;
+  }
+  
+  #tab-htmlsub-ref-tab-2 .ui-accordion-content {
+      height: 240px;
+  }
+  
+  #tab-htmlsub-ref-tab-3 {
+      height: 400px;
+      width: 94%;
+  }
+  
+  #tab-htmlsub-ref-tab-3 .ui-accordion-content {
+      height: 300px;
+  }
+  
+  #tab-htmlsub-ref table {
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #F8F8FE;
+      border-collapse: collapse;
+      border: 1px #CACAF4 solid;
+      margin-bottom: 1em;
+  }
+  
+  #tab-htmlsub-ref th, td {
+      padding: 5px;
+      border: 1px #CACAF4 solid;
+  }
+  
+  #tab-htmlsub-ref ol {
+      line-height: 2em;
+  }
+</style>
+<div id="tab-htmlsub-ref-tab">
+  <ul>
+    <li>
+      <a href="#tab-htmlsub-ref-tab-1">基本</a>
+    </li>
+    <li>
+      <a href="#tab-htmlsub-ref-tab-2">フォーム・属性・範囲指定</a>
+    </li>
+    <li>
+      <a href="#tab-htmlsub-ref-tab-3">その他</a>
+    </li>
+  </ul>
+  <div id="tab-htmlsub-ref-tab-1">
+    <h3>
+      <a href="#">見出し  &lt;h1&gt;～&lt;h6&gt;</a>
+    </h3>
+    <div>
+      <p>&lt;h1&gt;～&lt;h6&gt;は見出しを表現します。数字が小さいほど大きな見出しとなります。</p>
+      <pre class="prettyprint">
+&lt;h1&gt;1番目に大きな見出し&lt;/h1&gt;
+&lt;h2&gt;2番目に大きな見出し&lt;/h2&gt;
+&lt;h3&gt;3番目に大きな見出し&lt;/h3&gt;
+&lt;h4&gt;4番目に大きな見出し&lt;/h4&gt;
+&lt;h5&gt;5番目に大きな見出し&lt;/h5&gt;
+&lt;h6&gt;6番目に大きな見出し&lt;/h6&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;h1&gt;JavaScript&lt;/h1&gt;
+&lt;h2&gt;特徴&lt;/h2&gt;
+&lt;h2&gt;歴史&lt;/h2&gt;
+&lt;h3&gt;誕生&lt;/h3&gt;
+&lt;h3&gt;現在&lt;/h3&gt;
+&lt;h3&gt;JavaScript 2.0&lt;/h3&gt;
+&lt;h2&gt;セキュリティ上の制限&lt;/h2&gt;
+&lt;h2&gt;文法&lt;/h2&gt;
+</pre>
+      <p style="font-size:11px; margin-top:-0.8em;">※コード例はWikipediaのJavaScriptの項目の見出し。</p>
+    </div>
+    <h3>
+      <a href="#">段落  &lt;p&gt;</a>
+    </h3>
+    <div>
+      <p>&lt;p&gt;はひとつの段落（パラグラフ）を表現します。</p>
+      <pre class="prettyprint">
+&lt;p&gt;最初の段落です。&lt;/p&gt;
+&lt;p&gt;次の段落です。&lt;/p&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;p&gt;吾輩は猫である。名前はまだ無い。&lt;/p&gt;
+&lt;p&gt;どこで生れたかとんと見当がつかぬ。&lt;/p&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">ハイパーリンク  &lt;a&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;a&gt;はハイパーリンクを表現します。href属性にはリンク先のURLか、リンクしたいファイルの相対パスを記述します。
+        <br>&lt;a&gt;で囲まれた文字や画像（&lt;img&gt;で記述する）をクリックするとリンク先にジャンプさせることができます。</p>
+      <pre class="prettyprint">&lt;a href="リンク先"&gt;リンクしたい文字や画像&lt;/a&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;a href="http://www.google.co.jp/"&gt;Google検索&lt;/a&gt;
+&lt;a href="index.html"&gt;トップページに戻る&lt;/a&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">画像  &lt;img&gt;</a>
+    </h3>
+    <div>
+      <p>&lt;img&gt;は画像を埋め込みます。src属性に埋め込みたい画像のファイルの相対パスやURLを記述します。</p>
+      <pre class="prettyprint">&lt;img src="画像ファイルの相対パスやURL"&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;img src="img/logo/logo-large.png"&gt;
+&lt;img src="http://twitter.com/images/resources/twitter-bird-light-bgs.png"&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">順序なし・順序あり リスト   &lt;ul&gt;, &lt;ol&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;ul&gt;は順序なしのリスト、&lt;ol&gt;は順序ありのリストを表現します。
+        <br>リスト項目は、どちらの場合も&lt;li&gt;タグで指定します。</p>
+      <pre class="prettyprint">
+&lt;ul&gt;
+  &lt;li&gt;順序なしのリスト項目&lt;/li&gt;
+  &lt;li&gt;順序なしのリスト項目&lt;/li&gt;
+  &lt;li&gt;順序なしのリスト項目&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;順序ありのリスト項目&lt;/li&gt;
+  &lt;li&gt;順序ありのリスト項目&lt;/li&gt;
+  &lt;li&gt;順序ありのリスト項目&lt;/li&gt;
+&lt;/ol&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;ul&gt;
+  &lt;li&gt;お袋&lt;/li&gt;
+  &lt;li&gt;給料袋&lt;/li&gt;
+  &lt;li&gt;堪忍袋&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;零号機&lt;/li&gt;
+  &lt;li&gt;初号機&lt;/li&gt;
+  &lt;li&gt;弐号機&lt;/li&gt;
+&lt;/ol&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">定義・説明 リスト  &lt;dl&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;dl&gt;は、定義・説明リストを表現します。&lt;dl&gt;と&lt;/dl&gt;の中に、&lt;dt&gt;で定義・説明される言葉を、&lt;dd&gt;でそれに対応する説明を配置してリストを作成します。
+        <br>用語の定義リストを作成したり、何かの手順を箇条書きで説明する場合などに使用します。</p>
+      <pre class="prettyprint">
+&lt;dl&gt;
+  &lt;dt&gt言葉1&lt;/dt&gt;
+  &lt;dd&gt;言葉1に関する説明&lt;/dd&gt;
+  &lt;dt&gt;言葉2&lt;/dt&gt;
+  &lt;dd&gt;言葉2に関する説明&lt;/dd&gt;
+  &lt;dt&gt;言葉3&lt;/dt&gt;
+  &lt;dd&gt;言葉3に関する説明&lt;/dd&gt;
+&lt;/dl&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+  &lt;dt&gt;JK&lt;/dt&gt;
+  &lt;dd&gt;常識的に考えて&lt;/dd&gt;
+  &lt;dt&gt;チョベリバ&lt;/dt&gt;
+  &lt;dd&gt;超ベリーバッド&lt;/dd&gt;
+  &lt;/dl&gt;</pre>
+    </div>
+  </div>
+  <div id="tab-htmlsub-ref-tab-2">
+    <h3>
+      <a href="#">フォームの部品  &lt;input&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;input&gt;はユーザからの入力を受け付けるフォームの部品を表現します。
+        <br>type属性を指定することで、フォームの形式を変化させることができます。また、value属性を指定することで、フォームの入力値（ボタンに設定した場合はボタンのラベル表示）を設定することができます。</p>
+      <pre class="prettyprint">&lt;input type="フォームの形式" value="フォームの入力値（省略可能）"&gt;</pre>
+      <p>以下に代表的なtype属性の設定値の一覧を示します。</p>
+      <table style="border: 1px solid rgb(224, 224, 224);">
+        <thead>
+          <tr>
+            <th>type属性の設定値</th>
+            <th>表示されるフォームの形式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>text</td>
+            <td>一行テキストボックス（初期値）</td>
+          </tr>
+          <tr>
+            <td>button</td>
+            <td>汎用ボタン</td>
+          </tr>
+          <tr>
+            <td>checkbox</td>
+            <td>チェックボックス</td>
+          </tr>
+          <tr>
+            <td>radio</td>
+            <td>ラジオボタン</td>
+          </tr>
+          <tr>
+            <td>password</td>
+            <td>パスワード入力欄</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt!-- テキスト入力ができるidがaというフォーム部品 --&gt;
+&lt;input id="a" type="text"&gt;
+
+&lt!-- idがaのOKと書かれたボタン --&gt;
+&lt;input id="b" type="button" value="OK"&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">複数行のテキスト入力欄  &lt;textarea&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;textarea&gt;は複数行のテキスト入力を受け取るフォームの部品を表現します。
+        <br>cols属性で一行当たりの最大文字数の目安、rows属性で表示行数を指定します。</p>
+      <pre class="prettyprint">&lt;textarea cols="一行あたりの最大文字数の目安" rows="行数"&gt;</pre>
+      <p>以下に代表的な属性の一覧を示します。</p>
+      <table style="border: 1px solid rgb(224, 224, 224);">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>解説</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>maxlength</td>
+            <td>入力可能な最大文字数を指定する。</td>
+          </tr>
+          <tr>
+            <td>placeholder</td>
+            <td>ユーザー入力に関するヒントを指定する。</td>
+          </tr>
+          <tr>
+            <td>wrap</td>
+            <td>入力テキストの改行ルールを指定する。softかhardの二種類で、hardを指定する場合には、同時にcols属性を指定する。</td>
+          </tr>
+          <tr>
+            <td>readonly</td>
+            <td>ユーザーによるテキスト編集を不可にして読み取り専用にする場合に属性名を書く。値は指定する必要はない。</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt!-- 感想の入力フォームを表示する --&gt;
+&lt;textarea cols="40" rows="4" maxlength="20" placeholder="感想をどうぞ"&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">共通属性  id, style, class, hidden, title</a>
+    </h3>
+    <div>
+      <p>以下に示す属性はすべてのHTML要素に共通で指定することができます。</p>
+      <table style="border: 1px solid rgb(224, 224, 224);">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>解説</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>ページ内でユニークな識別子(ID)を指定します。空白文字を入れたIDを指定することはできません。CSSやJavaScriptでHTML要素を特定したい場合に利用します。</td>
+          </tr>
+          <tr>
+            <td>style</td>
+            <td>HTML要素の見た目を変更するために、CSSを記述するための属性です。</td>
+          </tr>
+          <tr>
+            <td>class</td>
+            <td>CSSで定義したクラスを適用する時に利用します。CSSには「.クラスの名前」としてスタイルを定義し、class属性の値としてクラス名を指定します。</td>
+          </tr>
+          <tr>
+            <td>hidden</td>
+            <td>この属性があるHTML要素はWebブラウザに表示されません。属性の名前だけを記述すればよく、値は指定する必要はありません。</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>そのHTML要素のツールチップとなる補足情報を表します。HTML要素がリンクであれば、リンク先のリソースの表題や説明、画像であれば、その画像の著作権表示や説明になります。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>
+      <a href="#">イベント属性  onclick, onchange等</a>
+    </h3>
+    <div>
+      <p>&lt;input&gt;をはじめとしたHTMLの要素には、様々なイベントハンドラ（あるイベントが発生したことをきっかとして、指定した処理を実行するもの）を設定することができます。フォームの部品にイベントハンドラを設定し、指定したJavaScriptの関数を実行させる方法が多く使われます。</p>
+      <p>Hello!というボタンを表示し、そのボタンがクリックされたら、hello_button_clickedという名前のJavaScriptの関数を実行するコード例は以下のようになります。</p>
+      <pre class="prettyprint">
+&lt;input type="button" value="Hello!" onclick="hello_button_clicked()"&gt;</pre>
+      <p>以下にonclickも含めた、主なイベントハンドラの例を示します。</p>
+      <table style="border: 1px solid rgb(224, 224, 224);">
+        <thead>
+          <tr>
+            <th>タイプ</th>
+            <th>イベント</th>
+            <th>イベントの内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="4">ページ等</td>
+            <td>onload</td>
+            <td>ページ等の読み込み完了した時</td>
+          </tr>
+          <tr>
+            <td>onunload</td>
+            <td>他のページへの移動時、ページのクローズ時</td>
+          </tr>
+          <tr>
+            <td>onresize</td>
+            <td>サイズが変更された時</td>
+          </tr>
+          <tr>
+            <td>onscroll</td>
+            <td>スクロールした時</td>
+          </tr>
+          <tr>
+            <td rowspan="5">マウス</td>
+            <td>onclick</td>
+            <td>クリックした時</td>
+          </tr>
+          <tr>
+            <td>ondblclick</td>
+            <td>ダブルクリックした時</td>
+          </tr>
+          <tr>
+            <td>onmousedown</td>
+            <td>マウスボタンを押した時</td>
+          </tr>
+          <tr>
+            <td>onmouseup</td>
+            <td>マウスボタンを放した時</td>
+          </tr>
+          <tr>
+            <td>onmouseover</td>
+            <td>マウスが重なった時</td>
+          </tr>
+          <tr>
+            <td rowspan="3">キー</td>
+            <td>onkeydown</td>
+            <td>キーが押し下げられた時</td>
+          </tr>
+          <tr>
+            <td>onkeypress</td>
+            <td>キー入力があった時</td>
+          </tr>
+          <tr>
+            <td>onkeyup</td>
+            <td>押し下げられたキーが放された時</td>
+          </tr>
+          <tr>
+            <td rowspan="3">フォーム</td>
+            <td>onchange</td>
+            <td>内容が変更された時</td>
+          </tr>
+          <tr>
+            <td>onsubmit</td>
+            <td>サブミットボタンが押された時</td>
+          </tr>
+          <tr>
+            <td>onreset</td>
+            <td>リセットボタンが押された時</td>
+          </tr>
+          <tr>
+            <td rowspan="2">フォーカス</td>
+            <td>onfocus</td>
+            <td>フォーカスされた時</td>
+          </tr>
+          <tr>
+            <td>onblur</td>
+            <td>フォーカスが外れた時</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>
+      <a href="#divspan">範囲指定  &lt;div&gt;, &lt;span&gt;</a>
+    </h3>
+    <div>
+      <p>
+        &lt;div&gt;や&lt;span&gt;は範囲を指定するために使います。id属性・class属性・style属性などと一緒に使用します。
+        <br>divは指定した範囲が改行され、spanは改行されません。</p>
+      <pre class="prettyprint">&lt;div 属性名="属性の値"&gt;範囲を指定したい部分（改行される）&lt;/div&gt;
+      &lt;span 属性名="属性の値"&gt;範囲を指定したい部分&lt;/span&gt;
+      </pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;div id="answer" class="red"&gt;
+  この範囲にanswerというidを設定し、CSSのredというクラスを適用します。
+&lt;/div&gt;
+
+&lt;p&gt;これは&lt;span style="background-color: #0099FF"&gt;青色&lt;/span&gt;です。&lt;/p&gt;</pre>
+    </div>
+  </div>
+  <div id="tab-htmlsub-ref-tab-3">
+    <h3>
+      <a href="#">メタデータ  &lt;head&gt;, &lt;meta&gt;, &lt;title&gt;, &lt;link&gt;, &lt;style&gt;</a>
+    </h3>
+    <div>
+      <p>HTMLに関する情報をメタデータと呼び、複数のメタデータは&lt;head&gt;で囲んで表現します。</p>
+      <table style="border: 1px solid rgb(224, 224, 224);">
+        <thead>
+          <tr>
+            <th>タグ</th>
+            <th>解説</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt;head&gt;</td>
+            <td>HTMLのヘッダ情報を表現します。以下のtitle、link、meta、styleなどのタグをこのタグの中に記述します。</td>
+          </tr>
+          <tr>
+            <td>&lt;meta&gt;</td>
+            <td>その文書に関する情報（メタデータ）を指定します。charset属性でページの文字コードを指定する場合に使われます。そのほかにも検索エンジン向けのキーワードなども指定できます。</td>
+          </tr>
+          <tr>
+            <td>&lt;title&gt;</td>
+            <td>HTMLのタイトルを付けます。</td>
+          </tr>
+          <tr>
+            <td>&lt;link&gt;</td>
+            <td>リンクする外部リソースを指定します。</td>
+          </tr>
+          <tr>
+            <td>&lt;style&gt;</td>
+            <td>スタイルシートを記述します。</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>以下にいくつかメタデータを定義したHTMLの例を示します。</p>
+      <pre class="prettyprint">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8"/&gt;
-    &lt;title>ページタイトルを書きます&lt;/title&gt;
-  &lt;/head&gt;
-    &lt;body&gt;
-    &lt;!-- ここから下にHTMLの内容を書きます --&gt;
-    &lt;h1>Hello, world!&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-    <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-      ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-      amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-      odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;はじめてのHTMLページ&lt;/title&gt;
+    &lt;link rel="stylesheet" href="default.css"&gt;
+  &lt;head&gt;
+  &lt;body&gt;
+    &lt;p&gt;ページの本文&lt;/p&gt;
+  &lt;/hody&gt;
+&lt;/html&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">コメント  &lt;!-- --&gt;</a>
+    </h3>
+    <div>
+      <p>&lt;!--と--&gt;で囲まれた部分はHTMLのソース中のコメントを表現します。一時的にコンテンツの一部を隠したり、タグを無効にする際にも使用します。</p>
+      <pre class="prettyprint">&lt;!-- コメント --&gt;</pre>
+      <h4>コード例</h4>
+      <pre class="prettyprint">
+&lt;!-- HTMLの文字コードはUTF-8にする --&gt;
+&lt;meta charset="UTF-8"/&gt;</pre>
+    </div>
+    <h3>
+      <a href="#">外部Webサイト</a>
+    </h3>
+    <div>
+      <p>HTMLを記述するときに役に立つWebサイトです。</p>
+      <ol>
+        <li>
+          <a href="http://www.htmq.com/index.htm" target="_blank">HTMLクイックリファレンス</a>
+        </li>
+        <li>
+          <a href="http://www.tagindex.com/color/index.html" target="_blank">カラーチャート - TAG index</a>
+        </li>
+        <li>
+          <a href="http://validator.w3.org" target="_blank">HTML検証サービス - The W3C Markup Validation Service</a>
+        </li>
+      </ol>
+    </div>
   </div>
-  <h3>
-    <a href="#">Section 2</a>
-  </h3>
-  <div>
-    <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-      purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-      velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-      suscipit faucibus urna.</p>
-  </div>
-  <h3>
-    <a href="#">Section 3</a>
-  </h3>
-  <div>
-    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-      Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-      ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-      lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
-    <ul>
-      <li>List item one</li>
-      <li>List item two</li>
-      <li>List item three</li>
-    </ul>
-    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-      Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-      ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-      lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
-    <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-      Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-      ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-      lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
-  </div>
-  <h3>
-    <a href="#">Section 4</a>
-  </h3>
-  <div>
-    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-      et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-      faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-      mauris vel est.</p>
-    <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-      Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-      inceptos himenaeos.</p>
-  </div>
-  <h3>
-    <a href="#">Section 5</a>
-  </h3>
-  <div>
-    <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-      et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-      faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-      mauris vel est.
-    </p>
-    <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-      Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-      inceptos himenaeos.
-    </p>
-  </div>
-</dvi>
+</div>
