@@ -459,6 +459,13 @@ Blockly.LANG_OBJECT_SET2_2 = 'に';
 Blockly.LANG_OBJECT_SET2_3 = 'を代入する';
 Blockly.LANG_OBJECT_SET_TOOLTIP_1 = '変数"%1"に格納されているオブジェクトの\n指定したプロパティの値を設定します。';
 
+Blockly.LANG_OBJECT_DATE = '現在の日付';
+Blockly.LANG_OBJECT_DATE_OBJECT = 'オブジェクト';
+Blockly.LANG_OBJECT_DATE_LOCALESTRING = 'オブジェクトの文字列表現';
+Blockly.LANG_OBJECT_DATE_OBJECT_TOOLTIP = '現在の日付と時刻でDateオブジェクトを生成します。';
+Blockly.LANG_OBJECT_DATE_LOCALESTRING_TOOLTIP = '現地のタイムゾーンと現地の日付フォーマットを使って\nDateを文字列に変換した値を取得します。';
+
+
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';
 Blockly.LANG_CATEGORY_JOKER_PREFIX = '*';

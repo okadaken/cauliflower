@@ -104,3 +104,20 @@ Blockly.JavaScript.objects_set_by_value = function() {
   code = variable + property + " = " + value + ";\n";
   return code;
 };
+
+Blockly.JavaScript.objects_date = function() {
+  var code = '';
+  var type = this.getTitleValue('TYPE');
+  switch (type) {
+  case 'OBJECT':
+    code += 'new Date()';
+    break;
+  case 'LOCALESTRING':
+    code += 'new Date().toLocaleString()';
+    break;
+  default:
+    throw 'Unknown type.'
+  }
+  
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
