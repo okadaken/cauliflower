@@ -1,0 +1,58 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;フォームの活用&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;form&gt;
+			お名前をどうぞ: 
+			&lt;input id="lec03_03_text1" size="20" type="text"&gt;
+			&lt;input value="OK" onclick="lec03_03_hello()" type="button"&gt;
+		&lt;/form&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-2" y="2">
+      <mutation></mutation>
+      <title name="NAME">lec03_03_hello</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">name</title>
+          <value name="VALUE">
+            <block type="myDocument_get">
+              <title name="TARGET">lec03_03_text1</title>
+              <title name="ATTRIBUTE">.value</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_print" inline="false">
+              <value name="TEXT">
+                <block type="text_join" inline="false">
+                  <mutation items="3"></mutation>
+                  <value name="ADD0">
+                    <block type="text">
+                      <title name="TEXT">こんにちは、</title>
+                    </block>
+                  </value>
+                  <value name="ADD1">
+                    <block type="variables_get">
+                      <title name="VAR">name</title>
+                    </block>
+                  </value>
+                  <value name="ADD2">
+                    <block type="text">
+                      <title name="TEXT">さん</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

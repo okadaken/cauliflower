@@ -1,0 +1,25 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;すこし意味のあるプログラム&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="myDocument_direct" x="-6" y="5">
+      <statement name="DO">
+        <block type="myDocument_write" inline="false">
+          <value name="TEXT">
+            <block type="objects_date">
+              <title name="TYPE">LOCALESTRING</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

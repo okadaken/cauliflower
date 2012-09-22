@@ -32,17 +32,23 @@ function allOption() {
   {
     var allOptions = [];
     allOptions.push(['要素', '']);
-    allOptions.push(['要素のHTML', '.innerHTML']);
     allOptions.push(['要素の値', '.value']);
+    allOptions.push(['要素のHTML', '.innerHTML']);
     
     options.push(['all', allOptions]);
   }
   {
     var divOptions = [];
-    divOptions.push(['要素のスタイルの背景色', '.style.backgroundColor']);
     divOptions.push(['要素のスタイルの文字色', '.style.color']);
+    divOptions.push(['要素のスタイルの背景色', '.style.backgroundColor']);
     
     options.push(['div', divOptions]);
+  }
+  {
+    var inputOptions = [];
+    inputOptions.push(['要素のスタイルの背景色', '.style.backgroundColor']);
+    
+    options.push(['input', inputOptions]);
   }
   
   return options;
