@@ -64,7 +64,7 @@ $(document).ready(function() {
  * コンポーネント初期化関連
  **************************************************/
 function initializeWindowTitle() {
-  $('title').text($('title').text() + ' ' + version);
+  $('title').text($('title').text() + ' v' + version);
 }
 
 function initializeTabs() {

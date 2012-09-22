@@ -68,24 +68,21 @@ Blockly.JavaScript.lists_repeat = function() {
 };
 
 Blockly.JavaScript.lists_length = function() {
-  var argument0 = this.getTitleValue('VALUE');
-  return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
+  // Testing the length of a list is the same as for a string.
+  return Blockly.JavaScript.text_length.call(this);
 };
 
 Blockly.JavaScript.lists_indexOf = function() {
-  var operator = this.getTitleValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND', Blockly.JavaScript.ORDER_NONE) ||
-  '\'\'';
-  var argument1 = this.getTitleValue('VALUE');
-  var code = argument1 + '.' + operator + '(' + argument0 + ')';
-  return [code, Blockly.JavaScript.ORDER_MEMBER];
+  // Searching a list for a value is the same as search for a substring.
+  return Blockly.JavaScript.text_indexOf.call(this);
 };
 
 Blockly.JavaScript.lists_getIndex = function() {
   // Get letter at index.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'AT', Blockly.JavaScript.ORDER_NONE) ||
   '0';
-  var argument1 = this.getTitleValue('VALUE');
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_MEMBER) ||
+  '[]';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -102,7 +99,8 @@ Blockly.JavaScript.lists_setIndex = function() {
   // Set element at index.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'AT', Blockly.JavaScript.ORDER_NONE) ||
   '0';
-  var argument1 = this.getTitleValue('VALUE');
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'LIST', Blockly.JavaScript.ORDER_MEMBER) ||
+  '[]';
   var argument2 = Blockly.JavaScript.valueToCode(this, 'TO', Blockly.JavaScript.ORDER_ASSIGNMENT) ||
   'null';
   // Blockly uses one-based indicies.
