@@ -191,7 +191,7 @@ function initalizeSampleButton() {
   $.get('samples.html', function(data) {
     $('#sample-button').menu({
       content: data,
-      width: '270px',
+      width: '230px',
       flyOut: true
       //showSpeed: 150
     });
