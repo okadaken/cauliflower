@@ -374,6 +374,9 @@ Blockly.Comment.prototype.destroy = function() {
   // Disconnect links between the block and the comment.
   this.block_.comment = null;
   this.block_ = null;
+  
+  //コメント削除時にコード生成
+  window.parent.updateJavaScriptPreview();
 };
 
 /**
