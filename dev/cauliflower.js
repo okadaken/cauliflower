@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.0';
-var build = '[Build:2012092301, Blockly:r419]'
+var build = '[Build:2012092302, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -926,15 +926,30 @@ function getAllCode(doc) {
   var js = doc.createElement('script');
   js.appendChild(doc.createTextNode('\n'));
   js.setAttribute('type', 'text/javascript');
-  js.appendChild(doc.createComment(getJavaScriptCode()));
+  
+  var javascriptcode = getJavaScriptCode();
+  var lines = javascriptcode.split('\n');
+  while (lines[0] == '') {
+    lines.splice(0, 1);
+  }
+  for (var i = 0; i < lines.length; i++) {
+    lines[i] = '\t\t' + lines[i];
+  }
+  javascriptcode = lines.join('\n');
+  javascriptcode = '\n' + javascriptcode;
+  var jsNode = doc.createComment(javascriptcode);
+  js.appendChild(jsNode);
   js.appendChild(doc.createTextNode('\n'));
+  js.insertBefore(doc.createTextNode('\t\t'), jsNode);
   
   //生成したノードを追加（docにbodyタグがあることが前提）
   var body = doc.getElementsByTagName('body')[0];
   body.insertBefore(js, body.firstChild);
+  body.insertBefore(doc.createTextNode('\t\t'), js);
   body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
   var serializer = new XMLSerializer();
   var code = serializer.serializeToString(doc);
+  code = code.replace(/-->\n<\/script>/g, '-->\n\t\t</script>');
   
   //titleが空で<title/>となるとbodyがレンダリングされない
   code = code.replace(/<title\/>/g, '<title></title>');
@@ -962,6 +977,12 @@ function getJavaScriptCode() {
 
 function updateJavaScriptPreview() {
   var code = Blockly.Generator.workspaceToCode('JavaScript')
+  var lines = code.split('\n');
+  if (lines[0] == '') {
+    lines.splice(0, 1);
+  }
+  code = lines.join('\n');
+  
   JavaScriptPreview.setValue(code);
   if (previousCode != null) {
     diff(previousCode, code);
