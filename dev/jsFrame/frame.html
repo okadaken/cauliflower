@@ -1,7 +1,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Blockly Demo: Code</title>
     <script type="text/javascript" src="blockly_uncompressed.js"></script>
     <script type="text/javascript" src="generators/javascript.js"></script>
     <script type="text/javascript" src="generators/javascript/control.js"></script>
@@ -49,6 +48,7 @@
     <script>
       function init() {
         Blockly.editorScale = parent.getBlocklyScale();
+        Blockly.showBlockShapeMenu = parent.showBlockShapeMenu();
         
         //mouseToSvg用にチェックしておく
         var env = parent.getUserEnv();

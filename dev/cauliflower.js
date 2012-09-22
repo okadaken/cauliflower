@@ -243,6 +243,9 @@ function initializeHelp() {
     $('#jockercheck').checkbox({
       cls: 'jquery-safari-checkbox'
     });
+    $('#shapecheck').checkbox({
+      cls: 'jquery-safari-checkbox'
+    });
     $('#blocklyscale').checkbox({
       cls: 'jquery-safari-checkbox'
     });
@@ -1306,6 +1309,10 @@ function showJocker() {
   return $('#jockercheck').attr('checked');
 }
 
+function showBlockShapeMenu() {
+  return $('#shapecheck').attr('checked');
+}
+
 function getBlocklyScale() {
   return blocklyscale;
 }
@@ -1317,6 +1324,13 @@ function backupDevSettings() {
       window.localStorage.setItem('cauliflower_dev_jockercheck', 'on');
     } else {
       window.localStorage.setItem('cauliflower_dev_jockercheck', 'off');
+    }
+    
+    //ブロック変形メニュー設定
+    if ($('#shapecheck').attr('checked')) {
+      window.localStorage.setItem('cauliflower_dev_shapecheck', 'on');
+    } else {
+      window.localStorage.setItem('cauliflower_dev_shapecheck', 'off');
     }
     
     //描画倍率設定
@@ -1336,6 +1350,15 @@ function restoreDevSettings() {
         $('#jockercheck').attr('checked', true);
       } else {
         $('#jockercheck').attr('checked', false);
+      }
+    }
+    
+    //ブロック変形メニュー設定
+    if (window.localStorage.cauliflower_dev_shapecheck) {
+      if (window.localStorage.cauliflower_dev_shapecheck == 'on') {
+        $('#shapecheck').attr('checked', true);
+      } else {
+        $('#shapecheck').attr('checked', false);
       }
     }
     

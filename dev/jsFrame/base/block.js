@@ -565,21 +565,24 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     };
     options.push(disableOption);
     
-        // Option to make block inline.
-    if (!this.collapsed) {
-      for (var i = 0; i < this.inputList.length; i++) {
-        if (this.inputList[i].type == Blockly.INPUT_VALUE) {
-          // Only display this option if there is a value input on the block.
-          var inlineOption = {enabled: true};
-          inlineOption.text = this.inputsInline ? Blockly.MSG_EXTERNAL_INPUTS :
-                                                  Blockly.MSG_INLINE_INPUTS;
-          inlineOption.callback = function() {
-            block.setInputsInline(!block.inputsInline);
-          };
-          options.push(inlineOption);
-          break;
+    // Option to make block inline.
+    if (Blockly.showBlockShapeMenu) {
+        if (!this.collapsed) {
+            for (var i = 0; i < this.inputList.length; i++) {
+                if (this.inputList[i].type == Blockly.INPUT_VALUE) {
+                    // Only display this option if there is a value input on the block.
+                    var inlineOption = {
+                        enabled: true
+                    };
+                    inlineOption.text = this.inputsInline ? Blockly.MSG_EXTERNAL_INPUTS : Blockly.MSG_INLINE_INPUTS;
+                    inlineOption.callback = function() {
+                        block.setInputsInline(!block.inputsInline);
+                    };
+                    options.push(inlineOption);
+                    break;
+                }
+            }
         }
-      }
     }
 
   // Option to get help.
