@@ -22,7 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.0  [Build:2012092101, Blockly:r419]';
+var version = '1.0';
+var build = '[Build:2012092101, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -47,6 +48,7 @@ var ignore = false;
 var blocklyscale = 1.2;
 
 $(document).ready(function() {
+  initializeWindowTitle();
   initializeTabs();
   initializeHTMLReferenceAccordion();
   initializeButtons();
@@ -61,6 +63,10 @@ $(document).ready(function() {
 /**************************************************
  * コンポーネント初期化関連
  **************************************************/
+function initializeWindowTitle() {
+  $('title').text($('title').text() + ' ' + version);
+}
+
 function initializeTabs() {
   $('#tabs').tabs({
     cookie: {
@@ -255,7 +261,7 @@ function initializeHelp() {
   
   $.get('help.html', function(data) {
     $('#help').html(data);
-    $('.version').replaceWith(version);
+    $('.version').replaceWith(version + '  ' + build);
     $('#jockercheck').checkbox({
       cls: 'jquery-safari-checkbox'
     });
