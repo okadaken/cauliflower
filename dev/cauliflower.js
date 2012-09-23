@@ -924,7 +924,6 @@ function createNullDOM() {
 function getAllCode(doc) {
   //JavaScriptタグとコードのノードを生成
   var js = doc.createElement('script');
-  js.appendChild(doc.createTextNode('\n'));
   js.setAttribute('type', 'text/javascript');
   
   var javascriptcode = getJavaScriptCode();
@@ -937,10 +936,8 @@ function getAllCode(doc) {
   }
   javascriptcode = lines.join('\n');
   javascriptcode = '\n' + javascriptcode;
-  var jsNode = doc.createComment(javascriptcode);
+  var jsNode = doc.createTextNode(javascriptcode);
   js.appendChild(jsNode);
-  js.appendChild(doc.createTextNode('\n'));
-  js.insertBefore(doc.createTextNode('\t\t'), jsNode);
   
   //生成したノードを追加（docにbodyタグがあることが前提）
   var body = doc.getElementsByTagName('body')[0];
@@ -949,7 +946,6 @@ function getAllCode(doc) {
   body.insertBefore(doc.createTextNode('\n'), body.firstChild);//scritpタグの前に改行を追加
   var serializer = new XMLSerializer();
   var code = serializer.serializeToString(doc);
-  code = code.replace(/-->\n<\/script>/g, '-->\n\t\t</script>');
   
   //titleが空で<title/>となるとbodyがレンダリングされない
   code = code.replace(/<title\/>/g, '<title></title>');
