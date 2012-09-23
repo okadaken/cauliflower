@@ -564,6 +564,11 @@ function loadSample(path) {
     return;
   }
   
+  if (path.match(/^http/)) {
+    window.open(path, 'subwindow');
+    return;
+  }
+  
   //FIX:load関数と重複コードあり
   //エラー処理なし（正しいpath、ネットワーク接続ありと仮定）
   $.get(path, function(data) {
