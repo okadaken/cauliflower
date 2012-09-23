@@ -214,7 +214,7 @@
       'consolebak.timeEnd()= function(s) {consolebak.timeEnd()};';
       
       //コードをオリジナルに挿入
-      var targetCode = '<script type="text/javascript">\n<!--\n';
+      var targetCode = '<script type="text/javascript">\n';
       var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + consolelog + '\n');
       
       updateHTMLPreview(codeForExec);
