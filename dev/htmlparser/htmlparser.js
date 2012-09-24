@@ -174,7 +174,7 @@
                 var pos = 0;
             // Find the closest opened tag of the same type
             else for (var pos = stack.length - 1; pos >= 0; pos--) 
-                if (stack[pos] == tagName) 
+                if (stack[pos] == tagName.toLowerCase()) 
                     break;
             
             if (pos >= 0) {
