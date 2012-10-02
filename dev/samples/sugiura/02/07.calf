@@ -1,0 +1,66 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;計算プログラム2&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="myDocument_direct" x="8" y="12">
+      <statement name="DO">
+        <block type="variables_set" inline="false">
+          <title name="VAR">a</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">3456</title>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">b</title>
+              <value name="VALUE">
+                <block type="text">
+                  <title name="TEXT">789</title>
+                </block>
+              </value>
+              <next>
+                <block type="variables_set" inline="false">
+                  <title name="VAR">c</title>
+                  <value name="VALUE">
+                    <block type="math_arithmetic" inline="true">
+                      <title name="OP">ADD</title>
+                      <value name="A">
+                        <block type="variables_get">
+                          <title name="VAR">a</title>
+                        </block>
+                      </value>
+                      <value name="B">
+                        <block type="variables_get">
+                          <title name="VAR">b</title>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="myDocument_write" inline="false">
+                      <value name="TEXT">
+                        <block type="variables_get">
+                          <title name="VAR">c</title>
+                        </block>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

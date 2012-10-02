@@ -1,0 +1,27 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;コメントを追加したプログラム&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="myDocument_direct" x="43" y="77">
+      <statement name="DO">
+        <block type="myDocument_write" inline="false">
+          <comment pinned="true" x="-100" y="-120" h="64.4" w="179.2">現在時刻を表示する</comment>
+          <value name="TEXT">
+            <block type="objects_date">
+              <title name="TYPE">OBJECT</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

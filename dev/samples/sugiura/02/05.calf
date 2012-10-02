@@ -1,0 +1,36 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;変数を使った挨拶のプログラム&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="myDocument_direct" x="8" y="12">
+      <statement name="DO">
+        <block type="variables_set" inline="false">
+          <title name="VAR">greeting</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">おはよう</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_write" inline="false">
+              <value name="TEXT">
+                <block type="variables_get">
+                  <title name="VAR">greeting</title>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
