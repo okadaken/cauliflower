@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.0';
-var build = '[Build:2012092401, Blockly:r419]'
+var build = '[Build:2012100201, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -963,12 +963,24 @@ function getAllCode(doc) {
     code = code.trim();
     code = '<!DOCTYPE html>\n' + code;
   }
+  
+  code = code.replace(/CAL-gt;/g, '>');
+  code = code.replace(/CAL-lt;/g, '<');
+  code = code.replace(/CAL-amp;/g, '&');
+  
   return code;
 }
 
 function getJavaScriptCode() {
   if (Blockly != null) {
     var code = '\n' + Blockly.Generator.workspaceToCode('JavaScript');
+    
+    //コード内の<と>と&はいったん置換にしておく
+    //textNodeにするとエスケープされちゃうので
+    code = code.replace(/>/g, 'CAL-gt;');
+    code = code.replace(/</g, 'CAL-lt;');
+    code = code.replace(/&/g, 'CAL-amp;');
+    
     return code;
   } else {
     console.error('Bockly is undefined!');
