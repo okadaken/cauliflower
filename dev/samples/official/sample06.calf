@@ -3,7 +3,7 @@
 &lt;html&gt;
 	&lt;head&gt;
 		&lt;meta charset="UTF-8"/&gt;
-		&lt;title&gt;ボタンクリック時の実行&lt;/title&gt;
+		&lt;title&gt;02-1&lt;/title&gt;
 	&lt;/head&gt;
 	&lt;body&gt;
 		&lt;input type="button" value="Click me!" onclick="lec03_01_button()" /&gt;

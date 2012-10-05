@@ -3,7 +3,7 @@
 &lt;html&gt;
 	&lt;head&gt;
 		&lt;meta charset="UTF-8"/&gt;
-		&lt;title&gt;マウスを重ねた時の実行&lt;/title&gt;
+		&lt;title&gt;02-2&lt;/title&gt;
 	&lt;/head&gt;
 	&lt;body&gt;
 		&lt;div id="lec03_02_div1" onmouseover="lec03_02_div1_onmouseover()" onmouseout="lec03_02_div1_onmouseout()"&gt;
