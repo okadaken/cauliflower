@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.0';
-var build = '[Build:2012100201, Blockly:r419]'
+var build = '[Build:2012100501, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -430,7 +430,7 @@ function load(event) {
     }
     var count = Blockly.mainWorkspace.getAllBlocks().length;
     if (count) {
-      var title = '編集のブロックがあります';
+      var title = '編集中のブロックがあります';
       var message = 'JavaScriptエディタに編集中のブロックがあります。編集中のブロックの扱いを選択してください。';
       var buttons = {
         '削除': function() {
@@ -593,7 +593,7 @@ function loadSample(path) {
     }
     var count = Blockly.mainWorkspace.getAllBlocks().length;
     if (count) {
-      var title = '編集のブロックがあります';
+      var title = '編集中のブロックがあります';
       var message = 'JavaScriptエディタに編集中のブロックがあります。編集中のブロックの扱いを選択してください。';
       var buttons = {
         '削除': function() {
