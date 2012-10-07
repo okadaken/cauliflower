@@ -1,0 +1,48 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;03-3&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div id="text" onmouseover="over()" onmouseout="out()"&gt;
+			マウスカーソルを重ねてください。
+		&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="14" y="124">
+      <mutation></mutation>
+      <title name="NAME">out</title>
+      <statement name="STACK">
+        <block type="myDocument_set" inline="false">
+          <title name="TARGET">text</title>
+          <title name="ACTION">.style.backgroundColor</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">white</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <block type="procedures_defnoreturn" x="14" y="5">
+      <mutation></mutation>
+      <title name="NAME">over</title>
+      <statement name="STACK">
+        <block type="myDocument_set" inline="false">
+          <title name="TARGET">text</title>
+          <title name="ACTION">.style.backgroundColor</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">yellow</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

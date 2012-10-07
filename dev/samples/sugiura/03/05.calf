@@ -1,0 +1,79 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;03-5&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;form&gt;
+			&lt;input type="text" id="a" size="5" style="float:left;" onchange="updateAnswer()" /&gt;
+			&lt;div style="float:left;"&gt;+&lt;/div&gt;
+			&lt;input type="text" id="b" size="5" style="float:left;" onchange="updateAnswer()" /&gt;
+			&lt;div style="float:left;"&gt;=&lt;/div&gt;
+			&lt;input type="text" id="sum" size="5" /&gt;
+		&lt;/form&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-7" y="-1">
+      <mutation></mutation>
+      <title name="NAME">updateAnswer</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">a</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">a</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">b</title>
+              <value name="VALUE">
+                <block type="math_parse" inline="true">
+                  <title name="TYPE">INT</title>
+                  <value name="VALUE">
+                    <block type="myDocument_get">
+                      <title name="TARGET">b</title>
+                      <title name="ATTRIBUTE">.value</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_set" inline="false">
+                  <title name="TARGET">sum</title>
+                  <title name="ACTION">.value</title>
+                  <value name="VALUE">
+                    <block type="math_arithmetic" inline="true">
+                      <title name="OP">ADD</title>
+                      <value name="A">
+                        <block type="variables_get">
+                          <title name="VAR">a</title>
+                        </block>
+                      </value>
+                      <value name="B">
+                        <block type="variables_get">
+                          <title name="VAR">b</title>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

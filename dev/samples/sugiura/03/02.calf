@@ -1,0 +1,28 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;03-2&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;input type="button" value="Click me!" onclick="button_click()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="14" y="6">
+      <mutation></mutation>
+      <title name="NAME">button_click</title>
+      <statement name="STACK">
+        <block type="myDocument_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <title name="TEXT">ボタンが押されました。</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
