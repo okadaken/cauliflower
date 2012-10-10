@@ -7,9 +7,9 @@
 	&lt;/head&gt;
 	&lt;body&gt;
 		&lt;form&gt;
-			&lt;input type="text" id="a" size="5" style="float:left;" onchange="updateAnswer()" /&gt;
+			&lt;input type="text" id="a" size="5" style="float:left;" onchange="update_answer()" /&gt;
 			&lt;div style="float:left;"&gt;+&lt;/div&gt;
-			&lt;input type="text" id="b" size="5" style="float:left;" onchange="updateAnswer()" /&gt;
+			&lt;input type="text" id="b" size="5" style="float:left;" onchange="update_answer()" /&gt;
 			&lt;div style="float:left;"&gt;=&lt;/div&gt;
 			&lt;input type="text" id="sum" size="5" /&gt;
 		&lt;/form&gt;
@@ -20,7 +20,7 @@
   <blocks>
     <block type="procedures_defnoreturn" x="-7" y="-1">
       <mutation></mutation>
-      <title name="NAME">updateAnswer</title>
+      <title name="NAME">update_answer</title>
       <statement name="STACK">
         <block type="variables_set" inline="false">
           <title name="VAR">a</title>
