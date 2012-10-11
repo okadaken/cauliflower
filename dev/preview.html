@@ -82,9 +82,13 @@
           primary: 'ui-icon-circle-arrow-s'
         }
       }).click(function() {
+        var contents = SourcePreview.getValue();
+        if (window.opener.convertIndent()) {
+          contents = contents.replace(/\t/g, '    ');
+        }
         saveToFileForPreviewWindow({
           filename: getExportFileName(),
-          contents: SourcePreview.getValue()
+          contents: contents
         });
       });
     }

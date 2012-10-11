@@ -22,8 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.0';
-var build = '[Build:2012100501, Blockly:r419]'
+var version = '1.1';
+var build = '[Build:2012101101, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -269,6 +269,9 @@ function initializeHelp() {
       cls: 'jquery-safari-checkbox'
     });
     $('#blocklyscale').checkbox({
+      cls: 'jquery-safari-checkbox'
+    });
+    $('#indentspace').checkbox({
       cls: 'jquery-safari-checkbox'
     });
     restoreDevSettings();
@@ -1373,6 +1376,10 @@ function getBlocklyScale() {
   return blocklyscale;
 }
 
+function convertIndent() {
+  return $('#indentspace').attr('checked');
+}
+
 function backupDevSettings() {
   if ('localStorage' in window) {
     //ジョーカー設定
@@ -1394,6 +1401,13 @@ function backupDevSettings() {
       window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.2');
     } else {
       window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.0');
+    }
+    
+    //HTMLインデント設定設定
+    if ($('#indentspace').attr('checked')) {
+      window.localStorage.setItem('cauliflower_dev_indentspace', 'on');
+    } else {
+      window.localStorage.setItem('cauliflower_dev_indentspace', 'off');
     }
   }
 }
@@ -1431,6 +1445,17 @@ function restoreDevSettings() {
       blocklyscale = 1.2;
       $('#blocklyscale').attr('checked', true);
       window.localStorage.setItem('cauliflower_dev_blocklyscale', '1.2');
+    }
+    
+    //HTMLエクスポートのインデント設定
+    if (window.localStorage.cauliflower_dev_indentspace) {
+      if (window.localStorage.cauliflower_dev_indentspace == 'on') {
+        $('#indentspace').attr('checked', true);
+      } else {
+        $('#indentspace').attr('checked', false);
+      }
+    } else {
+      $('#indentspace').attr('checked', true);
     }
   }
 }
