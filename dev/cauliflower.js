@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.1';
-var build = '[Build:2012101101, Blockly:r419]'
+var build = '[Build:2012101401, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
