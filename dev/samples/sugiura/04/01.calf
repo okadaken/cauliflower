@@ -9,7 +9,7 @@
 		&lt;form&gt;
 			数値を入力してください: 
 			&lt;input id="number" size="10" type="text"&gt;
-			&lt;input value="OK" type="button" onclick="changeFormColor()"&gt;
+			&lt;input value="OK" type="button" onclick="change_form_color()"&gt;
 		&lt;/form&gt;
 	&lt;/body&gt;
 &lt;/html&gt;
@@ -18,7 +18,7 @@
   <blocks>
     <block type="procedures_defnoreturn" x="28" y="19">
       <mutation></mutation>
-      <title name="NAME">changeFormColor</title>
+      <title name="NAME">change_form_color</title>
       <statement name="STACK">
         <block type="variables_set" inline="false">
           <title name="VAR">num</title>
