@@ -1,0 +1,69 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;03-3&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;input id="number" size="10" type="text"&gt;
+		&lt;input value="数字かチェックする" onclick="check_number()" type="button"&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="0" y="-22">
+      <mutation></mutation>
+      <title name="NAME">check_number</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">num</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">number</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="controls_if" inline="false">
+              <mutation else="1"></mutation>
+              <value name="IF0">
+                <block type="logic_isnan" inline="true">
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <title name="VAR">num</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <statement name="DO0">
+                <block type="myDocument_print" inline="false">
+                  <value name="TEXT">
+                    <block type="text">
+                      <title name="TEXT">数値ではありません</title>
+                    </block>
+                  </value>
+                </block>
+              </statement>
+              <statement name="ELSE">
+                <block type="myDocument_print" inline="false">
+                  <value name="TEXT">
+                    <block type="text">
+                      <title name="TEXT">数値です</title>
+                    </block>
+                  </value>
+                </block>
+              </statement>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
