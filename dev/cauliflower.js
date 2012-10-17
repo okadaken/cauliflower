@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.1';
-var build = '[Build:2012101401, Blockly:r419]'
+var build = '[Build:2012101701, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -70,7 +70,9 @@ function initializeWindowTitle() {
 function initializeTabs() {
   $('#tabs').tabs({
     cookie: {
-      expires: 3
+      name: 'tabs',
+      expires: 3,
+      path: '/'
     },
     select: function(event, ui) {
       if (HTMLEditor != null) {
@@ -110,7 +112,9 @@ function initializeTabs() {
   
   $('#tab-htmlsub').tabs({
     cookie: {
-      expires: 3
+      name: 'tab-htmlsub',
+      expires: 3,
+      path: '/'
     }
   });
 }
@@ -121,7 +125,9 @@ function initializeHTMLReferenceAccordion() {
     $('#tab-htmlsub-ref').html(data);
     $('#tab-htmlsub-ref-tab').tabs({
       cookie: {
-        expires: 3
+        name: 'tab-htmlsub-ref-tab',
+        expires: 3,
+        path: '/'
       }
     });
     $('#tab-htmlsub-ref-tab-1').accordion({
