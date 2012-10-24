@@ -72,7 +72,7 @@ Blockly.JavaScript.controls_for = function() {
     // Both arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
     code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
-        variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
+        variable0 + (up ? ' < ' : ' > ') + (up ?(parseFloat(argument1)+1):(parseFloat(argument1)-1)) + '; ' +
         variable0 + (up ? '++' : '--') + ') {\n' +
         branch0 + '}\n';
   } else {
