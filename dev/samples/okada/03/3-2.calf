@@ -1,0 +1,85 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;3-2&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div
+			id="target"
+			onmouseover="mouseOver()"
+			onmouseout="mouseOut()"
+			onclick="myclick()"&gt;ここにマウスを当てて下さい&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-281" y="18">
+      <mutation></mutation>
+      <title name="NAME">mouseOver</title>
+      <statement name="STACK">
+        <block type="myDocument_set" inline="false">
+          <title name="TARGET">target</title>
+          <title name="ACTION">.style.backgroundColor</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">black</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_set" inline="false">
+              <title name="TARGET">target</title>
+              <title name="ACTION">.style.color</title>
+              <value name="VALUE">
+                <block type="text">
+                  <title name="TEXT">red</title>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+    <block type="procedures_defnoreturn" x="-277" y="143">
+      <mutation></mutation>
+      <title name="NAME">mouseOut</title>
+      <statement name="STACK">
+        <block type="myDocument_set" inline="false">
+          <title name="TARGET">target</title>
+          <title name="ACTION">.style.backgroundColor</title>
+          <value name="VALUE">
+            <block type="text">
+              <title name="TEXT">white</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_set" inline="false">
+              <title name="TARGET">target</title>
+              <title name="ACTION">.style.color</title>
+              <value name="VALUE">
+                <block type="text">
+                  <title name="TEXT">black</title>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+    <block type="procedures_defnoreturn" x="-272" y="262">
+      <mutation></mutation>
+      <title name="NAME">myclick</title>
+      <statement name="STACK">
+        <block type="myDocument_print" inline="false">
+          <value name="TEXT">
+            <block type="text">
+              <title name="TEXT">クリックしましたね？</title>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

@@ -1,0 +1,73 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;3-3&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		名前：&lt;input type="text" id="name"/&gt;&lt;br/&gt;
+		学籍番号&lt;input type="text" id="studentID"/&gt;&lt;br/&gt;
+		&lt;input type="button" value="OK" onclick="showName()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-235" y="-17">
+      <mutation></mutation>
+      <title name="NAME">showName</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">name</title>
+          <value name="VALUE">
+            <block type="myDocument_get">
+              <title name="TARGET">name</title>
+              <title name="ATTRIBUTE">.value</title>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">studentID</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">studentID</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_print" inline="false">
+                  <value name="TEXT">
+                    <block type="text_join" inline="false">
+                      <mutation items="4"></mutation>
+                      <value name="ADD0">
+                        <block type="variables_get">
+                          <title name="VAR">name</title>
+                        </block>
+                      </value>
+                      <value name="ADD1">
+                        <block type="text">
+                          <title name="TEXT">さんの学籍番号は</title>
+                        </block>
+                      </value>
+                      <value name="ADD2">
+                        <block type="variables_get">
+                          <title name="VAR">studentID</title>
+                        </block>
+                      </value>
+                      <value name="ADD3">
+                        <block type="text">
+                          <title name="TEXT">です。</title>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

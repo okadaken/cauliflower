@@ -1,0 +1,118 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;2-2&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="myDocument_direct" x="-48" y="-135">
+      <statement name="DO">
+        <block type="variables_set" inline="false">
+          <title name="VAR">weight</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_prompt">
+                  <title name="TEXT">体重を入力してください</title>
+                  <title name="TYPE">TEXT</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">height_cm</title>
+              <value name="VALUE">
+                <block type="math_parse" inline="true">
+                  <title name="TYPE">INT</title>
+                  <value name="VALUE">
+                    <block type="myDocument_prompt">
+                      <title name="TEXT">身長を入力して下さい</title>
+                      <title name="TYPE">TEXT</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <next>
+                <block type="variables_set" inline="false">
+                  <title name="VAR">height_m</title>
+                  <value name="VALUE">
+                    <block type="math_arithmetic" inline="true">
+                      <title name="OP">DIVIDE</title>
+                      <value name="A">
+                        <block type="variables_get">
+                          <title name="VAR">height_cm</title>
+                        </block>
+                      </value>
+                      <value name="B">
+                        <block type="math_number">
+                          <title name="NUM">100</title>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="variables_set" inline="false">
+                      <title name="VAR">bmi</title>
+                      <value name="VALUE">
+                        <block type="math_arithmetic" inline="true">
+                          <title name="OP">DIVIDE</title>
+                          <value name="A">
+                            <block type="variables_get">
+                              <title name="VAR">weight</title>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="math_arithmetic" inline="true">
+                              <title name="OP">MULTIPLY</title>
+                              <value name="A">
+                                <block type="variables_get">
+                                  <title name="VAR">height_m</title>
+                                </block>
+                              </value>
+                              <value name="B">
+                                <block type="variables_get">
+                                  <title name="VAR">height_m</title>
+                                </block>
+                              </value>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                      <next>
+                        <block type="myDocument_print" inline="false">
+                          <value name="TEXT">
+                            <block type="text_join" inline="false">
+                              <mutation items="2"></mutation>
+                              <value name="ADD0">
+                                <block type="text">
+                                  <title name="TEXT">ＢＭＩ：</title>
+                                </block>
+                              </value>
+                              <value name="ADD1">
+                                <block type="variables_get">
+                                  <title name="VAR">bmi</title>
+                                </block>
+                              </value>
+                            </block>
+                          </value>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

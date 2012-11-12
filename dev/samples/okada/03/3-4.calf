@@ -1,0 +1,79 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;3-4&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;input type="text" id="left" size="2" /&gt;
+		＋
+		&lt;input type="text" id="right" size="2" /&gt;
+		＝
+		&lt;input type="text" id="answer" size="2" /&gt;
+		&lt;br/&gt;
+		&lt;input type="button" value="計算" onclick="calc()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-267" y="-139">
+      <mutation></mutation>
+      <title name="NAME">calc</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">left</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">left</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">right</title>
+              <value name="VALUE">
+                <block type="math_parse" inline="true">
+                  <title name="TYPE">INT</title>
+                  <value name="VALUE">
+                    <block type="myDocument_get">
+                      <title name="TARGET">right</title>
+                      <title name="ATTRIBUTE">.value</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_set" inline="false">
+                  <title name="TARGET">answer</title>
+                  <title name="ACTION">.value</title>
+                  <value name="VALUE">
+                    <block type="math_arithmetic" inline="true">
+                      <title name="OP">ADD</title>
+                      <value name="A">
+                        <block type="variables_get">
+                          <title name="VAR">left</title>
+                        </block>
+                      </value>
+                      <value name="B">
+                        <block type="variables_get">
+                          <title name="VAR">right</title>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

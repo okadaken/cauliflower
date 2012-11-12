@@ -1,0 +1,55 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;3-1&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;input type="button" value="Click me!" onclick="push()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="1" y="-42">
+      <mutation></mutation>
+      <title name="NAME">push</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">x</title>
+          <value name="VALUE">
+            <block type="myDocument_prompt">
+              <title name="TEXT">名前を入力して下さい</title>
+              <title name="TYPE">TEXT</title>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_print" inline="false">
+              <value name="TEXT">
+                <block type="text_join" inline="false">
+                  <mutation items="3"></mutation>
+                  <value name="ADD0">
+                    <block type="text">
+                      <title name="TEXT">こんにちは、</title>
+                    </block>
+                  </value>
+                  <value name="ADD1">
+                    <block type="variables_get">
+                      <title name="VAR">x</title>
+                    </block>
+                  </value>
+                  <value name="ADD2">
+                    <block type="text">
+                      <title name="TEXT">さん</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

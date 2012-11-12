@@ -1,0 +1,124 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;3-5&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		半径&lt;input type="text" id="hankei" size="2" /&gt;&lt;br/&gt;
+		直径&lt;input type="text" id="tyokkei" size="2" /&gt;&lt;br/&gt;
+		円周&lt;input type="text" id="ensyuu" size="2" /&gt;&lt;br/&gt;
+		面積&lt;input type="text" id="mennseki" size="2" /&gt;&lt;br/&gt;
+		&lt;input type="button" value="計算" onclick="calc()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  
+  
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-263" y="-178">
+      <mutation></mutation>
+      <title name="NAME">calc</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">hankei</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">hankei</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="myDocument_set" inline="false">
+              <title name="TARGET">tyokkei</title>
+              <title name="ACTION">.value</title>
+              <value name="VALUE">
+                <block type="math_arithmetic" inline="true">
+                  <title name="OP">ADD</title>
+                  <value name="A">
+                    <block type="variables_get">
+                      <title name="VAR">hankei</title>
+                    </block>
+                  </value>
+                  <value name="B">
+                    <block type="variables_get">
+                      <title name="VAR">hankei</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_set" inline="false">
+                  <title name="TARGET">ensyuu</title>
+                  <title name="ACTION">.value</title>
+                  <value name="VALUE">
+                    <block type="math_arithmetic" inline="true">
+                      <title name="OP">MULTIPLY</title>
+                      <value name="A">
+                        <block type="math_const">
+                          <title name="TYPE">PI</title>
+                        </block>
+                      </value>
+                      <value name="B">
+                        <block type="math_arithmetic" inline="true">
+                          <title name="OP">ADD</title>
+                          <value name="A">
+                            <block type="variables_get">
+                              <title name="VAR">hankei</title>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="variables_get">
+                              <title name="VAR">hankei</title>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                    </block>
+                  </value>
+                  <next>
+                    <block type="myDocument_set" inline="false">
+                      <title name="TARGET">mennseki</title>
+                      <title name="ACTION">.value</title>
+                      <value name="VALUE">
+                        <block type="math_arithmetic" inline="true">
+                          <title name="OP">MULTIPLY</title>
+                          <value name="A">
+                            <block type="math_arithmetic" inline="true">
+                              <title name="OP">MULTIPLY</title>
+                              <value name="A">
+                                <block type="variables_get">
+                                  <title name="VAR">hankei</title>
+                                </block>
+                              </value>
+                              <value name="B">
+                                <block type="variables_get">
+                                  <title name="VAR">hankei</title>
+                                </block>
+                              </value>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="math_const">
+                              <title name="TYPE">PI</title>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
