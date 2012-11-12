@@ -6,18 +6,19 @@
 		&lt;title&gt;3-1&lt;/title&gt;
 	&lt;/head&gt;
 	&lt;body&gt;
-		&lt;input type="button" value="Click me!" onclick="push()" /&gt;
+		&lt;input type="button" value="Click me!" onclick="hello()" /&gt;
 	&lt;/body&gt;
 &lt;/html&gt;
+  
   
   </html>
   <blocks>
     <block type="procedures_defnoreturn" x="1" y="-42">
       <mutation></mutation>
-      <title name="NAME">push</title>
+      <title name="NAME">hello</title>
       <statement name="STACK">
         <block type="variables_set" inline="false">
-          <title name="VAR">x</title>
+          <title name="VAR">name</title>
           <value name="VALUE">
             <block type="myDocument_prompt">
               <title name="TEXT">名前を入力して下さい</title>
@@ -36,7 +37,7 @@
                   </value>
                   <value name="ADD1">
                     <block type="variables_get">
-                      <title name="VAR">x</title>
+                      <title name="VAR">name</title>
                     </block>
                   </value>
                   <value name="ADD2">
