@@ -1,0 +1,111 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;8-5&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;!-- ここから下にHTMLの内容を書きます --&gt;
+		検索ワード：&lt;input type="text" id="target" /&gt;
+		&lt;br/&gt;
+		&lt;input type="button" value="検索する" onclick="search()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="procedures_defnoreturn" x="-33" y="41">
+      <mutation></mutation>
+      <title name="NAME">search</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">words</title>
+          <value name="VALUE">
+            <block type="lists_create_with" inline="false">
+              <mutation items="4"></mutation>
+              <value name="ADD0">
+                <block type="text">
+                  <title name="TEXT">佐藤</title>
+                </block>
+              </value>
+              <value name="ADD1">
+                <block type="text">
+                  <title name="TEXT">田中</title>
+                </block>
+              </value>
+              <value name="ADD2">
+                <block type="text">
+                  <title name="TEXT">渡辺</title>
+                </block>
+              </value>
+              <value name="ADD3">
+                <block type="text">
+                  <title name="TEXT">鈴木</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">target</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">target</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+              <next>
+                <block type="controls_for" inline="false">
+                  <variable data="i" name="VAR"></variable>
+                  <value name="FROM">
+                    <block type="math_number">
+                      <title name="NUM">0</title>
+                    </block>
+                  </value>
+                  <value name="TO">
+                    <block type="math_number">
+                      <title name="NUM">4</title>
+                    </block>
+                  </value>
+                  <statement name="DO">
+                    <block type="controls_if" inline="false">
+                      <value name="IF0">
+                        <block type="logic_compare" inline="true">
+                          <title name="OP">EQ</title>
+                          <value name="A">
+                            <block type="lists_getIndex" inline="true">
+                              <title name="VALUE">words</title>
+                              <value name="AT">
+                                <block type="variables_get">
+                                  <title name="VAR">i</title>
+                                </block>
+                              </value>
+                            </block>
+                          </value>
+                          <value name="B">
+                            <block type="variables_get">
+                              <title name="VAR">target</title>
+                            </block>
+                          </value>
+                        </block>
+                      </value>
+                      <statement name="DO0">
+                        <block type="myDocument_print" inline="false">
+                          <value name="TEXT">
+                            <block type="text">
+                              <title name="TEXT">見つかりました！</title>
+                            </block>
+                          </value>
+                        </block>
+                      </statement>
+                    </block>
+                  </statement>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>

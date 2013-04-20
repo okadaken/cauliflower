@@ -1,0 +1,97 @@
+<cauliflower version="1.0">
+  <html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta charset="UTF-8"/&gt;
+		&lt;title&gt;8-7&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		消費税計算機&lt;br/&gt;
+		価格：&lt;input type="text" id="price" size="6" /&gt;&lt;br/&gt;
+		税額：&lt;input type="text" id="tax" size="6" /&gt;&lt;br/&gt;
+		&lt;input type="button" value="消費税計算" onclick="calc()" /&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+  </html>
+  <blocks>
+    <block type="procedures_defreturn" inline="false" x="-53" y="188">
+      <mutation>
+        <arg name="p"></arg>
+      </mutation>
+      <title name="NAME">calcTax</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">t</title>
+          <value name="VALUE">
+            <block type="math_arithmetic" inline="true">
+              <title name="OP">MULTIPLY</title>
+              <value name="A">
+                <block type="variables_get">
+                  <title name="VAR">p</title>
+                </block>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <title name="NUM">0.05</title>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+      </statement>
+      <value name="RETURN">
+        <block type="variables_get">
+          <title name="VAR">t</title>
+        </block>
+      </value>
+    </block>
+    <block type="procedures_defnoreturn" x="-54" y="29">
+      <mutation></mutation>
+      <title name="NAME">calc</title>
+      <statement name="STACK">
+        <block type="variables_set" inline="false">
+          <title name="VAR">price</title>
+          <value name="VALUE">
+            <block type="math_parse" inline="true">
+              <title name="TYPE">INT</title>
+              <value name="VALUE">
+                <block type="myDocument_get">
+                  <title name="TARGET">price</title>
+                  <title name="ATTRIBUTE">.value</title>
+                </block>
+              </value>
+            </block>
+          </value>
+          <next>
+            <block type="variables_set" inline="false">
+              <title name="VAR">tax</title>
+              <value name="VALUE">
+                <block type="procedures_callreturn" inline="false">
+                  <mutation name="calcTax">
+                    <arg name="p"></arg>
+                  </mutation>
+                  <value name="ARG0">
+                    <block type="variables_get">
+                      <title name="VAR">price</title>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <next>
+                <block type="myDocument_set" inline="false">
+                  <title name="TARGET">tax</title>
+                  <title name="ACTION">.value</title>
+                  <value name="VALUE">
+                    <block type="variables_get">
+                      <title name="VAR">tax</title>
+                    </block>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </next>
+        </block>
+      </statement>
+    </block>
+  </blocks>
+</cauliflower>
