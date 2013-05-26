@@ -341,6 +341,24 @@ Blockly.Procedures.dropdownCreate = function( initValue ) {
   return options;
 };
 
+Blockly.Procedures.dropdownCreate2 = function(initValue) {
+
+  var funcList = Blockly.Procedures.allProcedures();
+  
+  //funcList.sort(Blockly.caseInsensitiveComparator);
+  
+  var options = [];
+  for (var x = 0; x < funcList.length; x++) {
+      if (funcList[0][x] != undefined) {
+          options[x] = [funcList[0][x][0], funcList[0][x][0]];
+      }
+  }
+  if(options.length==0){
+      options[0] = [Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE,Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE];
+  }
+  return options;
+};
+
 Blockly.Procedures.dropdownChange = function(text) {
   function promptName(promptText, defaultText) {
     Blockly.hideChaff();

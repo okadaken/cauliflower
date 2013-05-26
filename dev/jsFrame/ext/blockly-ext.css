@@ -122,6 +122,20 @@
     font-size: 13px;
 }
 
+/* Web API */
+.webapi > rect {
+    fill: #708090;
+}
+
+.webapi-catmaker {
+    fill: #708090;
+}
+
+.webapi {
+    font-weight: bold;
+    font-size: 13px;
+}
+
 /* ジョーカー */
 .joker > rect {
     fill: #000000;

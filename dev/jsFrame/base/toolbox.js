@@ -202,9 +202,9 @@ Blockly.Toolbox.redraw = function() {
   }
   
   //カテゴリの位置順番調整（最後に配列とオブジェクトを配置する）
-  var sliceIndex = 2;
+  var sliceIndex = 3;
   if(parent.showJocker()){  //ジョーカーを最後にするため
-        sliceIndex = 3;
+        sliceIndex = 4;
   }
 
   if (Blockly.Language.variables_get || Blockly.Language.variables_set) {

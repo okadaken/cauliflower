@@ -40,6 +40,14 @@
     .console-msg-line-div {
         font-size: 12px;
         padding: 3px 0px;
+        white-space: pre; /* CSS 2.0 */
+        white-space: pre-wrap; /* CSS 2.1 */
+        white-space: pre-line; /* CSS 3.0 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        white-space: -moz-pre-wrap; /* Mozilla */
+        white-space: -hp-pre-wrap; /* HP Printers */
+        word-wrap: break-word; /* IE 5+ */
     }
     
     .console-msg-error {
@@ -196,6 +204,11 @@
         pageTitle = titles[0].firstChild.nodeValue;
         $('title').text(pageTitle);
       }
+      
+      if (window.opener.useWebAPIBlocks()) {
+        var jquery = '\t\t<script type="text/javascript" src="http:\/\/ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>\n';
+        codeForView = codeForView.replace('\t</head>', jquery + '\t</head>' + '\n');
+      }
       SourcePreview.setValue(codeForView);
       
       //実際に動かすコードを作る   
@@ -221,6 +234,10 @@
       var targetCode = '<script type="text/javascript">\n';
       var codeForExec = codeForView.replace(targetCode, targetCode + onerrorHandler + consolelog + '\n');
       
+      if (window.opener.useWebAPIBlocks()) {
+        var jquery = '\t\t<script type="text/javascript" src="http:\/\/ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>\n';
+        codeForExec = codeForExec.replace('\t</head>', jquery + '\t</head>' + '\n');
+      }
       updateHTMLPreview(codeForExec);
     });
     

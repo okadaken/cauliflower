@@ -465,6 +465,13 @@ Blockly.LANG_OBJECT_DATE_LOCALESTRING = 'オブジェクトの文字列表現';
 Blockly.LANG_OBJECT_DATE_OBJECT_TOOLTIP = '現在の日付と時刻でDateオブジェクトを生成します。';
 Blockly.LANG_OBJECT_DATE_LOCALESTRING_TOOLTIP = '現地のタイムゾーンと現地の日付フォーマットを使って\nDateを文字列に変換した値を取得します。';
 
+//Web API
+Blockly.LANG_CATEGORY_WEB_API = 'Web API';
+Blockly.LANG_WEB_API_GET_JSON = 'JSONを取得する';
+Blockly.LANG_WEB_API_CALLBACK = 'コールバック関数';
+Blockly.LANG_WEB_API_URL = 'URL';
+Blockly.LANG_WEB_API_PARAM = 'パラメータ';
+Blockly.LANG_WEB_API_TOOLTIP ='指定されたURLからJSONを取得し、\n取得が終了するとコールバックに指定された関数を呼び出します。';
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

@@ -215,6 +215,11 @@ Blockly.FieldDropdown.prototype.getValue = function() {
       return options[x][1];
     }
   }
+  
+  if(this.sourceBlock_.categoryID=='webapi' && options.length>0){
+      return options[0][1];
+  }
+  
   throw '"' + selectedText + '" not valid in dropdown.';
 };
 
