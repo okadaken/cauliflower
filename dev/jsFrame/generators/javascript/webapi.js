@@ -31,7 +31,7 @@ Blockly.JavaScript.webapi_getjson = function() {
   if (param.length == 0) {
     var code = 'jQuery.getJSON(' + url + ', ' + callback + ');\n';
   } else {
-    var code = 'jQuery.getJSON(' + url + ', ' + param + ', ' + callback + ');\m';
+    var code = 'jQuery.getJSON(' + url + ', ' + param + ', ' + callback + ');\n';
   }
   return code;
 };
