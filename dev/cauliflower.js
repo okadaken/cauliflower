@@ -964,6 +964,9 @@ function getAllCode(doc) {
   //titleが空で<title/>となるとbodyがレンダリングされない
   code = code.replace(/<title\/>/g, '<title></title>');
   
+  //divが空で<div/>となると、getElementByIdでエラーになる
+   code = code.replace(/<div(.*)\/>/g, '<div$1></div>');
+  
   //コメントアウトしていたEntityを戻す
   code = uncommentHtmlEntity(code);
   
