@@ -53,7 +53,7 @@ Blockly.JavaScript.objects_get = function() {
   var variable = this.getTitleValue('VAR');
   var property = this.getTitleValue('PROPERTY') || '';
   
-  if (property.length != 0 && !property.match(/^[a-z][a-zA-Z0-9.]*$/)) {
+  if (property.length != 0 && !property.match(/^[a-z][a-zA-Z0-9._]*$/)) {
     //プロパティ名としてそのまま記述できない場合
     property = '[\'' + property + '\']';
   } else if (property.length != 0) {
