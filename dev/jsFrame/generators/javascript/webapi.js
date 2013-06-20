@@ -35,3 +35,78 @@ Blockly.JavaScript.webapi_getjson = function() {
   }
   return code;
 };
+
+Blockly.JavaScript.webapi_show_gmap = function() {
+  var id = Blockly.JavaScript.valueToCode(this, 'ID', Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  var option = Blockly.JavaScript.valueToCode(this, 'OPT', Blockly.JavaScript.ORDER_NONE) || 'null';
+  var code = 'new google.maps.Map(' + id + ', ' + option + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript.webapi_map_latlng = function() {
+  var lat = Blockly.JavaScript.valueToCode(this, 'LAT', Blockly.JavaScript.ORDER_COMMA) || '0';
+  var lng = Blockly.JavaScript.valueToCode(this, 'LNG', Blockly.JavaScript.ORDER_COMMA) || '0';
+  var code = 'new google.maps.LatLng(' + lat + ', ' + lng + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript.webapi_map_marker = function() {
+  var map = Blockly.JavaScript.valueToCode(this, 'MAP', Blockly.JavaScript.ORDER_NONE) || null;
+  var latlng = Blockly.JavaScript.valueToCode(this, 'LATLNG', Blockly.JavaScript.ORDER_NONE) || null;
+  var title = Blockly.JavaScript.valueToCode(this, 'TITLE', Blockly.JavaScript.ORDER_NONE) || null;
+  if (title == null) {
+    var code = 'new google.maps.Marker({' +
+    'position:' +
+    latlng +
+    ',' +
+    'map:' +
+    map +
+    '})'
+  } else {
+    var code = 'new google.maps.Marker({' +
+    'position:' +
+    latlng +
+    ',' +
+    'map:' +
+    map +
+    ',' +
+    'title:' +
+    title +
+    '})'
+  }
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript.webapi_map_set_center = function() {
+  var map = Blockly.JavaScript.valueToCode(this, 'MAP', Blockly.JavaScript.ORDER_NONE) || null;
+  var center = Blockly.JavaScript.valueToCode(this, 'CENTER', Blockly.JavaScript.ORDER_NONE) || null;
+  var code = map + '.setCenter(' +
+  center +
+  ');\n'
+  return code;
+};
+
+Blockly.JavaScript.webapi_map_set_info_window = function() {
+  var marker = Blockly.JavaScript.valueToCode(this, 'MARKER', Blockly.JavaScript.ORDER_NONE) || null;
+  var html = Blockly.JavaScript.valueToCode(this, 'HTML', Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  var code = "(function(target, content) {" +
+  "google.maps.event.addListener(target, 'click', function(event) {" +
+  " new google.maps.InfoWindow({" +
+  "content:content" +
+  "}).open(target.getMap(), target);" +
+  "});" +
+  "})(" +
+  marker +
+  ", " +
+  html +
+  ");\n";
+  +"}";
+  return code;
+};
+
+Blockly.JavaScript.webapi_map_info_window = function() {
+  var html = Blockly.JavaScript.valueToCode(this, 'HTML', Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  var code = 'new google.maps.InfoWindow({content:' + html + '})';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+

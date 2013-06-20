@@ -22,8 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.2';
-var build = '[Build:2013061301, Blockly:r419]'
+var version = '1.3';
+var build = '[Build:2013062001, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -1583,6 +1583,16 @@ function useWebAPIBlocks() {
   var blocks = Blockly.mainWorkspace.getAllBlocks(false);
   for (var x = 0; x < blocks.length; x++) {
     if (blocks[x].categoryID == 'webapi') {
+      return true;
+    }
+  }
+  return false;
+}
+
+function useGoogleMapBlocks() {
+  var blocks = Blockly.mainWorkspace.getAllBlocks(false);
+  for (var x = 0; x < blocks.length; x++) {
+    if (blocks[x].categoryID == 'gmap') {
       return true;
     }
   }

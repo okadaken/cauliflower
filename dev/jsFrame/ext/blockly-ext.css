@@ -136,6 +136,20 @@
     font-size: 13px;
 }
 
+/* Web API */
+.gmap > rect {
+    fill: #708090;
+}
+
+.gmap-catmaker {
+    fill: #708090;
+}
+
+.gmap {
+    font-weight: bold;
+    font-size: 13px;
+}
+
 /* ジョーカー */
 .joker > rect {
     fill: #000000;
