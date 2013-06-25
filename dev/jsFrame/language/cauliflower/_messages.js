@@ -460,11 +460,23 @@ Blockly.LANG_OBJECT_SET2_3 = 'を代入する';
 Blockly.LANG_OBJECT_SET_TOOLTIP_1 = '変数"%1"に格納されているオブジェクトの\n指定したプロパティの値を設定します。';
 
 //日付
+Blockly.LANG_CATEGORY_DATE = "日付";
 Blockly.LANG_DATE = '現在の日付';
 Blockly.LANG_DATE_OBJECT = 'オブジェクト';
 Blockly.LANG_DATE_LOCALESTRING = 'オブジェクトの文字列表現';
 Blockly.LANG_DATE_OBJECT_TOOLTIP = '現在の日付と時刻でDateオブジェクトを生成します。';
 Blockly.LANG_DATE_LOCALESTRING_TOOLTIP = '現地のタイムゾーンと現地の日付フォーマットを使って\nDateを文字列に変換した値を取得します。';
+
+Blockly.LANG_DATE_PROPERTIES_TITLE = '現在の';
+Blockly.LANG_DATE_YEAR = '年';
+Blockly.LANG_DATE_MONTH = '月';
+Blockly.LANG_DATE_DATE = '日';
+Blockly.LANG_DATE_DAY = '曜日';
+Blockly.LANG_DATE_HOUR = '時';
+Blockly.LANG_DATE_MINUTE = '分';
+Blockly.LANG_DATE_SECOND = '秒';
+Blockly.LANG_DATE_MS = 'ミリ秒';
+
 Blockly.LANG_DATE_YEAR_TOOLTIP = '現在の年を取得します';
 Blockly.LANG_DATE_MONTH_TOOLTIP = '現在の月を取得します';
 Blockly.LANG_DATE_DATE_TOOLTIP = '現在の日を取得します';
@@ -474,13 +486,43 @@ Blockly.LANG_DATE_MINUTE_TOOLTIP = '現在の分を取得します';
 Blockly.LANG_DATE_SECOND_TOOLTIP = '現在の秒を取得します';
 Blockly.LANG_DATE_MS_TOOLTIP = '現在のミリ秒を取得します';
 
+Blockly.LANG_DATE_TIME_TITLE = "1970/1/1 0:00からの経過ミリ秒";
+Blockly.LANG_DATE_TIME_TOOLTIP = '1970年1月1日午前0時からのミリ秒を参照します。';
+
 //Web API
 Blockly.LANG_CATEGORY_WEB_API = 'Web API';
 Blockly.LANG_WEB_API_GET_JSON = 'JSONを取得する';
+Blockly.LANG_WEB_API_GET_JSON2 = 'XMLをJSONに変換して取得する'
 Blockly.LANG_WEB_API_CALLBACK = 'コールバック関数';
 Blockly.LANG_WEB_API_URL = 'URL';
 Blockly.LANG_WEB_API_PARAM = 'パラメータ';
 Blockly.LANG_WEB_API_TOOLTIP = '指定されたURLからJSONを取得し、\n取得が終了するとコールバックに指定された関数を呼び出します。';
+Blockly.LANG_WEB_API_TOOLTIP2 = '指定されたURLからXMLを取得し、JSONに変換します、\n取得が終了するとコールバックに指定された関数を呼び出します。';
+
+Blockly.LANG_WEB_API_MAP_CREATE = '地図を作る';
+Blockly.LANG_WEB_API_MAP_HTMLELEM = '表示先のHTML要素';
+Blockly.LANG_WEB_API_MAP_OPTION = 'オプション';
+Blockly.LANG_WEB_API_MAP_TOOLTIP = 'Google Mapを生成し、指定された表示先、\nオプションで表示を行います。';
+
+Blockly.LANG_WEB_API_MAP_LATLNG_TITLE = '地図用の座標を作る';
+Blockly.LANG_WEB_API_MAP_LAT = '緯度';
+Blockly.LANG_WEB_API_MAP_LNG = '経度';
+Blockly.LANG_WEB_API_MAP_LATLNG_TOOLTIP = "Google Mapで利用するための\n緯度経度を指定したオブジェクトを生成します。";
+
+Blockly.LANG_WEB_API_MAP_MARKER_TITLE = 'マーカーを作る';
+Blockly.LANG_WEB_API_MAP_MAP = '地図';
+Blockly.LANG_WEB_API_MAP_LATLNG = '座標';
+Blockly.LANG_WEB_API_MAP_TITLE = 'タイトル';
+Blockly.LANG_WEB_API_MAP_MARKER_TOOLTIP = "Google Mapのマーカーを生成して地図に配置します。";
+
+Blockly.LANG_WEB_API_MAP_CENTER_TITLE = '地図の中心を設定する';
+Blockly.LANG_WEB_API_MAP_CENTER_LATLNG = '中心の座標';
+Blockly.LANG_WEB_API_MAP_CENTER_TOOLTIP = "地図の中心を指定された座標に変更します。";
+
+Blockly.LANG_WEB_API_MAP_INFO_TITLE = '情報ウィンドウを設定する';
+Blockly.LANG_WEB_API_MAP_INFO_MARKER = '対象のマーカー';
+Blockly.LANG_WEB_API_MAP_INFO_CONTENT = "内容"
+Blockly.LANG_WEB_API_MAP_INFO_TOOLTIP = "指定されたマーカーに情報ウィンドウを設定します。";
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

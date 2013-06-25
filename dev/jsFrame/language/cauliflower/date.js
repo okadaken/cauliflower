@@ -1,10 +1,28 @@
+/**
+ * Visual Blocks Language
+ *
+ * Copyright 2012 Google Inc.
+ * http://code.google.com/p/blockly/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var dateColor = '#c71585';
 
-var dateColor = '#c71585';//'#191970';
 if (!Blockly.Language) 
   Blockly.Language = {};
 
 Blockly.Language.date_object = {
-  categoryName: "日付",
+  categoryName: Blockly.LANG_CATEGORY_DATE,
   categoryID: 'date',
   init: function() {
     this.setColour(dateColor);
@@ -27,11 +45,11 @@ Blockly.Language.date_object.TOOLTIPS = {
 };
 
 Blockly.Language.date_properties = {
-  categoryName: "日付",
+  categoryName: Blockly.LANG_CATEGORY_DATE,
   categoryID: 'date',
   init: function() {
     this.setColour(dateColor);
-    this.appendTitle("現在の");
+    this.appendTitle(Blockly.LANG_DATE_PROPERTIES_TITLE);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'TYPE');
     var thisBlock = this;
@@ -43,7 +61,7 @@ Blockly.Language.date_properties = {
   }
 };
 
-Blockly.Language.date_properties.OPERATORS = [['年', 'YEAR'], ['月', 'MONTH'], ['日', 'DATE'], ['曜日', 'DAY'], ['時', 'HOUR'], ['分', 'MINUTE'], ['秒', 'SECOND'], ['ミリ秒', 'MS']];
+Blockly.Language.date_properties.OPERATORS = [[Blockly.LANG_DATE_YEAR, 'YEAR'], [Blockly.LANG_DATE_MONTH, 'MONTH'], [Blockly.LANG_DATE_DATE, 'DATE'], [Blockly.LANG_DATE_DAY, 'DAY'], [Blockly.LANG_DATE_HOUR, 'HOUR'], [Blockly.LANG_DATE_MINUTE, 'MINUTE'], [Blockly.LANG_DATE_SECOND, 'SECOND'], [Blockly.LANG_DATE_MS, 'MS']];
 
 Blockly.Language.date_properties.TOOLTIPS = {
   YEAR: Blockly.LANG_DATE_YEAR_TOOLTIP,
@@ -57,12 +75,12 @@ Blockly.Language.date_properties.TOOLTIPS = {
 };
 
 Blockly.Language.date_time = {
-  categoryName: "日付",
+  categoryName: Blockly.LANG_CATEGORY_DATE,
   categoryID: 'date',
   init: function() {
     this.setColour(dateColor);
-    this.appendTitle("1970/1/1 0:00からの経過ミリ秒");
-    this.setTooltip("");
+    this.appendTitle(Blockly.LANG_DATE_TIME_TITLE);
+    this.setTooltip(Blockly.LANG_DATE_TIME_TOOLTIP);
     this.setOutput(true, Number);
   }
 };
