@@ -264,26 +264,51 @@ Blockly.Language.objects_set_by_value = {
   }
 };
 
-Blockly.Language.objects_date = {
-  categoryName: Blockly.LANG_CATEGORY_OBJECT,
-  categoryID: 'object',
-  init: function() {
-    this.setColour(objColor);
-    this.setOutput(true);
-    this.appendTitle(Blockly.LANG_OBJECT_DATE);
-    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendTitle(dropdown, 'TYPE');
-    var thisBlock = this;
-    this.setTooltip(function() {
-      var type = thisBlock.getTitleValue('TYPE');
-      return Blockly.Language.objects_date.TOOLTIPS[type];
-    });
-  }
-};
+/*
 
-Blockly.Language.objects_date.OPERATORS = [[Blockly.LANG_OBJECT_DATE_OBJECT, 'OBJECT'], [Blockly.LANG_OBJECT_DATE_LOCALESTRING, 'LOCALESTRING']];
-Blockly.Language.objects_date.TOOLTIPS = {
-  OBJECT: Blockly.LANG_OBJECT_DATE_OBJECT_TOOLTIP,
-  LOCALESTRING: Blockly.LANG_OBJECT_DATE_LOCALESTRING_TOOLTIP
-};
+ カテゴリ移動
+
+ Blockly.Language.objects_date = {
+
+ categoryName: Blockly.LANG_CATEGORY_OBJECT,
+
+ categoryID: 'object',
+
+ init: function() {
+
+ this.setColour(objColor);
+
+ this.setOutput(true);
+
+ this.appendTitle(Blockly.LANG_OBJECT_DATE);
+
+ var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
+
+ this.appendTitle(dropdown, 'TYPE');
+
+ var thisBlock = this;
+
+ this.setTooltip(function() {
+
+ var type = thisBlock.getTitleValue('TYPE');
+
+ return Blockly.Language.objects_date.TOOLTIPS[type];
+
+ });
+
+ }
+
+ };
+
+ Blockly.Language.objects_date.OPERATORS = [[Blockly.LANG_OBJECT_DATE_OBJECT, 'OBJECT'], [Blockly.LANG_OBJECT_DATE_LOCALESTRING, 'LOCALESTRING']];
+
+ Blockly.Language.objects_date.TOOLTIPS = {
+
+ OBJECT: Blockly.LANG_OBJECT_DATE_OBJECT_TOOLTIP,
+
+ LOCALESTRING: Blockly.LANG_OBJECT_DATE_LOCALESTRING_TOOLTIP
+
+ };
+
+ */
 
