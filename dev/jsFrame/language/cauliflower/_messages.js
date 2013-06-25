@@ -459,11 +459,20 @@ Blockly.LANG_OBJECT_SET2_2 = 'に';
 Blockly.LANG_OBJECT_SET2_3 = 'を代入する';
 Blockly.LANG_OBJECT_SET_TOOLTIP_1 = '変数"%1"に格納されているオブジェクトの\n指定したプロパティの値を設定します。';
 
-Blockly.LANG_OBJECT_DATE = '現在の日付';
-Blockly.LANG_OBJECT_DATE_OBJECT = 'オブジェクト';
-Blockly.LANG_OBJECT_DATE_LOCALESTRING = 'オブジェクトの文字列表現';
-Blockly.LANG_OBJECT_DATE_OBJECT_TOOLTIP = '現在の日付と時刻でDateオブジェクトを生成します。';
-Blockly.LANG_OBJECT_DATE_LOCALESTRING_TOOLTIP = '現地のタイムゾーンと現地の日付フォーマットを使って\nDateを文字列に変換した値を取得します。';
+//日付
+Blockly.LANG_DATE = '現在の日付';
+Blockly.LANG_DATE_OBJECT = 'オブジェクト';
+Blockly.LANG_DATE_LOCALESTRING = 'オブジェクトの文字列表現';
+Blockly.LANG_DATE_OBJECT_TOOLTIP = '現在の日付と時刻でDateオブジェクトを生成します。';
+Blockly.LANG_DATE_LOCALESTRING_TOOLTIP = '現地のタイムゾーンと現地の日付フォーマットを使って\nDateを文字列に変換した値を取得します。';
+Blockly.LANG_DATE_YEAR_TOOLTIP = '現在の年を取得します';
+Blockly.LANG_DATE_MONTH_TOOLTIP = '現在の月を取得します';
+Blockly.LANG_DATE_DATE_TOOLTIP = '現在の日を取得します';
+Blockly.LANG_DATE_DAY_TOOLTIP = '現在の曜日（0が日曜日で6まで）を取得します';
+Blockly.LANG_DATE_HOUR_TOOLTIP = '現在の時を取得します';
+Blockly.LANG_DATE_MINUTE_TOOLTIP = '現在の分を取得します';
+Blockly.LANG_DATE_SECOND_TOOLTIP = '現在の秒を取得します';
+Blockly.LANG_DATE_MS_TOOLTIP = '現在のミリ秒を取得します';
 
 //Web API
 Blockly.LANG_CATEGORY_WEB_API = 'Web API';
@@ -471,7 +480,7 @@ Blockly.LANG_WEB_API_GET_JSON = 'JSONを取得する';
 Blockly.LANG_WEB_API_CALLBACK = 'コールバック関数';
 Blockly.LANG_WEB_API_URL = 'URL';
 Blockly.LANG_WEB_API_PARAM = 'パラメータ';
-Blockly.LANG_WEB_API_TOOLTIP ='指定されたURLからJSONを取得し、\n取得が終了するとコールバックに指定された関数を呼び出します。';
+Blockly.LANG_WEB_API_TOOLTIP = '指定されたURLからJSONを取得し、\n取得が終了するとコールバックに指定された関数を呼び出します。';
 
 // Joker Blocks.
 Blockly.LANG_CATEGORY_JOKER = 'ジョーカー';

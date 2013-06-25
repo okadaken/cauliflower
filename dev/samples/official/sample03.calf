@@ -15,7 +15,7 @@
         <block type="myDocument_write" inline="false">
           <comment pinned="false" x="-100" y="-120" h="60" w="174">現在時刻を表示する</comment>
           <value name="TEXT">
-            <block type="objects_date">
+            <block type="date_object">
               <title name="TYPE">LOCALESTRING</title>
             </block>
           </value>

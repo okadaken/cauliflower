@@ -23,7 +23,6 @@
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.webapi_getjson = function() {
-  // Define a procedure with a return value.
   var callback = Blockly.JavaScript.variableDB_.getName(this.getTitleText('CALLBACK'), Blockly.Procedures.NAME_TYPE);
   var url = Blockly.JavaScript.valueToCode(this, 'URL', Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var param = Blockly.JavaScript.valueToCode(this, 'PARAM', Blockly.JavaScript.ORDER_NONE) || '';
@@ -33,6 +32,30 @@ Blockly.JavaScript.webapi_getjson = function() {
   } else {
     var code = 'jQuery.getJSON(' + url + ', ' + param + ', ' + callback + ');\n';
   }
+  return code;
+};
+
+Blockly.JavaScript.webapi_getjson_proxy = function() {
+  var param = Blockly.JavaScript.valueToCode(this, 'PARAM', Blockly.JavaScript.ORDER_NONE) || '';
+  var url = Blockly.JavaScript.valueToCode(this, 'URL', Blockly.JavaScript.ORDER_NONE) || '';
+  var callback = Blockly.JavaScript.variableDB_.getName(this.getTitleText('CALLBACK'), Blockly.Procedures.NAME_TYPE);
+  
+  //オプションを変換する
+  var properties = '';
+  var obj = eval('(' + param + ')');
+  for (var prop in obj) {
+    properties += prop + "=" + obj[prop] + '%26';
+  }
+  properties = properties.substr(0, properties.length - 3);
+  
+  //URLから前後のシングルクオートを取る
+  url = url.substr(1, url.length - 2);
+  
+  //Proxy用のアドレスに合成 
+  var proxy = 'http://msatellite.info/cauliflower-support/proxy.php?';
+  proxy += 'url=' + url + '?' + properties + '&callback=?';
+  
+  var code = 'jQuery.getJSON(\'' + proxy + '\', ' + callback + ');\n';
   return code;
 };
 
@@ -61,6 +84,8 @@ Blockly.JavaScript.webapi_map_marker = function() {
     ',' +
     'map:' +
     map +
+    //',' +
+    //"animation: google.maps.Animation.DROP" +
     '})'
   } else {
     var code = 'new google.maps.Marker({' +
@@ -72,6 +97,8 @@ Blockly.JavaScript.webapi_map_marker = function() {
     ',' +
     'title:' +
     title +
+    //',' +
+    //"animation: google.maps.Animation.DROP" +
     '})'
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];

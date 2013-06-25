@@ -15,7 +15,7 @@
       <statement name="DO">
         <block type="myDocument_write" inline="false">
           <value name="TEXT">
-            <block type="objects_date">
+            <block type="date_object">
               <title name="TYPE">OBJECT</title>
             </block>
           </value>

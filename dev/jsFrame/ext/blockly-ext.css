@@ -136,7 +136,7 @@
     font-size: 13px;
 }
 
-/* Web API */
+/* Web API gmap 現状は同じ色*/
 .gmap > rect {
     fill: #708090;
 }
@@ -174,6 +174,20 @@
 }
 
 .object {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 日付 */
+.date > rect {
+    fill: #c71585;
+}
+
+.date-catmaker {
+    fill: #c71585;
+}
+
+.date {
     font-weight: bold;
     font-size: 13px;
 }

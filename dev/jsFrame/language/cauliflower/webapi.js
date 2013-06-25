@@ -40,6 +40,24 @@ Blockly.Language.webapi_getjson = {
   }
 };
 
+Blockly.Language.webapi_getjson_proxy = {
+  categoryName: Blockly.LANG_CATEGORY_WEB_API,
+  categoryID: 'webapi',
+  init: function() {
+    this.setColour(webapiColor);
+    this.appendTitle("XMLをJSONに変換して取得");
+    var name = Blockly.Procedures.findLegalName(Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE, this);
+    var dropdown = new Blockly.FieldDropdown(Blockly.Procedures.dropdownCreate2, Blockly.Procedures.dropdownChange, null, name);
+    this.appendTitle(Blockly.LANG_WEB_API_CALLBACK);
+    this.appendInput([dropdown, 'CALLBACK'], Blockly.DUMMY_INPUT, '', null);
+    this.appendInput(Blockly.LANG_WEB_API_URL, Blockly.INPUT_VALUE, 'URL', [String]);
+    this.appendInput(Blockly.LANG_WEB_API_PARAM, Blockly.INPUT_VALUE, 'PARAM', null);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip("");
+  }
+};
+
 //以下、仮実装
 Blockly.Language.webapi_show_gmap = {
   categoryName: Blockly.LANG_CATEGORY_WEB_API,

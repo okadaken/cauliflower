@@ -22,8 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.3';
-var build = '[Build:2013062001, Blockly:r419]'
+var version = '1.4';
+var build = '[Build:2013062501, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -965,7 +965,7 @@ function getAllCode(doc) {
   code = code.replace(/<title\/>/g, '<title></title>');
   
   //divが空で<div/>となると、getElementByIdでエラーになる
-   code = code.replace(/<div(.*)\/>/g, '<div$1></div>');
+  code = code.replace(/<div(.*)\/>/g, '<div$1></div>');
   
   //コメントアウトしていたEntityを戻す
   code = uncommentHtmlEntity(code);
