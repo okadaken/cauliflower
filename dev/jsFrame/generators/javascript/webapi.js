@@ -137,3 +137,12 @@ Blockly.JavaScript.webapi_map_info_window = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
+Blockly.JavaScript.webapi_geo_get = function() {
+  var callback = Blockly.JavaScript.variableDB_.getName(this.getTitleText('CALLBACK'), Blockly.Procedures.NAME_TYPE);
+  var code = 'navigator.geolocation.getCurrentPosition(' + callback + ');\n';
+  return code;
+};
+
+Blockly.JavaScript.webapi_geo_boolean = function() {
+  return ['navigator.geolocation', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+};
