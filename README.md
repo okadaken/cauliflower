@@ -14,7 +14,7 @@ JavaScriptプログラミングの入門教育を支援するオンラインエ�
 UIと機能設計の意図
 ------
 
-プログラミングの未経験者が、テキストエディタとブラウザ、IDEなどを利用し、JavaScriptプログラミングを円滑に学習できるようなScaffoldingを行うことをねらいしたJavaScriptエディタです。**最後の最後までCauliflowerで学習をすることは想定していません。**
+プログラミングの未経験者が、テキストエディタとブラウザ、IDEなどを利用し、JavaScriptプログラミングを円滑に学習できるようなScaffoldingを行うことをねらいしたJavaScriptエディタです。__最後の最後までCauliflowerで学習をすることは想定していません__。
 
 ねらいとしたScaffoldingは次の２点で、これらを踏まえたUIと機能設計を行っています。また、Cauliflowerを卒業して、本来の目標であるテキストエディタとブラウザ、その他のIDE等を使った（テキストによる）JavaScriptプログラミングに移行しやすいように、Fadingに関しても考慮をしています。
 
@@ -39,7 +39,7 @@ HTMLとJavaScriptがどのように連携して動作するかの仕組みの理
 関連URL
 ------
 
-Demo URL: [http://okaken.sakura.ne.jp/cauliflower/](http://okaken.sakura.ne.jp/cauliflower/)
+Demo URL: [http://crew-lab.sfc.keio.ac.jp/cauliflower/](http://crew-lab.sfc.keio.ac.jp/cauliflower)
 
 Support Target: [http://ipl.sfc.keio.ac.jp/text/pro-2012-4/%E3%83%9B%E3%83%BC%E3%83%A0/](http://ipl.sfc.keio.ac.jp/text/pro-2012-4/%E3%83%9B%E3%83%BC%E3%83%A0/) 
 
