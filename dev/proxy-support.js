@@ -13,6 +13,5 @@ function getJSONProxy(url, callback, param) {
   } else {
     proxy += '?url=' + url + '&callback=?';
   }
-  window.alert(proxy);
   jQuery.getJSON(proxy, callback);
 }
