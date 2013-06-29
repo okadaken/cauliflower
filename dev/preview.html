@@ -207,6 +207,7 @@
       
       if (window.opener.useWebAPIBlocks()) {
         var jquery = '\t\t<script type="text/javascript" src="http:\/\/ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>\n';
+        jquery += '\t\t<script type="text/javascript" src="http:\/\/crew-lab.sfc.keio.ac.jp/cauliflower/proxy-support.js"><\/script>\n';
         codeForView = codeForView.replace('\t</head>', jquery + '\t</head>' + '\n');
       }
       
@@ -242,6 +243,7 @@
       
       if (window.opener.useWebAPIBlocks()) {
         var jquery = '\t\t<script type="text/javascript" src="http:\/\/ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"><\/script>\n';
+        jquery += '\t\t<script type="text/javascript" src="http:\/\/crew-lab.sfc.keio.ac.jp/cauliflower/proxy-support.js"><\/script>\n';
         codeForExec = codeForExec.replace('\t</head>', jquery + '\t</head>' + '\n');
       }
       if (window.opener.useGoogleMapBlocks()) {

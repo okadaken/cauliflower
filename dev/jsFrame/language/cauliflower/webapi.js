@@ -33,7 +33,7 @@ Blockly.Language.webapi_getjson = {
     this.appendTitle(Blockly.LANG_WEB_API_CALLBACK);
     this.appendInput([dropdown, 'CALLBACK'], Blockly.DUMMY_INPUT, '', null);
     this.appendInput(Blockly.LANG_WEB_API_URL, Blockly.INPUT_VALUE, 'URL', [String]);
-    this.appendInput(Blockly.LANG_WEB_API_PARAM, Blockly.INPUT_VALUE, 'PARAM', null);
+    this.appendInput(Blockly.LANG_WEB_API_PARAM, Blockly.INPUT_VALUE, 'PARAM', [Array]);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.LANG_WEB_API_TOOLTIP);
@@ -51,7 +51,7 @@ Blockly.Language.webapi_getjson_proxy = {
     this.appendTitle(Blockly.LANG_WEB_API_CALLBACK);
     this.appendInput([dropdown, 'CALLBACK'], Blockly.DUMMY_INPUT, '', null);
     this.appendInput(Blockly.LANG_WEB_API_URL, Blockly.INPUT_VALUE, 'URL', [String]);
-    this.appendInput(Blockly.LANG_WEB_API_PARAM, Blockly.INPUT_VALUE, 'PARAM', null);
+    this.appendInput(Blockly.LANG_WEB_API_PARAM, Blockly.INPUT_VALUE, 'PARAM', [Array]);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.LANG_WEB_API_TOOLTIP2);
@@ -129,6 +129,7 @@ Blockly.Language.webapi_map_set_info_window = {
 
 //以下、仮実装
 
+//logicへの移設を検討せよ 後方互換性も配慮すること
 Blockly.Language.webapi_geo_boolean = {
   categoryName: Blockly.LANG_CATEGORY_WEB_API,
   categoryID: 'gmap',

@@ -36,26 +36,11 @@ Blockly.JavaScript.webapi_getjson = function() {
 };
 
 Blockly.JavaScript.webapi_getjson_proxy = function() {
-  var param = Blockly.JavaScript.valueToCode(this, 'PARAM', Blockly.JavaScript.ORDER_NONE) || '';
   var url = Blockly.JavaScript.valueToCode(this, 'URL', Blockly.JavaScript.ORDER_NONE) || '';
   var callback = Blockly.JavaScript.variableDB_.getName(this.getTitleText('CALLBACK'), Blockly.Procedures.NAME_TYPE);
+  var param = Blockly.JavaScript.valueToCode(this, 'PARAM', Blockly.JavaScript.ORDER_NONE) || null;
   
-  //オプションを変換する
-  var properties = '';
-  var obj = eval('(' + param + ')');
-  for (var prop in obj) {
-    properties += prop + "=" + obj[prop] + '%26';
-  }
-  properties = properties.substr(0, properties.length - 3);
-  
-  //URLから前後のシングルクオートを取る
-  url = url.substr(1, url.length - 2);
-  
-  //Proxy用のアドレスに合成 
-  var proxy = 'http://msatellite.info/cauliflower-support/proxy.php?';
-  proxy += 'url=' + url + '?' + properties + '&callback=?';
-  
-  var code = 'jQuery.getJSON(\'' + proxy + '\', ' + callback + ');\n';
+  var code = 'getJSONProxy(' + url + ', ' + callback + ', ' + param + ');\n';
   return code;
 };
 
