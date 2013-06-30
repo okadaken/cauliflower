@@ -29,5 +29,5 @@ function geolocation_error(error) {
     message = "タイムアウトしました。";
     break;
   }
-  windw.alert(message);
+  window.alert(message);
 }
