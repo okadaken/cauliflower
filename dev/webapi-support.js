@@ -19,13 +19,13 @@ function getJSONProxy(url, callback, param) {
 function geolocation_error(error) {
   var message = "";
   switch (error.code) {
-  case PositionError.PERMISSION_DENIED:
+  case error.PERMISSION_DENIED:
     message = "位置情報の利用が許可されていません。";
     break;
-  case PositionError.POSITION_UNAVAILABLE:
+  case error.POSITION_UNAVAILABLE:
     message = "デバイスの位置が判定できません。";
     break;
-  case PositionError.TIMEOUT:
+  case error.TIMEOUT:
     message = "タイムアウトしました。";
     break;
   }
