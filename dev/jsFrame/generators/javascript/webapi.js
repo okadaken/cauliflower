@@ -124,7 +124,7 @@ Blockly.JavaScript.webapi_map_info_window = function() {
 
 Blockly.JavaScript.webapi_geo_get = function() {
   var callback = Blockly.JavaScript.variableDB_.getName(this.getTitleText('CALLBACK'), Blockly.Procedures.NAME_TYPE);
-  var code = 'navigator.geolocation.getCurrentPosition(' + callback + ');\n';
+  var code = 'navigator.geolocation.getCurrentPosition(' + callback + ',geolocation_error);\n';
   return code;
 };
 

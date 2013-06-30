@@ -15,3 +15,19 @@ function getJSONProxy(url, callback, param) {
   }
   jQuery.getJSON(proxy, callback);
 }
+
+function geolocation_error(error) {
+  var message = "";
+  switch (error.code) {
+  case PERMISSION_DENIED:
+    message = "位置情報の利用が許可されていません。";
+    break;
+  case POSITION_UNAVAILABLE:
+    message = "デバイスの位置が判定できません。";
+    break;
+  case TIMEOUT:
+    message = "タイムアウトしました。";
+    break;
+  }
+  windw.alert(message);
+}
