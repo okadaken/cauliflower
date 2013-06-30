@@ -17,17 +17,6 @@ function getJSONProxy(url, callback, param) {
 }
 
 function geolocation_error(error) {
-  var message = "";
-  switch (error.code) {
-  case error.PERMISSION_DENIED:
-    message = "位置情報の利用が許可されていません。";
-    break;
-  case error.POSITION_UNAVAILABLE:
-    message = "デバイスの位置が判定できません。";
-    break;
-  case error.TIMEOUT:
-    message = "タイムアウトしました。";
-    break;
-  }
-  window.alert(message);
+  var message = [error.message, "位置情報の利用が許可されていません。", "デバイスの位置が判定できません。", "タイムアウトしました。"];
+  window.alert(message[error.code]);
 }
