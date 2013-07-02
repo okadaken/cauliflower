@@ -153,6 +153,7 @@ function initializeButtons() {
   initalizeNewButton();
   initalizeLoadButton();
   initalizeSaveButton();
+  initalizeStorageButton();
   initalizeSampleButton();
   initalizeExecButton();
   initalizeHelpButton();
@@ -190,6 +191,16 @@ function initalizeSaveButton() {
     }
   }).click(function() {
     save();
+  });
+}
+
+function initalizeStorageButton() {
+  $('#storage-button').button({
+    icons: {
+      primary: 'ui-icon-disk'
+    }
+  }).click(function() {
+    storage();
   });
 }
 
@@ -502,6 +513,10 @@ function save() {
     filename: getFileNameForSave(dom),
     contents: createXML()
   });
+}
+
+function storage() {
+  BlocklyStorage.makeRequest_('http://msatellite.info/cauliflower-support/storage.php', 'xml', createXML());
 }
 
 function openPreviewWindow() {
