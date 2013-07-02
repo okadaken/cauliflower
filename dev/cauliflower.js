@@ -153,8 +153,8 @@ function initializeButtons() {
   initalizeNewButton();
   initalizeLoadButton();
   initalizeSaveButton();
-  initalizeStorageButton();
   initalizeSampleButton();
+  initalizeShareButton();
   initalizeExecButton();
   initalizeHelpButton();
 }
@@ -194,13 +194,12 @@ function initalizeSaveButton() {
   });
 }
 
-function initalizeStorageButton() {
-  $('#storage-button').button({
-    icons: {
-      primary: 'ui-icon-disk'
+function initalizeShareButton() {
+  $('#share-button').button({
+    icons: {      //primary: 'ui-icon-disk'
     }
   }).click(function() {
-    storage();
+    share();
   });
 }
 
@@ -515,8 +514,21 @@ function save() {
   });
 }
 
-function storage() {
-  BlocklyStorage.makeRequest_('http://msatellite.info/cauliflower-support/storage.php', 'xml', createXML());
+function share() {
+  $.ajax({
+    type: 'post',
+    cache: false,
+    url: 'http://msatellite.info/cauliflower-support/storage.php',
+    data: {
+      'xml': "hoge"//createXML()
+    },
+    success: function(data) {
+      alert(data);
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(textStatus);
+    }
+  });
 }
 
 function openPreviewWindow() {

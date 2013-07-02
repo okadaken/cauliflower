@@ -119,11 +119,12 @@ BlocklyStorage.makeRequest_ = function(url, name, content) {
  */
 BlocklyStorage.handleRequest_ = function() {
   if (BlocklyStorage.httpRequest_.readyState == 4) {
+    /*
     if (BlocklyStorage.httpRequest_.status != 200) {
       alert(BlocklyStorage.HTTPREQUEST_ERROR +
       'httpRequest_.status: ' +
       BlocklyStorage.httpRequest_.status);
-    } else {
+    } else {*/
       var data = BlocklyStorage.httpRequest_.responseText.trim();
       if (BlocklyStorage.httpRequest_.name == 'xml') {
         window.location.hash = data;
@@ -135,7 +136,7 @@ BlocklyStorage.handleRequest_ = function() {
         } else {
           BlocklyStorage.loadXml_(data);
         }
-      }
+      //}
       BlocklyStorage.monitorChanges_();
     }
     BlocklyStorage.httpRequest_ = null;
