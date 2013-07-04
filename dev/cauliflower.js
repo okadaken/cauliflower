@@ -22,8 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.61';
-var build = '[Build:2013070101, Blockly:r419]'
+var version = '1.7';
+var build = '[Build:2013070401, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -59,6 +59,115 @@ $(document).ready(function() {
   nullDOM = createNullDOM();
   validateBrowser();
 });
+
+function loadSharedProject() {
+  var url = window.location.href;
+  if (url.indexOf('#') != -1) {
+    var hash = url.split('#')[1];
+    if (hash == 'tab-html' || hash == 'tab-javascript' || hash.length == 0) {
+      window.location.hash = ''
+      return;
+    }
+    loadSharedProjectFromURL("http://msatellite.info/cauliflower-support/share/" + hash + ".xml");
+  }
+}
+
+//仮実装
+function loadSharedProjectFromURL(url) {
+  //FIX:load関数と重複コードあり
+  //エラー処理なし（正しいpath、ネットワーク接続ありと仮定）
+  $.ajax({
+    url: url,
+    dataType: "xml",
+    success: function(data) {
+      var xml;
+      try {
+        if (!(data instanceof Document)) {
+          var parser = new DOMParser();
+          xml = parser.parseFromString(data, 'text/xml');
+        } else {
+          xml = data;
+        }
+      } catch (e) {//想定しているブラウザはExceptionをthrowしないはず
+        console.error('Error parsing XML:\n' + e);
+        return;
+      }
+      
+      var oldHTML = HTMLEditor.getValue();
+      var oldBlocks = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var htmls = xml.getElementsByTagName('html');
+      if (htmls.length != 0) {
+        HTMLEditor.setValue(htmls[0].firstChild.nodeValue);
+      }
+      var count = Blockly.mainWorkspace.getAllBlocks().length;
+      if (count) {
+        var title = '編集中のブロックがあります';
+        var message = 'JavaScriptエディタに編集中のブロックがあります。編集中のブロックの扱いを選択してください。';
+        var buttons = {
+          '削除': function() {
+            Blockly.mainWorkspace.clear();
+            $('#dialog').dialog('close');
+            try {
+              loadXML(xml);
+            } catch (e) {
+              Blockly.mainWorkspace.clear();
+              Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+              updateJavaScriptPreview();
+              Blockly.mainWorkspace.render();
+              Blockly.Toolbox.redraw();
+              HTMLEditor.setValue(oldHTML);
+              showLoadErrorDialog();
+              console.error(e);
+              return;
+            }
+          },
+          '残す': function() {
+            $('#dialog').dialog('close');
+            try {
+              loadXML(xml);
+            } catch (e) {
+              Blockly.mainWorkspace.clear();
+              Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, oldBlocks);
+              updateJavaScriptPreview();
+              Blockly.mainWorkspace.render();
+              Blockly.Toolbox.redraw();
+              HTMLEditor.setValue(oldHTML);
+              showLoadErrorDialog();
+              console.error(e);
+              return;
+            }
+          },
+          'キャンセル': function() {
+            HTMLEditor.setValue(oldHTML);
+            $('#dialog').dialog('close');
+          }
+        };
+        showDialog('confirm', title, message, buttons);
+      } else {
+        try {
+          loadXML(xml);
+        } catch (e) {
+          Blockly.mainWorkspace.clear();
+          HTMLEditor.setValue(oldHTML);
+          showLoadErrorDialog();
+          console.error(e);
+          return;
+        }
+      }
+    },
+    error: function() {
+      var title = '読み込みエラー';
+      var message = 'ファイルの読み込みに失敗しました。アドレスの#以降の文字列が正しいかを確認してください。';
+      var buttons = {
+        OK: function() {
+          $('#dialog').dialog('close');
+        }
+      };
+      showDialog('error', title, message, buttons);
+      $('#load').val('');
+    }
+  });
+}
 
 /**************************************************
  * コンポーネント初期化関連
@@ -196,7 +305,8 @@ function initalizeSaveButton() {
 
 function initalizeShareButton() {
   $('#share-button').button({
-    icons: {      //primary: 'ui-icon-disk'
+    icons: {
+      primary: 'ui-icon-star'
     }
   }).click(function() {
     share();
@@ -363,6 +473,7 @@ function initializeBlocklyFrame(blockly) {
   }, 1);
   window.setTimeout(restoreBlocks, 0);
   Blockly.bindEvent_(window, 'unload', null, backupBlocks);
+  loadSharedProject();
 }
 
 /**************************************************
@@ -518,15 +629,31 @@ function share() {
   $.ajax({
     type: 'post',
     cache: false,
-    url: 'http://msatellite.info/cauliflower-support/storage.php',
+    url: 'http://msatellite.info/cauliflower-support/share.php',
     data: {
-      'xml': "hoge"//createXML()
+      'xml': createXML()
     },
     success: function(data) {
-      alert(data);
+      window.location.hash = data;
+      var title = '共有の完了';
+      var message = "以下のURLで共有が完了しました。URLを記録してください。<br><br>" + window.location.href;
+      //var message = '<div style="margin-top:1.5em;">ファイルの読み込みが完了しました。</div>';
+      var buttons = {
+        OK: function() {
+          $('#dialog').dialog('close');
+        }
+      };
+      $('#dialog-icon').attr('src', 'img/dialog/notice.png');
+      $('#dialog').dialog({
+        title: title,
+        buttons: buttons,
+        minWidth: 570
+      });
+      $('#dialog-message').html('<div class="dialog-string-long"><p>' + message + '</p></div>');
+      $('#dialog').dialog('open');
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      alert(textStatus);
+      showShareErrorDialog(textStatus);
     }
   });
 }
@@ -585,6 +712,18 @@ function loadXML(xml) {
 function showLoadErrorDialog() {
   var title = 'ファイル読み込みエラー';
   var message = 'ファイルの読み込みに失敗しました。ファイルが壊れている可能性があります。';
+  var buttons = {
+    OK: function() {
+      $('#dialog').dialog('close');
+    }
+  };
+  showDialog('error', title, message, buttons);
+  $('#load').val('');
+}
+
+function showShareErrorDialog(textStatus) {
+  var title = '共有エラー';
+  var message = '共有に失敗しました。ネットワーク接続を確認してください。［原因： ' + textStatus + '］';
   var buttons = {
     OK: function() {
       $('#dialog').dialog('close');
