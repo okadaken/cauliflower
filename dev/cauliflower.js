@@ -647,7 +647,7 @@ function share() {
       $('#dialog').dialog({
         title: title,
         buttons: buttons,
-        minWidth: 470
+        minWidth: 520
       });
       $('#dialog-message').html('<div class="dialog-string-long"><p>' + message + '</p></div>');
       $('#dialog').dialog('open');
