@@ -643,11 +643,13 @@ function share() {
           $('#dialog').dialog('close');
         }
       };
+      
+      var width = window.location.href.length * 7.9;
       $('#dialog-icon').attr('src', 'img/dialog/notice.png');
       $('#dialog').dialog({
         title: title,
         buttons: buttons,
-        minWidth: 520
+        minWidth: width
       });
       $('#dialog-message').html('<div class="dialog-string-long"><p>' + message + '</p></div>');
       $('#dialog').dialog('open');
