@@ -644,7 +644,7 @@ function share() {
         }
       };
       
-      var width = window.location.href.length * 7.9;
+      var width = window.location.href.length * 8.2;
       $('#dialog-icon').attr('src', 'img/dialog/notice.png');
       $('#dialog').dialog({
         title: title,
