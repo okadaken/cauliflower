@@ -1,6 +1,6 @@
 /**
  * Cauliflower
- * Copyright (c) 2012 CreW Project
+ * Copyright (c) 2013 CreW Project
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,7 +23,7 @@
  */
 //バージョン
 var version = '1.7';
-var build = '[Build:2013070401, Blockly:r419]'
+var build = '[Build:2013070501, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
@@ -60,15 +60,26 @@ $(document).ready(function() {
   validateBrowser();
 });
 
+/**************************************************
+ * 共有関連 仮実装
+ **************************************************/
+function removeURLHash() {
+  var url = window.location.href;
+  if (url.indexOf('#') != -1) {
+    window.location.hash = ''
+    window.location.href = window.location.href.replace("#", "");
+  }
+}
+
 function loadSharedProject() {
   var url = window.location.href;
   if (url.indexOf('#') != -1) {
     var hash = url.split('#')[1];
     if (hash == 'tab-html' || hash == 'tab-javascript' || hash.length == 0) {
-      window.location.hash = ''
-      return;
+      removeURLHash();
+    } else {
+      loadSharedProjectFromURL("http://msatellite.info/cauliflower-support/share/" + hash + ".xml");
     }
-    loadSharedProjectFromURL("http://msatellite.info/cauliflower-support/share/" + hash + ".xml");
   }
 }
 
@@ -156,8 +167,8 @@ function loadSharedProjectFromURL(url) {
       }
     },
     error: function() {
-      var title = '読み込みエラー';
-      var message = 'ファイルの読み込みに失敗しました。アドレスの#以降の文字列が正しいかを確認してください。';
+      var title = '共有ファイル 読み込みエラー';
+      var message = '共有ファイルの読み込みに失敗しました。<br>URLの#以降を確認してください。';
       var buttons = {
         OK: function() {
           $('#dialog').dialog('close');
@@ -165,6 +176,40 @@ function loadSharedProjectFromURL(url) {
       };
       showDialog('error', title, message, buttons);
       $('#load').val('');
+    }
+  });
+}
+
+function share() {
+  $.ajax({
+    type: 'post',
+    cache: false,
+    url: 'http://msatellite.info/cauliflower-support/share.php',
+    data: {
+      'xml': createXML()
+    },
+    success: function(data) {
+      window.location.hash = data;
+      var title = '共有の完了';
+      var message = "以下のURLで共有が完了しました。URLを記録してください。<br><br>" + window.location.href;
+      var buttons = {
+        OK: function() {
+          $('#dialog').dialog('close');
+        }
+      };
+      
+      var width = window.location.href.length * 7.9;
+      $('#dialog-icon').attr('src', 'img/dialog/notice.png');
+      $('#dialog').dialog({
+        title: title,
+        buttons: buttons,
+        minWidth: width
+      });
+      $('#dialog-message').html('<div class="dialog-string-long"><p>' + message + '</p></div>');
+      $('#dialog').dialog('open');
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      showShareErrorDialog(textStatus);
     }
   });
 }
@@ -486,6 +531,7 @@ function newFile() {
     OK: function() {
       loadHTMLTemplate();
       clearBlocklyWorkspace();
+      removeURLHash();
       $('#dialog').dialog('close');
     },
     'キャンセル': function() {
@@ -622,41 +668,6 @@ function save() {
   saveToFile({
     filename: getFileNameForSave(dom),
     contents: createXML()
-  });
-}
-
-function share() {
-  $.ajax({
-    type: 'post',
-    cache: false,
-    url: 'http://msatellite.info/cauliflower-support/share.php',
-    data: {
-      'xml': createXML()
-    },
-    success: function(data) {
-      window.location.hash = data;
-      var title = '共有の完了';
-      var message = "以下のURLで共有が完了しました。URLを記録してください。<br><br>" + window.location.href;
-      //var message = '<div style="margin-top:1.5em;">ファイルの読み込みが完了しました。</div>';
-      var buttons = {
-        OK: function() {
-          $('#dialog').dialog('close');
-        }
-      };
-      
-      var width = window.location.href.length * 7.9;
-      $('#dialog-icon').attr('src', 'img/dialog/notice.png');
-      $('#dialog').dialog({
-        title: title,
-        buttons: buttons,
-        minWidth: width
-      });
-      $('#dialog-message').html('<div class="dialog-string-long"><p>' + message + '</p></div>');
-      $('#dialog').dialog('open');
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-      showShareErrorDialog(textStatus);
-    }
   });
 }
 
