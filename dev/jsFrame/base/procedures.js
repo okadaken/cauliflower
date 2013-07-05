@@ -341,6 +341,8 @@ Blockly.Procedures.dropdownCreate = function( initValue ) {
   return options;
 };
 
+//現状Web APIブロックのコールバック指定のみで利用
+//戻り値ありのものはリストしていない
 Blockly.Procedures.dropdownCreate2 = function(initValue) {
 
   var funcList = Blockly.Procedures.allProcedures();
@@ -348,7 +350,7 @@ Blockly.Procedures.dropdownCreate2 = function(initValue) {
   //funcList.sort(Blockly.caseInsensitiveComparator);
   
   var options = [];
-  for (var x = 0; x < funcList.length; x++) {
+  for (var x = 0; x < funcList[0].length; x++) {
       if (funcList[0][x] != undefined) {
           options[x] = [funcList[0][x][0], funcList[0][x][0]];
       }
