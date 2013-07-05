@@ -32,7 +32,7 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = '変数 "%1" の新しい変数名を入力�
 //日本語化終了 Procedure renaming.
 Blockly.MSG_NEW_PROCEDURE = 'New procedure...';//現状未使用
 Blockly.MSG_NEW_PROCEDURE_TITLE = 'New procedure name:';//現状未使用
-Blockly.MSG_RENAME_PROCEDURE = '一覧にない関数を新しく定義する';
+Blockly.MSG_RENAME_PROCEDURE = '新しい関数を定義する';
 Blockly.MSG_RENAME_PROCEDURE_TITLE = '新しく定義する関数の名前を入力してください。';
 
 //日本語化終了 Control Blocks
