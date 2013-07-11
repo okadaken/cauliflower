@@ -49,8 +49,14 @@ Blockly.JavaScript.date_properties = function() {
   case 'MONTH':
     code += '.getMonth()+1';
     break;
+  case 'MONTH2':
+    code = '("0" + (new Date().getMonth()+1)).slice(-2)';
+    break;
   case 'DATE':
     code += '.getDate()';
+    break;
+  case 'DATE2':
+    code = '("0" + new Date().getDate()).slice(-2)';
     break;
   case 'DAY':
     code += '.getDay()';

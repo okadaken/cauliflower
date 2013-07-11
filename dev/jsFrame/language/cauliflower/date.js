@@ -61,12 +61,14 @@ Blockly.Language.date_properties = {
   }
 };
 
-Blockly.Language.date_properties.OPERATORS = [[Blockly.LANG_DATE_YEAR, 'YEAR'], [Blockly.LANG_DATE_MONTH, 'MONTH'], [Blockly.LANG_DATE_DATE, 'DATE'], [Blockly.LANG_DATE_DAY, 'DAY'], [Blockly.LANG_DATE_HOUR, 'HOUR'], [Blockly.LANG_DATE_MINUTE, 'MINUTE'], [Blockly.LANG_DATE_SECOND, 'SECOND'], [Blockly.LANG_DATE_MS, 'MS']];
+Blockly.Language.date_properties.OPERATORS = [[Blockly.LANG_DATE_YEAR, 'YEAR'], [Blockly.LANG_DATE_MONTH, 'MONTH'], [Blockly.LANG_DATE_MONTH2, 'MONTH2'], [Blockly.LANG_DATE_DATE, 'DATE'], [Blockly.LANG_DATE_DATE2, 'DATE2'], [Blockly.LANG_DATE_DAY, 'DAY'], [Blockly.LANG_DATE_HOUR, 'HOUR'], [Blockly.LANG_DATE_MINUTE, 'MINUTE'], [Blockly.LANG_DATE_SECOND, 'SECOND'], [Blockly.LANG_DATE_MS, 'MS']];
 
 Blockly.Language.date_properties.TOOLTIPS = {
   YEAR: Blockly.LANG_DATE_YEAR_TOOLTIP,
   MONTH: Blockly.LANG_DATE_MONTH_TOOLTIP,
   DATE: Blockly.LANG_DATE_DATE_TOOLTIP,
+  MONTH2: Blockly.LANG_DATE_MONTH2_TOOLTIP,
+  DATE2: Blockly.LANG_DATE2_DATE_TOOLTIP,
   DAY: Blockly.LANG_DATE_DAY_TOOLTIP,
   HOUR: Blockly.LANG_DATE_HOUR_TOOLTIP,
   MINUTE: Blockly.LANG_DATE_MINUTE_TOOLTIP,
