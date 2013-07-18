@@ -34,7 +34,7 @@ Blockly.JavaScript.objects = function() {
     }
     
     //プロパティ名として妥当でなければ'をつける
-    if (!key.match(/^[a-zA-Z][a-zA-Z0-9]*$/)) {
+    if (!key.match(/^[a-zA-Z$$][a-zA-Z0-9$$]*$/)) {
       key = '\'' + key.replace(/'/g, '\\\'') + '\'';
     }
     code += key + ': ' + value;
@@ -53,7 +53,7 @@ Blockly.JavaScript.objects_get = function() {
   var variable = this.getTitleValue('VAR');
   var property = this.getTitleValue('PROPERTY') || '';
   
-  if (property.length != 0 && !property.match(/^[a-zA-Z][a-zA-Z0-9._]*$/)) {
+  if (property.length != 0 && !property.match(/^[a-zA-Z$$][a-zA-Z0-9$$._]*$/)) {
     //プロパティ名としてそのまま記述できない場合
     property = '[\'' + property + '\']';
   } else if (property.length != 0) {
@@ -70,7 +70,7 @@ Blockly.JavaScript.objects_set = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '\'\'';
   var property = this.getTitleText('PROPERTY') || '';
   
-  if (property.length != 0 && !property.match(/^[a-zA-Z][a-zA-Z0-9.]*$/)) {
+  if (property.length != 0 && !property.match(/^[a-zA-Z$$][a-zA-Z0-9$$.]*$/)) {
     //プロパティ名としてそのまま記述できない場合
     property = '[\'' + property + '\']';
   } else if (property.length != 0) {
