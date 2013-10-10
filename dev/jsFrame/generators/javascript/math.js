@@ -56,7 +56,9 @@ Blockly.JavaScript.math_arithmetic.OPERATORS = {
 Blockly.JavaScript.math_parse = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE', Blockly.JavaScript.ORDER_COMMA) || '0';
   var type = this.getTitleValue('TYPE');
-  if (type == 'INT') {
+  if (type == 'NUM') {
+    return ['Number(' + value + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  } else if (type == 'INT') {
     return ['parseInt(' + value + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
   } else if (type == 'FLOAT') {
     return ['parseFloat(' + value + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];

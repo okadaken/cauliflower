@@ -139,8 +139,10 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = '左辺を右辺で累乗します�
 
 Blockly.LANG_MATH_PARSE_TITLE1 = 'を';
 Blockly.LANG_MATH_PARSE_TITLE2 = 'に変換した値';
+Blockly.LANG_MATH_PARSE_TYPE_NUM = '数値';
 Blockly.LANG_MATH_PARSE_TYPE_INT = '整数';
 Blockly.LANG_MATH_PARSE_TYPE_FLOAT = '実数';
+Blockly.LANG_MATH_PARSE_TOOLTIP_NUM = '指定された文字列を数値に変換します。\n文字列が変換できない場合はNaNを返します。';
 Blockly.LANG_MATH_PARSE_TOOLTIP_INT = '指定された文字列を整数に変換します。\n小数点以下は切り捨てられます。\n文字列が変換できない場合はNaNを返します。';
 Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT = '指定された文字列を実数に変換します。\n文字列が変換できない場合はNaNを返します。';
 

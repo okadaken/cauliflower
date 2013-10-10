@@ -130,7 +130,7 @@ Blockly.Language.math_single.TOOLTIPS = {
   ROUNDDOWN: Blockly.LANG_MATH_SINGLE_TOOLTIP_ROUNDDOWN
 };
 
-//parseIntとparseFloat（オリジナル）
+//NumberとparseIntとparseFloat（オリジナル）
 Blockly.Language.math_parse = {
   categoryName: Blockly.LANG_CATEGORY_MATH,
   categoryID: 'math',
@@ -154,8 +154,9 @@ Blockly.Language.math_parse = {
   }
 };
 
-Blockly.Language.math_parse.OPERATORS = [[Blockly.LANG_MATH_PARSE_TYPE_INT, 'INT'], [Blockly.LANG_MATH_PARSE_TYPE_FLOAT, 'FLOAT']];
+Blockly.Language.math_parse.OPERATORS = [[Blockly.LANG_MATH_PARSE_TYPE_NUM, 'NUM'],[Blockly.LANG_MATH_PARSE_TYPE_INT, 'INT'], [Blockly.LANG_MATH_PARSE_TYPE_FLOAT, 'FLOAT']];
 Blockly.Language.math_parse.TOOLTIPS = {
+  NUM: Blockly.LANG_MATH_PARSE_TOOLTIP_NUM,
   INT: Blockly.LANG_MATH_PARSE_TOOLTIP_INT,
   FLOAT: Blockly.LANG_MATH_PARSE_TOOLTIP_FLOAT
 };

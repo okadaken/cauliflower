@@ -22,8 +22,8 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 //バージョン
-var version = '1.72';
-var build = '[Build:2013071101, Blockly:r419]'
+var version = '1.73';
+var build = '[Build:2013101001, Blockly:r419]'
 
 //CodeMirrorコンポーネント
 var HTMLEditor;
