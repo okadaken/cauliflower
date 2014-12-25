@@ -78,7 +78,7 @@ function loadSharedProject() {
     if (hash == 'tab-html' || hash == 'tab-javascript' || hash.length == 0) {
       removeURLHash();
     } else {
-      loadSharedProjectFromURL("http://msatellite.info/cauliflower-support/share/" + hash + ".xml");
+      loadSharedProjectFromURL("http://27.120.109.136/cauliflower-support/share/" + hash + ".xml");
     }
   }
 }
@@ -184,7 +184,7 @@ function share() {
   $.ajax({
     type: 'post',
     cache: false,
-    url: 'http://msatellite.info/cauliflower-support/share.php',
+    url: 'http://27.120.109.136/cauliflower-support/share.php',
     data: {
       'xml': createXML()
     },
@@ -856,7 +856,7 @@ function getFileNameForSave(doc) {
 function saveToFile(properties) {
   // TODO:jquery
   var form = document.createElement('form');
-  form.setAttribute('action', 'http://msatellite.info/cauliflower-support/save.php');
+  form.setAttribute('action', 'http://27.120.109.136/cauliflower-support/save.php');
   form.setAttribute('method', 'post');
   form.style.display = 'none';
   document.body.appendChild(form);
