@@ -1,5 +1,5 @@
 function getJSONProxy(url, callback, param) {
-  var proxy = 'http://msatellite.info/cauliflower-support/proxy.php';
+  var proxy = 'http://27.120.109.136/cauliflower-support/proxy.php';
   if (param != null && typeof param == "object") {
     var properties = '';
     var keys = Object.keys(param);
